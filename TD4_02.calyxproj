@@ -1,0 +1,14 @@
+{
+  "assetDirectory": "Resources/Assets",
+  "engineVersion": "v1.0.9",
+  "gameModule": "Generated/Outputs/Debug/TD4_02.dll",
+  "gameModules": {
+    "Debug": "Generated/Outputs/Debug/TD4_02.dll",
+    "Develop": "Generated/Outputs/Develop/TD4_02.dll",
+    "Release": "Generated/Outputs/Release/TD4_02.dll"
+  },
+  "name": "TD4_02",
+  "sourceDirectory": "Game",
+  "startupScene": "Resources/Assets/Scenes/DemoScene.scene",
+  "template": "Demo"
+}

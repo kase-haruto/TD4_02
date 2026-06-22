@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Game"><UniqueIdentifier>{0F00B343-33A4-46BB-BB71-6E16E76FE59B}</UniqueIdentifier></Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Game/Demo/3D/Actor/DemoCamera/DemoCameraPivot.cpp"><Filter>Game</Filter></ClCompile>
+    <ClCompile Include="Game/Demo/3D/Actor/DemoPlayer/DemoPlayer.cpp"><Filter>Game</Filter></ClCompile>
+    <ClCompile Include="Game/Demo/3D/Actor/DemoPlayer/DemoPlayerMotor.cpp"><Filter>Game</Filter></ClCompile>
+    <ClCompile Include="Game/Demo/3D/Actor/DemoPlayer/Weapon/Weapon.cpp"><Filter>Game</Filter></ClCompile>
+    <ClCompile Include="Game/Demo/Input/PlayerInput.cpp"><Filter>Game</Filter></ClCompile>
+    <ClCompile Include="Game/Demo/Scene/DemoScene/DemoScene.cpp"><Filter>Game</Filter></ClCompile>
+    <ClCompile Include="Game/Demo/Scene/Utility/SceneTypeUtil.cpp"><Filter>Game</Filter></ClCompile>
+    <ClCompile Include="Game/GameApplication.cpp"><Filter>Game</Filter></ClCompile>
+    <ClCompile Include="Game/GameMain.cpp"><Filter>Game</Filter></ClCompile>
+    <ClCompile Include="Game/GameObjectRegistry.generated.cpp"><Filter>Game</Filter></ClCompile>
+  </ItemGroup>
+</Project>
