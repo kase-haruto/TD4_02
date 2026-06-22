@@ -1,10 +1,79 @@
-Generated/
+###############################################################################
+# IDE / User settings
+###############################################################################
 .vs/
-*.user
+.idea/
+.ai/
+.vscode/
+
+# Local release packaging tools are maintained outside this repository.
+Tool/Release/
+
+*.rsuser
 *.suo
+*.user
+*.userprefs
+*.userosscache
+*.sln.docstates
+
+imgui.ini
+*.generated.cpp
+*.generated.h
+# Asset metadata stores stable GUIDs and must be shared. Do not ignore *.meta globally.
+
+
+###############################################################################
+# Build output (ENGINE)
+###############################################################################
+generated/
+
+###############################################################################
+# Visual Studio intermediate
+###############################################################################
+ipch/
+*.aps
+*.ncb
+*.opendb
+*.opensdf
+*.sdf
 *.VC.db
-*.VC.opendb
+*.VC.VC.opendb
+
+###############################################################################
+# C++ artifacts
+###############################################################################
+*.o
+*.exe
+*.dll
 *.pdb
 *.ilk
-*.obj
+
+###############################################################################
+# EXCEPTION: Live++ Agent files (required for hot reload)
+# These files must be included in git despite *.exe, *.dll, *.pdb rules above
+###############################################################################
+!project/externals/LivePP/Agent/**
+!project/externals/LivePP/Agent/**/*.exe
+!project/externals/LivePP/Agent/**/*.dll
+!project/externals/LivePP/Agent/**/*.pdb
+!project/externals/LivePP/Agent/**/*.lib
+
+###############################################################################
+# External libraries (ignore build outputs only)
+###############################################################################
+project/externals/**/bin/
+project/externals/**/build/
+
+###############################################################################
+# OS
+###############################################################################
+.DS_Store
+Thumbs.db
+
+###############################################################################
+# Logs / temp
+###############################################################################
 *.log
+*.tmp
+*~
+~$*
