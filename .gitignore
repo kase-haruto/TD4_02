@@ -19,6 +19,8 @@ Tool/Release/
 imgui.ini
 *.generated.cpp
 *.generated.h
+!Game/GameObjectRegistry.generated.cpp
+!Game/GameObjectRegistry.generated.h
 # Asset metadata stores stable GUIDs and must be shared. Do not ignore *.meta globally.
 
 
