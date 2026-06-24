@@ -3,15 +3,15 @@
 #include <Enemy/BaseEnemy.h>
 
 /*-----------------------------------------------------------------------------------------
- * Zako
+ * Slime
  * - 基本の敵(仮)
  *---------------------------------------------------------------------------------------*/
-CALYX_OBJECT(Category = GameObject, DisplayName = "Zako", Icon = "UI/Tool/cube.dds")
-class Zako
+CALYX_OBJECT(Category = GameObject, DisplayName = "Slime", Icon = "UI/Tool/cube.dds")
+class Slime
 	: public BaseEnemy {
 public:
-	Zako();
-	~Zako() override = default;
+	Slime();
+	~Slime() override = default;
 
 	void Initialize() override;
 };
