@@ -4,6 +4,7 @@
 // game
 #include <Demo/Input/PlayerInput.h>
 #include "PlayerMotor.h"
+#include "PlayerDodge.h"
 #include "Sword/Sword.h"
 
 /*-----------------------------------------------------------------------------------------
@@ -29,5 +30,6 @@ private:
 	//===================================================================*/
 	PlayerInput input_;
 	PlayerMotor motor_;
+	PlayerDodge dodge_;
 	std::shared_ptr<Sword> sword_;
 };

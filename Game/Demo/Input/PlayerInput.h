@@ -10,10 +10,12 @@
  * - 移動はXが左右、Yが前後として扱う
  */
 struct PlayerInputState {
-	CalyxEngine::Vector2 move{0.0f, 0.0f}; //!< 移動入力（x=右、y=前）
-	bool jumpPressed = false;              //!< ジャンプが押された瞬間か
-	bool attackPressed = false;            //!< 攻撃が押された瞬間か
-	bool dashHeld = false;                 //!< ダッシュ入力を押しているか
+    CalyxEngine::Vector2 move{0.0f, 0.0f}; //!< 移動入力（x=右、y=前）
+    CalyxEngine::Vector2 look{0.0f, 0.0f}; //!< 向き入力（右スティック, x=右, y=前） ← 追加
+    bool jumpPressed = false;
+    bool attackPressed = false;
+	bool dodgePressed = false; //!< 回避が押された瞬間か
+    bool dashHeld = false;
 };
 
 /**

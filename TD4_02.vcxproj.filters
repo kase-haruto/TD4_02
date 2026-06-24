@@ -42,6 +42,8 @@
     <ClCompile Include="Game\Enemy\BaseEnemy.cpp" />
     <ClCompile Include="Game\Enemy\Movement\HomingMove.cpp" />
     <ClCompile Include="Game\Enemy\Enemies\Slime.cpp" />
+    <ClCompile Include="Game\Scene\PlayerTestScene\PlayerTestScene.cpp" />
+    <ClCompile Include="Game\Player\PlayerDodge.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\GameObjectRegistry.generated.h">

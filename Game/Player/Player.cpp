@@ -16,6 +16,13 @@ Player::Player()
 /////////////////////////////////////////////////////////////////////////////////////////
 void Player::Initialize() {
 	Actor::Initialize();
+
+	// 剣を生成
+	sword_ = std::make_shared<Sword>();
+	sword_->Initialize();
+
+	// 手のボーンにペアレント
+	SetBoneParent(sword_->GetWorldTransform(), "mixamorig:RightHand", true);
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -23,6 +30,13 @@ void Player::Initialize() {
 /////////////////////////////////////////////////////////////////////////////////////////
 void Player::Update(float dt) {
 	input_.Update();
-	motor_.Update(*this, input_.GetState(), dt);
+
+	const PlayerInputState& in = input_.GetState();
+	// 回避を先に処理,回避中は移動/向き/ジャンプを受け付けない
+	dodge_.Update(*this, in, dt);
+	if (!dodge_.IsDodging()) {
+		motor_.Update(*this, in, dt);
+	}
+
 	Actor::Update(dt);
 }

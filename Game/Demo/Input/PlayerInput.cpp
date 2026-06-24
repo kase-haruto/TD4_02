@@ -22,6 +22,9 @@ void PlayerInput::Update() {
 	// 片方だけでも動けるようにし、同時入力時は後段で長さを1に制限する。
 	state_.move = ClampMoveLength(digitalMove + analogMove);
 
+	// 向く方向を取得（キーボードは取得しない）
+	state_.look = Input::GetRightStick();
+
 	// ジャンプは押された瞬間だけを状態に残す。
 	// CharacterMovementComponent側で接地中かどうかを判定するため、ここでは入力事実だけを扱う。
 	state_.jumpPressed = IsTriggerAction(InputAction::Jump) || IsTriggerGamepadAction(InputAction::Jump);
@@ -29,6 +32,9 @@ void PlayerInput::Update() {
 	// 攻撃も押された瞬間だけを状態に残す。
 	// 現時点ではDemoPlayer側で未使用だが、入力責務として状態を作っておく。
 	state_.attackPressed = IsTriggerAction(InputAction::Attack) || IsTriggerGamepadAction(InputAction::Attack);
+
+	// 回避を押した時
+	state_.dodgePressed = IsTriggerAction(InputAction::Dash) || IsTriggerGamepadAction(InputAction::Dash);
 
 	// ダッシュは押し続け状態として扱う。
 	// 移動速度変更などの継続効果で使えるように、トリガーではなくPushを参照する。
