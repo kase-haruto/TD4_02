@@ -22,6 +22,9 @@ void PlayerInput::Update() {
 	// 片方だけでも動けるようにし、同時入力時は後段で長さを1に制限する。
 	state_.move = ClampMoveLength(digitalMove + analogMove);
 
+	// 向く方向を取得（キーボードは取得しない）
+	state_.look = Input::GetRightStick();
+
 	// ジャンプは押された瞬間だけを状態に残す。
 	// CharacterMovementComponent側で接地中かどうかを判定するため、ここでは入力事実だけを扱う。
 	state_.jumpPressed = IsTriggerAction(InputAction::Jump) || IsTriggerGamepadAction(InputAction::Jump);

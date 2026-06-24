@@ -7,14 +7,20 @@
 #include <Engine/Physics/Character/CharacterMovementComponent.h>
 
 void PlayerMotor::Update(Player& player, const PlayerInputState& input, float /*dt*/) {
+	// --- 移動 ---
 	CalyxEngine::Vector3 worldDirection = BuildWorldMoveDirection(input.move);
-
 	if (worldDirection.LengthSquared() > 0.0f) {
 		player.GetCharacterMovement().AddMovementInput(worldDirection);
-
-		FaceMoveDirection(player, worldDirection);
 	}
 
+	// --- 向き : 右スティックを倒した方向へ即向ける ---
+	constexpr float kAimThresholdSq = 0.04f; // ノイズで向きが変わらないように
+	if (input.look.LengthSquared() > kAimThresholdSq) {
+		CalyxEngine::Vector3 aimDirection = BuildWorldMoveDirection(input.look);
+		FaceMoveDirection(player, aimDirection);
+	}
+
+	// --- ジャンプ ---
 	if (input.jumpPressed) {
 		player.GetCharacterMovement().Jump();
 	}
