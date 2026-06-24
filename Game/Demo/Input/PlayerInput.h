@@ -14,6 +14,7 @@ struct PlayerInputState {
     CalyxEngine::Vector2 look{0.0f, 0.0f}; //!< 向き入力（右スティック, x=右, y=前） ← 追加
     bool jumpPressed = false;
     bool attackPressed = false;
+	bool dodgePressed = false; //!< 回避が押された瞬間か
     bool dashHeld = false;
 };
 

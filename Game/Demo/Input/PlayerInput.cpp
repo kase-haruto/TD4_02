@@ -33,6 +33,9 @@ void PlayerInput::Update() {
 	// 現時点ではDemoPlayer側で未使用だが、入力責務として状態を作っておく。
 	state_.attackPressed = IsTriggerAction(InputAction::Attack) || IsTriggerGamepadAction(InputAction::Attack);
 
+	// 回避を押した時
+	state_.dodgePressed = IsTriggerAction(InputAction::Dash) || IsTriggerGamepadAction(InputAction::Dash);
+
 	// ダッシュは押し続け状態として扱う。
 	// 移動速度変更などの継続効果で使えるように、トリガーではなくPushを参照する。
 	state_.dashHeld = IsPushAction(InputAction::Dash) || IsPushGamepadAction(InputAction::Dash);
