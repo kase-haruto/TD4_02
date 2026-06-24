@@ -183,6 +183,9 @@ if exist "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" copy "$(Win
     <ClCompile Include="Game/GameApplication.cpp" />
     <ClCompile Include="Game/GameMain.cpp" />
     <ClCompile Include="Game/GameObjectRegistry.generated.cpp" />
+    <ClCompile Include="Game\Enemy\BaseEnemy.cpp" />
+    <ClCompile Include="Game\Enemy\Enemies\Zako.cpp" />
+    <ClCompile Include="Game\Enemy\Movement\HomingMove.cpp" />
     <ClCompile Include="Game\Player\Player.cpp" />
     <ClCompile Include="Game\Player\PlayerMotor.cpp" />
     <ClCompile Include="Game\Player\Sword\Sword.cpp" />

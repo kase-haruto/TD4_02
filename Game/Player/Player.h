@@ -27,7 +27,7 @@ private:
 	//===================================================================*/
 	//						private variables
 	//===================================================================*/
-	PlayerInput input_; //!< 入力状態の生成だけを担当する
+	PlayerInput input_;
 	PlayerMotor motor_;
 	std::shared_ptr<Sword> sword_;
 };

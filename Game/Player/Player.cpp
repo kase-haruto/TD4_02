@@ -8,8 +8,6 @@
 //			ctor / dtor
 /////////////////////////////////////////////////////////////////////////////////////////
 Player::Player()
-	// Actor の基底コンストラクタへ「モデル名」と「オブジェクト名」を渡す。
-	// "PlayerIdle.gltf" は DemoPlayer と同じ既存アセットを流用している。
 	: Actor("PlayerIdle.gltf", "Player") {
 }
 
@@ -17,7 +15,6 @@ Player::Player()
 //			初期化
 /////////////////////////////////////////////////////////////////////////////////////////
 void Player::Initialize() {
-	// 基底の初期化を必ず呼ぶ（コンポーネント生成などが行われる）。
 	Actor::Initialize();
 }
 
@@ -25,8 +22,6 @@ void Player::Initialize() {
 //			更新
 /////////////////////////////////////////////////////////////////////////////////////////
 void Player::Update(float dt) {
-	// 1) 入力デバイスの状態を Player 用の入力状態へ変換する。
-	//    Player 自身はキーコードやパッドボタンを直接知らない構成にしておく。
 	input_.Update();
 	motor_.Update(*this, input_.GetState(), dt);
 	Actor::Update(dt);

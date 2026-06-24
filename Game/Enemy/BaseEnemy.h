@@ -1,0 +1,44 @@
+#pragma once
+#include <Engine/Objects/3D/Actor/Actor.h>
+
+#include <memory>
+#include <string>
+
+#include "EnemyStats.h"
+#include "IEnemyMovement.h"
+
+/*-----------------------------------------------------------------------------------------
+ * BaseEnemy
+ * - すべての敵の基礎
+ *---------------------------------------------------------------------------------------*/
+class BaseEnemy
+	:public Actor {
+public:
+	//===================================================================*/
+	//						public methods
+	//===================================================================*/
+	BaseEnemy(const std::string& modelName, const std::string& objName);
+	~BaseEnemy() override = default;
+
+	void Initialize() override;
+	void Update(float dt) override;
+
+	void SetMovement(std::unique_ptr<IEnemyMovement> movement);
+	void SetStats(const EnemyStats& stats) { stats_ = stats; }
+	void SetTarget(const Actor* target) { target_ = target; }
+
+	void TakeDamage(int amount);
+	bool IsDead() const { return currentHp_ <= 0; }
+
+	const EnemyStats& GetStats() const { return stats_; }
+
+protected:
+	//===================================================================*/
+	//						protected variables
+	//===================================================================*/
+	EnemyStats stats_{};        // 個体値
+	int        currentHp_ = 0;  // 現在HP
+
+	std::unique_ptr<IEnemyMovement> movement_;       // 動き
+	const Actor* target_ = nullptr;
+};

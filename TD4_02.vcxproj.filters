@@ -39,5 +39,8 @@
     <ClCompile Include="Game\Player\Player.cpp" />
     <ClCompile Include="Game\Player\PlayerMotor.cpp" />
     <ClCompile Include="Game\Player\Sword\Sword.cpp" />
+    <ClCompile Include="Game\Enemy\BaseEnemy.cpp" />
+    <ClCompile Include="Game\Enemy\Movement\HomingMove.cpp" />
+    <ClCompile Include="Game\Enemy\Enemies\Zako.cpp" />
   </ItemGroup>
 </Project>
