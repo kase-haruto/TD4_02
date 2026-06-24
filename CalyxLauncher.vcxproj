@@ -54,7 +54,7 @@
   </PropertyGroup>
   <PropertyGroup>
     <ProjectLauncher>$(ProjectDir)Tools\CalyxLauncher.exe</ProjectLauncher>
-    <CalyxEnginePackageDir>$(LOCALAPPDATA)\CalyxEngine\Engines\v1.1.1\</CalyxEnginePackageDir>
+    <CalyxEnginePackageDir>$(LOCALAPPDATA)\CalyxEngine\Engines\v1.1.2\</CalyxEnginePackageDir>
     <NMakeBuildCommandLine>"$(ProjectLauncher)" "$(ProjectDir)TD4_02.calyxproj"</NMakeBuildCommandLine>
     <NMakeReBuildCommandLine>"$(ProjectLauncher)" "$(ProjectDir)TD4_02.calyxproj" --force</NMakeReBuildCommandLine>
     <NMakeCleanCommandLine>echo CalyxLauncher has no generated build outputs to clean.</NMakeCleanCommandLine>

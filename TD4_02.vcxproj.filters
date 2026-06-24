@@ -43,4 +43,9 @@
     <ClCompile Include="Game\Enemy\Movement\HomingMove.cpp" />
     <ClCompile Include="Game\Enemy\Enemies\Slime.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Game\GameObjectRegistry.generated.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+  </ItemGroup>
 </Project>

@@ -1,10 +1,7 @@
 #include <CalyxEngine/CalyxEngine.h>
 
+#include "GameObjectRegistry.generated.h"
 #include "GameApplication.h"
-
-namespace CalyxEngine {
-	void RegisterGeneratedGameSceneObjects();
-}
 
 extern "C" __declspec(dllexport) Calyx::Application* CreateCalyxApplication() {
 	CalyxEngine::RegisterGeneratedSceneObjects();
