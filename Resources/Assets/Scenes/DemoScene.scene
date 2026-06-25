@@ -50,10 +50,10 @@
                 "inheritScale": true,
                 "inheritTranslate": true,
                 "rotation": {
-                    "w": 0.9807204008102417,
-                    "x": 0.06857864558696747,
-                    "y": 0.1825421154499054,
-                    "z": -0.012764587067067623
+                    "w": 0.9565450549125671,
+                    "x": 0.06688814610242844,
+                    "y": 0.2831176221370697,
+                    "z": -0.019797509536147118
                 },
                 "scale": {
                     "x": 1.0,
@@ -61,9 +61,9 @@
                     "z": 1.0
                 },
                 "translation": {
-                    "x": -5.849409580230713,
-                    "y": 2.484027862548828,
-                    "z": -5.316630840301514
+                    "x": -10.01494026184082,
+                    "y": 2.7867302894592285,
+                    "z": 0.8213229179382324
                 }
             },
             "type": "Camera3d"
@@ -78,10 +78,10 @@
                 "inheritScale": true,
                 "inheritTranslate": true,
                 "rotation": {
-                    "w": 0.6265184283256531,
-                    "x": 0.14695946872234344,
-                    "y": -0.7452000975608826,
-                    "z": 0.17479807138442993
+                    "w": 0.9517971277236938,
+                    "x": 0.23584789037704468,
+                    "y": 0.19035036861896515,
+                    "z": -0.0471673347055912
                 },
                 "scale": {
                     "x": 1.0,
@@ -89,98 +89,12 @@
                     "z": 1.0
                 },
                 "translation": {
-                    "x": -1.3291950225830078,
-                    "y": 2.1904168128967285,
-                    "z": -1.9972171783447266
+                    "x": -6.241929054260254,
+                    "y": 7.1770339012146,
+                    "z": -10.805305480957031
                 }
             },
             "type": "DebugCamera"
-        },
-        {
-            "cameraDitherEnabled": false,
-            "colliderConfig": {
-                "capsuleHeight": 2.0,
-                "capsuleRadius": 0.5,
-                "colliderType": 0,
-                "isCollisionEnabled": true,
-                "isDraw": true,
-                "isTrigger": false,
-                "offset": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.5
-                },
-                "radius": 1.0,
-                "rotate": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0
-                },
-                "size": {
-                    "x": 30.0,
-                    "y": 30.0,
-                    "z": 1.0
-                },
-                "targetType": 0
-            },
-            "colliderKind": 1,
-            "guid": "a84b193d-0e58-4e61-940a-a9a1478ffdb3",
-            "modelConfig": {
-                "blendMode": 5,
-                "materialGuid": "00000000-0000-0000-0000-000000000000",
-                "modelName": "plane.obj",
-                "textureGuid": "872b65b5-4991-45b2-9d66-d39017e4385e",
-                "uvTransConfig": {
-                    "rotation": 0.0,
-                    "scale": {
-                        "x": 3.0,
-                        "y": 3.0
-                    }
-                }
-            },
-            "name": "ground",
-            "objectType": 2,
-            "outlineColor": {
-                "w": 1.0,
-                "x": 0.019999999552965164,
-                "y": 0.019999999552965164,
-                "z": 0.02500000037252903
-            },
-            "outlineEnabled": false,
-            "outlineThickness": 0.03500000014901161,
-            "parentGuid": "00000000-0000-0000-0000-000000000000",
-            "physicsBodyConfig": {
-                "bodyType": 0,
-                "enabled": true,
-                "pushbackRatio": 1.0
-            },
-            "transform": {
-                "inheritRotate": true,
-                "inheritScale": true,
-                "inheritTranslate": true,
-                "rotation": {
-                    "w": 0.7069340944290161,
-                    "x": 0.7072794437408447,
-                    "y": 0.0,
-                    "z": 0.0
-                },
-                "scale": {
-                    "x": 15.0,
-                    "y": 15.0,
-                    "z": 1.0
-                },
-                "translation": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 5.0
-                }
-            },
-            "type": "BaseGameObject",
-            "visualOffset": {
-                "x": 0.0,
-                "y": 0.0,
-                "z": 0.0
-            }
         },
         {
             "cameraDitherEnabled": true,
@@ -259,6 +173,92 @@
                     "x": 0.0,
                     "y": 1.5,
                     "z": -9.5
+                }
+            },
+            "type": "BaseGameObject",
+            "visualOffset": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            }
+        },
+        {
+            "cameraDitherEnabled": false,
+            "colliderConfig": {
+                "capsuleHeight": 2.0,
+                "capsuleRadius": 0.5,
+                "colliderType": 0,
+                "isCollisionEnabled": true,
+                "isDraw": true,
+                "isTrigger": false,
+                "offset": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.5
+                },
+                "radius": 1.0,
+                "rotate": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "size": {
+                    "x": 30.0,
+                    "y": 30.0,
+                    "z": 1.0
+                },
+                "targetType": 0
+            },
+            "colliderKind": 1,
+            "guid": "a84b193d-0e58-4e61-940a-a9a1478ffdb3",
+            "modelConfig": {
+                "blendMode": 5,
+                "materialGuid": "00000000-0000-0000-0000-000000000000",
+                "modelName": "plane.obj",
+                "textureGuid": "872b65b5-4991-45b2-9d66-d39017e4385e",
+                "uvTransConfig": {
+                    "rotation": 0.0,
+                    "scale": {
+                        "x": 3.0,
+                        "y": 3.0
+                    }
+                }
+            },
+            "name": "ground",
+            "objectType": 2,
+            "outlineColor": {
+                "w": 1.0,
+                "x": 0.019999999552965164,
+                "y": 0.019999999552965164,
+                "z": 0.02500000037252903
+            },
+            "outlineEnabled": false,
+            "outlineThickness": 0.03500000014901161,
+            "parentGuid": "00000000-0000-0000-0000-000000000000",
+            "physicsBodyConfig": {
+                "bodyType": 0,
+                "enabled": true,
+                "pushbackRatio": 1.0
+            },
+            "transform": {
+                "inheritRotate": true,
+                "inheritScale": true,
+                "inheritTranslate": true,
+                "rotation": {
+                    "w": 0.7069340944290161,
+                    "x": 0.7072794437408447,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "scale": {
+                    "x": 15.0,
+                    "y": 15.0,
+                    "z": 1.0
+                },
+                "translation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 5.0
                 }
             },
             "type": "BaseGameObject",
@@ -619,7 +619,7 @@
                 },
                 "translation": {
                     "x": -9.82618522644043,
-                    "y": 0.5056518316268921,
+                    "y": 1.6650172472000122,
                     "z": 13.903096199035645
                 }
             },
@@ -723,7 +723,7 @@
                 },
                 "translation": {
                     "x": 8.569681167602539,
-                    "y": 0.5138383507728577,
+                    "y": 1.5679450035095215,
                     "z": -2.8585622310638428
                 }
             },
@@ -737,93 +737,7 @@
         {
             "cameraDitherEnabled": false,
             "colliderConfig": {
-                "capsuleHeight": 2.0,
-                "capsuleRadius": 0.5,
-                "colliderType": 0,
-                "isCollisionEnabled": true,
-                "isDraw": true,
-                "isTrigger": false,
-                "offset": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.5
-                },
-                "radius": 1.0,
-                "rotate": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0
-                },
-                "size": {
-                    "x": 5.599999904632568,
-                    "y": 5.599999904632568,
-                    "z": 1.0
-                },
-                "targetType": 0
-            },
-            "colliderKind": 1,
-            "guid": "a9838bb5-9001-4210-8570-0c66a3fa4ed1",
-            "modelConfig": {
-                "blendMode": 5,
-                "materialGuid": "00000000-0000-0000-0000-000000000000",
-                "modelName": "plane.obj",
-                "textureGuid": "00000000-0000-0000-0000-000000000000",
-                "uvTransConfig": {
-                    "rotation": 0.0,
-                    "scale": {
-                        "x": 1.0,
-                        "y": 1.0
-                    }
-                }
-            },
-            "name": "plane",
-            "objectType": 2,
-            "outlineColor": {
-                "w": 1.0,
-                "x": 0.019999999552965164,
-                "y": 0.019999999552965164,
-                "z": 0.02500000037252903
-            },
-            "outlineEnabled": false,
-            "outlineThickness": 0.03500000014901161,
-            "parentGuid": "00000000-0000-0000-0000-000000000000",
-            "physicsBodyConfig": {
-                "bodyType": 0,
-                "enabled": true,
-                "pushbackRatio": 1.0
-            },
-            "transform": {
-                "inheritRotate": true,
-                "inheritScale": true,
-                "inheritTranslate": true,
-                "rotation": {
-                    "w": 0.8623279333114624,
-                    "x": 0.47600603103637695,
-                    "y": 0.15755213797092438,
-                    "z": -0.07061261683702469
-                },
-                "scale": {
-                    "x": 2.7800002098083496,
-                    "y": 2.7799999713897705,
-                    "z": 2.7799999713897705
-                },
-                "translation": {
-                    "x": 4.6556010246276855,
-                    "y": 1.2298128604888916,
-                    "z": 3.784273862838745
-                }
-            },
-            "type": "BaseGameObject",
-            "visualOffset": {
-                "x": 0.0,
-                "y": 0.0,
-                "z": 0.0
-            }
-        },
-        {
-            "cameraDitherEnabled": false,
-            "colliderConfig": {
-                "capsuleHeight": 2.0,
+                "capsuleHeight": 1.7999999523162842,
                 "capsuleRadius": 0.30000001192092896,
                 "colliderType": 0,
                 "isCollisionEnabled": true,
@@ -894,9 +808,9 @@
                     "z": 1.0
                 },
                 "translation": {
-                    "x": -5.049750328063965,
-                    "y": 0.008108923211693764,
-                    "z": -2.575894355773926
+                    "x": -8.667858123779297,
+                    "y": 0.31081146001815796,
+                    "z": 3.3385555744171143
                 }
             },
             "type": "Player",
@@ -925,7 +839,7 @@
                     "z": 0.0
                 },
                 "stickRotateSpeed": 3.1415927410125732,
-                "yaw": 0.3680495321750641
+                "yaw": 0.5755281448364258
             },
             "guid": "75021bf6-2fe5-4abf-ae6a-4f890f2f106d",
             "name": "DemoCameraPivot",
@@ -953,6 +867,92 @@
                 }
             },
             "type": "DemoCameraPivot"
+        },
+        {
+            "cameraDitherEnabled": false,
+            "colliderConfig": {
+                "capsuleHeight": 2.0,
+                "capsuleRadius": 0.5,
+                "colliderType": 0,
+                "isCollisionEnabled": true,
+                "isDraw": true,
+                "isTrigger": false,
+                "offset": {
+                    "x": 0.0,
+                    "y": -0.5,
+                    "z": 0.0
+                },
+                "radius": 1.0,
+                "rotate": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "size": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "targetType": 0
+            },
+            "colliderKind": 1,
+            "guid": "9c1299f0-f8c0-4f60-8993-2e24d76978c1",
+            "modelConfig": {
+                "blendMode": 5,
+                "materialGuid": "00000000-0000-0000-0000-000000000000",
+                "modelName": "debugCube.obj",
+                "textureGuid": "00000000-0000-0000-0000-000000000000",
+                "uvTransConfig": {
+                    "rotation": 0.0,
+                    "scale": {
+                        "x": 1.0,
+                        "y": 1.0
+                    }
+                }
+            },
+            "name": "Slime",
+            "objectType": 2,
+            "outlineColor": {
+                "w": 1.0,
+                "x": 0.019999999552965164,
+                "y": 0.019999999552965164,
+                "z": 0.02500000037252903
+            },
+            "outlineEnabled": false,
+            "outlineThickness": 0.03500000014901161,
+            "parentGuid": "00000000-0000-0000-0000-000000000000",
+            "physicsBodyConfig": {
+                "bodyType": 1,
+                "enabled": true,
+                "pushbackRatio": 1.0
+            },
+            "transform": {
+                "inheritRotate": true,
+                "inheritScale": true,
+                "inheritTranslate": true,
+                "rotation": {
+                    "w": 1.0,
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "translation": {
+                    "x": -6.016095161437988,
+                    "y": 2.2969489097595215,
+                    "z": 4.875729084014893
+                }
+            },
+            "type": "Slime",
+            "visualOffset": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            }
         }
     ],
     "sceneName": "TestScene",

@@ -6,7 +6,7 @@
  * Slime
  * - 基本の敵(仮)
  *---------------------------------------------------------------------------------------*/
-CALYX_OBJECT(Category = GameObject, DisplayName = "Slime", Icon = "UI/Tool/cube.dds")
+CALYX_OBJECT(Category = GameObject, DisplayName = "Slime")
 class Slime
 	: public BaseEnemy {
 public:
