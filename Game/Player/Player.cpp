@@ -3,6 +3,7 @@
 #include <Engine/Foundation/Math/Quaternion.h>
 #include <Engine/Graphics/Camera/Manager/CameraManager.h>
 #include <Engine/Physics/Character/CharacterMovementComponent.h>
+#include <Engine/Scene/Utility/SceneUtility.h>
 
 /////////////////////////////////////////////////////////////////////////////////////////
 //			ctor / dtor
@@ -18,7 +19,7 @@ void Player::Initialize() {
 	Actor::Initialize();
 
 	// 剣を生成
-	sword_ = std::make_shared<Sword>();
+	sword_ = SceneAPI::Instantiate<Sword>();
 	sword_->Initialize();
 
 	// 手のボーンにペアレント
