@@ -5,6 +5,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////
 PlayerBase::PlayerBase()
 	: Actor("PlayerIdle.gltf", "Player") {
+	SerializableParamObjectsMutable().push_back(&attack_.SerializableParam());
 }
 
 namespace {
@@ -68,4 +69,8 @@ void PlayerBase::PlayAnimation(PlayerAnimationID animationId) {
 
 	currentAnimationId_ = animationId;
 	SetModelFileNameForEditor(GetPlayerAnimationModelName(animationId));
+}
+
+void PlayerBase::DerivativeGui() {
+	attack_.ShowGui();
 }

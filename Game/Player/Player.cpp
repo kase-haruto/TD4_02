@@ -8,7 +8,9 @@
 /////////////////////////////////////////////////////////////////////////////////////////
 //			ctor / dtor
 /////////////////////////////////////////////////////////////////////////////////////////
-Player::Player() = default;
+Player::Player() {
+	SerializableParamObjectsMutable().push_back(&ability_.SerializableParam());
+}
 
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -18,12 +20,13 @@ void Player::Update(float dt) {
 	input_.Update();
 
 	const PlayerInputState& in = input_.GetState();
+	ability_.Update(*this, &in, dt);
+
 	// 回避を先に処理,回避中は移動/向き/ジャンプを受け付けない
 	dodge_.Update(this, in, dt);
 
 	// 回避中は攻撃しない
 	if (!dodge_.IsDodging()) {
-		ability_.Update(*this, &in, dt);
 		attack_.Update(*this, in, dt);
 	}
 
@@ -35,4 +38,6 @@ void Player::Update(float dt) {
 }
 
 void Player::DerivativeGui(){
+	PlayerBase::DerivativeGui();
+	ability_.ShowGui();
 }

@@ -38,6 +38,9 @@ void PlayerInput::Update() {
 
 	// クローン生成を押した時
 	state_.cloneAbilityPressed = IsTriggerAction(InputAction::Ability) || IsTriggerGamepadAction(InputAction::Ability);
+	state_.cloneAbilityHeld = IsPushAction(InputAction::Ability) || IsPushGamepadAction(InputAction::Ability);
+	state_.cloneAbilityReleased = prevCloneAbilityHeld_ && !state_.cloneAbilityHeld;
+	prevCloneAbilityHeld_ = state_.cloneAbilityHeld;
 
 	// ダッシュは押し続け状態として扱う。
 	// 移動速度変更などの継続効果で使えるように、トリガーではなくPushを参照する。

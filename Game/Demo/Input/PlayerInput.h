@@ -17,6 +17,8 @@ struct PlayerInputState {
 	bool dodgePressed = false; //!< 回避が押された瞬間か
     bool dashHeld = false;
 	bool cloneAbilityPressed = false; //!< クローン生成が押された瞬間か
+	bool cloneAbilityHeld = false; //!< クローン生成ボタンを押し続けているか
+	bool cloneAbilityReleased = false; //!< クローン生成ボタンを離した瞬間か
 };
 
 /**
@@ -67,6 +69,7 @@ private:
 
 private:
 	PlayerInputState state_{};
+	bool prevCloneAbilityHeld_ = false;
 };
 
 

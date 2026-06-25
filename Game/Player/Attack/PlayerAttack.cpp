@@ -1,6 +1,17 @@
 #include "PlayerAttack.h"
 
 #include "../Base/PlayerBase.h"
+#include "../Sword/Sword.h"
+
+#include <Engine/Foundation/Math/Quaternion.h>
+#include <Engine/Scene/Context/SceneContext.h>
+#include <Engine/Scene/Utility/SceneUtility.h>
+#include <optional>
+#include <string>
+
+PlayerAttack::PlayerAttack(){
+	param_.LoadParams();
+}
 
 void PlayerAttack::Update(PlayerBase& player, const PlayerInputState& input, float dt) {
 	if (isAttacking_) {
@@ -11,6 +22,14 @@ void PlayerAttack::Update(PlayerBase& player, const PlayerInputState& input, flo
 	if (input.attackPressed) {
 		StartAttack(player, 0);
 	}
+}
+
+void PlayerAttack::ShowGui() {
+	param_.ShowGui();
+}
+
+CalyxEngine::SerializableObject& PlayerAttack::SerializableParam() {
+	return param_;
 }
 
 void PlayerAttack::StartAttack(PlayerBase& player, int comboIndex) {
@@ -39,13 +58,13 @@ void PlayerAttack::UpdateAttack(PlayerBase& player, const PlayerInputState& inpu
 		nextAttackReserved_ = true;
 	}
 
-	float duration = param_.attackDuration1;
+	const float duration = GetCurrentAttackDuration();
 
-	if (comboIndex_ == 1) {
-		duration = param_.attackDuration2;
-	}
-	else if (comboIndex_ == 2) {
-		duration = param_.attackDuration3;
+	if (IsHitboxActive()) {
+		CreateAttackHitbox(player);
+		UpdateAttackHitbox(player);
+	} else {
+		RemoveAttackHitbox();
 	}
 
 	if (attackTimer_ < duration) {
@@ -71,9 +90,78 @@ void PlayerAttack::EndAttack() {
 
 	comboIndex_ = 0;
 	attackTimer_ = 0.0f;
+	RemoveAttackHitbox();
 }
 
 bool PlayerAttack::IsInComboAcceptWindow() const {
 	return attackTimer_ >= param_.comboAcceptStart &&
 		attackTimer_ <= param_.comboAcceptEnd;
+}
+
+bool PlayerAttack::BlocksMovement() const {
+	return isAttacking_ &&
+		attackTimer_ >= param_.movementBlockStart &&
+		attackTimer_ <= param_.movementBlockEnd;
+}
+
+float PlayerAttack::GetCurrentAttackDuration() const {
+	if (comboIndex_ == 1) {
+		return param_.attackDuration2;
+	}
+	if (comboIndex_ == 2) {
+		return param_.attackDuration3;
+	}
+	return param_.attackDuration1;
+}
+
+bool PlayerAttack::IsHitboxActive() const {
+	return isAttacking_ &&
+		attackTimer_ >= param_.hitboxActiveStart &&
+		attackTimer_ <= param_.hitboxActiveEnd;
+}
+
+void PlayerAttack::CreateAttackHitbox(PlayerBase& player) {
+	if (attackHitbox_) {
+		return;
+	}
+
+	attackHitbox_ = SceneAPI::Instantiate<Sword>(
+		std::string("PlayerSword.obj"),
+		std::optional<std::string>("PlayerAttackHitbox"));
+	if (attackHitbox_) {
+		attackHitbox_->ConfigureAsAttackHitbox(param_.hitboxSize, param_.drawHitbox);
+		UpdateAttackHitbox(player);
+	}
+}
+
+void PlayerAttack::UpdateAttackHitbox(PlayerBase& player) {
+	if (!attackHitbox_) {
+		return;
+	}
+
+	CalyxEngine::Vector3 forward =
+		CalyxEngine::Quaternion::RotateVector(
+			CalyxEngine::Vector3::Forward(),
+			player.GetWorldTransform().rotation);
+	forward.y = 0.0f;
+	forward = forward.LengthSquared() > 1.0e-6f ? forward.Normalize() : CalyxEngine::Vector3::Forward();
+
+	const CalyxEngine::Vector3 position =
+		player.GetWorldTransform().translation +
+		forward * param_.hitboxForwardOffset +
+		CalyxEngine::Vector3(0.0f, param_.hitboxHeightOffset, 0.0f);
+
+	attackHitbox_->SetTranslate(position);
+	attackHitbox_->SetRotate(player.GetWorldTransform().rotation);
+}
+
+void PlayerAttack::RemoveAttackHitbox() {
+	if (!attackHitbox_) {
+		return;
+	}
+
+	if (auto* context = SceneContext::Current()) {
+		context->RemoveObject(std::static_pointer_cast<SceneObject>(attackHitbox_));
+	}
+	attackHitbox_.reset();
 }

@@ -23,4 +23,11 @@ public:
 	//===================================================================*/
 	PlayerClone();
 	~PlayerClone() override = default;
+	void Update(float dt) override;
+	void OnCollisionEnter(Collider* other) override;
+	void SetGhost(bool isGhost) { isGhost_ = isGhost; }
+	bool IsGhost() const { return isGhost_; }
+
+private:
+	bool isGhost_ = false;
 };

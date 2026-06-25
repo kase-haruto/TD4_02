@@ -34,6 +34,7 @@ public:
 
 	virtual void Initialize() override;
 	virtual void Update(float dt) override;
+	void DerivativeGui() override;
 	void PlayAnimation(PlayerAnimationID animationId);
 	PlayerAnimationID GetCurrentAnimationId() const { return currentAnimationId_; }
 
