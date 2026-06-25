@@ -38,6 +38,17 @@ void DemoScene::Initialize(){
 
 	LoadAssets();
 
+	player_ = sceneContext_->FindObjectByName<Player>("Player");
+	if (player_) {
+		player_->Initialize();
+	}
+	slime_ = sceneContext_->FindObjectByName<Slime>("Slime");
+	if (slime_) {
+		slime_->Initialize();
+		if (!player_) return;
+		slime_->SetTarget(player_.get());
+	}
+
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////

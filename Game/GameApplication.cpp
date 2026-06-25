@@ -7,7 +7,7 @@
 void GameApplication::RegisterScenes(Calyx::SceneRegistry& registry) {
 	registry.AddScene<DemoScene>(0);
 	//registry.AddScene<PlayerTestScene>(1);
-	registry.SetStartupScene(1);
+	registry.SetStartupScene(0);
 }
 
 void GameApplication::OnInitialize() {}

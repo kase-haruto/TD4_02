@@ -3,6 +3,8 @@
 /* include space
 /* ===================================================================== */
 /* game */
+#include <Game/Player/Player.h>
+#include <Game/Enemy/Enemies/Slime.h>
 
 /* engine */
 #include <Engine/scene/Base/BaseScene.h>
@@ -40,4 +42,7 @@ public:
 	 */
 	void CleanUp()override;
 	void LoadAssets()override;
+
+	std::shared_ptr<Slime> slime_;
+	std::shared_ptr<Player> player_;
 };

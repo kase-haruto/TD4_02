@@ -4,7 +4,7 @@
 #include <Engine/Foundation/Math/Quaternion.h>
 
 namespace {
-	constexpr float kKnockbackInitialSpeed = 8.0f;  // 吹き飛び初速 (m/s)
+	constexpr float kKnockbackInitialSpeed = 16.0f;  // 吹き飛び初速 (m/s)
 	constexpr float kKnockbackDamping      = 8.0f;  // 減衰の強さ。大きいほど早く止まる
 	constexpr float kKnockbackStopSq       = 0.04f; // 速度がこれ以下(≈0.2m/s)で停止
 }
