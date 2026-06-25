@@ -1,6 +1,6 @@
 #include "PlayerDodge.h"
 
-#include "Player.h"
+#include "Base/PlayerBase.h"
 
 #include <Engine/Foundation/Math/Quaternion.h>
 #include <Engine/Physics/Character/CharacterMovementComponent.h>
@@ -45,4 +45,5 @@ void PlayerDodge::StartDodge(PlayerBase* player) {
 	isDodging_ = true;
 	dodgeTimer_ = 0.0f;
 	invincibleTimer_ = kInvincibleTime;
+	player->PlayAnimation(PlayerAnimationID::Dodge);
 }

@@ -195,10 +195,12 @@ if exist "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" copy "$(Win
     <ClCompile Include="Game\Scene\PlayerTestScene\PlayerTestScene.cpp" />
     <ClCompile Include="Game\Player\Ability\PlayerAbility.cpp" />
     <ClCompile Include="Game\Player\Base\PlayerBase.cpp" />
+    <ClCompile Include="Game\Player\Attack\PlayerAttack.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Player\Ability\PlayerAbility.h" />
     <ClInclude Include="Game\Player\Base\PlayerBase.h" />
+    <ClInclude Include="Game\Player\Attack\PlayerAttack.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <Target Name="EnsureCalyxEngineSdk" BeforeTargets="PrepareForBuild" Condition="!Exists('$(CalyxEngineSdkDir)\Include\CalyxEngine\Application.h') or !Exists('$(CalyxEngineSdkDir)\Include\Data\Engine') or !Exists('$(CalyxEngineSdkDir)\Include\externals\nlohmann\json.hpp')">

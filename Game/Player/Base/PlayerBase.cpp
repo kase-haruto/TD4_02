@@ -7,6 +7,25 @@ PlayerBase::PlayerBase()
 	: Actor("PlayerIdle.gltf", "Player") {
 }
 
+namespace {
+	const char* GetPlayerAnimationModelName(PlayerAnimationID animationId) {
+		switch (animationId) {
+		case PlayerAnimationID::Idle:
+			return "PlayerIdle.gltf";
+		case PlayerAnimationID::Walk:
+			return "PlayerWalk.gltf";
+		case PlayerAnimationID::Attack1:
+			return "PlayerAttack1.gltf";
+		case PlayerAnimationID::Attack2:
+			return "PlayerAttack2.gltf";
+		case PlayerAnimationID::Dodge:
+			return "PlayerDodge.gltf";
+		default:
+			return "PlayerIdle.gltf";
+		}
+	}
+}
+
 /////////////////////////////////////////////////////////////////////////////////////////
 //			初期化
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -15,6 +34,7 @@ void PlayerBase::Initialize() {
 
 	// 初期化
 	motor_.Initialize(this);
+	PlayAnimation(PlayerAnimationID::Idle);
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -24,11 +44,28 @@ void PlayerBase::Update(float dt) {
 	input_.Update();
 
 	const PlayerInputState& in = input_.GetState();
-	// 回避を先に処理,回避中は移動/向き/ジャンプを受け付けない
+
+	// 回避を先に処理
 	dodge_.Update(this, in, dt);
+
+	// 回避中は攻撃しない
 	if (!dodge_.IsDodging()) {
+		attack_.Update(*this, in, dt);
+	}
+
+	// 回避中・攻撃中は通常移動しない
+	if (!dodge_.IsDodging() && !attack_.BlocksMovement()) {
 		motor_.Update(this, in, dt);
 	}
 
 	Actor::Update(dt);
+}
+
+void PlayerBase::PlayAnimation(PlayerAnimationID animationId) {
+	if (currentAnimationId_ == animationId) {
+		return;
+	}
+
+	currentAnimationId_ = animationId;
+	SetModelFileNameForEditor(GetPlayerAnimationModelName(animationId));
 }

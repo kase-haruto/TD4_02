@@ -9,6 +9,8 @@
 #include "Sword/Sword.h"
 #include "Ability/PlayerAbility.h"
 
+
+
 /*-----------------------------------------------------------------------------------------
  * Player
  * - メインキャラ
@@ -23,7 +25,6 @@ public:
 	Player();
 	~Player() override = default;
 
-	void Initialize() override;
 	void Update(float dt) override;
 
 	/**
@@ -35,10 +36,6 @@ private:
 	//===================================================================*/
 	//						private variables
 	//===================================================================*/
-	PlayerInput input_;
-	PlayerMotor motor_;
-	PlayerDodge dodge_;
 	PlayerAbility ability_;
 
-	bool useAbility_ = true; //!< 能力を使うかどうか
 };

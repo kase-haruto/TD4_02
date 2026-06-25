@@ -17,7 +17,14 @@ void PlayerMotor::Update(PlayerBase* player, const PlayerInputState& input, floa
 	// --- 移動 ---
 	CalyxEngine::Vector3 worldDirection = BuildWorldMoveDirection(input.move);
 	if (worldDirection.LengthSquared() > 0.0f) {
+		if (player->GetCurrentAnimationId() != PlayerAnimationID::Walk) {
+			player->PlayAnimation(PlayerAnimationID::Walk);
+		}
 		player->GetCharacterMovement().AddMovementInput(worldDirection);
+	} else {
+		if (player->GetCurrentAnimationId() != PlayerAnimationID::Idle) {
+			player->PlayAnimation(PlayerAnimationID::Idle);
+		}
 	}
 
 	// --- 向き : 右スティックを倒した方向へ即向ける ---
