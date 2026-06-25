@@ -18,12 +18,6 @@ Player::Player()
 void Player::Initialize() {
 	Actor::Initialize();
 
-	// 剣を生成
-	sword_ = SceneAPI::Instantiate<Sword>();
-	sword_->Initialize();
-
-	// 手のボーンにペアレント
-	SetBoneParent(sword_->GetWorldTransform(), "mixamorig:RightHand", true);
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
