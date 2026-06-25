@@ -44,10 +44,6 @@
     <ClCompile Include="Game\Enemy\Enemies\Slime.cpp" />
     <ClCompile Include="Game\Scene\PlayerTestScene\PlayerTestScene.cpp" />
     <ClCompile Include="Game\Player\PlayerDodge.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Game\GameObjectRegistry.generated.h">
-      <Filter>Game</Filter>
-    </ClInclude>
+    <ClCompile Include="Game\Player\Clone\Clone.cpp" />
   </ItemGroup>
 </Project>

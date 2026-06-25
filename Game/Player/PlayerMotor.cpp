@@ -16,8 +16,12 @@ void PlayerMotor::Update(Player& player, const PlayerInputState& input, float /*
 	// --- 向き : 右スティックを倒した方向へ即向ける ---
 	constexpr float kAimThresholdSq = 0.04f; // ノイズで向きが変わらないように
 	if (input.look.LengthSquared() > kAimThresholdSq) {
+		// Rスティック入力ありを優先
 		CalyxEngine::Vector3 aimDirection = BuildWorldMoveDirection(input.look);
 		FaceMoveDirection(player, aimDirection);
+	} else if (worldDirection.LengthSquared() > 0.0f) {
+		// 移動している方向へ即向く
+		FaceMoveDirection(player, worldDirection);
 	}
 
 	// --- ジャンプ ---
