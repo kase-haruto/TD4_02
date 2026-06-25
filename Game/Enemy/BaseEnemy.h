@@ -1,5 +1,7 @@
 #pragma once
 #include <Engine/Objects/3D/Actor/Actor.h>
+#include <Engine/Application/Effects/EffectAsset.h>
+#include <Engine/Scene/Utility/SceneUtility.h>
 
 #include <memory>
 #include <string>
@@ -51,4 +53,6 @@ protected:
 
 	std::unique_ptr<IEnemyMovement> movement_;       // 動き
 	const Actor* target_ = nullptr;
+
+	CalyxEngine::EffectAsset hit_;
 };

@@ -2,6 +2,8 @@
 
 #include <Engine/Objects/Collider/Collider.h>
 #include <Engine/Foundation/Math/Quaternion.h>
+#include <Engine/Foundation/Input/Input.h>
+
 
 namespace {
 	constexpr float kKnockbackInitialSpeed = 16.0f;  // 吹き飛び初速 (m/s)
@@ -20,6 +22,7 @@ void BaseEnemy::Initialize() {
 	Actor::Initialize();
 
 	currentHp_ = stats_.maxHp;
+	hit_.Load("EnemyHit");
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -31,6 +34,18 @@ void BaseEnemy::Update(float dt) {
 		UpdateKnockback(dt);
 	} else if (movement_ && target_) {
 		movement_->Update(*this, target_->GetWorldPosition(), dt);
+	}
+
+	if (CalyxFoundation::Input::TriggerKey(DIK_P)) {
+		CalyxEngine::Vector3 dir = CalyxEngine::Quaternion::RotateVector(
+			CalyxEngine::Vector3::Forward(), target_->GetWorldTransform().rotation);
+		dir.y = 0.0f;
+		if (dir.LengthSquared() <= 0.0001f) {
+			return;
+		}
+		EffectAPI::Play(hit_, worldTransform_.GetWorldPosition());
+
+		knockbackVelocity_ = dir.Normalize() * kKnockbackInitialSpeed;
 	}
 
 	Actor::Update(dt);
@@ -46,6 +61,7 @@ void BaseEnemy::OnCollisionEnter(Collider* other) {
 	// プレイヤーの攻撃に当たったときだけ
 	if ((other->GetType() & ColliderType::Type_PlayerAttack) != ColliderType::Type_None) {
 		OnHitByPlayerAttack(other);
+		EffectAPI::Play(hit_, worldTransform_.GetWorldPosition());
 	}
 }
 
