@@ -16,6 +16,7 @@ struct PlayerInputState {
     bool attackPressed = false;
 	bool dodgePressed = false; //!< 回避が押された瞬間か
     bool dashHeld = false;
+	bool cloneAbilityPressed = false; //!< クローン生成が押された瞬間か
 };
 
 /**

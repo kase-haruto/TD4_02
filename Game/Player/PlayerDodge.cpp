@@ -5,7 +5,7 @@
 #include <Engine/Foundation/Math/Quaternion.h>
 #include <Engine/Physics/Character/CharacterMovementComponent.h>
 
-void PlayerDodge::Update(Player& player, const PlayerInputState& input, float dt) {
+void PlayerDodge::Update(PlayerBase* player, const PlayerInputState& input, float dt) {
 	// タイマー減衰
 	if (invincibleTimer_ > 0.0f) invincibleTimer_ -= dt;
 	if (cooldownTimer_ > 0.0f) cooldownTimer_ -= dt;
@@ -15,7 +15,7 @@ void PlayerDodge::Update(Player& player, const PlayerInputState& input, float dt
 		dodgeTimer_ += dt;
 
 		// 開始時に決めた向きへ進み続ける
-		player.GetCharacterMovement().AddMovementInput(dodgeDir_);
+		player->GetCharacterMovement().AddMovementInput(dodgeDir_);
 
 		if (dodgeTimer_ >= kDodgeDuration) {
 			isDodging_ = false;
@@ -30,11 +30,11 @@ void PlayerDodge::Update(Player& player, const PlayerInputState& input, float dt
 	}
 }
 
-void PlayerDodge::StartDodge(Player& player) {
+void PlayerDodge::StartDodge(PlayerBase* player) {
 	CalyxEngine::Vector3 forward =
 		CalyxEngine::Quaternion::RotateVector(
 			CalyxEngine::Vector3::Forward(),
-			player.GetWorldTransform().rotation);
+			player->GetWorldTransform().rotation);
 	forward.y = 0.0f;
 
 	if (forward.LengthSquared() <= 1.0e-6f) {

@@ -4,7 +4,7 @@
 #include <Engine/Foundation/Math/Vector3.h>
 #include <Engine/Foundation/Serialization/SerializableObject.h>
 
-class Player;
+class PlayerBase;
 
 /**
  * \brief Playerの入力をキャラクター移動へ変換するクラス
@@ -17,15 +17,15 @@ public:
 	/**
 	 * \brief 初期化
 	 * \param player プレイヤー
-	 */
-	void Initialize(Player& player);
+	 */	
+	void Initialize(PlayerBase* player);
 	/**
 	 * \brief 更新
 	 * \param player プレイヤー
 	 * \param input 入力状態
 	 * \param dt 時間差
 	 */
-	void Update(Player& player, const PlayerInputState& input, float dt);
+	void Update(PlayerBase* player, const PlayerInputState& input, float dt);
 	void ShowGui();
 
 private:
@@ -33,7 +33,7 @@ private:
 	CalyxEngine::Vector3 BuildWorldMoveDirection(const CalyxEngine::Vector2& move) const;
 
 	/// 移動方向へ見た目の向きを合わせる
-	void FaceMoveDirection(Player& player, const CalyxEngine::Vector3& worldDirection) const;
+	void FaceMoveDirection(PlayerBase* player, const CalyxEngine::Vector3& worldDirection) const;
 
 	struct PlayerMoveParam : CalyxEngine::SerializableObject{
 		PlayerMoveParam() {

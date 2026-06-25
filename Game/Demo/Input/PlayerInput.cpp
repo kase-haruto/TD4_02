@@ -36,6 +36,9 @@ void PlayerInput::Update() {
 	// 回避を押した時
 	state_.dodgePressed = IsTriggerAction(InputAction::Dash) || IsTriggerGamepadAction(InputAction::Dash);
 
+	// クローン生成を押した時
+	state_.cloneAbilityPressed = IsTriggerAction(InputAction::Ability) || IsTriggerGamepadAction(InputAction::Ability);
+
 	// ダッシュは押し続け状態として扱う。
 	// 移動速度変更などの継続効果で使えるように、トリガーではなくPushを参照する。
 	state_.dashHeld = IsPushAction(InputAction::Dash) || IsPushGamepadAction(InputAction::Dash);
@@ -51,6 +54,7 @@ void PlayerInput::ResetBindings() {
 		{InputAction::MoveLeft, DIK_A},
 		{InputAction::MoveRight, DIK_D},
 		{InputAction::Jump, DIK_SPACE},
+		{InputAction::Ability, DIK_Q},
 		{InputAction::Attack, DIK_K},
 		{InputAction::Dash, DIK_LSHIFT},
 	};
@@ -62,6 +66,7 @@ void PlayerInput::ResetBindings() {
 		{InputAction::MoveRight, PadButton::DPAD_RIGHT},
 		{InputAction::Jump, PadButton::A},
 		{InputAction::Attack, PadButton::X},
+		{InputAction::Ability, PadButton::Y},
 		{InputAction::Dash, PadButton::LB},
 	};
 }

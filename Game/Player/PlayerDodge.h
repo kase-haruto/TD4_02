@@ -3,7 +3,7 @@
 #include <Demo/Input/PlayerInput.h>
 #include <Engine/Foundation/Math/Vector3.h>
 
-class Player;
+class PlayerBase;
 
 /*-----------------------------------------------------------------------------------------
  * PlayerDodge
@@ -11,13 +11,13 @@ class Player;
  *---------------------------------------------------------------------------------------*/
 class PlayerDodge {
 public:
-	void Update(Player& player, const PlayerInputState& input, float dt);
+	void Update(PlayerBase* player, const PlayerInputState& input, float dt);
 
 	bool IsDodging() const { return isDodging_; }
 	bool IsInvincible() const { return invincibleTimer_ > 0.0f; }
 
 private:
-	void StartDodge(Player& player);
+	void StartDodge(PlayerBase* player);
 
 private:
 	bool  isDodging_ = false;

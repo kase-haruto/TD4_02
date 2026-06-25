@@ -45,5 +45,11 @@
     <ClCompile Include="Game\Scene\PlayerTestScene\PlayerTestScene.cpp" />
     <ClCompile Include="Game\Player\PlayerDodge.cpp" />
     <ClCompile Include="Game\Player\Clone\Clone.cpp" />
+    <ClCompile Include="Game\Player\Ability\PlayerAbility.cpp" />
+    <ClCompile Include="Game\Player\Base\PlayerBase.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Game\Player\Ability\PlayerAbility.h" />
+    <ClInclude Include="Game\Player\Base\PlayerBase.h" />
   </ItemGroup>
 </Project>

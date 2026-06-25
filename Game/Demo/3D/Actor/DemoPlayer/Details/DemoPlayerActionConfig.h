@@ -10,5 +10,6 @@ enum class InputAction {
 	MoveRight,
 	Jump,
 	Attack,
+	Ability,
 	Dash,
 };

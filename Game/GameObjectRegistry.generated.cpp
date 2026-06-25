@@ -7,6 +7,7 @@
 
 #include <Game/Demo/3D/Actor/DemoCamera/DemoCameraPivot.h>
 #include <Game/Demo/3D/Actor/DemoPlayer/DemoPlayer.h>
+#include <Game/Player/Clone/Clone.h>
 #include <Game/Player/Player.h>
 #include <Game/Enemy/Enemies/Slime.h>
 #include <Game/Player/Sword/Sword.h>
@@ -43,6 +44,16 @@ namespace CalyxEngine {
 			false,
 			false,
 			&CreateSceneObject<Player>);
+
+		SceneObjectRegistry::Get().Register(
+			"PlayerClone",
+			"PlayerClone",
+			ObjectType::GameObject,
+			"UI/Tool/cube.dds",
+			true,
+			false,
+			false,
+			&CreateSceneObject<PlayerClone>);
 
 		SceneObjectRegistry::Get().Register(
 			"Slime",

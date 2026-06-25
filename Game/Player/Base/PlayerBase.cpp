@@ -1,19 +1,16 @@
-#include "Player.h"
-
-#include <Engine/Foundation/Math/Quaternion.h>
-#include <Engine/Graphics/Camera/Manager/CameraManager.h>
-#include <Engine/Physics/Character/CharacterMovementComponent.h>
-#include <Engine/Scene/Utility/SceneUtility.h>
+#include "PlayerBase.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////
 //			ctor / dtor
 /////////////////////////////////////////////////////////////////////////////////////////
-Player::Player() = default;
+PlayerBase::PlayerBase()
+	: Actor("PlayerIdle.gltf", "Player") {
+}
 
 /////////////////////////////////////////////////////////////////////////////////////////
 //			初期化
 /////////////////////////////////////////////////////////////////////////////////////////
-void Player::Initialize() {
+void PlayerBase::Initialize() {
 	Actor::Initialize();
 
 	// 初期化
@@ -23,22 +20,15 @@ void Player::Initialize() {
 /////////////////////////////////////////////////////////////////////////////////////////
 //			更新
 /////////////////////////////////////////////////////////////////////////////////////////
-void Player::Update(float dt) {
+void PlayerBase::Update(float dt) {
 	input_.Update();
 
 	const PlayerInputState& in = input_.GetState();
 	// 回避を先に処理,回避中は移動/向き/ジャンプを受け付けない
 	dodge_.Update(this, in, dt);
 	if (!dodge_.IsDodging()) {
-		if (useAbility_) {
-			ability_.Update(*this, &in, dt);
-		}
 		motor_.Update(this, in, dt);
 	}
 
 	Actor::Update(dt);
-}
-
-void Player::DerivativeGui(){
-	GuiCmd::CheckBox("Use Ability", useAbility_);
 }

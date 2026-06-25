@@ -1,16 +1,9 @@
 [
     {
-        "boneParentBindings": [
-            {
-                "boneName": "mixamorig:RightHandRing1",
-                "inheritScale": true,
-                "targetGuid": "cbf98216-256b-4fa8-8207-c53f79daf30e"
-            }
-        ],
         "cameraDitherEnabled": false,
         "castShadow": true,
         "colliderConfig": {
-            "capsuleHeight": 1.7999999523162842,
+            "capsuleHeight": 2.0,
             "capsuleRadius": 0.30000001192092896,
             "colliderType": 0,
             "isCollisionEnabled": true,
@@ -36,11 +29,11 @@
         },
         "colliderKind": 3,
         "drawEnable": true,
-        "guid": "6c41c273-3b84-4177-bd53-f9a737ef7dcf",
+        "guid": "9d6107b3-9531-43a0-8097-fc301a4fe63f",
         "modelConfig": {
             "blendMode": 5,
             "materialGuid": "00000000-0000-0000-0000-000000000000",
-            "modelName": "run.gltf",
+            "modelName": "PlayerIdle.gltf",
             "textureGuid": "00000000-0000-0000-0000-000000000000",
             "uvTransConfig": {
                 "rotation": 0.0,
@@ -90,201 +83,12 @@
                 "z": 1.0
             },
             "translation": {
-                "x": -9.557315826416016,
-                "y": 0.010811448097229004,
-                "z": 3.306306838989258
+                "x": -4.979720115661621,
+                "y": 0.005553454160690308,
+                "z": 7.24162483215332
             }
         },
-        "type": "Player",
-        "visualOffset": {
-            "x": 0.0,
-            "y": 0.0,
-            "z": 0.0
-        },
-        "worldTransform": {
-            "inheritRotate": true,
-            "inheritScale": true,
-            "inheritTranslate": true,
-            "rotation": {
-                "w": 1.0,
-                "x": 0.0,
-                "y": 0.0,
-                "z": 0.0
-            },
-            "scale": {
-                "x": 1.0,
-                "y": 1.0,
-                "z": 1.0
-            },
-            "translation": {
-                "x": 0.0,
-                "y": 0.0,
-                "z": 0.0
-            }
-        }
-    },
-    {
-        "DemoCameraPivot": {
-            "autoFindTarget": true,
-            "cameraLocalOffset": {
-                "x": 0.23999999463558197,
-                "y": 0.6200000047683716,
-                "z": -2.9600000381469727
-            },
-            "followSharpness": 18.0,
-            "keyRotateSpeed": 2.094395160675049,
-            "maxPitch": 1.0471975803375244,
-            "minPitch": -0.6108652949333191,
-            "pitch": 0.13962633907794952,
-            "pivotLocalOffset": {
-                "x": 0.0,
-                "y": 1.4500000476837158,
-                "z": 0.0
-            },
-            "stickRotateSpeed": 3.1415927410125732,
-            "yaw": 0.5755281448364258
-        },
-        "cameraDitherEnabled": false,
-        "castShadow": true,
-        "drawEnable": true,
-        "guid": "d2557a55-d9b7-4510-9fff-19e504842d4e",
-        "name": "DemoCameraPivot",
-        "objectType": 2,
-        "outlineColor": {
-            "w": 1.0,
-            "x": 0.019999999552965164,
-            "y": 0.019999999552965164,
-            "z": 0.02500000037252903
-        },
-        "outlineEnabled": false,
-        "outlineThickness": 0.03500000014901161,
-        "parentGuid": "6c41c273-3b84-4177-bd53-f9a737ef7dcf",
-        "transform": {
-            "inheritRotate": true,
-            "inheritScale": true,
-            "inheritTranslate": true,
-            "rotation": {
-                "w": 1.0,
-                "x": 0.0,
-                "y": 0.0,
-                "z": 0.0
-            },
-            "scale": {
-                "x": 1.0,
-                "y": 1.0,
-                "z": 1.0
-            },
-            "translation": {
-                "x": 0.0,
-                "y": 1.4500000476837158,
-                "z": 0.0
-            }
-        },
-        "type": "SceneObject",
-        "worldTransform": {
-            "inheritRotate": true,
-            "inheritScale": true,
-            "inheritTranslate": true,
-            "rotation": {
-                "w": 1.0,
-                "x": 0.0,
-                "y": 0.0,
-                "z": 0.0
-            },
-            "scale": {
-                "x": 1.0,
-                "y": 1.0,
-                "z": 1.0
-            },
-            "translation": {
-                "x": 0.0,
-                "y": 1.4500000476837158,
-                "z": 0.0
-            }
-        }
-    },
-    {
-        "cameraDitherEnabled": false,
-        "castShadow": true,
-        "colliderConfig": {
-            "capsuleHeight": 2.0,
-            "capsuleRadius": 0.5,
-            "colliderType": 0,
-            "isCollisionEnabled": true,
-            "isDraw": true,
-            "isTrigger": false,
-            "offset": {
-                "x": 0.0,
-                "y": 0.0,
-                "z": 0.0
-            },
-            "radius": 1.0,
-            "rotate": {
-                "x": 0.0,
-                "y": 0.0,
-                "z": 0.0
-            },
-            "size": {
-                "x": 1.0,
-                "y": 1.0,
-                "z": 1.0
-            },
-            "targetType": 0
-        },
-        "colliderKind": 0,
-        "drawEnable": true,
-        "guid": "cbf98216-256b-4fa8-8207-c53f79daf30e",
-        "modelConfig": {
-            "blendMode": 5,
-            "materialGuid": "00000000-0000-0000-0000-000000000000",
-            "modelName": "PlayerSword.obj",
-            "textureGuid": "00000000-0000-0000-0000-000000000000",
-            "uvTransConfig": {
-                "rotation": 0.0,
-                "scale": {
-                    "x": 1.0,
-                    "y": 1.0
-                }
-            }
-        },
-        "name": "PlayerSword",
-        "objectType": 2,
-        "outlineColor": {
-            "w": 1.0,
-            "x": 0.019999999552965164,
-            "y": 0.019999999552965164,
-            "z": 0.02500000037252903
-        },
-        "outlineEnabled": false,
-        "outlineThickness": 0.03500000014901161,
-        "parentGuid": "6c41c273-3b84-4177-bd53-f9a737ef7dcf",
-        "physicsBodyConfig": {
-            "bodyType": 0,
-            "enabled": true,
-            "pushbackRatio": 1.0
-        },
-        "transform": {
-            "inheritRotate": true,
-            "inheritScale": true,
-            "inheritTranslate": true,
-            "rotation": {
-                "w": 1.0,
-                "x": 0.0,
-                "y": 0.0,
-                "z": 0.0
-            },
-            "scale": {
-                "x": 1.0,
-                "y": 1.0,
-                "z": 1.0
-            },
-            "translation": {
-                "x": 0.0,
-                "y": 0.0,
-                "z": 0.0
-            }
-        },
-        "type": "BaseGameObject",
+        "type": "PlayerClone",
         "visualOffset": {
             "x": 0.0,
             "y": 0.0,

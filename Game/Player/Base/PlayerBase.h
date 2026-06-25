@@ -1,35 +1,30 @@
 #pragma once
 
-#include "Base/PlayerBase.h"
+#include <Engine/Objects/3D/Actor/Actor.h>
 
 // game
 #include <Demo/Input/PlayerInput.h>
-#include "PlayerMotor.h"
-#include "PlayerDodge.h"
-#include "Sword/Sword.h"
-#include "Ability/PlayerAbility.h"
+#include "../PlayerMotor.h"
+#include "../PlayerDodge.h"
+#include "../Sword/Sword.h"
+#include "../Ability/PlayerAbility.h"
 
 /*-----------------------------------------------------------------------------------------
- * Player
- * - メインキャラ
+ * PlayerBase
+ * - Playerの基底クラス
  *---------------------------------------------------------------------------------------*/
-CALYX_OBJECT(Category = GameObject, DisplayName = "Player", Icon = "UI/Tool/cube.dds")
-class Player
-	:public PlayerBase{
+CALYX_OBJECT(Category = GameObject, DisplayName = "PlayerBase", Icon = "UI/Tool/cube.dds")
+class PlayerBase
+	:public Actor {
 public:
 	//===================================================================*/
 	//						public methods
 	//===================================================================*/
-	Player();
-	~Player() override = default;
+	PlayerBase();
+	~PlayerBase() override = default;
 
-	void Initialize() override;
-	void Update(float dt) override;
-
-	/**
-	 * \brief 派生パラメータGUI
-	 */
-	void DerivativeGui() override;
+	virtual void Initialize() override;
+	virtual void Update(float dt) override;
 
 private:
 	//===================================================================*/
@@ -38,7 +33,4 @@ private:
 	PlayerInput input_;
 	PlayerMotor motor_;
 	PlayerDodge dodge_;
-	PlayerAbility ability_;
-
-	bool useAbility_ = true; //!< 能力を使うかどうか
 };
