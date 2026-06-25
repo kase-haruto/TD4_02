@@ -31,5 +31,4 @@ private:
 	PlayerInput input_;
 	PlayerMotor motor_;
 	PlayerDodge dodge_;
-	std::shared_ptr<Sword> sword_;
 };

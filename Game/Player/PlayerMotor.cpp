@@ -6,6 +6,13 @@
 #include <Engine/Graphics/Camera/Manager/CameraManager.h>
 #include <Engine/Physics/Character/CharacterMovementComponent.h>
 
+
+void PlayerMotor::Initialize(Player& player) {
+	param_.LoadParams();
+	player.GetCharacterMovement().SetMaxWalkSpeed(param_.moveSpeed);
+	player.GetCharacterMovement().SetJumpVelocity(param_.jumpForce);
+}
+
 void PlayerMotor::Update(Player& player, const PlayerInputState& input, float /*dt*/) {
 	// --- 移動 ---
 	CalyxEngine::Vector3 worldDirection = BuildWorldMoveDirection(input.move);
@@ -28,6 +35,10 @@ void PlayerMotor::Update(Player& player, const PlayerInputState& input, float /*
 	if (input.jumpPressed) {
 		player.GetCharacterMovement().Jump();
 	}
+}
+
+void PlayerMotor::ShowGui(){
+	param_.ShowGui();
 }
 
 CalyxEngine::Vector3 PlayerMotor::BuildWorldMoveDirection(const CalyxEngine::Vector2& move) const {
