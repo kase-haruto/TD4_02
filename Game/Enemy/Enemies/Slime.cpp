@@ -20,6 +20,7 @@ void Slime::Initialize() {
 	stats.attackRange = 1.2f;
 	stats.detectionRange = 6.0f;
 	SetStats(stats);
+	characterMovement_.SetMaxWalkSpeed(stats.moveSpeed);
 
 	SetMovement(std::make_unique<HomingMove>());
 	BaseEnemy::Initialize();

@@ -36,7 +36,7 @@ void BaseEnemy::Update(float dt) {
 		movement_->Update(*this, target_->GetWorldPosition(), dt);
 	}
 
-	if (CalyxFoundation::Input::TriggerKey(DIK_P)) {
+	if (CalyxFoundation::Input::TriggerKey(DIK_P)|| CalyxFoundation::Input::TriggerGamepadButton(CalyxFoundation::PadButton::X)) {
 		CalyxEngine::Vector3 dir = CalyxEngine::Quaternion::RotateVector(
 			CalyxEngine::Vector3::Forward(), target_->GetWorldTransform().rotation);
 		dir.y = 0.0f;
