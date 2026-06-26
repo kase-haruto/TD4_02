@@ -22,7 +22,7 @@ void BaseEnemy::Initialize() {
 	Actor::Initialize();
 
 	currentHp_ = stats_.maxHp;
-	hit_.Load("EnemyHit");
+	//hit_.Load("EnemyHit");
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -43,7 +43,7 @@ void BaseEnemy::Update(float dt) {
 		if (dir.LengthSquared() <= 0.0001f) {
 			return;
 		}
-		EffectAPI::Play(hit_, worldTransform_.GetWorldPosition());
+		//EffectAPI::Play(hit_, worldTransform_.GetWorldPosition());
 
 		knockbackVelocity_ = dir.Normalize() * kKnockbackInitialSpeed;
 	}
@@ -61,7 +61,7 @@ void BaseEnemy::OnCollisionEnter(Collider* other) {
 	// プレイヤーの攻撃に当たったときだけ
 	if ((other->GetType() & ColliderType::Type_PlayerAttack) != ColliderType::Type_None) {
 		OnHitByPlayerAttack(other);
-		EffectAPI::Play(hit_, worldTransform_.GetWorldPosition());
+		//EffectAPI::Play(hit_, worldTransform_.GetWorldPosition());
 	}
 }
 

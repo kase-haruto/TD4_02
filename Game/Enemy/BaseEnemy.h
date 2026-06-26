@@ -54,5 +54,5 @@ protected:
 	std::unique_ptr<IEnemyMovement> movement_;       // 動き
 	const Actor* target_ = nullptr;
 
-	CalyxEngine::EffectAsset hit_;
+	//CalyxEngine::EffectAsset hit_;
 };
