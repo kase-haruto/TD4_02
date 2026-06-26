@@ -15,6 +15,9 @@ public:
 	Sword();
 	Sword(const std::string& modelName, std::optional<std::string> objectName = std::nullopt);
 	~Sword()override;
+	void ConfigureAsAttackHitbox(
+		const CalyxEngine::Vector3& size,
+		bool drawCollider);
 
 private:
 	//====================================================================*/

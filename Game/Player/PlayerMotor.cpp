@@ -1,16 +1,30 @@
 #include "PlayerMotor.h"
 
-#include "Player.h"
+#include "Base/PlayerBase.h"
 
 #include <Engine/Foundation/Math/Quaternion.h>
 #include <Engine/Graphics/Camera/Manager/CameraManager.h>
 #include <Engine/Physics/Character/CharacterMovementComponent.h>
 
-void PlayerMotor::Update(Player& player, const PlayerInputState& input, float /*dt*/) {
+
+void PlayerMotor::Initialize(PlayerBase* player) {
+	param_.LoadParams();
+	player->GetCharacterMovement().SetMaxWalkSpeed(param_.moveSpeed);
+	player->GetCharacterMovement().SetJumpVelocity(param_.jumpForce);
+}
+
+void PlayerMotor::Update(PlayerBase* player, const PlayerInputState& input, float /*dt*/) {
 	// --- 移動 ---
 	CalyxEngine::Vector3 worldDirection = BuildWorldMoveDirection(input.move);
 	if (worldDirection.LengthSquared() > 0.0f) {
-		player.GetCharacterMovement().AddMovementInput(worldDirection);
+		if (player->GetCurrentAnimationId() != PlayerAnimationID::Walk) {
+			player->PlayAnimation(PlayerAnimationID::Walk);
+		}
+		player->GetCharacterMovement().AddMovementInput(worldDirection);
+	} else {
+		if (player->GetCurrentAnimationId() != PlayerAnimationID::Idle) {
+			player->PlayAnimation(PlayerAnimationID::Idle);
+		}
 	}
 
 	// --- 向き : 右スティックを倒した方向へ即向ける ---
@@ -26,8 +40,12 @@ void PlayerMotor::Update(Player& player, const PlayerInputState& input, float /*
 
 	// --- ジャンプ ---
 	if (input.jumpPressed) {
-		player.GetCharacterMovement().Jump();
+		player->GetCharacterMovement().Jump();
 	}
+}
+
+void PlayerMotor::ShowGui(){
+	param_.ShowGui();
 }
 
 CalyxEngine::Vector3 PlayerMotor::BuildWorldMoveDirection(const CalyxEngine::Vector2& move) const {
@@ -53,7 +71,7 @@ CalyxEngine::Vector3 PlayerMotor::BuildWorldMoveDirection(const CalyxEngine::Vec
 	return direction;
 }
 
-void PlayerMotor::FaceMoveDirection(Player& player, const CalyxEngine::Vector3& worldDirection) const {
+void PlayerMotor::FaceMoveDirection(PlayerBase* player, const CalyxEngine::Vector3& worldDirection) const {
 	if (worldDirection.LengthSquared() <= 0.0f) {
 		return;
 	}
@@ -61,6 +79,6 @@ void PlayerMotor::FaceMoveDirection(Player& player, const CalyxEngine::Vector3& 
 	CalyxEngine::Vector3 to = worldDirection.Normalize();
 
 	// モデルの基準前方(Forward)を、移動方向(to)へ回す回転を作る
-	player.GetWorldTransform().rotation =
+	player->GetWorldTransform().rotation =
 		CalyxEngine::Quaternion::FromToQuaternion(CalyxEngine::Vector3::Forward(), to);
 }

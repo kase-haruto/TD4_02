@@ -1,11 +1,15 @@
 #pragma once
-#include <Engine/Objects/3D/Actor/Actor.h>
+
+#include "Base/PlayerBase.h"
 
 // game
 #include <Demo/Input/PlayerInput.h>
 #include "PlayerMotor.h"
 #include "PlayerDodge.h"
 #include "Sword/Sword.h"
+#include "Ability/PlayerAbility.h"
+
+
 
 /*-----------------------------------------------------------------------------------------
  * Player
@@ -13,7 +17,7 @@
  *---------------------------------------------------------------------------------------*/
 CALYX_OBJECT(Category = GameObject, DisplayName = "Player", Icon = "UI/Tool/cube.dds")
 class Player
-	:public Actor{
+	:public PlayerBase{
 public:
 	//===================================================================*/
 	//						public methods
@@ -21,15 +25,17 @@ public:
 	Player();
 	~Player() override = default;
 
-	void Initialize() override;
 	void Update(float dt) override;
+
+	/**
+	 * \brief 派生パラメータGUI
+	 */
+	void DerivativeGui() override;
 
 private:
 	//===================================================================*/
 	//						private variables
 	//===================================================================*/
-	PlayerInput input_;
-	PlayerMotor motor_;
-	PlayerDodge dodge_;
-	std::shared_ptr<Sword> sword_;
+	PlayerAbility ability_;
+
 };

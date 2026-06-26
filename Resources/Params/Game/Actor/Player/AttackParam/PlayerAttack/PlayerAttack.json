@@ -1,0 +1,22 @@
+{
+    "fields": {
+        "attackDuration1": 0.4000000059604645,
+        "attackDuration2": 0.44999998807907104,
+        "attackDuration3": 0.6000000238418579,
+        "comboAcceptEnd": 0.3499999940395355,
+        "comboAcceptStart": 0.18000000715255737,
+        "comboCount": 2,
+        "drawHitbox": true,
+        "hitboxActiveEnd": 0.25,
+        "hitboxActiveStart": 0.05000000074505806,
+        "hitboxForwardOffset": 0.550000011920929,
+        "hitboxHeightOffset": 1.0,
+        "hitboxSize": [
+            1.399999976158142,
+            1.2999999523162842,
+            1.100000023841858
+        ],
+        "movementBlockEnd": 0.3499999940395355,
+        "movementBlockStart": 0.0
+    }
+}
