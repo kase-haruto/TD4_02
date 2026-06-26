@@ -13,9 +13,12 @@ struct PlayerInputState {
     CalyxEngine::Vector2 move{0.0f, 0.0f}; //!< 移動入力（x=右、y=前）
     CalyxEngine::Vector2 look{0.0f, 0.0f}; //!< 向き入力（右スティック, x=右, y=前） ← 追加
     bool jumpPressed = false;
-    bool attackPressed = false;
+	bool attackPressed = false;//!< 攻撃ボタンが押された瞬間
 	bool dodgePressed = false; //!< 回避が押された瞬間か
     bool dashHeld = false;
+	bool cloneAbilityPressed = false; //!< クローン生成が押された瞬間か
+	bool cloneAbilityHeld = false; //!< クローン生成ボタンを押し続けているか
+	bool cloneAbilityReleased = false; //!< クローン生成ボタンを離した瞬間か
 };
 
 /**
@@ -66,6 +69,7 @@ private:
 
 private:
 	PlayerInputState state_{};
+	bool prevCloneAbilityHeld_ = false;
 };
 
 
