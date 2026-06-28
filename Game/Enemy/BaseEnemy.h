@@ -19,7 +19,7 @@ public:
 	//===================================================================*/
 	//						public methods
 	//===================================================================*/
-	BaseEnemy(const std::string& modelName, const std::string& objName);
+	BaseEnemy(const std::string& modelName, const std::string& objName, EnemyStats& stats);
 	~BaseEnemy() override = default;
 
 	void Initialize() override;
@@ -28,13 +28,14 @@ public:
 	void OnCollisionEnter([[maybe_unused]] Collider* other)override;
 
 	void SetMovement(std::unique_ptr<IEnemyMovement> movement);
-	void SetStats(const EnemyStats& stats) { stats_ = stats; }
 	void SetTarget(const Actor* target) { target_ = target; }
 
 	void TakeDamage(int amount);
 	bool IsDead() const { return currentHp_ <= 0; }
 
 	const EnemyStats& GetStats() const { return stats_; }
+
+	void DerivativeGui() override;
 
 protected:
 	// 敵ごとの反応
@@ -47,7 +48,7 @@ protected:
 	//===================================================================*/
 	//						protected variables
 	//===================================================================*/
-	EnemyStats stats_{};        // 個体値
+	EnemyStats& stats_;        // 個体値
 	int        currentHp_ = 0;  // 現在HP
 	CalyxEngine::Vector3 knockbackVelocity_{};
 

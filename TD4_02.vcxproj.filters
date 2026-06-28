@@ -48,6 +48,7 @@
     <ClCompile Include="Game\Player\Ability\PlayerAbility.cpp" />
     <ClCompile Include="Game\Player\Base\PlayerBase.cpp" />
     <ClCompile Include="Game\Player\Attack\PlayerAttack.cpp" />
+    <ClCompile Include="Game\Enemy\Enemies\HeavySlime.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Player\Ability\PlayerAbility.h" />

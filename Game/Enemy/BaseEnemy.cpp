@@ -5,14 +5,8 @@
 #include <Engine/Foundation/Input/Input.h>
 
 
-namespace {
-	constexpr float kKnockbackInitialSpeed = 16.0f;  // 吹き飛び初速 (m/s)
-	constexpr float kKnockbackDamping      = 8.0f;  // 減衰の強さ。大きいほど早く止まる
-	constexpr float kKnockbackStopSq       = 0.04f; // 速度がこれ以下(≈0.2m/s)で停止
-}
-
-BaseEnemy::BaseEnemy(const std::string& modelName, const std::string& objectName)
-	: Actor(modelName, objectName) {}
+BaseEnemy::BaseEnemy(const std::string& modelName, const std::string& objectName, EnemyStats& stats)
+	: Actor(modelName, objectName), stats_(stats) {}
 
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -29,7 +23,8 @@ void BaseEnemy::Initialize() {
 //			更新
 /////////////////////////////////////////////////////////////////////////////////////////
 void BaseEnemy::Update(float dt) {
-	if (knockbackVelocity_.LengthSquared() > kKnockbackStopSq) {
+	const float stopSq = stats_.knockbackStopSpeed * stats_.knockbackStopSpeed;
+	if (knockbackVelocity_.LengthSquared() > stopSq) {
 		// 吹き飛び中は追尾せず、ノックバックで動かす
 		UpdateKnockback(dt);
 	} else if (movement_ && target_) {
@@ -45,7 +40,7 @@ void BaseEnemy::Update(float dt) {
 		}
 		//EffectAPI::Play(hit_, worldTransform_.GetWorldPosition());
 
-		knockbackVelocity_ = dir.Normalize() * kKnockbackInitialSpeed;
+		knockbackVelocity_ = dir.Normalize() * stats_.knockbackInitialSpeed;
 	}
 
 	Actor::Update(dt);
@@ -65,6 +60,10 @@ void BaseEnemy::OnCollisionEnter(Collider* other) {
 	}
 }
 
+void BaseEnemy::DerivativeGui() {
+	stats_.ShowGui();
+}
+
 void BaseEnemy::OnHitByPlayerAttack(Collider* attacker) {
 	ApplyKnockbackFrom(attacker);
 }
@@ -82,7 +81,7 @@ void BaseEnemy::ApplyKnockbackFrom(Collider* attacker) {
 		return;
 	}
 
-	knockbackVelocity_ = dir.Normalize() * kKnockbackInitialSpeed;
+	knockbackVelocity_ = dir.Normalize() * stats_.knockbackInitialSpeed;
 }
 
 void BaseEnemy::UpdateKnockback(float dt) {
@@ -90,9 +89,10 @@ void BaseEnemy::UpdateKnockback(float dt) {
 		GetWorldTransform().translation + knockbackVelocity_ * dt;
 
 	// 減衰
-	knockbackVelocity_ = knockbackVelocity_ * (1.0f - kKnockbackDamping * dt);
+	knockbackVelocity_ = knockbackVelocity_ * (1.0f - stats_.knockbackDamping * dt);
 
-	if (knockbackVelocity_.LengthSquared() <= kKnockbackStopSq) {
+	const float stopSq = stats_.knockbackStopSpeed * stats_.knockbackStopSpeed;
+	if (knockbackVelocity_.LengthSquared() <= stopSq) {
 		knockbackVelocity_ = {};
 	}
 }
