@@ -3,6 +3,7 @@
 #include <Engine/Objects/Collider/Collider.h>
 #include <Engine/Foundation/Math/Quaternion.h>
 #include <Engine/Foundation/Input/Input.h>
+#include <Engine/Scene/Context/SceneContext.h>
 
 
 BaseEnemy::BaseEnemy(const std::string& modelName, const std::string& objectName, EnemyStats& stats)
@@ -44,6 +45,14 @@ void BaseEnemy::Update(float dt) {
 	}
 
 	Actor::Update(dt);
+
+	if (IsDead()) {
+		if (auto* context = SceneContext::Current()) {
+			context->RemoveObject(
+				std::static_pointer_cast<SceneObject>(shared_from_this()));
+		}
+		return;
+	}
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -66,6 +75,7 @@ void BaseEnemy::DerivativeGui() {
 
 void BaseEnemy::OnHitByPlayerAttack(Collider* attacker) {
 	ApplyKnockbackFrom(attacker);
+	TakeDamage(1);
 }
 
 void BaseEnemy::ApplyKnockbackFrom(Collider* attacker) {
