@@ -1,6 +1,7 @@
 #include "Slime.h"
 
 #include <Enemy/Movement/HomingMove.h>
+#include <Enemy/Attack/MeleeAttack.h>
 
 /////////////////////////////////////////////////////////////////////////////////////////
 //			ctor
@@ -17,5 +18,6 @@ void Slime::Initialize() {
 	characterMovement_.SetMaxWalkSpeed(statsImpl_.moveSpeed);
 
 	SetMovement(std::make_unique<HomingMove>());
+	SetAttack(std::make_unique<MeleeAttack>());
 	BaseEnemy::Initialize();
 }

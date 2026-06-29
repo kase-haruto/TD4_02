@@ -32,6 +32,11 @@ void BaseEnemy::Update(float dt) {
 		movement_->Update(*this, target_->GetWorldPosition(), dt);
 	}
 
+	// 攻撃（ノックバックで吹き飛んでいる間は攻撃しない）
+	if (knockbackVelocity_.LengthSquared() <= stopSq && attack_ && target_) {
+		attack_->Update(*this, target_, dt);
+	}
+
 	if (CalyxFoundation::Input::TriggerKey(DIK_P)|| CalyxFoundation::Input::TriggerGamepadButton(CalyxFoundation::PadButton::X)) {
 		CalyxEngine::Vector3 dir = CalyxEngine::Quaternion::RotateVector(
 			CalyxEngine::Vector3::Forward(), target_->GetWorldTransform().rotation);
@@ -71,6 +76,9 @@ void BaseEnemy::OnCollisionEnter(Collider* other) {
 
 void BaseEnemy::DerivativeGui() {
 	stats_.ShowGui();
+	if (attack_) {
+		attack_->ShowGui();
+	}
 }
 
 void BaseEnemy::OnHitByPlayerAttack(Collider* attacker) {
@@ -109,6 +117,13 @@ void BaseEnemy::UpdateKnockback(float dt) {
 
 void BaseEnemy::SetMovement(std::unique_ptr<IEnemyMovement> movement) {
 	movement_ = std::move(movement);
+}
+
+void BaseEnemy::SetAttack(std::unique_ptr<IEnemyAttack> attack) {
+	attack_ = std::move(attack);
+	if (attack_) {
+		SerializableParamObjectsMutable().push_back(&attack_->SerializableParam());
+	}
 }
 
 void BaseEnemy::TakeDamage(int amount) {
