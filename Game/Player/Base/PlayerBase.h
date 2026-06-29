@@ -37,6 +37,7 @@ public:
 	void DerivativeGui() override;
 	void PlayAnimation(PlayerAnimationID animationId);
 	PlayerAnimationID GetCurrentAnimationId() const { return currentAnimationId_; }
+	CalyxEngine::Vector3 GetMoveDir() const { return motor_.GetMoveDir(); }
 
 protected:
 	//===================================================================*/

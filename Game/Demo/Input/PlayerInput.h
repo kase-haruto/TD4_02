@@ -61,6 +61,12 @@ private:
 	CalyxEngine::Vector2 BuildDigitalMove() const;
 
 	/**
+	 * \brief キーボードのデジタル方向入力を取得
+	 * \return 正規化済みの方向入力
+	 */
+	CalyxEngine::Vector2 BuildDigitalLook() const;
+
+	/**
 	 * \brief 入力ベクトルの長さを最大1に制限
 	 * \param move 制限対象の入力
 	 * \return 長さを制限した入力

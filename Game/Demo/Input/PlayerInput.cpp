@@ -22,8 +22,10 @@ void PlayerInput::Update() {
 	// 片方だけでも動けるようにし、同時入力時は後段で長さを1に制限する。
 	state_.move = ClampMoveLength(digitalMove + analogMove);
 
-	// 向く方向を取得（キーボードは取得しない）
-	state_.look = Input::GetRightStick();
+	// 向く方向を取得（キーボードは矢印キー）
+	CalyxEngine::Vector2 digitalLook = BuildDigitalLook();
+	CalyxEngine::Vector2 analogLook = Input::GetRightStick();
+	state_.look = ClampMoveLength(digitalLook + analogLook);
 
 	// ジャンプは押された瞬間だけを状態に残す。
 	// CharacterMovementComponent側で接地中かどうかを判定するため、ここでは入力事実だけを扱う。
@@ -96,6 +98,26 @@ CalyxEngine::Vector2 PlayerInput::BuildDigitalMove() const {
 	}
 
 	return ClampMoveLength(move);
+}
+
+CalyxEngine::Vector2 PlayerInput::BuildDigitalLook() const {
+	CalyxEngine::Vector2 look{ 0.0f, 0.0f };
+
+	if (Input::PushKey(DIK_UP)) {
+		look.y += 1.0f;
+	}
+	if (Input::PushKey(DIK_DOWN)) {
+		look.y -= 1.0f;
+	}
+	if (Input::PushKey(DIK_RIGHT)) {
+		look.x += 1.0f;
+	}
+	if (Input::PushKey(DIK_LEFT)) {
+		look.x -= 1.0f;
+	}
+
+	// 斜め入力で長さが1を超えないようにする。
+	return ClampMoveLength(look);
 }
 
 CalyxEngine::Vector2 PlayerInput::ClampMoveLength(const CalyxEngine::Vector2& move) const {

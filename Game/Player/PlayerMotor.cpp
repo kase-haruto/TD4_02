@@ -17,6 +17,7 @@ void PlayerMotor::Update(PlayerBase* player, const PlayerInputState& input, floa
 	// --- 移動 ---
 	CalyxEngine::Vector3 worldDirection = BuildWorldMoveDirection(input.move);
 	if (worldDirection.LengthSquared() > 0.0f) {
+		lastMoveDir_ = worldDirection;
 		if (player->GetCurrentAnimationId() != PlayerAnimationID::Walk) {
 			player->PlayAnimation(PlayerAnimationID::Walk);
 		}
@@ -33,9 +34,6 @@ void PlayerMotor::Update(PlayerBase* player, const PlayerInputState& input, floa
 		// Rスティック入力ありを優先
 		CalyxEngine::Vector3 aimDirection = BuildWorldMoveDirection(input.look);
 		FaceMoveDirection(player, aimDirection);
-	} else if (worldDirection.LengthSquared() > 0.0f) {
-		// 移動している方向へ即向く
-		FaceMoveDirection(player, worldDirection);
 	}
 
 	// --- ジャンプ ---

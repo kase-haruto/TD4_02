@@ -32,9 +32,7 @@ void PlayerDodge::Update(PlayerBase* player, const PlayerInputState& input, floa
 
 void PlayerDodge::StartDodge(PlayerBase* player) {
 	CalyxEngine::Vector3 forward =
-		CalyxEngine::Quaternion::RotateVector(
-			CalyxEngine::Vector3::Forward(),
-			player->GetWorldTransform().rotation);
+		player->GetMoveDir();
 	forward.y = 0.0f;
 
 	if (forward.LengthSquared() <= 1.0e-6f) {
