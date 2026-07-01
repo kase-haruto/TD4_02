@@ -1,119 +1,120 @@
-[
+﻿[
     {
-        "cameraDitherEnabled": false,
-        "castShadow": true,
-        "colliderConfig": {
-            "capsuleHeight": 2.0,
-            "capsuleRadius": 0.30000001192092896,
-            "colliderType": 0,
-            "isCollisionEnabled": true,
-            "isDraw": true,
-            "isTrigger": false,
-            "offset": {
-                "x": 0.0,
-                "y": 0.0,
-                "z": 0.0
-            },
-            "radius": 1.0,
-            "rotate": {
-                "x": 0.0,
-                "y": 0.0,
-                "z": 0.0
-            },
-            "size": {
-                "x": 1.0,
-                "y": 1.0,
-                "z": 1.0
-            },
-            "targetType": 0
-        },
-        "colliderKind": 3,
-        "drawEnable": true,
-        "guid": "9d6107b3-9531-43a0-8097-fc301a4fe63f",
-        "modelConfig": {
-            "blendMode": 5,
-            "materialGuid": "00000000-0000-0000-0000-000000000000",
-            "modelName": "PlayerIdle.gltf",
-            "textureGuid": "00000000-0000-0000-0000-000000000000",
-            "uvTransConfig": {
-                "rotation": 0.0,
-                "scale": {
-                    "x": 1.0,
-                    "y": 1.0
-                }
-            }
-        },
-        "name": "PlayerClone",
-        "objectType": 2,
-        "outlineColor": {
-            "w": 1.0,
-            "x": 0.019999999552965164,
-            "y": 0.019999999552965164,
-            "z": 0.02500000037252903
-        },
-        "outlineEnabled": false,
-        "outlineThickness": 0.03500000014901161,
-        "parentGuid": "00000000-0000-0000-0000-000000000000",
-        "physicsBodyConfig": {
-            "bodyType": 1,
-            "enabled": true,
-            "pushbackRatio": 1.0
-        },
-        "serializableParams": {
-            "Game/Default": {
-                "fields": {
-                    "jumpForce": 5.0,
-                    "moveSpeed": 5.0
-                }
-            }
-        },
-        "transform": {
-            "inheritRotate": true,
-            "inheritScale": true,
-            "inheritTranslate": true,
-            "rotation": {
-                "w": 1.0,
-                "x": 0.0,
-                "y": 0.0,
-                "z": 0.0
-            },
-            "scale": {
-                "x": 1.0,
-                "y": 1.0,
-                "z": 1.0
-            },
-            "translation": {
-                "x": -4.979720115661621,
-                "y": 0.005553454160690308,
-                "z": 7.24162483215332
-            }
-        },
-        "type": "PlayerClone",
-        "visualOffset": {
-            "x": 0.0,
-            "y": 0.0,
-            "z": 0.0
-        },
-        "worldTransform": {
-            "inheritRotate": true,
-            "inheritScale": true,
-            "inheritTranslate": true,
-            "rotation": {
-                "w": 1.0,
-                "x": 0.0,
-                "y": 0.0,
-                "z": 0.0
-            },
-            "scale": {
-                "x": 1.0,
-                "y": 1.0,
-                "z": 1.0
-            },
-            "translation": {
-                "x": 0.0,
-                "y": 0.0,
-                "z": 0.0
-            }
-        }
+        "cameraDitherEnabled":  false,
+        "castShadow":  true,
+        "colliderConfig":  {
+                               "capsuleHeight":  2.0,
+                               "capsuleRadius":  0.30000001192092896,
+                               "colliderType":  0,
+                               "isCollisionEnabled":  true,
+                               "isDraw":  true,
+                               "isTrigger":  false,
+                               "offset":  {
+                                              "x":  0.0,
+                                              "y":  0.0,
+                                              "z":  0.0
+                                          },
+                               "radius":  1.0,
+                               "rotate":  {
+                                              "x":  0.0,
+                                              "y":  0.0,
+                                              "z":  0.0
+                                          },
+                               "size":  {
+                                            "x":  1.0,
+                                            "y":  1.0,
+                                            "z":  1.0
+                                        },
+                               "targetType":  0,
+                               "layerId":  6
+                           },
+        "colliderKind":  3,
+        "drawEnable":  true,
+        "guid":  "9d6107b3-9531-43a0-8097-fc301a4fe63f",
+        "modelConfig":  {
+                            "blendMode":  5,
+                            "materialGuid":  "00000000-0000-0000-0000-000000000000",
+                            "modelName":  "PlayerIdle.gltf",
+                            "textureGuid":  "00000000-0000-0000-0000-000000000000",
+                            "uvTransConfig":  {
+                                                  "rotation":  0.0,
+                                                  "scale":  {
+                                                                "x":  1.0,
+                                                                "y":  1.0
+                                                            }
+                                              }
+                        },
+        "name":  "PlayerClone",
+        "objectType":  2,
+        "outlineColor":  {
+                             "w":  1.0,
+                             "x":  0.019999999552965164,
+                             "y":  0.019999999552965164,
+                             "z":  0.02500000037252903
+                         },
+        "outlineEnabled":  false,
+        "outlineThickness":  0.03500000014901161,
+        "parentGuid":  "00000000-0000-0000-0000-000000000000",
+        "physicsBodyConfig":  {
+                                  "bodyType":  1,
+                                  "enabled":  true,
+                                  "pushbackRatio":  1.0
+                              },
+        "serializableParams":  {
+                                   "Game/Default":  {
+                                                        "fields":  {
+                                                                       "jumpForce":  5.0,
+                                                                       "moveSpeed":  5.0
+                                                                   }
+                                                    }
+                               },
+        "transform":  {
+                          "inheritRotate":  true,
+                          "inheritScale":  true,
+                          "inheritTranslate":  true,
+                          "rotation":  {
+                                           "w":  1.0,
+                                           "x":  0.0,
+                                           "y":  0.0,
+                                           "z":  0.0
+                                       },
+                          "scale":  {
+                                        "x":  1.0,
+                                        "y":  1.0,
+                                        "z":  1.0
+                                    },
+                          "translation":  {
+                                              "x":  -4.979720115661621,
+                                              "y":  0.005553454160690308,
+                                              "z":  7.24162483215332
+                                          }
+                      },
+        "type":  "PlayerClone",
+        "visualOffset":  {
+                             "x":  0.0,
+                             "y":  0.0,
+                             "z":  0.0
+                         },
+        "worldTransform":  {
+                               "inheritRotate":  true,
+                               "inheritScale":  true,
+                               "inheritTranslate":  true,
+                               "rotation":  {
+                                                "w":  1.0,
+                                                "x":  0.0,
+                                                "y":  0.0,
+                                                "z":  0.0
+                                            },
+                               "scale":  {
+                                             "x":  1.0,
+                                             "y":  1.0,
+                                             "z":  1.0
+                                         },
+                               "translation":  {
+                                                   "x":  0.0,
+                                                   "y":  0.0,
+                                                   "z":  0.0
+                                               }
+                           }
     }
 ]
