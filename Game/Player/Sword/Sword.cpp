@@ -1,5 +1,7 @@
 #include "Sword.h"
 
+#include <Game/Collision/CollisionLayerUtil.h>
+
 #include <Data/Engine/Configs/Scene/Objects/Collider/ColliderConfig.h>
 #include <Engine/Objects/Collider/BoxCollider.h>
 
@@ -19,26 +21,27 @@ void Sword::ConfigureAsAttackHitbox(
 	SetCastShadow(false);
 	SetTransient(true);
 
-    const bool isPlayer = (owner == HitboxOwner::Player);
-    const char* objectName = isPlayer ? "PlayerAttackHitbox" : "EnemyAttackHitbox";
-    const char* colliderName = isPlayer ? "PlayerAttackHitboxCollider" : "EnemyAttackHitboxCollider";
-    const ColliderType selfType = isPlayer ? ColliderType::Type_PlayerAttack : ColliderType::Type_EnemyAttack;
-    const ColliderType targetType = isPlayer ? ColliderType::Type_Enemy : ColliderType::Type_Player;
+	const bool isPlayer = (owner == HitboxOwner::Player);
+	const char* objectName = isPlayer ? "PlayerAttackHitbox" : "EnemyAttackHitbox";
+	const char* colliderName = isPlayer ? "PlayerAttackHitboxCollider" : "EnemyAttackHitboxCollider";
+	const char* layerName = isPlayer ? "PlayerAttack" : "EnemyAttack";
+	const auto layerId = GameCollision::FindLayerId(layerName);
 
-    SetName(objectName);
-    InitializeCollider(ColliderKind::Box);
-    if (auto* collider = GetCollider()) {
-        ColliderConfig config;
-        config.isCollisionEnabled = true;
-        config.isTrigger = true;
-        config.isDraw = drawCollider;
-        config.colliderType = static_cast<int>(selfType);
-        config.targetType = static_cast<int>(targetType);
-        config.size = size;
-        collider->ApplyConfig(config);
-        collider->SetName(colliderName);
-        if (auto* box = dynamic_cast<BoxCollider*>(collider)) {
-            box->SetSize(size);
-        }
-    }
+	SetName(objectName);
+	InitializeCollider(ColliderKind::Box);
+	if (auto* collider = GetCollider()) {
+		ColliderConfig config;
+		config.isCollisionEnabled = true;
+		config.isTrigger = true;
+		config.isDraw = drawCollider;
+		config.size = size;
+		if (layerId) {
+			config.layerId = *layerId;
+		}
+		collider->ApplyConfig(config);
+		collider->SetName(colliderName);
+		if (auto* box = dynamic_cast<BoxCollider*>(collider)) {
+			box->SetSize(size);
+		}
+	}
 }

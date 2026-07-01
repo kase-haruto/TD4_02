@@ -80,8 +80,8 @@
                 "rotation": {
                     "w": 0.8877882361412048,
                     "x": 0.378388911485672,
-                    "y": -0.2410385012626648,
-                    "z": 0.1027342826128006
+                    "y": -0.2410384863615036,
+                    "z": 0.1027342900633812
                 },
                 "scale": {
                     "x": 1.0,
@@ -89,108 +89,22 @@
                     "z": 1.0
                 },
                 "translation": {
-                    "x": -4.900007724761963,
+                    "x": -4.900007247924805,
                     "y": 5.741569519042969,
-                    "z": 2.5472207069396973
+                    "z": 2.547220230102539
                 }
             },
             "type": "DebugCamera"
-        },
-        {
-            "cameraDitherEnabled": true,
-            "colliderConfig": {
-                "capsuleHeight": 2.0,
-                "capsuleRadius": 0.5,
-                "colliderType": 0,
-                "isCollisionEnabled": true,
-                "isDraw": true,
-                "isTrigger": false,
-                "offset": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0
-                },
-                "radius": 1.0,
-                "rotate": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0
-                },
-                "size": {
-                    "x": 30.0,
-                    "y": 3.0,
-                    "z": 1.0
-                },
-                "targetType": 0
-            },
-            "colliderKind": 1,
-            "guid": "6400667d-5015-4efa-9b1e-bd9712a5cc24",
-            "modelConfig": {
-                "blendMode": 5,
-                "materialGuid": "00000000-0000-0000-0000-000000000000",
-                "modelName": "debugCube.obj",
-                "textureGuid": "872b65b5-4991-45b2-9d66-d39017e4385e",
-                "uvTransConfig": {
-                    "rotation": -1.5700000524520874,
-                    "scale": {
-                        "x": 3.0,
-                        "y": 30.0
-                    }
-                }
-            },
-            "name": "wall",
-            "objectType": 2,
-            "outlineColor": {
-                "w": 1.0,
-                "x": 0.019999999552965164,
-                "y": 0.019999999552965164,
-                "z": 0.02500000037252903
-            },
-            "outlineEnabled": false,
-            "outlineThickness": 0.03500000014901161,
-            "parentGuid": "00000000-0000-0000-0000-000000000000",
-            "physicsBodyConfig": {
-                "bodyType": 0,
-                "enabled": true,
-                "pushbackRatio": 1.0
-            },
-            "transform": {
-                "inheritRotate": true,
-                "inheritScale": true,
-                "inheritTranslate": true,
-                "rotation": {
-                    "w": 1.0,
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0
-                },
-                "scale": {
-                    "x": 30.0,
-                    "y": 3.0,
-                    "z": 1.0
-                },
-                "translation": {
-                    "x": 0.0,
-                    "y": 1.5,
-                    "z": -9.5
-                }
-            },
-            "type": "BaseGameObject",
-            "visualOffset": {
-                "x": 0.0,
-                "y": 0.0,
-                "z": 0.0
-            }
         },
         {
             "cameraDitherEnabled": false,
             "colliderConfig": {
                 "capsuleHeight": 2.0,
                 "capsuleRadius": 0.5,
-                "colliderType": 0,
                 "isCollisionEnabled": true,
                 "isDraw": true,
                 "isTrigger": false,
+                "layerId": 0,
                 "offset": {
                     "x": 0.0,
                     "y": 0.0,
@@ -206,8 +120,7 @@
                     "x": 30.0,
                     "y": 30.0,
                     "z": 1.0
-                },
-                "targetType": 0
+                }
             },
             "colliderKind": 1,
             "guid": "a84b193d-0e58-4e61-940a-a9a1478ffdb3",
@@ -238,7 +151,10 @@
             "physicsBodyConfig": {
                 "bodyType": 0,
                 "enabled": true,
-                "pushbackRatio": 1.0
+                "gravityScale": 1.0,
+                "mass": 1.0,
+                "pushbackRatio": 1.0,
+                "useGravity": true
             },
             "transform": {
                 "inheritRotate": true,
@@ -273,10 +189,10 @@
             "colliderConfig": {
                 "capsuleHeight": 2.0,
                 "capsuleRadius": 0.5,
-                "colliderType": 0,
                 "isCollisionEnabled": true,
                 "isDraw": true,
                 "isTrigger": false,
+                "layerId": 1,
                 "offset": {
                     "x": 0.0,
                     "y": 0.0,
@@ -292,8 +208,95 @@
                     "x": 30.0,
                     "y": 3.0,
                     "z": 1.0
+                }
+            },
+            "colliderKind": 1,
+            "guid": "6400667d-5015-4efa-9b1e-bd9712a5cc24",
+            "modelConfig": {
+                "blendMode": 5,
+                "materialGuid": "00000000-0000-0000-0000-000000000000",
+                "modelName": "debugCube.obj",
+                "textureGuid": "872b65b5-4991-45b2-9d66-d39017e4385e",
+                "uvTransConfig": {
+                    "rotation": -1.5700000524520874,
+                    "scale": {
+                        "x": 3.0,
+                        "y": 30.0
+                    }
+                }
+            },
+            "name": "wall",
+            "objectType": 2,
+            "outlineColor": {
+                "w": 1.0,
+                "x": 0.019999999552965164,
+                "y": 0.019999999552965164,
+                "z": 0.02500000037252903
+            },
+            "outlineEnabled": false,
+            "outlineThickness": 0.03500000014901161,
+            "parentGuid": "00000000-0000-0000-0000-000000000000",
+            "physicsBodyConfig": {
+                "bodyType": 0,
+                "enabled": true,
+                "gravityScale": 1.0,
+                "mass": 1.0,
+                "pushbackRatio": 1.0,
+                "useGravity": true
+            },
+            "transform": {
+                "inheritRotate": true,
+                "inheritScale": true,
+                "inheritTranslate": true,
+                "rotation": {
+                    "w": 1.0,
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
                 },
-                "targetType": 0
+                "scale": {
+                    "x": 30.0,
+                    "y": 3.0,
+                    "z": 1.0
+                },
+                "translation": {
+                    "x": 0.0,
+                    "y": 1.5,
+                    "z": -9.5
+                }
+            },
+            "type": "BaseGameObject",
+            "visualOffset": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            }
+        },
+        {
+            "cameraDitherEnabled": true,
+            "colliderConfig": {
+                "capsuleHeight": 2.0,
+                "capsuleRadius": 0.5,
+                "isCollisionEnabled": true,
+                "isDraw": true,
+                "isTrigger": false,
+                "layerId": 1,
+                "offset": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "radius": 1.0,
+                "rotate": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "size": {
+                    "x": 30.0,
+                    "y": 3.0,
+                    "z": 1.0
+                }
             },
             "colliderKind": 1,
             "guid": "b86d45d7-3958-456d-9243-12e52adbe094",
@@ -324,7 +327,10 @@
             "physicsBodyConfig": {
                 "bodyType": 0,
                 "enabled": true,
-                "pushbackRatio": 1.0
+                "gravityScale": 1.0,
+                "mass": 1.0,
+                "pushbackRatio": 1.0,
+                "useGravity": true
             },
             "transform": {
                 "inheritRotate": true,
@@ -359,10 +365,10 @@
             "colliderConfig": {
                 "capsuleHeight": 2.0,
                 "capsuleRadius": 0.5,
-                "colliderType": 0,
                 "isCollisionEnabled": true,
                 "isDraw": true,
                 "isTrigger": false,
+                "layerId": 1,
                 "offset": {
                     "x": 0.0,
                     "y": 0.0,
@@ -378,8 +384,7 @@
                     "x": 30.0,
                     "y": 3.0,
                     "z": 1.0
-                },
-                "targetType": 0
+                }
             },
             "colliderKind": 1,
             "guid": "490c0697-76e1-4fb4-aacc-c548ff02dcaf",
@@ -410,7 +415,10 @@
             "physicsBodyConfig": {
                 "bodyType": 0,
                 "enabled": true,
-                "pushbackRatio": 1.0
+                "gravityScale": 1.0,
+                "mass": 1.0,
+                "pushbackRatio": 1.0,
+                "useGravity": true
             },
             "transform": {
                 "inheritRotate": true,
@@ -445,10 +453,10 @@
             "colliderConfig": {
                 "capsuleHeight": 2.0,
                 "capsuleRadius": 0.5,
-                "colliderType": 0,
                 "isCollisionEnabled": true,
                 "isDraw": true,
                 "isTrigger": false,
+                "layerId": 1,
                 "offset": {
                     "x": 0.0,
                     "y": 0.0,
@@ -464,8 +472,7 @@
                     "x": 30.0,
                     "y": 3.0,
                     "z": 1.0
-                },
-                "targetType": 0
+                }
             },
             "colliderKind": 1,
             "guid": "25c9b416-9006-4233-ba05-3f54ca550af5",
@@ -496,7 +503,10 @@
             "physicsBodyConfig": {
                 "bodyType": 0,
                 "enabled": true,
-                "pushbackRatio": 1.0
+                "gravityScale": 1.0,
+                "mass": 1.0,
+                "pushbackRatio": 1.0,
+                "useGravity": true
             },
             "transform": {
                 "inheritRotate": true,
@@ -547,10 +557,10 @@
             "colliderConfig": {
                 "capsuleHeight": 2.0,
                 "capsuleRadius": 0.5,
-                "colliderType": 0,
                 "isCollisionEnabled": true,
                 "isDraw": true,
                 "isTrigger": false,
+                "layerId": 0,
                 "offset": {
                     "x": 0.0,
                     "y": -0.5,
@@ -566,8 +576,7 @@
                     "x": 1.0,
                     "y": 1.0,
                     "z": 1.0
-                },
-                "targetType": 0
+                }
             },
             "colliderKind": 1,
             "guid": "d271ffd1-13b8-43b3-b358-22a37ee3cc14",
@@ -598,7 +607,10 @@
             "physicsBodyConfig": {
                 "bodyType": 1,
                 "enabled": true,
-                "pushbackRatio": 1.0
+                "gravityScale": 1.0,
+                "mass": 1.0,
+                "pushbackRatio": 1.0,
+                "useGravity": true
             },
             "prefabAssetGuid": "4dc6b768-6b58-4fd1-a473-ebf1997f745c",
             "prefabSourceGuid": "d271ffd1-13b8-43b3-b358-22a37ee3cc14",
@@ -651,10 +663,10 @@
             "colliderConfig": {
                 "capsuleHeight": 2.0,
                 "capsuleRadius": 0.5,
-                "colliderType": 0,
                 "isCollisionEnabled": true,
                 "isDraw": true,
                 "isTrigger": false,
+                "layerId": 0,
                 "offset": {
                     "x": 0.0,
                     "y": -0.5,
@@ -670,8 +682,7 @@
                     "x": 1.0,
                     "y": 1.0,
                     "z": 1.0
-                },
-                "targetType": 0
+                }
             },
             "colliderKind": 1,
             "guid": "a34126fe-8d1c-464e-981f-87b14bc4a999",
@@ -702,7 +713,10 @@
             "physicsBodyConfig": {
                 "bodyType": 1,
                 "enabled": true,
-                "pushbackRatio": 1.0
+                "gravityScale": 1.0,
+                "mass": 1.0,
+                "pushbackRatio": 1.0,
+                "useGravity": true
             },
             "prefabAssetGuid": "4dc6b768-6b58-4fd1-a473-ebf1997f745c",
             "prefabSourceGuid": "d271ffd1-13b8-43b3-b358-22a37ee3cc14",
@@ -739,10 +753,10 @@
             "colliderConfig": {
                 "capsuleHeight": 1.7999999523162842,
                 "capsuleRadius": 0.30000001192092896,
-                "colliderType": 0,
                 "isCollisionEnabled": true,
                 "isDraw": true,
                 "isTrigger": false,
+                "layerId": 2,
                 "offset": {
                     "x": 0.0,
                     "y": 0.0,
@@ -758,8 +772,7 @@
                     "x": 1.0,
                     "y": 1.0,
                     "z": 1.0
-                },
-                "targetType": 0
+                }
             },
             "colliderKind": 3,
             "guid": "7cf4af54-848a-4332-a62a-2b36e4c02dd8",
@@ -790,7 +803,10 @@
             "physicsBodyConfig": {
                 "bodyType": 1,
                 "enabled": true,
-                "pushbackRatio": 1.0
+                "gravityScale": 1.0,
+                "mass": 1.0,
+                "pushbackRatio": 1.0,
+                "useGravity": true
             },
             "serializableParams": {
                 "Game/Default": {
@@ -806,7 +822,7 @@
                 "inheritTranslate": true,
                 "rotation": {
                     "w": 0.878714382648468,
-                    "x": -0.0,
+                    "x": 0.0,
                     "y": -0.4773479104042053,
                     "z": 0.0
                 },
@@ -881,10 +897,10 @@
             "colliderConfig": {
                 "capsuleHeight": 2.0,
                 "capsuleRadius": 0.5,
-                "colliderType": 0,
                 "isCollisionEnabled": true,
                 "isDraw": true,
                 "isTrigger": false,
+                "layerId": 3,
                 "offset": {
                     "x": 0.0,
                     "y": -0.5,
@@ -900,8 +916,7 @@
                     "x": 1.0,
                     "y": 1.0,
                     "z": 1.0
-                },
-                "targetType": 0
+                }
             },
             "colliderKind": 1,
             "guid": "9c1299f0-f8c0-4f60-8993-2e24d76978c1",
@@ -932,7 +947,41 @@
             "physicsBodyConfig": {
                 "bodyType": 1,
                 "enabled": true,
-                "pushbackRatio": 1.0
+                "gravityScale": 1.0,
+                "mass": 1.0,
+                "pushbackRatio": 1.0,
+                "useGravity": true
+            },
+            "serializableParams": {
+                "Game/Actor/Enemy/AttackParam/MeleeAttack": {
+                    "fields": {
+                        "attackDuration": 0.6000000238418579,
+                        "drawHitbox": true,
+                        "hitboxActiveEnd": 0.4000000059604645,
+                        "hitboxActiveStart": 0.25,
+                        "hitboxForwardOffset": 1.2000000476837158,
+                        "hitboxHeightOffset": 1.0,
+                        "hitboxSize": [
+                            1.0,
+                            0.800000011920929,
+                            1.0
+                        ]
+                    }
+                },
+                "Game/Actor/Enemy/Slime": {
+                    "fields": {
+                        "attackDamage": 2,
+                        "attackInterval": 2.0,
+                        "attackRange": 1.2000000476837158,
+                        "contactDamage": 1,
+                        "detectionRange": 6.0,
+                        "knockbackDamping": 8.0,
+                        "knockbackInitialSpeed": 16.0,
+                        "knockbackStopSpeed": 0.20000000298023224,
+                        "maxHp": 5,
+                        "moveSpeed": 1.5
+                    }
+                }
             },
             "transform": {
                 "inheritRotate": true,
@@ -964,5 +1013,74 @@
         }
     ],
     "sceneName": "TestScene",
-    "version": 1
+    "settings": {
+        "collision": {
+            "layers": [
+                {
+                    "id": 0,
+                    "name": "Default"
+                },
+                {
+                    "id": 1,
+                    "name": "Obstacle"
+                },
+                {
+                    "id": 2,
+                    "name": "Player"
+                },
+                {
+                    "id": 3,
+                    "name": "Enemy"
+                },
+                {
+                    "id": 4,
+                    "name": "PlayerAttack"
+                },
+                {
+                    "id": 5,
+                    "name": "EnemyAttack"
+                },
+                {
+                    "id": 6,
+                    "name": "PlayerClone"
+                }
+            ],
+            "matrixRows": [
+                0,
+                78,
+                42,
+                86,
+                8,
+                68,
+                106,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ]
+        },
+        "version": 1
+    },
+    "version": 2
 }

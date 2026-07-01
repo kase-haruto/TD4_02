@@ -1,9 +1,10 @@
 #include "BaseEnemy.h"
 
+#include <Game/Collision/CollisionLayerUtil.h>
+
 #include <Engine/Objects/Collider/Collider.h>
 #include <Engine/Foundation/Math/Quaternion.h>
 #include <Engine/Foundation/Input/Input.h>
-#include <Engine/Scene/Context/SceneContext.h>
 
 
 BaseEnemy::BaseEnemy(const std::string& modelName, const std::string& objectName, EnemyStats& stats)
@@ -67,11 +68,19 @@ void BaseEnemy::OnCollisionEnter(Collider* other) {
 	if (!other) {
 		return;
 	}
-	// プレイヤーの攻撃に当たったときだけ
-	if ((other->GetType() & ColliderType::Type_PlayerAttack) != ColliderType::Type_None) {
+
+	const auto playerAttackLayer = GameCollision::FindLayerId("PlayerAttack");
+	if (playerAttackLayer && other->GetLayerId() == *playerAttackLayer) {
 		OnHitByPlayerAttack(other);
 		//EffectAPI::Play(hit_, worldTransform_.GetWorldPosition());
 	}
+
+
+	//// プレイヤーの攻撃に当たったときだけ
+	//if ((other->GetType() & ColliderType::Type_PlayerAttack) != ColliderType::Type_None) {
+	//	OnHitByPlayerAttack(other);
+	//	//EffectAPI::Play(hit_, worldTransform_.GetWorldPosition());
+	//}
 }
 
 void BaseEnemy::DerivativeGui() {
