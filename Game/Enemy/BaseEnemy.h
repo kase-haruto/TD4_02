@@ -47,6 +47,9 @@ protected:
 
 	void UpdateKnockback(float dt);
 
+	virtual bool AllowMovement() const { return true; }
+	virtual bool AllowAttack()   const { return true; }
+
 	//===================================================================*/
 	//						protected variables
 	//===================================================================*/

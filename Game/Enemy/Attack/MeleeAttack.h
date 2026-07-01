@@ -18,6 +18,7 @@ public:
 
 	void Update(BaseEnemy& self, const Actor* target, float dt)override;
 	void ShowGui()override;
+	bool IsAttacking() const override { return isAttacking_; }
 	CalyxEngine::SerializableObject& SerializableParam()override;
 
 private:

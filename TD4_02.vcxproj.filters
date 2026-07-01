@@ -52,6 +52,7 @@
     <ClCompile Include="Game\Enemy\Attack\MeleeAttack.cpp" />
     <ClCompile Include="Game\Enemy\Enemies\ShieldEnemy.cpp" />
     <ClCompile Include="Game\Enemy\Enemies\HeavyShieldEnemy.cpp" />
+    <ClCompile Include="Game\Enemy\Enemies\ShieldEnemyBase.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Player\Ability\PlayerAbility.h" />

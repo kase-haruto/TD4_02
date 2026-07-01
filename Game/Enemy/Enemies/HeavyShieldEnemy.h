@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Enemy/BaseEnemy.h>
+#include <Enemy/Enemies/ShieldEnemyBase.h>
 
 /*-----------------------------------------------------------------------------------------
  * HeavyShieldEnemy
@@ -8,7 +8,7 @@
  *---------------------------------------------------------------------------------------*/
 CALYX_OBJECT(Category = GameObject, DisplayName = "HeavyShieldEnemy")
 class HeavyShieldEnemy
-	: public BaseEnemy {
+	: public ShieldEnemyBase {
 public:
 	HeavyShieldEnemy();
 	~HeavyShieldEnemy() override = default;

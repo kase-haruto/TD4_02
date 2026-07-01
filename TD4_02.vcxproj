@@ -189,6 +189,7 @@ if exist "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" copy "$(Win
     <ClCompile Include="Game\Enemy\Enemies\HeavyShieldEnemy.cpp" />
     <ClCompile Include="Game\Enemy\Enemies\HeavySlime.cpp" />
     <ClCompile Include="Game\Enemy\Enemies\ShieldEnemy.cpp" />
+    <ClCompile Include="Game\Enemy\Enemies\ShieldEnemyBase.cpp" />
     <ClCompile Include="Game\Enemy\Enemies\Slime.cpp" />
     <ClCompile Include="Game\Enemy\Movement\HomingMove.cpp" />
     <ClCompile Include="Game\Player\Clone\Clone.cpp" />

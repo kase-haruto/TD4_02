@@ -7,7 +7,7 @@
 //			ctor
 /////////////////////////////////////////////////////////////////////////////////////////
 HeavyShieldEnemy::HeavyShieldEnemy()
-	: BaseEnemy("debugCube.obj", "HeavyShieldEnemy", statsImpl_) {
+	: ShieldEnemyBase("debugCube.obj", "HeavyShieldEnemy", statsImpl_) {
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -19,5 +19,5 @@ void HeavyShieldEnemy::Initialize() {
 
 	SetMovement(std::make_unique<HomingMove>());
 	SetAttack(std::make_unique<MeleeAttack>());
-	BaseEnemy::Initialize();
+	ShieldEnemyBase::Initialize();
 }

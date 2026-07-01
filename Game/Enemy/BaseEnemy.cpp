@@ -28,12 +28,12 @@ void BaseEnemy::Update(float dt) {
 	if (knockbackVelocity_.LengthSquared() > stopSq) {
 		// 吹き飛び中は追尾せず、ノックバックで動かす
 		UpdateKnockback(dt);
-	} else if (movement_ && target_) {
+	} else if (movement_ && target_ && AllowMovement()) {
 		movement_->Update(*this, target_->GetWorldPosition(), dt);
 	}
 
 	// 攻撃（ノックバックで吹き飛んでいる間は攻撃しない）
-	if (knockbackVelocity_.LengthSquared() <= stopSq && attack_ && target_) {
+	if (knockbackVelocity_.LengthSquared() <= stopSq && attack_ && target_ && AllowAttack()) {
 		attack_->Update(*this, target_, dt);
 	}
 

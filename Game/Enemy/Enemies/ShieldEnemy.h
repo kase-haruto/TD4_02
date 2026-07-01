@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Enemy/BaseEnemy.h>
+#include <Enemy/Enemies/ShieldEnemyBase.h>
 
 /*-----------------------------------------------------------------------------------------
  * ShieldEnemy
@@ -8,7 +8,7 @@
  *---------------------------------------------------------------------------------------*/
 CALYX_OBJECT(Category = GameObject, DisplayName = "ShieldEnemy")
 class ShieldEnemy
-	: public BaseEnemy {
+	: public ShieldEnemyBase {
 public:
 	ShieldEnemy();
 	~ShieldEnemy() override = default;
