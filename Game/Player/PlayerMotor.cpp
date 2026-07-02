@@ -5,6 +5,7 @@
 #include <Engine/Foundation/Math/Quaternion.h>
 #include <Engine/Graphics/Camera/Manager/CameraManager.h>
 #include <Engine/Physics/Character/CharacterMovementComponent.h>
+#include <Engine/Foundation/Math/MathUtil.h>
 
 
 void PlayerMotor::Initialize(PlayerBase* player) {
@@ -28,12 +29,23 @@ void PlayerMotor::Update(PlayerBase* player, const PlayerInputState& input, floa
 		}
 	}
 
-	// --- 向き : 右スティックを倒した方向へ即向ける ---
-	constexpr float kAimThresholdSq = 0.04f; // ノイズで向きが変わらないように
-	if (input.look.LengthSquared() > kAimThresholdSq) {
-		// Rスティック入力ありを優先
-		CalyxEngine::Vector3 aimDirection = BuildWorldMoveDirection(input.look);
-		FaceMoveDirection(player, aimDirection);
+	// --- 向き ---
+	if (input.aimWithMouse) {
+		// マウスカーソルの方を向く
+		CalyxEngine::Vector2 playerScreen = CalyxEngine::WorldToScreen(player->GetWorldPosition());
+		CalyxEngine::Vector2 delta = input.aimScreen - playerScreen;
+
+		constexpr float kCursorDeadZoneSq = 4.0f;
+		if (delta.LengthSquared() > kCursorDeadZoneSq) {
+			CalyxEngine::Vector2 aim2D = { delta.x, -delta.y };
+			FaceMoveDirection(player, BuildWorldMoveDirection(aim2D));
+		}
+	} else {
+		// パッド右スティックの方を向く（中立ならFaceMoveDirection側で何もしない）
+		constexpr float kAimThresholdSq = 0.04f;
+		if (input.look.LengthSquared() > kAimThresholdSq) {
+			FaceMoveDirection(player, BuildWorldMoveDirection(input.look));
+		}
 	}
 
 	// --- ジャンプ ---

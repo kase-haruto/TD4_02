@@ -22,10 +22,20 @@ void PlayerInput::Update() {
 	// 片方だけでも動けるようにし、同時入力時は後段で長さを1に制限する。
 	state_.move = ClampMoveLength(digitalMove + analogMove);
 
-	// 向く方向を取得（キーボードは矢印キー）
-	CalyxEngine::Vector2 digitalLook = BuildDigitalLook();
+	// 向く方向を取得
 	CalyxEngine::Vector2 analogLook = Input::GetRightStick();
-	state_.look = ClampMoveLength(digitalLook + analogLook);
+	state_.look = ClampMoveLength(analogLook);
+
+	// マウスカーソルのスクリーン座標を保持する。
+	state_.aimScreen = Input::GetMousePosition();
+	// 狙いデバイスの選択（最後に使ったデバイスを優先する）
+	constexpr float kAimThresholdSq = 0.04f;
+	if (state_.look.LengthSquared() > kAimThresholdSq || analogMove.LengthSquared() > kAimThresholdSq) {
+		aimWithMouse_ = false;
+	} else if (Input::GetMouseDelta().LengthSquared() > 0.0f) {
+		aimWithMouse_ = true;
+	}
+	state_.aimWithMouse = aimWithMouse_;
 
 	// ジャンプは押された瞬間だけを状態に残す。
 	// CharacterMovementComponent側で接地中かどうかを判定するため、ここでは入力事実だけを扱う。

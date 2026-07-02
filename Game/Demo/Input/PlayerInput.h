@@ -11,7 +11,9 @@
  */
 struct PlayerInputState {
     CalyxEngine::Vector2 move{0.0f, 0.0f}; //!< 移動入力（x=右、y=前）
-    CalyxEngine::Vector2 look{0.0f, 0.0f}; //!< 向き入力（右スティック, x=右, y=前） ← 追加
+    CalyxEngine::Vector2 look{0.0f, 0.0f}; //!< 向き入力（右スティック, x=右, y=前）
+	CalyxEngine::Vector2 aimScreen{ 0.0f, 0.0f }; //!< マウスカーソルのスクリーン座標(ピクセル)
+	bool aimWithMouse = true;
     bool jumpPressed = false;
 	bool attackPressed = false;//!< 攻撃ボタンが押された瞬間
 	bool dodgePressed = false; //!< 回避が押された瞬間か
@@ -76,6 +78,7 @@ private:
 private:
 	PlayerInputState state_{};
 	bool prevCloneAbilityHeld_ = false;
+	bool aimWithMouse_ = true;
 };
 
 
