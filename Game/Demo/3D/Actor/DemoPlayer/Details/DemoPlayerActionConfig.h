@@ -8,7 +8,7 @@ enum class InputAction {
 	MoveBackward,
 	MoveLeft,
 	MoveRight,
-	Jump,
+	//Jump,
 	Attack,
 	Ability,
 	Dash,

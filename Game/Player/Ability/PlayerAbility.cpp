@@ -59,6 +59,7 @@ void PlayerAbility::SpawnClone(Player& player, float spawnDistance) {
 	if (!clone) {
 		return;
 	}
+	clone->SetAimOrigin(&player);
 	clone->SetRotate(player.GetWorldTransform().rotation);
 	clones_.push_back(clone);
 }
