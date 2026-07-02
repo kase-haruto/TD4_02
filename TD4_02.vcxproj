@@ -116,6 +116,9 @@ if not exist "$(TargetDir)CalyxEngine.dll" if exist "$(CalyxEngineSdkDir)\..\Cal
 if exist "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxcompiler.dll" copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxcompiler.dll" "$(TargetDir)dxcompiler.dll"
 if exist "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dxil.dll"</Command>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>powershell -NoProfile -ExecutionPolicy Bypass -File "$(ProjectDir)Tools\Reflection\generate_reflection.ps1" -ApiMacro CALYX_API</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -172,6 +175,9 @@ if not exist "$(TargetDir)CalyxEngine.dll" if exist "$(CalyxEngineSdkDir)\..\Cal
 if exist "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxcompiler.dll" copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxcompiler.dll" "$(TargetDir)dxcompiler.dll"
 if exist "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dxil.dll"</Command>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>powershell -NoProfile -ExecutionPolicy Bypass -File "$(ProjectDir)Tools\Reflection\generate_reflection.ps1" -ApiMacro CALYX_API</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Game/Demo/3D/Actor/DemoCamera/DemoCameraPivot.cpp" />
