@@ -30,6 +30,8 @@ public:
 
 	CalyxEngine::Vector3 GetMoveDir() const { return lastMoveDir_; }
 
+	void SetAimOrigin(const PlayerBase* origin) { aimOrigin_ = origin; }
+
 private:
 	/// 2D入力(x=右, y=前)をカメラ基準のXZ平面移動方向へ変換
 	CalyxEngine::Vector3 BuildWorldMoveDirection(const CalyxEngine::Vector2& move) const;
@@ -48,4 +50,5 @@ private:
 	}param_;
 
 	CalyxEngine::Vector3 lastMoveDir_{};
+	const PlayerBase* aimOrigin_ = nullptr;
 };

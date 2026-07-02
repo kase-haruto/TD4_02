@@ -28,6 +28,8 @@ public:
 	void SetGhost(bool isGhost) { isGhost_ = isGhost; }
 	bool IsGhost() const { return isGhost_; }
 
+	void SetAimOrigin(const PlayerBase* origin) { motor_.SetAimOrigin(origin); }
+
 private:
 	bool isGhost_ = false;
 };

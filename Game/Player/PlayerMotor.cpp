@@ -32,8 +32,10 @@ void PlayerMotor::Update(PlayerBase* player, const PlayerInputState& input, floa
 	// --- 向き ---
 	if (input.aimWithMouse) {
 		// マウスカーソルの方を向く
-		CalyxEngine::Vector2 playerScreen = CalyxEngine::WorldToScreen(player->GetWorldPosition());
-		CalyxEngine::Vector2 delta = input.aimScreen - playerScreen;
+		// 向きの基準位置：クローンは親Playerの位置を使う（未設定なら自分）
+		const PlayerBase* originObj = aimOrigin_ ? aimOrigin_ : player;
+		CalyxEngine::Vector2 originScreen = CalyxEngine::WorldToScreen(originObj->GetWorldPosition());
+		CalyxEngine::Vector2 delta = input.aimScreen - originScreen;
 
 		constexpr float kCursorDeadZoneSq = 4.0f;
 		if (delta.LengthSquared() > kCursorDeadZoneSq) {
@@ -49,9 +51,9 @@ void PlayerMotor::Update(PlayerBase* player, const PlayerInputState& input, floa
 	}
 
 	// --- ジャンプ ---
-	if (input.jumpPressed) {
+	/*if (input.jumpPressed) {
 		player->GetCharacterMovement().Jump();
-	}
+	}*/
 }
 
 void PlayerMotor::ShowGui(){

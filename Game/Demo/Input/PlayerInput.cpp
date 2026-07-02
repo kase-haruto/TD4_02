@@ -39,14 +39,14 @@ void PlayerInput::Update() {
 
 	// ジャンプは押された瞬間だけを状態に残す。
 	// CharacterMovementComponent側で接地中かどうかを判定するため、ここでは入力事実だけを扱う。
-	state_.jumpPressed = IsTriggerAction(InputAction::Jump) || IsTriggerGamepadAction(InputAction::Jump);
+	//state_.jumpPressed = IsTriggerAction(InputAction::Jump) || IsTriggerGamepadAction(InputAction::Jump);
 
 	// 攻撃も押された瞬間だけを状態に残す。
 	// 現時点ではDemoPlayer側で未使用だが、入力責務として状態を作っておく。
-	state_.attackPressed = IsTriggerAction(InputAction::Attack) || IsTriggerGamepadAction(InputAction::Attack);
+	state_.attackPressed = IsTriggerAction(InputAction::Attack) || IsTriggerGamepadAction(InputAction::Attack) || Input::TriggerMouseButton(CalyxFoundation::MouseButton::Left);
 
 	// 回避を押した時
-	state_.dodgePressed = IsTriggerAction(InputAction::Dash) || IsTriggerGamepadAction(InputAction::Dash);
+	state_.dodgePressed = IsTriggerAction(InputAction::Dash) || IsTriggerGamepadAction(InputAction::Dash) || Input::TriggerMouseButton(CalyxFoundation::MouseButton::Right);
 
 	// クローン生成を押した時
 	state_.cloneAbilityPressed = IsTriggerAction(InputAction::Ability) || IsTriggerGamepadAction(InputAction::Ability);
@@ -56,7 +56,7 @@ void PlayerInput::Update() {
 
 	// ダッシュは押し続け状態として扱う。
 	// 移動速度変更などの継続効果で使えるように、トリガーではなくPushを参照する。
-	state_.dashHeld = IsPushAction(InputAction::Dash) || IsPushGamepadAction(InputAction::Dash);
+	state_.dashHeld = IsPushAction(InputAction::Dash) || IsPushGamepadAction(InputAction::Dash) || Input::PushMouseButton(CalyxFoundation::MouseButton::Right);
 }
 
 void PlayerInput::ShowGui() {
@@ -68,8 +68,8 @@ void PlayerInput::ResetBindings() {
 		{InputAction::MoveBackward, DIK_S},
 		{InputAction::MoveLeft, DIK_A},
 		{InputAction::MoveRight, DIK_D},
-		{InputAction::Jump, DIK_SPACE},
-		{InputAction::Ability, DIK_Q},
+		//{InputAction::Jump, DIK_SPACE},
+		{InputAction::Ability, DIK_SPACE},
 		{InputAction::Attack, DIK_K},
 		{InputAction::Dash, DIK_LSHIFT},
 	};
@@ -79,10 +79,10 @@ void PlayerInput::ResetBindings() {
 		{InputAction::MoveBackward, PadButton::DPAD_DOWN},
 		{InputAction::MoveLeft, PadButton::DPAD_LEFT},
 		{InputAction::MoveRight, PadButton::DPAD_RIGHT},
-		{InputAction::Jump, PadButton::A},
-		{InputAction::Attack, PadButton::X},
-		{InputAction::Ability, PadButton::Y},
-		{InputAction::Dash, PadButton::LB},
+		//{InputAction::Jump, PadButton::A},
+		{InputAction::Attack, PadButton::RB},
+		{InputAction::Ability, PadButton::LB},
+		{InputAction::Dash, PadButton::A},
 	};
 }
 
