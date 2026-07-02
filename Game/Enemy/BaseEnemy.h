@@ -8,6 +8,7 @@
 
 #include "EnemyStats.h"
 #include "IEnemyMovement.h"
+#include "Attack/IEnemyAttack.h"
 
 /*-----------------------------------------------------------------------------------------
  * BaseEnemy
@@ -28,6 +29,7 @@ public:
 	void OnCollisionEnter([[maybe_unused]] Collider* other)override;
 
 	void SetMovement(std::unique_ptr<IEnemyMovement> movement);
+	void SetAttack(std::unique_ptr<IEnemyAttack> attack);
 	void SetTarget(const Actor* target) { target_ = target; }
 
 	void TakeDamage(int amount);
@@ -45,6 +47,9 @@ protected:
 
 	void UpdateKnockback(float dt);
 
+	virtual bool AllowMovement() const { return true; }
+	virtual bool AllowAttack()   const { return true; }
+
 	//===================================================================*/
 	//						protected variables
 	//===================================================================*/
@@ -53,6 +58,7 @@ protected:
 	CalyxEngine::Vector3 knockbackVelocity_{};
 
 	std::unique_ptr<IEnemyMovement> movement_;       // 動き
+	std::unique_ptr<IEnemyAttack> attack_;           // 攻撃
 	const Actor* target_ = nullptr;
 
 	//CalyxEngine::EffectAsset hit_;
