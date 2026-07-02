@@ -10,6 +10,13 @@ class Sword
 	: public BaseGameObject {
 public:
 	//====================================================================*/
+	//                    public enums
+	//====================================================================*/
+	enum class HitboxOwner {
+		Player, // プレイヤーの攻撃：敵に当たる
+		Enemy,  // 敵の攻撃：プレイヤーに当たる
+	};
+	//====================================================================*/
 	//                    public methods
 	//====================================================================*/
 	Sword();
@@ -17,7 +24,8 @@ public:
 	~Sword()override;
 	void ConfigureAsAttackHitbox(
 		const CalyxEngine::Vector3& size,
-		bool drawCollider);
+		bool drawCollider,
+		HitboxOwner owner = HitboxOwner::Player);
 
 private:
 	//====================================================================*/

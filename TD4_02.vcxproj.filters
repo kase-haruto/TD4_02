@@ -49,8 +49,13 @@
     <ClCompile Include="Game\Player\Base\PlayerBase.cpp" />
     <ClCompile Include="Game\Player\Attack\PlayerAttack.cpp" />
     <ClCompile Include="Game\Enemy\Enemies\HeavySlime.cpp" />
+    <ClCompile Include="Game\Enemy\Attack\MeleeAttack.cpp" />
+    <ClCompile Include="Game\Enemy\Enemies\ShieldEnemy.cpp" />
+    <ClCompile Include="Game\Enemy\Enemies\HeavyShieldEnemy.cpp" />
+    <ClCompile Include="Game\Enemy\Enemies\ShieldEnemyBase.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Game\Collision\CollisionLayerUtil.h" />
     <ClInclude Include="Game\Player\Ability\PlayerAbility.h" />
     <ClInclude Include="Game\Player\Base\PlayerBase.h" />
     <ClInclude Include="Game\Player\Attack\PlayerAttack.h" />

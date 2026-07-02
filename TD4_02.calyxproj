@@ -1,6 +1,6 @@
 {
   "assetDirectory": "Resources/Assets",
-  "engineVersion": "v1.1.6",
+  "engineVersion": "v1.1.11",
   "gameModule": "Generated/Outputs/Debug/TD4_02.dll",
   "gameModules": {
     "Debug": "Generated/Outputs/Debug/TD4_02.dll",

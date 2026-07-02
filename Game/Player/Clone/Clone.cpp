@@ -1,5 +1,7 @@
 #include "Clone.h"
 
+#include <Game/Collision/CollisionLayerUtil.h>
+
 #include <Engine/Objects/Collider/Collider.h>
 #include <Engine/Scene/Context/SceneContext.h>
 
@@ -23,14 +25,8 @@ void PlayerClone::OnCollisionEnter(Collider* other) {
 		return;
 	}
 
-	const BaseGameObject* owner = other->GetOwner();
-	const std::string& objectName = owner ? owner->GetName() : other->GetName();
-	const bool isObstacle =
-		other->GetType() == ColliderType::Type_Impediment ||
-		other->GetType() == ColliderType::Type_StageGimmick ||
-		objectName.find("wall") != std::string::npos ||
-		objectName.find("Wall") != std::string::npos;
-	if (!isObstacle) {
+	const auto obstacleLayer = GameCollision::FindLayerId("Obstacle");
+	if (!obstacleLayer || other->GetLayerId() != *obstacleLayer) {
 		return;
 	}
 

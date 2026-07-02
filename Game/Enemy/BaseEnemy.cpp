@@ -1,9 +1,10 @@
 #include "BaseEnemy.h"
 
+#include <Game/Collision/CollisionLayerUtil.h>
+
 #include <Engine/Objects/Collider/Collider.h>
 #include <Engine/Foundation/Math/Quaternion.h>
 #include <Engine/Foundation/Input/Input.h>
-#include <Engine/Scene/Context/SceneContext.h>
 
 
 BaseEnemy::BaseEnemy(const std::string& modelName, const std::string& objectName, EnemyStats& stats)
@@ -28,8 +29,13 @@ void BaseEnemy::Update(float dt) {
 	if (knockbackVelocity_.LengthSquared() > stopSq) {
 		// 吹き飛び中は追尾せず、ノックバックで動かす
 		UpdateKnockback(dt);
-	} else if (movement_ && target_) {
+	} else if (movement_ && target_ && AllowMovement()) {
 		movement_->Update(*this, target_->GetWorldPosition(), dt);
+	}
+
+	// 攻撃（ノックバックで吹き飛んでいる間は攻撃しない）
+	if (knockbackVelocity_.LengthSquared() <= stopSq && attack_ && target_ && AllowAttack()) {
+		attack_->Update(*this, target_, dt);
 	}
 
 	if (CalyxFoundation::Input::TriggerKey(DIK_P)|| CalyxFoundation::Input::TriggerGamepadButton(CalyxFoundation::PadButton::X)) {
@@ -62,15 +68,26 @@ void BaseEnemy::OnCollisionEnter(Collider* other) {
 	if (!other) {
 		return;
 	}
-	// プレイヤーの攻撃に当たったときだけ
-	if ((other->GetType() & ColliderType::Type_PlayerAttack) != ColliderType::Type_None) {
+
+	const auto playerAttackLayer = GameCollision::FindLayerId("PlayerAttack");
+	if (playerAttackLayer && other->GetLayerId() == *playerAttackLayer) {
 		OnHitByPlayerAttack(other);
 		//EffectAPI::Play(hit_, worldTransform_.GetWorldPosition());
 	}
+
+
+	//// プレイヤーの攻撃に当たったときだけ
+	//if ((other->GetType() & ColliderType::Type_PlayerAttack) != ColliderType::Type_None) {
+	//	OnHitByPlayerAttack(other);
+	//	//EffectAPI::Play(hit_, worldTransform_.GetWorldPosition());
+	//}
 }
 
 void BaseEnemy::DerivativeGui() {
 	stats_.ShowGui();
+	if (attack_) {
+		attack_->ShowGui();
+	}
 }
 
 void BaseEnemy::OnHitByPlayerAttack(Collider* attacker) {
@@ -109,6 +126,13 @@ void BaseEnemy::UpdateKnockback(float dt) {
 
 void BaseEnemy::SetMovement(std::unique_ptr<IEnemyMovement> movement) {
 	movement_ = std::move(movement);
+}
+
+void BaseEnemy::SetAttack(std::unique_ptr<IEnemyAttack> attack) {
+	attack_ = std::move(attack);
+	if (attack_) {
+		SerializableParamObjectsMutable().push_back(&attack_->SerializableParam());
+	}
 }
 
 void BaseEnemy::TakeDamage(int amount) {

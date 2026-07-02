@@ -1,4 +1,4 @@
-#include "Slime.h"
+#include "HeavyShieldEnemy.h"
 
 #include <Enemy/Movement/HomingMove.h>
 #include <Enemy/Attack/MeleeAttack.h>
@@ -6,20 +6,20 @@
 /////////////////////////////////////////////////////////////////////////////////////////
 //			ctor
 /////////////////////////////////////////////////////////////////////////////////////////
-Slime::Slime()
-	: BaseEnemy("debugCube.obj", "Slime", statsImpl_) {
+HeavyShieldEnemy::HeavyShieldEnemy()
+	: ShieldEnemyBase("debugCube.obj", "HeavyShieldEnemy", statsImpl_) {
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
 //			初期化
 /////////////////////////////////////////////////////////////////////////////////////////
-void Slime::Initialize() {
+void HeavyShieldEnemy::Initialize() {
 	statsImpl_.LoadParams();
 	characterMovement_.SetMaxWalkSpeed(statsImpl_.moveSpeed);
 
 	SetMovement(std::make_unique<HomingMove>());
 	SetAttack(std::make_unique<MeleeAttack>());
-	BaseEnemy::Initialize();
+	ShieldEnemyBase::Initialize();
 
-	SetColor({ 1.0f,0.7f,0.8f,1.0f });
+	SetColor({ 0.5f,0.0f,0.5f,1.0f });
 }
