@@ -20,4 +20,6 @@ void ShieldEnemy::Initialize() {
 	SetMovement(std::make_unique<HomingMove>());
 	SetAttack(std::make_unique<MeleeAttack>());
 	ShieldEnemyBase::Initialize();
+
+	SetColor({ 0.55f,0.2f,1.0f,1.0f });
 }
