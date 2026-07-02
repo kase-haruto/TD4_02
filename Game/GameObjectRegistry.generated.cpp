@@ -7,8 +7,12 @@
 
 #include <Game/Demo/3D/Actor/DemoCamera/DemoCameraPivot.h>
 #include <Game/Demo/3D/Actor/DemoPlayer/DemoPlayer.h>
-#include <Game/Player/Clone/Clone.h>
+#include <Game/Enemy/Enemies/HeavyShieldEnemy.h>
+#include <Game/Enemy/Enemies/HeavySlime.h>
 #include <Game/Player/Player.h>
+#include <Game/Player/Base/PlayerBase.h>
+#include <Game/Player/Clone/Clone.h>
+#include <Game/Enemy/Enemies/ShieldEnemy.h>
 #include <Game/Enemy/Enemies/Slime.h>
 #include <Game/Player/Sword/Sword.h>
 #include <Game/Demo/3D/Actor/DemoPlayer/Weapon/Weapon.h>
@@ -36,6 +40,26 @@ namespace CalyxEngine {
 			&CreateSceneObject<DemoPlayer>);
 
 		SceneObjectRegistry::Get().Register(
+			"HeavyShieldEnemy",
+			"HeavyShieldEnemy",
+			ObjectType::GameObject,
+			"UI/Tool/AssetPanel/generic.png",
+			true,
+			false,
+			false,
+			&CreateSceneObject<HeavyShieldEnemy>);
+
+		SceneObjectRegistry::Get().Register(
+			"HeavySlime",
+			"HeavySlime",
+			ObjectType::GameObject,
+			"UI/Tool/AssetPanel/generic.png",
+			true,
+			false,
+			false,
+			&CreateSceneObject<HeavySlime>);
+
+		SceneObjectRegistry::Get().Register(
 			"Player",
 			"Player",
 			ObjectType::GameObject,
@@ -46,20 +70,40 @@ namespace CalyxEngine {
 			&CreateSceneObject<Player>);
 
 		SceneObjectRegistry::Get().Register(
+			"PlayerBase",
+			"PlayerBase",
+			ObjectType::GameObject,
+			"UI/Tool/cube.dds",
+			true,
+			false,
+			false,
+			&CreateSceneObject<PlayerBase>);
+
+		SceneObjectRegistry::Get().Register(
 			"PlayerClone",
 			"PlayerClone",
 			ObjectType::GameObject,
-			"UI/Tool/cube.dds",
+			"UI/Tool/AssetPanel/generic.png",
 			true,
 			false,
 			false,
 			&CreateSceneObject<PlayerClone>);
 
 		SceneObjectRegistry::Get().Register(
+			"ShieldEnemy",
+			"ShieldEnemy",
+			ObjectType::GameObject,
+			"UI/Tool/AssetPanel/generic.png",
+			true,
+			false,
+			false,
+			&CreateSceneObject<ShieldEnemy>);
+
+		SceneObjectRegistry::Get().Register(
 			"Slime",
 			"Slime",
 			ObjectType::GameObject,
-			"UI/Tool/cube.dds",
+			"UI/Tool/AssetPanel/generic.png",
 			true,
 			false,
 			false,
