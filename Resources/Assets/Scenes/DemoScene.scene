@@ -78,10 +78,10 @@
                 "inheritScale": true,
                 "inheritTranslate": true,
                 "rotation": {
-                    "w": 0.8877882361412048,
-                    "x": 0.378388911485672,
-                    "y": -0.2410384863615036,
-                    "z": 0.1027342900633812
+                    "w": 0.9479711055755615,
+                    "x": 0.1876271814107895,
+                    "y": -0.25229594111442566,
+                    "z": 0.049935679882764816
                 },
                 "scale": {
                     "x": 1.0,
@@ -89,9 +89,9 @@
                     "z": 1.0
                 },
                 "translation": {
-                    "x": -4.900007247924805,
-                    "y": 5.741569519042969,
-                    "z": 2.547220230102539
+                    "x": -3.5765581130981445,
+                    "y": 2.5274641513824463,
+                    "z": 0.09766674041748047
                 }
             },
             "type": "DebugCamera"
@@ -924,7 +924,7 @@
                 "blendMode": 5,
                 "materialGuid": "00000000-0000-0000-0000-000000000000",
                 "modelName": "debugCube.obj",
-                "textureGuid": "00000000-0000-0000-0000-000000000000",
+                "textureGuid": "ec675a35-7435-45c0-b948-d23242ff7989",
                 "uvTransConfig": {
                     "rotation": 0.0,
                     "scale": {
@@ -970,6 +970,7 @@
                 },
                 "Game/Actor/Enemy/Slime": {
                     "fields": {
+                        "PlayerPtr": "7cf4af54-848a-4332-a62a-2b36e4c02dd8",
                         "attackDamage": 2,
                         "attackInterval": 2.0,
                         "attackRange": 1.2000000476837158,
@@ -1005,6 +1006,255 @@
                 }
             },
             "type": "Slime",
+            "visualOffset": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            }
+        },
+        {
+            "cameraDitherEnabled": false,
+            "colliderConfig": {
+                "capsuleHeight": 2.0,
+                "capsuleRadius": 0.5,
+                "isCollisionEnabled": true,
+                "isDraw": true,
+                "isTrigger": false,
+                "layerId": 3,
+                "offset": {
+                    "x": 0.0,
+                    "y": -0.5,
+                    "z": 0.0
+                },
+                "radius": 1.0,
+                "rotate": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "size": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                }
+            },
+            "colliderKind": 1,
+            "guid": "18ceae92-b9ba-42b3-875f-21688749f895",
+            "modelConfig": {
+                "blendMode": 5,
+                "materialGuid": "00000000-0000-0000-0000-000000000000",
+                "modelName": "debugCube.obj",
+                "textureGuid": "ec675a35-7435-45c0-b948-d23242ff7989",
+                "uvTransConfig": {
+                    "rotation": 0.0,
+                    "scale": {
+                        "x": 1.0,
+                        "y": 1.0
+                    }
+                }
+            },
+            "name": "HeavyShieldEnemy",
+            "objectType": 2,
+            "outlineColor": {
+                "w": 1.0,
+                "x": 0.019999999552965164,
+                "y": 0.019999999552965164,
+                "z": 0.02500000037252903
+            },
+            "outlineEnabled": false,
+            "outlineThickness": 0.03500000014901161,
+            "parentGuid": "00000000-0000-0000-0000-000000000000",
+            "physicsBodyConfig": {
+                "bodyType": 1,
+                "enabled": true,
+                "gravityScale": 1.0,
+                "mass": 1.0,
+                "pushbackRatio": 1.0,
+                "useGravity": true
+            },
+            "serializableParams": {
+                "Game/Actor/Enemy/AttackParam/MeleeAttack": {
+                    "fields": {
+                        "attackDuration": 0.6000000238418579,
+                        "drawHitbox": true,
+                        "hitboxActiveEnd": 0.4000000059604645,
+                        "hitboxActiveStart": 0.25,
+                        "hitboxForwardOffset": 1.2000000476837158,
+                        "hitboxHeightOffset": 1.0,
+                        "hitboxSize": [
+                            1.0,
+                            0.800000011920929,
+                            1.0
+                        ]
+                    }
+                },
+                "Game/Actor/Enemy/HeavyShieldEnemy": {
+                    "fields": {
+                        "PlayerPtr": "7cf4af54-848a-4332-a62a-2b36e4c02dd8",
+                        "attackDamage": 2,
+                        "attackInterval": 2.0,
+                        "attackRange": 1.2000000476837158,
+                        "contactDamage": 1,
+                        "detectionRange": 6.0,
+                        "knockbackDamping": 8.0,
+                        "knockbackInitialSpeed": 0.0,
+                        "knockbackStopSpeed": 0.20000000298023224,
+                        "maxHp": 5,
+                        "moveSpeed": 1.5
+                    }
+                },
+                "Game/Actor/Enemy/ShieldParam/ShieldEnemy": {
+                    "fields": {
+                        "blockAngleDeg": 180.0,
+                        "blockCountMax": 3,
+                        "blockCountMin": 3,
+                        "defenseDuration": 2.0
+                    }
+                }
+            },
+            "transform": {
+                "inheritRotate": true,
+                "inheritScale": true,
+                "inheritTranslate": true,
+                "rotation": {
+                    "w": 1.0,
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "translation": {
+                    "x": -4.233502388000488,
+                    "y": 1.1872122287750244,
+                    "z": 8.202238082885742
+                }
+            },
+            "type": "HeavyShieldEnemy",
+            "visualOffset": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            }
+        },
+        {
+            "cameraDitherEnabled": false,
+            "colliderConfig": {
+                "capsuleHeight": 2.0,
+                "capsuleRadius": 0.5,
+                "isCollisionEnabled": true,
+                "isDraw": true,
+                "isTrigger": false,
+                "layerId": 3,
+                "offset": {
+                    "x": 0.0,
+                    "y": -0.5,
+                    "z": 0.0
+                },
+                "radius": 1.0,
+                "rotate": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "size": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                }
+            },
+            "colliderKind": 1,
+            "guid": "efca7fd4-7cda-4c82-a600-058a4c0f073c",
+            "modelConfig": {
+                "blendMode": 5,
+                "materialGuid": "00000000-0000-0000-0000-000000000000",
+                "modelName": "debugCube.obj",
+                "textureGuid": "ec675a35-7435-45c0-b948-d23242ff7989",
+                "uvTransConfig": {
+                    "rotation": 0.0,
+                    "scale": {
+                        "x": 1.0,
+                        "y": 1.0
+                    }
+                }
+            },
+            "name": "DoomEnemy",
+            "objectType": 2,
+            "outlineColor": {
+                "w": 1.0,
+                "x": 0.019999999552965164,
+                "y": 0.019999999552965164,
+                "z": 0.02500000037252903
+            },
+            "outlineEnabled": false,
+            "outlineThickness": 0.03500000014901161,
+            "parentGuid": "00000000-0000-0000-0000-000000000000",
+            "physicsBodyConfig": {
+                "bodyType": 1,
+                "enabled": true,
+                "gravityScale": 1.0,
+                "mass": 1.0,
+                "pushbackRatio": 1.0,
+                "useGravity": true
+            },
+            "serializableParams": {
+                "Game/Actor/Enemy/AttackParam/PunchAttack": {
+                    "fields": {
+                        "attackDuration": 1.0,
+                        "drawHitbox": true,
+                        "hitboxActiveEnd": 0.699999988079071,
+                        "hitboxActiveStart": 0.550000011920929,
+                        "hitboxForwardOffset": 1.2000000476837158,
+                        "hitboxHeightOffset": 1.0,
+                        "hitboxSize": [
+                            1.600000023841858,
+                            1.2000000476837158,
+                            1.600000023841858
+                        ],
+                        "knockbackPower": 18.0
+                    }
+                },
+                "Game/Actor/Enemy/DoomEnemy": {
+                    "fields": {
+                        "PlayerPtr": "7cf4af54-848a-4332-a62a-2b36e4c02dd8",
+                        "attackDamage": 5,
+                        "attackInterval": 2.0,
+                        "attackRange": 1.2000000476837158,
+                        "contactDamage": 1,
+                        "detectionRange": 6.0,
+                        "knockbackDamping": 8.0,
+                        "knockbackInitialSpeed": 16.0,
+                        "knockbackStopSpeed": 0.20000000298023224,
+                        "maxHp": 5,
+                        "moveSpeed": 1.5
+                    }
+                }
+            },
+            "transform": {
+                "inheritRotate": true,
+                "inheritScale": true,
+                "inheritTranslate": true,
+                "rotation": {
+                    "w": 1.0,
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "translation": {
+                    "x": -7.543068885803223,
+                    "y": 1.2035744190216064,
+                    "z": 3.1642568111419678
+                }
+            },
+            "type": "DoomEnemy",
             "visualOffset": {
                 "x": 0.0,
                 "y": 0.0,

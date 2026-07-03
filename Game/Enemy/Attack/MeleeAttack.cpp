@@ -14,7 +14,7 @@ MeleeAttack::MeleeAttack() {
 	param_.LoadParams();
 }
 
-void MeleeAttack::Update(BaseEnemy& self, const WorldTransform* target, float dt) {
+void MeleeAttack::Update(BaseEnemy& self, const Actor* target, float dt) {
 	if (isAttacking_) {
 		UpdateAttack(self, dt);
 		return;
@@ -43,7 +43,7 @@ CalyxEngine::SerializableObject& MeleeAttack::SerializableParam() {
 	return param_;
 }
 
-void MeleeAttack::StartAttack(BaseEnemy& self, const WorldTransform* target) {
+void MeleeAttack::StartAttack(BaseEnemy& self, const Actor* target) {
 	isAttacking_ = true;
 	attackTimer_ = 0.0f;
 
@@ -134,7 +134,7 @@ void MeleeAttack::RemoveAttackHitbox() {
 	attackHitbox_.reset();
 }
 
-float MeleeAttack::PlanarDistanceSq(const BaseEnemy& self, const WorldTransform* target) {
+float MeleeAttack::PlanarDistanceSq(const BaseEnemy& self, const Actor* target) {
 	CalyxEngine::Vector3 toTarget = target->GetWorldPosition() - self.GetWorldPosition();
 	toTarget.y = 0.0f;
 	return toTarget.LengthSquared();

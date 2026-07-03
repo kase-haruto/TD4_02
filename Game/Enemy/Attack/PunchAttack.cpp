@@ -14,7 +14,7 @@ PunchAttack::PunchAttack() {
 	param_.LoadParams();
 }
 
-void PunchAttack::Update(BaseEnemy& self, const WorldTransform* target, float dt) {
+void PunchAttack::Update(BaseEnemy& self, const Actor* target, float dt) {
 	if (isAttacking_) {
 		UpdateAttack(self, dt);
 		return;
@@ -43,7 +43,7 @@ CalyxEngine::SerializableObject& PunchAttack::SerializableParam() {
 	return param_;
 }
 
-void PunchAttack::StartAttack(BaseEnemy& self, const WorldTransform* target) {
+void PunchAttack::StartAttack(BaseEnemy& self, const Actor* target) {
 	isAttacking_ = true;
 	attackTimer_ = 0.0f;
 
@@ -135,7 +135,7 @@ void PunchAttack::RemoveAttackHitbox() {
 	attackHitbox_.reset();
 }
 
-float PunchAttack::PlanarDistanceSq(const BaseEnemy& self, const WorldTransform* target) {
+float PunchAttack::PlanarDistanceSq(const BaseEnemy& self, const Actor* target) {
 	CalyxEngine::Vector3 toTarget = target->GetWorldPosition() - self.GetWorldPosition();
 	toTarget.y = 0.0f;
 	return toTarget.LengthSquared();

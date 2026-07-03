@@ -1,6 +1,8 @@
 #pragma once
 
 #include <Engine/Foundation/Serialization/SerializableObject.h>
+#include <Engine/Objects/3D/Actor/Actor.h>
+#include <Engine/Scene/Reference/SceneObjectReference.h>
 #include <cstdint>
 
 /*-----------------------------------------------------------------------------------------
@@ -9,6 +11,7 @@
  *---------------------------------------------------------------------------------------*/
 struct EnemyStats : CalyxEngine::SerializableObject {
 	EnemyStats() {
+		AddField("PlayerPtr", target);
 		AddField("maxHp", maxHp).Category("Status").Tooltip("最大HP");
 		AddField("moveSpeed", moveSpeed).Category("Status").Tooltip("移動速度");
 
@@ -44,4 +47,6 @@ struct EnemyStats : CalyxEngine::SerializableObject {
 	float knockbackInitialSpeed = 16.0f;
 	float knockbackDamping = 8.0f;
 	float knockbackStopSpeed = 0.2f;
+
+	CalyxEngine::SceneObjectRef<Actor> target;
 };
