@@ -185,8 +185,6 @@ if exist "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" copy "$(Win
     <ClCompile Include="Game/Demo/3D/Actor/DemoPlayer/DemoPlayerMotor.cpp" />
     <ClCompile Include="Game/Demo/3D/Actor/DemoPlayer/Weapon/Weapon.cpp" />
     <ClCompile Include="Game/Demo/Input/PlayerInput.cpp" />
-    <ClCompile Include="Game/Demo/Scene/DemoScene/DemoScene.cpp" />
-    <ClCompile Include="Game/Demo/Scene/Utility/SceneTypeUtil.cpp" />
     <ClCompile Include="Game/GameApplication.cpp" />
     <ClCompile Include="Game/GameMain.cpp" />
     <ClCompile Include="Game/GameObjectRegistry.generated.cpp" />
@@ -205,7 +203,6 @@ if exist "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" copy "$(Win
     <ClCompile Include="Game\Player\PlayerDodge.cpp" />
     <ClCompile Include="Game\Player\PlayerMotor.cpp" />
     <ClCompile Include="Game\Player\Sword\Sword.cpp" />
-    <ClCompile Include="Game\Scene\PlayerTestScene\PlayerTestScene.cpp" />
     <ClCompile Include="Game\Player\Ability\PlayerAbility.cpp" />
     <ClCompile Include="Game\Player\Base\PlayerBase.cpp" />
     <ClCompile Include="Game\Player\Attack\PlayerAttack.cpp" />
