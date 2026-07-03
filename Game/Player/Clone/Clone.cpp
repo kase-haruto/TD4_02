@@ -5,7 +5,9 @@
 #include <Engine/Objects/Collider/Collider.h>
 #include <Engine/Scene/Context/SceneContext.h>
 
-PlayerClone::PlayerClone() = default;
+PlayerClone::PlayerClone() {
+	SetAppliesMovement(false);
+}
 
 void PlayerClone::Update(float dt) {
 	if (isGhost_) {
@@ -33,4 +35,11 @@ void PlayerClone::OnCollisionEnter(Collider* other) {
 	if (auto* context = SceneContext::Current()) {
 		context->RemoveObject(std::static_pointer_cast<SceneObject>(shared_from_this()));
 	}
+}
+
+void PlayerClone::AddWorldOffset(const CalyxEngine::Vector3& delta) {
+	if (isGhost_) {
+		return;
+	}
+	GetWorldTransform().translation += delta;
 }

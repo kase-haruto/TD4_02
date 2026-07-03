@@ -30,6 +30,8 @@ public:
 
 	void ApplyKnockbackToClones(const CalyxEngine::Vector3& velocity, float friction);
 
+	void MoveClones(const CalyxEngine::Vector3& delta);
+
 private:	
 	//===================================================================*/
 	//						private method

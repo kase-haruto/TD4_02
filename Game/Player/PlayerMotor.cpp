@@ -22,7 +22,9 @@ void PlayerMotor::Update(PlayerBase* player, const PlayerInputState& input, floa
 		if (player->GetCurrentAnimationId() != PlayerAnimationID::Walk) {
 			player->PlayAnimation(PlayerAnimationID::Walk);
 		}
-		player->GetCharacterMovement().AddMovementInput(worldDirection);
+		if (player->AppliesMovement()) {
+			player->GetCharacterMovement().AddMovementInput(worldDirection);
+		}
 	} else {
 		if (player->GetCurrentAnimationId() != PlayerAnimationID::Idle) {
 			player->PlayAnimation(PlayerAnimationID::Idle);

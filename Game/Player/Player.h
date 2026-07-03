@@ -46,4 +46,5 @@ private:
 	PlayerStats stats_;
 
 	int        currentHp_ = 0;  // 現在HP
+	CalyxEngine::Vector3 lastCloneAnchor_{};
 };
