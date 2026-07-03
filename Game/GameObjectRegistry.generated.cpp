@@ -7,6 +7,7 @@
 
 #include <Game/Demo/3D/Actor/DemoCamera/DemoCameraPivot.h>
 #include <Game/Demo/3D/Actor/DemoPlayer/DemoPlayer.h>
+#include <Game/Enemy/Enemies/DoomEnemy.h>
 #include <Game/Enemy/Enemies/HeavyShieldEnemy.h>
 #include <Game/Enemy/Enemies/HeavySlime.h>
 #include <Game/Player/Player.h>
@@ -38,6 +39,16 @@ namespace CalyxEngine {
 			false,
 			false,
 			&CreateSceneObject<DemoPlayer>);
+
+		SceneObjectRegistry::Get().Register(
+			"DoomEnemy",
+			"DoomEnemy",
+			ObjectType::GameObject,
+			"UI/Tool/AssetPanel/generic.png",
+			true,
+			false,
+			false,
+			&CreateSceneObject<DoomEnemy>);
 
 		SceneObjectRegistry::Get().Register(
 			"HeavyShieldEnemy",

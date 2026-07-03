@@ -53,6 +53,8 @@
     <ClCompile Include="Game\Enemy\Enemies\ShieldEnemy.cpp" />
     <ClCompile Include="Game\Enemy\Enemies\HeavyShieldEnemy.cpp" />
     <ClCompile Include="Game\Enemy\Enemies\ShieldEnemyBase.cpp" />
+    <ClCompile Include="Game\Enemy\Enemies\DoomEnemy.cpp" />
+    <ClCompile Include="Game\Enemy\Attack\PunchAttack.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Collision\CollisionLayerUtil.h" />

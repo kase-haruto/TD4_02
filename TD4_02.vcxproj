@@ -191,7 +191,9 @@ if exist "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" copy "$(Win
     <ClCompile Include="Game/GameMain.cpp" />
     <ClCompile Include="Game/GameObjectRegistry.generated.cpp" />
     <ClCompile Include="Game\Enemy\Attack\MeleeAttack.cpp" />
+    <ClCompile Include="Game\Enemy\Attack\PunchAttack.cpp" />
     <ClCompile Include="Game\Enemy\BaseEnemy.cpp" />
+    <ClCompile Include="Game\Enemy\Enemies\DoomEnemy.cpp" />
     <ClCompile Include="Game\Enemy\Enemies\HeavyShieldEnemy.cpp" />
     <ClCompile Include="Game\Enemy\Enemies\HeavySlime.cpp" />
     <ClCompile Include="Game\Enemy\Enemies\ShieldEnemy.cpp" />
