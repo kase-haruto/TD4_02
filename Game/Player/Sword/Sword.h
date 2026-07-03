@@ -27,8 +27,16 @@ public:
 		bool drawCollider,
 		HitboxOwner owner = HitboxOwner::Player);
 
+	void  SetKnockbackPower(float power) { knockbackPower_ = power; }
+	float GetKnockbackPower() const { return knockbackPower_; }
+
+	void  SetDamage(int damage) { damage_ = damage; }
+	int   GetDamage() const { return damage_; }
+
 private:
 	//====================================================================*/
 	//                    private methods
 	//====================================================================*/
+	float knockbackPower_ = 0.0f;
+	int   damage_ = 0;
 };

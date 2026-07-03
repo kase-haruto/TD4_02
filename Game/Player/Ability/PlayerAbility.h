@@ -28,6 +28,8 @@ public:
 	void ShowGui();
 	CalyxEngine::SerializableObject& SerializableParam();
 
+	void ApplyKnockbackToClones(const CalyxEngine::Vector3& velocity, float friction);
+
 private:	
 	//===================================================================*/
 	//						private method

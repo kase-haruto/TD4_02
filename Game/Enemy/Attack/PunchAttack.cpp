@@ -97,6 +97,8 @@ void PunchAttack::CreateAttackHitbox(BaseEnemy& self) {
 		std::optional<std::string>("EnemyAttackHitbox"));
 	if (attackHitbox_) {
 		attackHitbox_->ConfigureAsAttackHitbox(param_.hitboxSize, param_.drawHitbox, Sword::HitboxOwner::Enemy);
+		attackHitbox_->SetKnockbackPower(param_.knockbackPower);
+		attackHitbox_->SetDamage(self.GetStats().attackDamage);
 		UpdateAttackHitbox(self);
 	}
 }

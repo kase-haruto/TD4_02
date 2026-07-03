@@ -39,7 +39,12 @@ public:
 	PlayerAnimationID GetCurrentAnimationId() const { return currentAnimationId_; }
 	CalyxEngine::Vector3 GetMoveDir() const { return motor_.GetMoveDir(); }
 
+	void ApplyKnockback(const CalyxEngine::Vector3& velocity, float friction);
+	bool IsKnockedBack() const { return knockbackVelocity_.LengthSquared() > 0.01f; }
+
 protected:
+	bool UpdateKnockback(float dt);
+
 	//===================================================================*/
 	//						private variables
 	//===================================================================*/
@@ -48,4 +53,7 @@ protected:
 	PlayerDodge dodge_;
 	PlayerAttack attack_;
 	PlayerAnimationID currentAnimationId_ = PlayerAnimationID::Idle;
+
+	CalyxEngine::Vector3 knockbackVelocity_{};
+	float knockbackFriction_ = 0.0f;
 };

@@ -6,7 +6,8 @@
 struct PlayerStats : CalyxEngine::SerializableObject {
 	PlayerStats() {
 		AddField("maxHp", maxHp).Category("Status").Tooltip("最大HP");
-		AddField("moveSpeed", moveSpeed).Category("Status").Tooltip("移動速度");
+
+		AddField("knockbackFriction", knockbackFriction).Category("Knockback").Tooltip("ノックバック減衰。大きいほど早く止まる");
 	}
 
 	CalyxEngine::ParamPath GetParamPath() const override {
@@ -14,5 +15,6 @@ struct PlayerStats : CalyxEngine::SerializableObject {
 	}
 
 	int32_t   maxHp = 10;    // 最大HP
-	float moveSpeed = 2.0f;  // 移動速度
+
+	float knockbackFriction = 8.0f;
 };

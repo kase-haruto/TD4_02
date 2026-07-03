@@ -53,6 +53,8 @@ private:
 				.Category("AttackHitbox").Tooltip("攻撃判定のサイズ");
 			AddField("drawHitbox", drawHitbox)
 				.Category("AttackHitbox").Tooltip("攻撃判定をデバッグ表示するか");
+			AddField("knockbackPower", knockbackPower)
+				.Category("Attack").Tooltip("命中時にプレイヤーを吹き飛ばす初速");
 		}
 
 		CalyxEngine::ParamPath GetParamPath() const override {
@@ -66,6 +68,7 @@ private:
 		float hitboxHeightOffset = 1.0f;
 		CalyxEngine::Vector3 hitboxSize = { 1.6f, 1.2f, 1.6f };
 		bool drawHitbox = true;
+		float knockbackPower = 18.0f;
 	};
 
 	PunchAttackParam param_;

@@ -1,5 +1,7 @@
 #include "Player.h"
 
+#include <Game/Collision/CollisionLayerUtil.h>
+
 #include <Engine/Foundation/Math/Quaternion.h>
 #include <Engine/Graphics/Camera/Manager/CameraManager.h>
 #include <Engine/Physics/Character/CharacterMovementComponent.h>
@@ -10,13 +12,25 @@
 /////////////////////////////////////////////////////////////////////////////////////////
 Player::Player() {
 	SerializableParamObjectsMutable().push_back(&ability_.SerializableParam());
+	stats_.LoadParams();
 }
 
+
+void Player::Initialize() {
+	PlayerBase::Initialize();
+	currentHp_ = stats_.maxHp;
+	knockbackVelocity_ = {};
+}
 
 /////////////////////////////////////////////////////////////////////////////////////////
 //			更新
 /////////////////////////////////////////////////////////////////////////////////////////
 void Player::Update(float dt) {
+	if (UpdateKnockback(dt)) {   // ← base の実装。ノックバック中は技も入力も止める
+		Actor::Update(dt);
+		return;
+	}
+
 	input_.Update();
 
 	const PlayerInputState& in = input_.GetState();
@@ -37,7 +51,55 @@ void Player::Update(float dt) {
 	Actor::Update(dt);
 }
 
+void Player::OnCollisionEnter(Collider* other) {
+	if (!other) {
+		return;
+	}
+
+	const auto enemyAttackLayer = GameCollision::FindLayerId("EnemyAttack");
+	if (enemyAttackLayer && other->GetLayerId() == *enemyAttackLayer) {
+		OnHitByEnemyAttack(other);
+	}
+}
+
+void Player::TakeDamage(int amount) {
+	if (amount <= 0) {
+		return;
+	}
+	currentHp_ -= amount;
+	if (currentHp_ < 0) {
+		currentHp_ = 0;
+	}
+}
+
 void Player::DerivativeGui(){
 	PlayerBase::DerivativeGui();
 	ability_.ShowGui();
+}
+
+void Player::OnHitByEnemyAttack(Collider* attacker) {
+	if (dodge_.IsInvincible()) {
+		return;
+	}
+
+	// 攻撃側ヒットボックスから攻撃情報を読む
+	auto* hitbox = attacker ? dynamic_cast<Sword*>(attacker->GetOwner()) : nullptr;
+	const int   damage = hitbox ? hitbox->GetDamage() : 1;
+	const float power = hitbox ? hitbox->GetKnockbackPower() : 0.0f;
+
+	TakeDamage(damage);
+
+	if (power <= 0.0f || !attacker || !attacker->GetOwner()) {
+		return;
+	}
+	CalyxEngine::Vector3 dir =
+		GetWorldPosition() - attacker->GetOwner()->GetWorldTransform().translation;
+	dir.y = 0.0f;
+	if (dir.LengthSquared() <= 0.0001f) {
+		return;
+	}
+	CalyxEngine::Vector3 vel = dir.Normalize() * power;
+
+	ApplyKnockback(vel, stats_.knockbackFriction);
+	ability_.ApplyKnockbackToClones(vel, stats_.knockbackFriction);
 }

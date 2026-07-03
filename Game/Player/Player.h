@@ -6,6 +6,7 @@
 #include <Demo/Input/PlayerInput.h>
 #include "PlayerMotor.h"
 #include "PlayerDodge.h"
+#include "PlayerStats.h"
 #include "Sword/Sword.h"
 #include "Ability/PlayerAbility.h"
 
@@ -25,7 +26,10 @@ public:
 	Player();
 	~Player() override = default;
 
+	void Initialize() override;
 	void Update(float dt) override;
+	void OnCollisionEnter([[maybe_unused]] Collider* other)override;
+	void TakeDamage(int amount);
 
 	/**
 	 * \brief 派生パラメータGUI
@@ -33,9 +37,13 @@ public:
 	void DerivativeGui() override;
 
 private:
+	void OnHitByEnemyAttack(Collider* attacker);
+
 	//===================================================================*/
 	//						private variables
 	//===================================================================*/
 	PlayerAbility ability_;
+	PlayerStats stats_;
 
+	int        currentHp_ = 0;  // 現在HP
 };

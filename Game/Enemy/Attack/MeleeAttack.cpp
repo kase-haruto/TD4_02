@@ -97,6 +97,7 @@ void MeleeAttack::CreateAttackHitbox(BaseEnemy& self) {
 		std::optional<std::string>("EnemyAttackHitbox"));
 	if (attackHitbox_) {
 		attackHitbox_->ConfigureAsAttackHitbox(param_.hitboxSize, param_.drawHitbox, Sword::HitboxOwner::Enemy);
+		attackHitbox_->SetDamage(self.GetStats().attackDamage);
 		UpdateAttackHitbox(self);
 	}
 }

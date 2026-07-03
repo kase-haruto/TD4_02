@@ -40,6 +40,7 @@ void Sword::ConfigureAsAttackHitbox(
 		}
 		collider->ApplyConfig(config);
 		collider->SetName(colliderName);
+		collider->SetOwner(this);
 		if (auto* box = dynamic_cast<BoxCollider*>(collider)) {
 			box->SetSize(size);
 		}

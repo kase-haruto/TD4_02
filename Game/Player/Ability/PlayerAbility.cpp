@@ -42,6 +42,15 @@ CalyxEngine::SerializableObject& PlayerAbility::SerializableParam() {
 	return param_;
 }
 
+void PlayerAbility::ApplyKnockbackToClones(const CalyxEngine::Vector3& velocity, float friction) {
+	RefreshClones();
+	for (auto& weak : clones_) {
+		if (auto clone = weak.lock()) {
+			clone->ApplyKnockback(velocity, friction);
+		}
+	}
+}
+
 void PlayerAbility::SpawnClone(Player& player) {
 	SpawnClone(player, param_.minCloneDistance);
 }

@@ -42,6 +42,11 @@ void PlayerBase::Initialize() {
 //			更新
 /////////////////////////////////////////////////////////////////////////////////////////
 void PlayerBase::Update(float dt) {
+	if (UpdateKnockback(dt)) {
+		Actor::Update(dt);
+		return;
+	}
+
 	input_.Update();
 
 	const PlayerInputState& in = input_.GetState();
@@ -69,6 +74,23 @@ void PlayerBase::PlayAnimation(PlayerAnimationID animationId) {
 
 	currentAnimationId_ = animationId;
 	SetModelFileNameForEditor(GetPlayerAnimationModelName(animationId));
+}
+
+void PlayerBase::ApplyKnockback(const CalyxEngine::Vector3& velocity, float friction) {
+	knockbackVelocity_ = velocity;
+	knockbackFriction_ = friction;
+}
+
+bool PlayerBase::UpdateKnockback(float dt) {
+	if (knockbackVelocity_.LengthSquared() <= 0.01f) {
+		knockbackVelocity_ = {};
+		return false;
+	}
+	GetWorldTransform().translation += knockbackVelocity_ * dt;
+	float damp = 1.0f - knockbackFriction_ * dt;
+	if (damp < 0.0f) damp = 0.0f;
+	knockbackVelocity_ = knockbackVelocity_ * damp;
+	return true;
 }
 
 void PlayerBase::DerivativeGui() {
