@@ -16,14 +16,14 @@ class PunchAttack : public IEnemyAttack {
 public:
 	PunchAttack();
 
-	void Update(BaseEnemy& self, const Actor* target, float dt)override;
+	void Update(BaseEnemy& self, const WorldTransform* target, float dt)override;
 	void ShowGui()override;
 	bool IsAttacking() const override { return isAttacking_; }
 	CalyxEngine::SerializableObject& SerializableParam()override;
 
 private:
 
-	void StartAttack(BaseEnemy& self, const Actor* target);
+	void StartAttack(BaseEnemy& self, const WorldTransform* target);
 	void UpdateAttack(BaseEnemy& self, float dt);
 	void EndAttack(BaseEnemy& self);
 
@@ -32,7 +32,7 @@ private:
 	void UpdateAttackHitbox(BaseEnemy& self);
 	void RemoveAttackHitbox();
 
-	static float PlanarDistanceSq(const BaseEnemy& self, const Actor* target);
+	static float PlanarDistanceSq(const BaseEnemy& self, const WorldTransform* target);
 
 private:
 	struct PunchAttackParam : CalyxEngine::SerializableObject {
