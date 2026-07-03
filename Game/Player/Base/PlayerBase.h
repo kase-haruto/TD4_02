@@ -42,8 +42,12 @@ public:
 	void ApplyKnockback(const CalyxEngine::Vector3& velocity, float friction);
 	bool IsKnockedBack() const { return knockbackVelocity_.LengthSquared() > 0.01f; }
 
+	bool AppliesMovement() const { return appliesMovement_; }
+
 protected:
 	bool UpdateKnockback(float dt);
+
+	void SetAppliesMovement(bool v) { appliesMovement_ = v; }
 
 	//===================================================================*/
 	//						private variables
@@ -56,4 +60,6 @@ protected:
 
 	CalyxEngine::Vector3 knockbackVelocity_{};
 	float knockbackFriction_ = 0.0f;
+
+	bool appliesMovement_ = true;
 };

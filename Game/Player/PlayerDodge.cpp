@@ -15,7 +15,9 @@ void PlayerDodge::Update(PlayerBase* player, const PlayerInputState& input, floa
 		dodgeTimer_ += dt;
 
 		// 開始時に決めた向きへ進み続ける
-		player->GetCharacterMovement().AddMovementInput(dodgeDir_);
+		if (player->AppliesMovement()) {
+			player->GetCharacterMovement().AddMovementInput(dodgeDir_);
+		}
 
 		if (dodgeTimer_ >= kDodgeDuration) {
 			isDodging_ = false;

@@ -20,6 +20,7 @@ void Player::Initialize() {
 	PlayerBase::Initialize();
 	currentHp_ = stats_.maxHp;
 	knockbackVelocity_ = {};
+	lastCloneAnchor_ = GetWorldPosition();
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -28,8 +29,12 @@ void Player::Initialize() {
 void Player::Update(float dt) {
 	if (UpdateKnockback(dt)) {   // ← base の実装。ノックバック中は技も入力も止める
 		Actor::Update(dt);
+		lastCloneAnchor_ = GetWorldPosition();
 		return;
 	}
+
+	ability_.MoveClones(GetWorldPosition() - lastCloneAnchor_);
+	lastCloneAnchor_ = GetWorldPosition();
 
 	input_.Update();
 
