@@ -21,12 +21,6 @@
     <ClCompile Include="Game/Demo/Input/PlayerInput.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="Game/Demo/Scene/DemoScene/DemoScene.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Game/Demo/Scene/Utility/SceneTypeUtil.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
     <ClCompile Include="Game/GameApplication.cpp">
       <Filter>Game</Filter>
     </ClCompile>
@@ -42,7 +36,6 @@
     <ClCompile Include="Game\Enemy\BaseEnemy.cpp" />
     <ClCompile Include="Game\Enemy\Movement\HomingMove.cpp" />
     <ClCompile Include="Game\Enemy\Enemies\Slime.cpp" />
-    <ClCompile Include="Game\Scene\PlayerTestScene\PlayerTestScene.cpp" />
     <ClCompile Include="Game\Player\PlayerDodge.cpp" />
     <ClCompile Include="Game\Player\Clone\Clone.cpp" />
     <ClCompile Include="Game\Player\Ability\PlayerAbility.cpp" />
@@ -55,6 +48,10 @@
     <ClCompile Include="Game\Enemy\Enemies\ShieldEnemyBase.cpp" />
     <ClCompile Include="Game\Enemy\Enemies\DoomEnemy.cpp" />
     <ClCompile Include="Game\Enemy\Attack\PunchAttack.cpp" />
+    <ClCompile Include="Game\Enemy\Enemies\Archer.cpp" />
+    <ClCompile Include="Game\Enemy\Attack\RangedAttack.cpp" />
+    <ClCompile Include="Game\Enemy\Movement\KiteMove.cpp" />
+    <ClCompile Include="Game\Enemy\Projectile\Arrow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Collision\CollisionLayerUtil.h" />
