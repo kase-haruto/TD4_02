@@ -36,8 +36,11 @@ public:
 	 */
 	void DerivativeGui() override;
 
+	void SetRespawnPoint(const CalyxEngine::Vector3& p) { respawnPoint_ = p; }
+
 private:
 	void OnHitByEnemyAttack(Collider* attacker);
+	void Respawn();
 
 	//===================================================================*/
 	//						private variables
@@ -47,4 +50,6 @@ private:
 
 	int        currentHp_ = 0;  // 現在HP
 	CalyxEngine::Vector3 lastCloneAnchor_{};
+
+	CalyxEngine::Vector3 respawnPoint_{};
 };

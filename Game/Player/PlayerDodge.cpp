@@ -32,6 +32,14 @@ void PlayerDodge::Update(PlayerBase* player, const PlayerInputState& input, floa
 	}
 }
 
+void PlayerDodge::Reset() {
+	isDodging_ = false;
+	dodgeTimer_ = 0.0f;
+	invincibleTimer_ = 0.0f;
+	cooldownTimer_ = 0.0f;
+	dodgeDir_ = {};
+}
+
 void PlayerDodge::StartDodge(PlayerBase* player) {
 	CalyxEngine::Vector3 forward =
 		player->GetMoveDir();

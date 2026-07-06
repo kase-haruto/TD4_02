@@ -35,6 +35,8 @@ public:
 	 */
 	bool BlocksMovement() const;
 
+	void Reset();
+
 private:
 	//===================================================================*/
 	//                      private methods

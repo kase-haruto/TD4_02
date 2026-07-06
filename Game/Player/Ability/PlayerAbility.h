@@ -32,6 +32,8 @@ public:
 
 	void MoveClones(const CalyxEngine::Vector3& delta);
 
+	void ClearClones();
+
 private:	
 	//===================================================================*/
 	//						private method

@@ -8,6 +8,7 @@
 #include <Game/Enemy/Enemies/Archer.h>
 #include <Game/Enemy/Enemies/Bat.h>
 #include <Game/Camera/CameraPivot.h>
+#include <Game/Gimmick/Checkpoint/Checkpoint.h>
 #include <Game/Demo/3D/Actor/DemoCamera/DemoCameraPivot.h>
 #include <Game/Demo/3D/Actor/DemoPlayer/DemoPlayer.h>
 #include <Game/Enemy/Enemies/DoomEnemy.h>
@@ -52,6 +53,16 @@ namespace CalyxEngine {
 			false,
 			false,
 			&CreateSceneObject<CameraPivot>);
+
+		SceneObjectRegistry::Get().Register(
+			"Checkpoint",
+			"Checkpoint",
+			ObjectType::GameObject,
+			"UI/Tool/cube.dds",
+			true,
+			false,
+			false,
+			&CreateSceneObject<Checkpoint>);
 
 		SceneObjectRegistry::Get().Register(
 			"DemoCameraPivot",

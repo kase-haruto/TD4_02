@@ -21,12 +21,23 @@ void Player::Initialize() {
 	currentHp_ = stats_.maxHp;
 	knockbackVelocity_ = {};
 	lastCloneAnchor_ = GetWorldPosition();
+	respawnPoint_ = GetWorldPosition();
+
+	if (collider_) {
+		collider_->SetOwner(this);
+	}
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
 //			更新
 /////////////////////////////////////////////////////////////////////////////////////////
 void Player::Update(float dt) {
+	if (currentHp_ <= 0) {
+		Respawn();
+		Actor::Update(dt);
+		return;
+	}
+
 	if (UpdateKnockback(dt)) {   // ← base の実装。ノックバック中は技も入力も止める
 		Actor::Update(dt);
 		lastCloneAnchor_ = GetWorldPosition();
@@ -107,4 +118,16 @@ void Player::OnHitByEnemyAttack(Collider* attacker) {
 
 	ApplyKnockback(vel, stats_.knockbackFriction);
 	ability_.ApplyKnockbackToClones(vel, stats_.knockbackFriction);
+}
+
+void Player::Respawn() {
+	currentHp_ = stats_.maxHp;   // 体力を元に
+	knockbackVelocity_ = {};
+	SetVelocity({});
+	dodge_.Reset();
+	attack_.Reset();
+	ability_.ClearClones();
+
+	SetPosition(respawnPoint_);        // チェックポイントへ戻す
+	lastCloneAnchor_ = respawnPoint_;
 }
