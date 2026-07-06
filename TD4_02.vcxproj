@@ -180,6 +180,7 @@ if exist "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" copy "$(Win
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Game\Camera\CameraPivot.cpp" />
     <ClCompile Include="Game/Demo/3D/Actor/DemoCamera/DemoCameraPivot.cpp" />
     <ClCompile Include="Game/Demo/3D/Actor/DemoPlayer/DemoPlayer.cpp" />
     <ClCompile Include="Game/Demo/3D/Actor/DemoPlayer/DemoPlayerMotor.cpp" />
@@ -214,6 +215,7 @@ if exist "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" copy "$(Win
     <ClCompile Include="Game\Player\Attack\PlayerAttack.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Game\Camera\CameraPivot.h" />
     <ClInclude Include="Game\Collision\CollisionLayerUtil.h" />
     <ClInclude Include="Game\Player\Ability\PlayerAbility.h" />
     <ClInclude Include="Game\Player\Base\PlayerBase.h" />
