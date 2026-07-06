@@ -875,7 +875,7 @@
             "modelConfig": {
                 "blendMode": 5,
                 "materialGuid": "00000000-0000-0000-0000-000000000000",
-                "modelName": "debugCube.obj",
+                "modelName": "tentative_enemy.obj",
                 "textureGuid": "ec675a35-7435-45c0-b948-d23242ff7989",
                 "uvTransConfig": {
                     "rotation": 0.0,
@@ -995,7 +995,7 @@
             "modelConfig": {
                 "blendMode": 5,
                 "materialGuid": "00000000-0000-0000-0000-000000000000",
-                "modelName": "debugCube.obj",
+                "modelName": "tentative_enemy.obj",
                 "textureGuid": "ec675a35-7435-45c0-b948-d23242ff7989",
                 "uvTransConfig": {
                     "rotation": 0.0,
@@ -1123,7 +1123,7 @@
             "modelConfig": {
                 "blendMode": 5,
                 "materialGuid": "00000000-0000-0000-0000-000000000000",
-                "modelName": "debugCube.obj",
+                "modelName": "tentative_enemy.obj",
                 "textureGuid": "ec675a35-7435-45c0-b948-d23242ff7989",
                 "uvTransConfig": {
                     "rotation": 0.0,
@@ -1244,7 +1244,7 @@
             "modelConfig": {
                 "blendMode": 5,
                 "materialGuid": "00000000-0000-0000-0000-000000000000",
-                "modelName": "debugCube.obj",
+                "modelName": "tentative_enemy.obj",
                 "textureGuid": "00000000-0000-0000-0000-000000000000",
                 "uvTransConfig": {
                     "rotation": 0.0,
@@ -1363,7 +1363,7 @@
             "modelConfig": {
                 "blendMode": 5,
                 "materialGuid": "00000000-0000-0000-0000-000000000000",
-                "modelName": "debugCube.obj",
+                "modelName": "tentative_enemy.obj",
                 "textureGuid": "00000000-0000-0000-0000-000000000000",
                 "uvTransConfig": {
                     "rotation": 0.0,
