@@ -8,6 +8,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////
 Slime::Slime()
 	: BaseEnemy("debugCube.obj", "Slime", statsImpl_) {
+	SetColor({1.0f, 0.7f, 0.8f, 1.0f});
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -21,5 +22,4 @@ void Slime::Initialize() {
 	SetAttack(std::make_unique<MeleeAttack>());
 	BaseEnemy::Initialize();
 
-	SetColor({ 1.0f,0.7f,0.8f,1.0f });
 }

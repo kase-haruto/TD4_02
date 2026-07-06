@@ -8,6 +8,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////
 ShieldEnemy::ShieldEnemy()
 	: ShieldEnemyBase("debugCube.obj", "ShieldEnemy", statsImpl_) {
+	SetColor({0.55f, 0.2f, 1.0f, 1.0f});
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -21,5 +22,4 @@ void ShieldEnemy::Initialize() {
 	SetAttack(std::make_unique<MeleeAttack>());
 	ShieldEnemyBase::Initialize();
 
-	SetColor({ 0.55f,0.2f,1.0f,1.0f });
 }

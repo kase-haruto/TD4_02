@@ -7,7 +7,9 @@
 //			ctor
 /////////////////////////////////////////////////////////////////////////////////////////
 HeavySlime::HeavySlime()
-	: BaseEnemy("debugCube.obj", "HeavySlime", statsImpl_) {}
+	: BaseEnemy("debugCube.obj", "HeavySlime", statsImpl_) {
+	SetColor({0.55f, 0.0f, 0.0f, 1.0f});
+}
 
 /////////////////////////////////////////////////////////////////////////////////////////
 //			初期化
@@ -20,5 +22,4 @@ void HeavySlime::Initialize() {
 	SetAttack(std::make_unique<MeleeAttack>());
 	BaseEnemy::Initialize();
 
-	SetColor({ 0.55f,0.0f,0.0f,1.0f });
 }

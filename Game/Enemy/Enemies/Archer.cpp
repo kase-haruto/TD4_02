@@ -8,6 +8,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////
 Archer::Archer()
 	: BaseEnemy("debugCube.obj", "Archer", statsImpl_) {
+	SetColor({0.6f, 0.8f, 1.0f, 1.0f});
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -21,5 +22,4 @@ void Archer::Initialize() {
 	SetAttack(std::make_unique<RangedAttack>());
 	BaseEnemy::Initialize();
 
-	SetColor({ 0.6f,0.8f,1.0f,1.0f });
 }
