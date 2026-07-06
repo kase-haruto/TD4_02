@@ -7,7 +7,7 @@
 #include <Engine/Objects/Collider/BoxCollider.h>
 
 Checkpoint::Checkpoint()
-	: BaseGameObject("Checkpoint.obj", "Checkpoint") {}
+	: BaseGameObject("debugCube.obj", "Checkpoint") {}
 
 void Checkpoint::Initialize() {
 	const float kActivateRadius = 2.5f;
