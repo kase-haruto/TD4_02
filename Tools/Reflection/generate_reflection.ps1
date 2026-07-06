@@ -66,7 +66,9 @@ foreach ($scanRoot in $ScanRoots) {
 
     Get-ChildItem -Path $resolvedScanRoot -Recurse -Filter *.h | ForEach-Object {
         $path = $_.FullName
-        $text = Get-Content $path -Raw
+        # Windows PowerShell returns $null for an empty file with -Raw.
+        # Regex.Matches requires a non-null string, so normalize it here.
+        $text = [string](Get-Content $path -Raw)
         foreach ($match in $objectRegex.Matches($text)) {
             $meta = @{}
             foreach ($part in ($match.Groups["meta"].Value -replace "`r|`n", " ").Split(",")) {
