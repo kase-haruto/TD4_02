@@ -8,7 +8,6 @@
 /////////////////////////////////////////////////////////////////////////////////////////
 HeavySlime::HeavySlime()
 	: BaseEnemy("debugCube.obj", "HeavySlime", statsImpl_) {
-	SetColor({0.55f, 0.0f, 0.0f, 1.0f});
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -21,5 +20,6 @@ void HeavySlime::Initialize() {
 	SetMovement(std::make_unique<HomingMove>());
 	SetAttack(std::make_unique<MeleeAttack>());
 	BaseEnemy::Initialize();
+	SetColor({ 0.55f, 0.0f, 0.0f, 1.0f });
 
 }

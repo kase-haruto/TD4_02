@@ -8,7 +8,6 @@
 /////////////////////////////////////////////////////////////////////////////////////////
 DoomEnemy::DoomEnemy()
 	: BaseEnemy("debugCube.obj", "DoomEnemy", statsImpl_) {
-	SetColor({0.0f, 0.0f, 0.0f, 1.0f});
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -21,5 +20,6 @@ void DoomEnemy::Initialize() {
 	SetMovement(std::make_unique<HomingMove>());
 	SetAttack(std::make_unique<PunchAttack>());
 	BaseEnemy::Initialize();
+	SetColor({ 0.0f, 0.0f, 0.0f, 1.0f });
 
 }

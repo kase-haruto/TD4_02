@@ -8,7 +8,6 @@
 /////////////////////////////////////////////////////////////////////////////////////////
 Bat::Bat()
 	: BaseEnemy("debugCube.obj", "Bat", statsImpl_) {
-	SetColor({0.5f, 0.3f, 0.6f, 1.0f});
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -21,5 +20,6 @@ void Bat::Initialize() {
 	SetMovement(std::make_unique<HomingMove>());
 	SetAttack(std::make_unique<ChargeAttack>());
 	BaseEnemy::Initialize();
+	SetColor({ 0.5f, 0.3f, 0.6f, 1.0f });
 
 }
