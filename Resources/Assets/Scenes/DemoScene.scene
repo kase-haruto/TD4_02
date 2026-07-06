@@ -78,10 +78,10 @@
                 "inheritScale": true,
                 "inheritTranslate": true,
                 "rotation": {
-                    "w": 0.9479711055755615,
-                    "x": 0.1876271814107895,
-                    "y": -0.25229594111442566,
-                    "z": 0.049935679882764816
+                    "w": 0.6993557214736938,
+                    "x": 0.32532110810279846,
+                    "y": 0.5770696997642517,
+                    "z": -0.2684370279312134
                 },
                 "scale": {
                     "x": 1.0,
@@ -89,9 +89,9 @@
                     "z": 1.0
                 },
                 "translation": {
-                    "x": -3.5765581130981445,
-                    "y": 2.5274641513824463,
-                    "z": 0.09766674041748047
+                    "x": -17.22614288330078,
+                    "y": 11.702392578125,
+                    "z": 6.607000350952148
                 }
             },
             "type": "DebugCamera"
@@ -1374,6 +1374,127 @@
                 }
             },
             "type": "Archer",
+            "visualOffset": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            }
+        },
+        {
+            "cameraDitherEnabled": false,
+            "colliderConfig": {
+                "capsuleHeight": 2.0,
+                "capsuleRadius": 0.5,
+                "isCollisionEnabled": true,
+                "isDraw": true,
+                "isTrigger": false,
+                "layerId": 3,
+                "offset": {
+                    "x": 0.0,
+                    "y": -0.5,
+                    "z": 0.0
+                },
+                "radius": 1.0,
+                "rotate": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "size": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                }
+            },
+            "colliderKind": 1,
+            "guid": "3726c2dd-ee97-4529-a83b-a7ccc967c2ca",
+            "modelConfig": {
+                "blendMode": 5,
+                "materialGuid": "00000000-0000-0000-0000-000000000000",
+                "modelName": "debugCube.obj",
+                "textureGuid": "00000000-0000-0000-0000-000000000000",
+                "uvTransConfig": {
+                    "rotation": 0.0,
+                    "scale": {
+                        "x": 1.0,
+                        "y": 1.0
+                    }
+                }
+            },
+            "name": "Bat",
+            "objectType": 2,
+            "outlineColor": {
+                "w": 1.0,
+                "x": 0.019999999552965164,
+                "y": 0.019999999552965164,
+                "z": 0.02500000037252903
+            },
+            "outlineEnabled": false,
+            "outlineThickness": 0.03500000014901161,
+            "parentGuid": "00000000-0000-0000-0000-000000000000",
+            "physicsBodyConfig": {
+                "bodyType": 1,
+                "enabled": true,
+                "gravityScale": 1.0,
+                "mass": 1.0,
+                "pushbackRatio": 1.0,
+                "useGravity": true
+            },
+            "serializableParams": {
+                "Game/Actor/Enemy/AttackParam/ChargeAttack": {
+                    "fields": {
+                        "chargeSpeed": 12.0,
+                        "drawHitbox": true,
+                        "hitboxHeightOffset": 1.0,
+                        "hitboxSize": [
+                            1.0,
+                            0.800000011920929,
+                            1.0
+                        ],
+                        "maxChargeTime": 1.2000000476837158,
+                        "overshootDistance": 2.0,
+                        "recoverTime": 0.5,
+                        "windupTime": 0.4000000059604645
+                    }
+                },
+                "Game/Actor/Enemy/Bat": {
+                    "fields": {
+                        "PlayerPtr": "7cf4af54-848a-4332-a62a-2b36e4c02dd8",
+                        "attackDamage": 2,
+                        "attackInterval": 2.0,
+                        "attackRange": 5.0,
+                        "contactDamage": 1,
+                        "detectionRange": 10.0,
+                        "knockbackDamping": 8.0,
+                        "knockbackInitialSpeed": 16.0,
+                        "knockbackStopSpeed": 0.20000000298023224,
+                        "maxHp": 5,
+                        "moveSpeed": 3.0
+                    }
+                }
+            },
+            "transform": {
+                "inheritRotate": true,
+                "inheritScale": true,
+                "inheritTranslate": true,
+                "rotation": {
+                    "w": 1.0,
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "translation": {
+                    "x": 6.800229549407959,
+                    "y": 1.5692660808563232,
+                    "z": 1.5778449773788452
+                }
+            },
+            "type": "Bat",
             "visualOffset": {
                 "x": 0.0,
                 "y": 0.0,

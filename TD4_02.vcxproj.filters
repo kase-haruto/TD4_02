@@ -52,6 +52,8 @@
     <ClCompile Include="Game\Enemy\Attack\RangedAttack.cpp" />
     <ClCompile Include="Game\Enemy\Movement\KiteMove.cpp" />
     <ClCompile Include="Game\Enemy\Projectile\Arrow.cpp" />
+    <ClCompile Include="Game\Enemy\Enemies\Bat.cpp" />
+    <ClCompile Include="Game\Enemy\Attack\ChargeAttack.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Collision\CollisionLayerUtil.h" />

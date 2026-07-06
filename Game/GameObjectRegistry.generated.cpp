@@ -6,6 +6,7 @@
 #include <Engine/Objects/3D/Actor/Registry/SceneObjectRegistry.h>
 
 #include <Game/Enemy/Enemies/Archer.h>
+#include <Game/Enemy/Enemies/Bat.h>
 #include <Game/Demo/3D/Actor/DemoCamera/DemoCameraPivot.h>
 #include <Game/Demo/3D/Actor/DemoPlayer/DemoPlayer.h>
 #include <Game/Enemy/Enemies/DoomEnemy.h>
@@ -30,6 +31,16 @@ namespace CalyxEngine {
 			false,
 			false,
 			&CreateSceneObject<Archer>);
+
+		SceneObjectRegistry::Get().Register(
+			"Bat",
+			"Bat",
+			ObjectType::GameObject,
+			"UI/Tool/AssetPanel/generic.png",
+			true,
+			false,
+			false,
+			&CreateSceneObject<Bat>);
 
 		SceneObjectRegistry::Get().Register(
 			"DemoCameraPivot",
