@@ -54,11 +54,13 @@
     <ClCompile Include="Game\Enemy\Projectile\Arrow.cpp" />
     <ClCompile Include="Game\Enemy\Enemies\Bat.cpp" />
     <ClCompile Include="Game\Enemy\Attack\ChargeAttack.cpp" />
+    <ClCompile Include="Game\Camera\CameraPivot.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Collision\CollisionLayerUtil.h" />
     <ClInclude Include="Game\Player\Ability\PlayerAbility.h" />
     <ClInclude Include="Game\Player\Base\PlayerBase.h" />
     <ClInclude Include="Game\Player\Attack\PlayerAttack.h" />
+    <ClInclude Include="Game\Camera\CameraPivot.h" />
   </ItemGroup>
 </Project>
