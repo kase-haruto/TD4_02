@@ -14,7 +14,7 @@ void Checkpoint::Initialize() {
 
 	InitializeCollider(ColliderKind::Box);
 
-	const auto layerId = GameCollision::FindLayerId("Default");
+	const auto layerId = GameCollision::FindLayerId("StageGimmick");
 
 	if (auto* collider = GetCollider()) {
 		ColliderConfig config;
