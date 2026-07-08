@@ -16,6 +16,8 @@ public:
 	bool IsDodging() const { return isDodging_; }
 	bool IsInvincible() const { return invincibleTimer_ > 0.0f; }
 
+	void Reset();
+
 private:
 	void StartDodge(PlayerBase* player);
 

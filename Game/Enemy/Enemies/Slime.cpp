@@ -7,8 +7,7 @@
 //			ctor
 /////////////////////////////////////////////////////////////////////////////////////////
 Slime::Slime()
-	: BaseEnemy("debugCube.obj", "Slime", statsImpl_) {
-	SetColor({1.0f, 0.7f, 0.8f, 1.0f});
+	: BaseEnemy("tentative_enemy.obj", "Slime", statsImpl_) {
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -21,5 +20,6 @@ void Slime::Initialize() {
 	SetMovement(std::make_unique<HomingMove>());
 	SetAttack(std::make_unique<MeleeAttack>());
 	BaseEnemy::Initialize();
+  SetColor({1.0f, 0.7f, 0.8f, 1.0f});
 
 }

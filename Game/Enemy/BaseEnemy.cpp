@@ -17,6 +17,7 @@ BaseEnemy::BaseEnemy(const std::string& modelName, const std::string& objectName
 void BaseEnemy::Initialize() {
 	Actor::Initialize();
 
+	worldTransform_.scale = { 0.5f,0.5f,0.5f };
 	currentHp_ = stats_.maxHp;
 	//hit_.Load("EnemyHit");
 }

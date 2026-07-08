@@ -104,6 +104,14 @@ bool PlayerAttack::BlocksMovement() const {
 		attackTimer_ <= param_.movementBlockEnd;
 }
 
+void PlayerAttack::Reset() {
+	RemoveAttackHitbox();
+	isAttacking_ = false;
+	nextAttackReserved_ = false;
+	comboIndex_ = 0;
+	attackTimer_ = 0.0f;
+}
+
 float PlayerAttack::GetCurrentAttackDuration() const {
 	if (comboIndex_ == 1) {
 		return param_.attackDuration2;

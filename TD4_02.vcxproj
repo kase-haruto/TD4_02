@@ -205,6 +205,7 @@ if exist "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" copy "$(Win
     <ClCompile Include="Game\Enemy\Movement\HomingMove.cpp" />
     <ClCompile Include="Game\Enemy\Movement\KiteMove.cpp" />
     <ClCompile Include="Game\Enemy\Projectile\Arrow.cpp" />
+    <ClCompile Include="Game\Gimmick\Checkpoint\Checkpoint.cpp" />
     <ClCompile Include="Game\Player\Clone\Clone.cpp" />
     <ClCompile Include="Game\Player\Player.cpp" />
     <ClCompile Include="Game\Player\PlayerDodge.cpp" />
