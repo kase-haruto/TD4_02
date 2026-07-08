@@ -61,12 +61,12 @@ private:
 
 		CalyxEngine::ParamPath GetParamPath() const override { return { CalyxEngine::ParamDomain::Game, "PlayerAbility", "Actor/Player/AbilityParam" }; }
 
-		int32_t maxCloneCount = 4; //!< 最大クローン数
-		float minCloneDistance = 1.0f; //!< 最小クローン生成距離
-		float maxCloneDistance = 5.0f; //!< 最大クローン生成距離
-		float chargeTimeToMax = 1.0f; //!< 最大距離までのチャージ時間
-		bool showCloneGhost = true; //!< 長押し中にクローン位置を表示する
-		float cloneGhostAlpha = 0.35f; //!< クローン位置表示の透明度
+		int32_t maxCloneCount = 4;		//!< 最大クローン数
+		float minCloneDistance = 1.0f;	//!< 最小クローン生成距離
+		float maxCloneDistance = 5.0f;	//!< 最大クローン生成距離
+		float chargeTimeToMax = 1.0f;	//!< 最大距離までのチャージ時間
+		bool showCloneGhost = true;		//!< 長押し中にクローン位置を表示する
+		float cloneGhostAlpha = 0.35f;	//!< クローン位置表示の透明度
 	}param_;
 
 	std::vector<std::weak_ptr<PlayerClone>> clones_; //!< 生成されたクローンのリスト

@@ -20,6 +20,7 @@ void HeavyShieldEnemy::Initialize() {
 	SetMovement(std::make_unique<HomingMove>());
 	SetAttack(std::make_unique<MeleeAttack>());
 	ShieldEnemyBase::Initialize();
+	SetColor({ 0.5f, 0.0f, 0.5f, 1.0f });
 
-	SetColor({ 0.5f,0.0f,0.5f,1.0f });
+
 }

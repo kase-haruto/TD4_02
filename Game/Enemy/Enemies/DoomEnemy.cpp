@@ -20,6 +20,6 @@ void DoomEnemy::Initialize() {
 	SetMovement(std::make_unique<HomingMove>());
 	SetAttack(std::make_unique<PunchAttack>());
 	BaseEnemy::Initialize();
+	SetColor({ 0.0f, 0.0f, 0.0f, 1.0f });
 
-	SetColor({ 0.0f,0.0f,0.0f,1.0f });
 }
