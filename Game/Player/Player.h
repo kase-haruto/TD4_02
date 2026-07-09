@@ -38,6 +38,10 @@ public:
 
 	void SetRespawnPoint(const CalyxEngine::Vector3& p) { respawnPoint_ = p; }
 
+	void SetDodgeEnabled(bool e) { dodge_.SetEnabled(e); }
+
+	bool IsDodgeButtonTriggered() const;
+
 private:
 	void OnHitByEnemyAttack(Collider* attacker);
 	void Respawn();

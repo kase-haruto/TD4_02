@@ -27,13 +27,14 @@ void PlayerDodge::Update(PlayerBase* player, const PlayerInputState& input, floa
 	}
 
 	// --- 回避開始判定 ---
-	if (input.dodgePressed && cooldownTimer_ <= 0.0f) {
+	if (enabled_ && input.dodgePressed && cooldownTimer_ <= 0.0f) {
 		StartDodge(player);
 	}
 }
 
 void PlayerDodge::Reset() {
 	isDodging_ = false;
+	enabled_ = true;
 	dodgeTimer_ = 0.0f;
 	invincibleTimer_ = 0.0f;
 	cooldownTimer_ = 0.0f;

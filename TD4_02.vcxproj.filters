@@ -57,6 +57,8 @@
     <ClCompile Include="Game\Camera\CameraPivot.cpp" />
     <ClCompile Include="Game\Editor\GameEditorExtension.cpp" />
     <ClCompile Include="Game\Gimmick\Checkpoint\Checkpoint.cpp" />
+    <ClCompile Include="Game\Gimmick\Bridge\Bridge.cpp" />
+    <ClCompile Include="Game\Gimmick\Bridge\InteractZone.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Collision\CollisionLayerUtil.h" />

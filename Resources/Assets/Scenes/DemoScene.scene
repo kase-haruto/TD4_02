@@ -78,10 +78,10 @@
                 "inheritScale": true,
                 "inheritTranslate": true,
                 "rotation": {
-                    "w": 0.6993557214736938,
-                    "x": 0.3253210783004761,
-                    "y": 0.5770696401596069,
-                    "z": -0.2684369683265686
+                    "w": 0.6872259974479675,
+                    "x": 0.20350593328475952,
+                    "y": -0.6686547994613647,
+                    "z": 0.19800648093223572
                 },
                 "scale": {
                     "x": 1.0,
@@ -89,9 +89,9 @@
                     "z": 1.0
                 },
                 "translation": {
-                    "x": -18.174888610839844,
-                    "y": 12.849658966064453,
-                    "z": 6.423530101776123
+                    "x": 10.83263874053955,
+                    "y": 10.63838005065918,
+                    "z": -6.374943256378174
                 }
             },
             "type": "DebugCamera"
@@ -190,9 +190,97 @@
                 "capsuleHeight": 2.0,
                 "capsuleRadius": 0.5,
                 "isCollisionEnabled": true,
+                "isDraw": false,
+                "isTrigger": false,
+                "layerId": 1,
+                "offset": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "radius": 1.0,
+                "rotate": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "size": {
+                    "x": 4.0,
+                    "y": 0.5,
+                    "z": 2.0
+                }
+            },
+            "colliderKind": 1,
+            "guid": "4cb97baa-1e38-4048-9b8f-8b5d948ec2a8",
+            "modelConfig": {
+                "blendMode": 5,
+                "materialGuid": "00000000-0000-0000-0000-000000000000",
+                "modelName": "debugCube.obj",
+                "textureGuid": "00000000-0000-0000-0000-000000000000",
+                "uvTransConfig": {
+                    "rotation": 0.0,
+                    "scale": {
+                        "x": 1.0,
+                        "y": 1.0
+                    }
+                }
+            },
+            "name": "Bridge",
+            "objectType": 2,
+            "outlineColor": {
+                "w": 1.0,
+                "x": 0.019999999552965164,
+                "y": 0.019999999552965164,
+                "z": 0.02500000037252903
+            },
+            "outlineEnabled": false,
+            "outlineThickness": 0.03500000014901161,
+            "parentGuid": "00000000-0000-0000-0000-000000000000",
+            "physicsBodyConfig": {
+                "bodyType": 0,
+                "enabled": true,
+                "gravityScale": 1.0,
+                "mass": 1.0,
+                "pushbackRatio": 1.0,
+                "useGravity": true
+            },
+            "transform": {
+                "inheritRotate": true,
+                "inheritScale": true,
+                "inheritTranslate": true,
+                "rotation": {
+                    "w": 0.7071067690849304,
+                    "x": 0.7071067690849304,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "scale": {
+                    "x": 4.0,
+                    "y": 1.0,
+                    "z": 10.0
+                },
+                "translation": {
+                    "x": -1.1645684242248535,
+                    "y": 2.562143087387085,
+                    "z": -9.515812873840332
+                }
+            },
+            "type": "Bridge",
+            "visualOffset": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            }
+        },
+        {
+            "cameraDitherEnabled": false,
+            "colliderConfig": {
+                "capsuleHeight": 2.0,
+                "capsuleRadius": 0.5,
+                "isCollisionEnabled": true,
                 "isDraw": true,
                 "isTrigger": true,
-                "layerId": 0,
+                "layerId": 7,
                 "offset": {
                     "x": 0.0,
                     "y": 0.0,

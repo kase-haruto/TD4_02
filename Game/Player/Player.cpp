@@ -93,6 +93,12 @@ void Player::DerivativeGui(){
 	ability_.ShowGui();
 }
 
+bool Player::IsDodgeButtonTriggered() const {
+	return input_.IsTriggerAction(InputAction::Dash)
+		|| input_.IsTriggerGamepadAction(InputAction::Dash)
+		|| CalyxFoundation::Input::TriggerMouseButton(CalyxFoundation::MouseButton::Right);
+}
+
 void Player::OnHitByEnemyAttack(Collider* attacker) {
 	if (dodge_.IsInvincible()) {
 		return;
