@@ -1,11 +1,15 @@
 #include "Player.h"
 
 #include <Game/Collision/CollisionLayerUtil.h>
+#include <Game/World/RespawnState.h>
 
 #include <Engine/Foundation/Math/Quaternion.h>
 #include <Engine/Graphics/Camera/Manager/CameraManager.h>
 #include <Engine/Physics/Character/CharacterMovementComponent.h>
 #include <Engine/Scene/Utility/SceneUtility.h>
+#include <Engine/Scene/Context/SceneContext.h>
+#include <filesystem>
+
 
 /////////////////////////////////////////////////////////////////////////////////////////
 //			ctor / dtor
@@ -24,6 +28,13 @@ void Player::Initialize() {
 
 	if (collider_) {
 		collider_->SetOwner(this);
+	}
+
+	if (RespawnState::Get().ConsumePendingApply()) {
+		const CalyxEngine::Vector3 p = RespawnState::Get().Position();
+		SetPosition(p);
+		respawnPoint_ = p;
+		lastCloneAnchor_ = p;
 	}
 }
 
@@ -133,6 +144,15 @@ void Player::Respawn() {
 	attack_.Reset();
 	ability_.ClearClones();
 
+	auto& rs = RespawnState::Get();
+	const std::string cur = SceneContext::Current() ? SceneContext::Current()->GetScenePath() : "";
+	if (rs.Has() && rs.ScenePath() != cur) {
+		rs.MarkPendingApply();
+		SceneAPI::RequestSceneChange(std::filesystem::path(rs.ScenePath()));
+		return;
+	}
+
+	const CalyxEngine::Vector3 target = rs.Has() ? rs.Position() : respawnPoint_;
 	SetPosition(respawnPoint_);        // チェックポイントへ戻す
 	lastCloneAnchor_ = respawnPoint_;
 }
