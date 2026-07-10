@@ -11,7 +11,6 @@
 //			ctor / dtor
 /////////////////////////////////////////////////////////////////////////////////////////
 Player::Player() {
-	SerializableParamObjectsMutable().push_back(&ability_.SerializableParam());
 	stats_.LoadParams();
 }
 

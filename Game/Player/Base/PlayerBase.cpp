@@ -4,9 +4,7 @@
 //			ctor / dtor
 /////////////////////////////////////////////////////////////////////////////////////////
 PlayerBase::PlayerBase()
-	: Actor("PlayerIdle.gltf", "Player") {
-	SerializableParamObjectsMutable().push_back(&attack_.SerializableParam());
-}
+	: Actor("PlayerIdle.gltf", "Player") {}
 
 namespace {
 	const char* GetPlayerAnimationModelName(PlayerAnimationID animationId) {

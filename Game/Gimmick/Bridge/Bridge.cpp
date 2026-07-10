@@ -3,8 +3,10 @@
 #include "InteractZone.h"
 
 #include <Game/Player/Player.h>
-#include <Engine/Objects/Collider/Collider.h>
 #include <Game/Collision/CollisionLayerUtil.h>
+#include <Game/World/WorldState.h>
+
+#include <Engine/Objects/Collider/Collider.h>
 #include <Data/Engine/Configs/Scene/Objects/Collider/ColliderConfig.h>
 #include <Engine/Objects/Collider/BoxCollider.h>
 #include <Engine/Physics/PhysicsBody.h>
@@ -21,6 +23,51 @@ Bridge::Bridge()
 Bridge::~Bridge() = default;
 
 void Bridge::Initialize() {
+	param_.ownerGuid_ = GetGuid();
+	param_.LoadParams();
+	firstReset_ = true;
+	angleDeg_ = param_.raisedAngleDeg;
+	worldTransform_.rotationSource = RotationSource::Euler;
+	ApplyBridgeRotation();
+}
+
+void Bridge::Update(float dt) {
+	if (firstReset_) {
+		FirstReset();   // 初期化をここでやる
+		firstReset_ = false;
+	}
+
+	UpdateDodgeSuppression();
+
+	// 範囲内でAが押されたら起動
+	Player* p = zone_ ? zone_->GetPlayer() : nullptr;
+	if (p && !activated_ && p->IsDodgeButtonTriggered()) {
+		activated_ = true;
+		WorldState::Get().SetActivated(GetGuid());
+	}
+
+	// 起動後、水平へ倒れていく
+	if (activated_ && angleDeg_ > param_.loweredAngleDeg) {
+		angleDeg_ -= param_.fallSpeedDeg * dt;
+		if (angleDeg_ < param_.loweredAngleDeg) {
+			angleDeg_ = param_.loweredAngleDeg;
+		}
+		ApplyBridgeRotation();
+	}
+}
+
+void Bridge::DerivativeGui() {
+	param_.ShowGui();
+	if (ImGui::Button("Apply to Zone")) {
+		ApplyZoneParams();
+	}
+	if (ImGui::Button("Reset Bridge Pose")) {
+		ResetBridgePose();
+	}
+}
+
+void Bridge::FirstReset() {
+
 	InitializeCollider(ColliderKind::Box);
 	const auto obstacle = GameCollision::FindLayerId("Obstacle");
 	if (auto* collider = GetCollider()) {
@@ -28,7 +75,7 @@ void Bridge::Initialize() {
 		config.isCollisionEnabled = true;
 		config.isTrigger = false;
 		config.isDraw = false;
-		config.size = bodySize_;
+		config.size = param_.bodySize;
 		if (obstacle) {
 			config.layerId = *obstacle;
 		}
@@ -36,41 +83,26 @@ void Bridge::Initialize() {
 		collider->SetName("BridgeBodyCollider");
 		collider->SetOwner(this);
 		if (auto* box = dynamic_cast<BoxCollider*>(collider)) {
-			box->SetSize(bodySize_);
+			box->SetSize(param_.bodySize);
 		}
 	}
 
 	// レバーを生成
 	zone_ = SceneAPI::Instantiate<InteractZone>();
-	zone_->Configure(zoneSize_, true);
-	zone_->SetTranslate(leverOffset_);
+	zone_->Configure(param_.zoneSize, true);
 	zone_->SetParent(shared_from_this());
 	zone_->GetWorldTransform().inheritRotate = false;
 	zone_->GetWorldTransform().inheritScale = false;
+	zone_->SetTranslate(param_.leverOffset);
 
-	// 初期は跳ね橋（直立90度）
-	angleDeg_ = kRaisedAngleDeg;
+	// 初期は跳ね橋
+	angleDeg_ = param_.raisedAngleDeg;
 	worldTransform_.rotationSource = RotationSource::Euler;
-	SetRotate(CalyxEngine::Vector3{ angleDeg_ * kDeg2Rad, 0.0f, 0.0f });
-}
-
-void Bridge::Update(float dt) {
-	UpdateDodgeSuppression();
-
-	// 範囲内でAが押されたら起動
-	Player* p = zone_ ? zone_->GetPlayer() : nullptr;
-	if (p && !activated_ && p->IsDodgeButtonTriggered()) {
+	if (WorldState::Get().IsActivated(GetGuid())) {
 		activated_ = true;
+		angleDeg_ = param_.loweredAngleDeg;
 	}
-
-	// 起動後、水平へ倒れていく
-	if (activated_ && angleDeg_ > 0.0f) {
-		angleDeg_ -= kFallSpeedDeg * dt;
-		if (angleDeg_ < 0.0f) {
-			angleDeg_ = 0.0f;
-		}
-		SetRotate(CalyxEngine::Vector3{ angleDeg_ * kDeg2Rad, 0.0f, 0.0f });
-	}
+	ApplyBridgeRotation();
 }
 
 void Bridge::UpdateDodgeSuppression() {
@@ -83,4 +115,24 @@ void Bridge::UpdateDodgeSuppression() {
 		suppressedPlayer_->SetDodgeEnabled(true);
 		suppressedPlayer_ = nullptr;
 	}
+}
+
+void Bridge::ApplyBridgeRotation() {
+	SetRotate(param_.fallAxis * (angleDeg_ * kDeg2Rad));
+}
+
+void Bridge::ApplyZoneParams() {
+	if (!zone_) {
+		return;
+	}
+	if (auto* box = dynamic_cast<BoxCollider*>(zone_->GetCollider())) {
+		box->SetSize(param_.zoneSize);
+	}
+	zone_->SetTranslate(param_.leverOffset);
+}
+
+void Bridge::ResetBridgePose() {
+	activated_ = false;
+	angleDeg_ = param_.raisedAngleDeg;
+	ApplyBridgeRotation();
 }

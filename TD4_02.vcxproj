@@ -217,6 +217,8 @@ if exist "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" copy "$(Win
     <ClCompile Include="Game\Player\Base\PlayerBase.cpp" />
     <ClCompile Include="Game\Player\Attack\PlayerAttack.cpp" />
     <ClCompile Include="Game\Editor\GameEditorExtension.cpp" />
+    <ClCompile Include="Game\World\Door.cpp" />
+    <ClCompile Include="Game\World\SpawnPoint.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Camera\CameraPivot.h" />

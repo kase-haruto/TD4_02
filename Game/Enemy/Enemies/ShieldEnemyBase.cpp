@@ -15,7 +15,6 @@ ShieldEnemyBase::ShieldEnemyBase(const std::string& modelName, const std::string
 
 void ShieldEnemyBase::Initialize() {
 	param_.LoadParams();
-	SerializableParamObjectsMutable().push_back(&param_);
 	RollThreshold();
 	BaseEnemy::Initialize();
 }

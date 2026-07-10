@@ -59,6 +59,8 @@
     <ClCompile Include="Game\Gimmick\Checkpoint\Checkpoint.cpp" />
     <ClCompile Include="Game\Gimmick\Bridge\Bridge.cpp" />
     <ClCompile Include="Game\Gimmick\Bridge\InteractZone.cpp" />
+    <ClCompile Include="Game\World\SpawnPoint.cpp" />
+    <ClCompile Include="Game\World\Door.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Collision\CollisionLayerUtil.h" />

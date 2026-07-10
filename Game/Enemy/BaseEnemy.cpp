@@ -134,9 +134,6 @@ void BaseEnemy::SetMovement(std::unique_ptr<IEnemyMovement> movement) {
 
 void BaseEnemy::SetAttack(std::unique_ptr<IEnemyAttack> attack) {
 	attack_ = std::move(attack);
-	if (attack_) {
-		SerializableParamObjectsMutable().push_back(&attack_->SerializableParam());
-	}
 }
 
 void BaseEnemy::TakeDamage(int amount) {
