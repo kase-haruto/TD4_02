@@ -2,6 +2,8 @@
 #include <Engine/Objects/3D/Actor/Actor.h>
 #include <Engine/Application/Effects/EffectAsset.h>
 #include <Engine/Scene/Utility/SceneUtility.h>
+#include <Engine/Scene/Reference/TransformReference.h>
+#include <Engine/Scene/Reference/SceneObjectReference.h>
 
 #include <memory>
 #include <string>
@@ -30,7 +32,6 @@ public:
 
 	void SetMovement(std::unique_ptr<IEnemyMovement> movement);
 	void SetAttack(std::unique_ptr<IEnemyAttack> attack);
-	void SetTarget(const Actor* target) { target_ = target; }
 
 	void TakeDamage(int amount);
 	bool IsDead() const { return currentHp_ <= 0; }
@@ -59,7 +60,6 @@ protected:
 
 	std::unique_ptr<IEnemyMovement> movement_;       // 動き
 	std::unique_ptr<IEnemyAttack> attack_;           // 攻撃
-	const Actor* target_ = nullptr;
 
 	//CalyxEngine::EffectAsset hit_;
 };

@@ -16,11 +16,16 @@ public:
 	bool IsDodging() const { return isDodging_; }
 	bool IsInvincible() const { return invincibleTimer_ > 0.0f; }
 
+	void Reset();
+
+	void SetEnabled(bool e) { enabled_ = e; }
+
 private:
 	void StartDodge(PlayerBase* player);
 
 private:
 	bool  isDodging_ = false;
+	bool  enabled_ = true;   // 橋などから一時的に回避を封じる
 	float dodgeTimer_ = 0.0f; // 回避の経過時間
 	float invincibleTimer_ = 0.0f; // 無敵の残り時間
 	float cooldownTimer_ = 0.0f; // 再回避までの残り時間

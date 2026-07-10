@@ -17,6 +17,7 @@ BaseEnemy::BaseEnemy(const std::string& modelName, const std::string& objectName
 void BaseEnemy::Initialize() {
 	Actor::Initialize();
 
+	worldTransform_.scale = { 0.5f,0.5f,0.5f };
 	currentHp_ = stats_.maxHp;
 	//hit_.Load("EnemyHit");
 }
@@ -25,22 +26,23 @@ void BaseEnemy::Initialize() {
 //			更新
 /////////////////////////////////////////////////////////////////////////////////////////
 void BaseEnemy::Update(float dt) {
+	auto targetPlayer = stats_.target.Resolve().get();
 	const float stopSq = stats_.knockbackStopSpeed * stats_.knockbackStopSpeed;
 	if (knockbackVelocity_.LengthSquared() > stopSq) {
 		// 吹き飛び中は追尾せず、ノックバックで動かす
 		UpdateKnockback(dt);
-	} else if (movement_ && target_ && AllowMovement()) {
-		movement_->Update(*this, target_->GetWorldPosition(), dt);
+	} else if (movement_ && targetPlayer && AllowMovement()) {
+		movement_->Update(*this, targetPlayer->GetWorldPosition(), dt);
 	}
 
 	// 攻撃（ノックバックで吹き飛んでいる間は攻撃しない）
-	if (knockbackVelocity_.LengthSquared() <= stopSq && attack_ && target_ && AllowAttack()) {
-		attack_->Update(*this, target_, dt);
+	if (knockbackVelocity_.LengthSquared() <= stopSq && attack_ && targetPlayer && AllowAttack()) {
+		attack_->Update(*this, targetPlayer, dt);
 	}
 
 	if (CalyxFoundation::Input::TriggerKey(DIK_P)|| CalyxFoundation::Input::TriggerGamepadButton(CalyxFoundation::PadButton::X)) {
 		CalyxEngine::Vector3 dir = CalyxEngine::Quaternion::RotateVector(
-			CalyxEngine::Vector3::Forward(), target_->GetWorldTransform().rotation);
+			CalyxEngine::Vector3::Forward(), targetPlayer->GetRenderWorldTransform().rotation);
 		dir.y = 0.0f;
 		if (dir.LengthSquared() <= 0.0001f) {
 			return;
@@ -84,6 +86,7 @@ void BaseEnemy::OnCollisionEnter(Collider* other) {
 }
 
 void BaseEnemy::DerivativeGui() {
+	GuiCmd::SceneObjectReferenceField("PlayerTrans", stats_.target);
 	stats_.ShowGui();
 	if (attack_) {
 		attack_->ShowGui();
@@ -96,13 +99,14 @@ void BaseEnemy::OnHitByPlayerAttack(Collider* attacker) {
 }
 
 void BaseEnemy::ApplyKnockbackFrom(Collider* attacker) {
-	if (!attacker || !target_) {
+	auto targetPlayer = stats_.target.Resolve().get();
+	if (!attacker || !targetPlayer) {
 		return;
 	}
 
 	// プレイヤーが向いている方向へ吹き飛ばす
 	CalyxEngine::Vector3 dir = CalyxEngine::Quaternion::RotateVector(
-		CalyxEngine::Vector3::Forward(), target_->GetWorldTransform().rotation);
+		CalyxEngine::Vector3::Forward(), targetPlayer->GetRenderWorldTransform().rotation);
 	dir.y = 0.0f;
 	if (dir.LengthSquared() <= 0.0001f) {
 		return;

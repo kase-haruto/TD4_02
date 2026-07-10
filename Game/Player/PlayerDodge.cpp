@@ -15,7 +15,9 @@ void PlayerDodge::Update(PlayerBase* player, const PlayerInputState& input, floa
 		dodgeTimer_ += dt;
 
 		// 開始時に決めた向きへ進み続ける
-		player->GetCharacterMovement().AddMovementInput(dodgeDir_);
+		if (player->AppliesMovement()) {
+			player->GetCharacterMovement().AddMovementInput(dodgeDir_);
+		}
 
 		if (dodgeTimer_ >= kDodgeDuration) {
 			isDodging_ = false;
@@ -25,9 +27,18 @@ void PlayerDodge::Update(PlayerBase* player, const PlayerInputState& input, floa
 	}
 
 	// --- 回避開始判定 ---
-	if (input.dodgePressed && cooldownTimer_ <= 0.0f) {
+	if (enabled_ && input.dodgePressed && cooldownTimer_ <= 0.0f) {
 		StartDodge(player);
 	}
+}
+
+void PlayerDodge::Reset() {
+	isDodging_ = false;
+	enabled_ = true;
+	dodgeTimer_ = 0.0f;
+	invincibleTimer_ = 0.0f;
+	cooldownTimer_ = 0.0f;
+	dodgeDir_ = {};
 }
 
 void PlayerDodge::StartDodge(PlayerBase* player) {

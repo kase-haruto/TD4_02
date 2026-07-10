@@ -51,6 +51,31 @@ void PlayerAbility::ApplyKnockbackToClones(const CalyxEngine::Vector3& velocity,
 	}
 }
 
+void PlayerAbility::MoveClones(const CalyxEngine::Vector3& delta) {
+	if (delta.LengthSquared() <= 0.0f) {
+		return;
+	}
+	RefreshClones();
+	for (auto& weak : clones_) {
+		if (auto clone = weak.lock()) {
+			clone->AddWorldOffset(delta);
+		}
+	}
+}
+
+void PlayerAbility::ClearClones() {
+	for (auto& weak : clones_) {
+		if (auto clone = weak.lock()) {
+			if (auto* context = SceneContext::Current()) {
+				context->RemoveObject(std::static_pointer_cast<SceneObject>(clone));
+			}
+		}
+	}
+	clones_.clear();
+
+	ClearCloneGhost();
+}
+
 void PlayerAbility::SpawnClone(Player& player) {
 	SpawnClone(player, param_.minCloneDistance);
 }

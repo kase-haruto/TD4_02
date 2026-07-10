@@ -1,4 +1,5 @@
 #pragma once
+#include <Engine/Objects/Transform/Transform.h>
 
 class BaseEnemy;
 class Actor;

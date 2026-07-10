@@ -70,10 +70,11 @@ void ShieldEnemyBase::RollThreshold() {
 }
 
 void ShieldEnemyBase::FaceTarget() {
-	if (!target_) {
+	auto targetPlayer = stats_.target.Resolve().get();
+	if (!targetPlayer) {
 		return;
 	}
-	CalyxEngine::Vector3 toTarget = target_->GetWorldPosition() - GetWorldPosition();
+	CalyxEngine::Vector3 toTarget = targetPlayer->GetWorldPosition() - GetWorldPosition();
 	toTarget.y = 0.0f;
 	if (toTarget.LengthSquared() < 1.0e-6f) {
 		return;
@@ -83,14 +84,15 @@ void ShieldEnemyBase::FaceTarget() {
 }
 
 bool ShieldEnemyBase::IsBlockedDirection() const {
-	if (!target_) {
+	auto targetPlayer = stats_.target.Resolve().get();
+	if (!targetPlayer) {
 		return false;
 	}
 	CalyxEngine::Vector3 forward = CalyxEngine::Quaternion::RotateVector(
 			CalyxEngine::Vector3::Forward(), GetWorldTransform().rotation);
 	forward.y = 0.0f;
 
-	CalyxEngine::Vector3 toTarget = target_->GetWorldPosition() - GetWorldPosition();
+	CalyxEngine::Vector3 toTarget = targetPlayer->GetWorldPosition() - GetWorldPosition();
 	toTarget.y = 0.0f;
 
 	if (forward.LengthSquared() < 1.0e-6f || toTarget.LengthSquared() < 1.0e-6f) {

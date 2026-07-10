@@ -44,16 +44,16 @@
             "guid": "3a77269f-5d6f-43cd-bfc3-ca4bc75609f7",
             "name": "MainCamera",
             "objectType": 0,
-            "parentGuid": "00000000-0000-0000-0000-000000000000",
+            "parentGuid": "e0bb1d9a-dd6a-4c53-b0b5-eb1db8c6580e",
             "transform": {
                 "inheritRotate": true,
                 "inheritScale": true,
                 "inheritTranslate": true,
                 "rotation": {
-                    "w": 0.9565450549125671,
-                    "x": 0.06688814610242844,
-                    "y": 0.2831176221370697,
-                    "z": -0.019797509536147118
+                    "w": 1.0,
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
                 },
                 "scale": {
                     "x": 1.0,
@@ -61,9 +61,9 @@
                     "z": 1.0
                 },
                 "translation": {
-                    "x": -9.426767349243164,
-                    "y": 2.785695791244507,
-                    "z": 2.93938946723938
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
                 }
             },
             "type": "Camera3d"
@@ -78,10 +78,10 @@
                 "inheritScale": true,
                 "inheritTranslate": true,
                 "rotation": {
-                    "w": 0.8877882361412048,
-                    "x": 0.378388911485672,
-                    "y": -0.2410384863615036,
-                    "z": 0.1027342900633812
+                    "w": 0.6872259974479675,
+                    "x": 0.20350593328475952,
+                    "y": -0.6686547994613647,
+                    "z": 0.19800648093223572
                 },
                 "scale": {
                     "x": 1.0,
@@ -89,100 +89,12 @@
                     "z": 1.0
                 },
                 "translation": {
-                    "x": -4.900007247924805,
-                    "y": 5.741569519042969,
-                    "z": 2.547220230102539
+                    "x": 10.83263874053955,
+                    "y": 10.63838005065918,
+                    "z": -6.374943256378174
                 }
             },
             "type": "DebugCamera"
-        },
-        {
-            "cameraDitherEnabled": false,
-            "colliderConfig": {
-                "capsuleHeight": 2.0,
-                "capsuleRadius": 0.5,
-                "isCollisionEnabled": true,
-                "isDraw": true,
-                "isTrigger": false,
-                "layerId": 0,
-                "offset": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.5
-                },
-                "radius": 1.0,
-                "rotate": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0
-                },
-                "size": {
-                    "x": 30.0,
-                    "y": 30.0,
-                    "z": 1.0
-                }
-            },
-            "colliderKind": 1,
-            "guid": "a84b193d-0e58-4e61-940a-a9a1478ffdb3",
-            "modelConfig": {
-                "blendMode": 5,
-                "materialGuid": "00000000-0000-0000-0000-000000000000",
-                "modelName": "plane.obj",
-                "textureGuid": "872b65b5-4991-45b2-9d66-d39017e4385e",
-                "uvTransConfig": {
-                    "rotation": 0.0,
-                    "scale": {
-                        "x": 3.0,
-                        "y": 3.0
-                    }
-                }
-            },
-            "name": "ground",
-            "objectType": 2,
-            "outlineColor": {
-                "w": 1.0,
-                "x": 0.019999999552965164,
-                "y": 0.019999999552965164,
-                "z": 0.02500000037252903
-            },
-            "outlineEnabled": false,
-            "outlineThickness": 0.03500000014901161,
-            "parentGuid": "00000000-0000-0000-0000-000000000000",
-            "physicsBodyConfig": {
-                "bodyType": 0,
-                "enabled": true,
-                "gravityScale": 1.0,
-                "mass": 1.0,
-                "pushbackRatio": 1.0,
-                "useGravity": true
-            },
-            "transform": {
-                "inheritRotate": true,
-                "inheritScale": true,
-                "inheritTranslate": true,
-                "rotation": {
-                    "w": 0.7069340944290161,
-                    "x": 0.7072794437408447,
-                    "y": 0.0,
-                    "z": 0.0
-                },
-                "scale": {
-                    "x": 15.0,
-                    "y": 15.0,
-                    "z": 1.0
-                },
-                "translation": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 5.0
-                }
-            },
-            "type": "BaseGameObject",
-            "visualOffset": {
-                "x": 0.0,
-                "y": 0.0,
-                "z": 0.0
-            }
         },
         {
             "cameraDitherEnabled": true,
@@ -263,6 +175,270 @@
                     "x": 0.0,
                     "y": 1.5,
                     "z": -9.5
+                }
+            },
+            "type": "BaseGameObject",
+            "visualOffset": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            }
+        },
+        {
+            "cameraDitherEnabled": false,
+            "colliderConfig": {
+                "capsuleHeight": 2.0,
+                "capsuleRadius": 0.5,
+                "isCollisionEnabled": true,
+                "isDraw": false,
+                "isTrigger": false,
+                "layerId": 1,
+                "offset": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "radius": 1.0,
+                "rotate": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "size": {
+                    "x": 4.0,
+                    "y": 0.5,
+                    "z": 2.0
+                }
+            },
+            "colliderKind": 1,
+            "guid": "4cb97baa-1e38-4048-9b8f-8b5d948ec2a8",
+            "modelConfig": {
+                "blendMode": 5,
+                "materialGuid": "00000000-0000-0000-0000-000000000000",
+                "modelName": "debugCube.obj",
+                "textureGuid": "00000000-0000-0000-0000-000000000000",
+                "uvTransConfig": {
+                    "rotation": 0.0,
+                    "scale": {
+                        "x": 1.0,
+                        "y": 1.0
+                    }
+                }
+            },
+            "name": "Bridge",
+            "objectType": 2,
+            "outlineColor": {
+                "w": 1.0,
+                "x": 0.019999999552965164,
+                "y": 0.019999999552965164,
+                "z": 0.02500000037252903
+            },
+            "outlineEnabled": false,
+            "outlineThickness": 0.03500000014901161,
+            "parentGuid": "00000000-0000-0000-0000-000000000000",
+            "physicsBodyConfig": {
+                "bodyType": 0,
+                "enabled": true,
+                "gravityScale": 1.0,
+                "mass": 1.0,
+                "pushbackRatio": 1.0,
+                "useGravity": true
+            },
+            "transform": {
+                "inheritRotate": true,
+                "inheritScale": true,
+                "inheritTranslate": true,
+                "rotation": {
+                    "w": 0.7071067690849304,
+                    "x": 0.7071067690849304,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "scale": {
+                    "x": 4.0,
+                    "y": 1.0,
+                    "z": 10.0
+                },
+                "translation": {
+                    "x": -1.1645684242248535,
+                    "y": 2.562143087387085,
+                    "z": -9.515812873840332
+                }
+            },
+            "type": "Bridge",
+            "visualOffset": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            }
+        },
+        {
+            "cameraDitherEnabled": false,
+            "colliderConfig": {
+                "capsuleHeight": 2.0,
+                "capsuleRadius": 0.5,
+                "isCollisionEnabled": true,
+                "isDraw": true,
+                "isTrigger": true,
+                "layerId": 7,
+                "offset": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "radius": 1.0,
+                "rotate": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "size": {
+                    "x": 2.5,
+                    "y": 2.5,
+                    "z": 2.5
+                }
+            },
+            "colliderKind": 1,
+            "guid": "ec67088c-4163-478a-9823-c4bdcf7dbc60",
+            "modelConfig": {
+                "blendMode": 5,
+                "materialGuid": "00000000-0000-0000-0000-000000000000",
+                "modelName": "debugCube.obj",
+                "textureGuid": "00000000-0000-0000-0000-000000000000",
+                "uvTransConfig": {
+                    "rotation": 0.0,
+                    "scale": {
+                        "x": 1.0,
+                        "y": 1.0
+                    }
+                }
+            },
+            "name": "Checkpoint",
+            "objectType": 2,
+            "outlineColor": {
+                "w": 1.0,
+                "x": 0.019999999552965164,
+                "y": 0.019999999552965164,
+                "z": 0.02500000037252903
+            },
+            "outlineEnabled": false,
+            "outlineThickness": 0.03500000014901161,
+            "parentGuid": "00000000-0000-0000-0000-000000000000",
+            "physicsBodyConfig": {
+                "bodyType": 0,
+                "enabled": true,
+                "gravityScale": 1.0,
+                "mass": 1.0,
+                "pushbackRatio": 1.0,
+                "useGravity": true
+            },
+            "transform": {
+                "inheritRotate": true,
+                "inheritScale": true,
+                "inheritTranslate": true,
+                "rotation": {
+                    "w": 1.0,
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "translation": {
+                    "x": -5.188474178314209,
+                    "y": 1.0832074880599976,
+                    "z": -3.1612894535064697
+                }
+            },
+            "type": "Checkpoint",
+            "visualOffset": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            }
+        },
+        {
+            "cameraDitherEnabled": false,
+            "colliderConfig": {
+                "capsuleHeight": 2.0,
+                "capsuleRadius": 0.5,
+                "isCollisionEnabled": true,
+                "isDraw": true,
+                "isTrigger": false,
+                "layerId": 0,
+                "offset": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.5
+                },
+                "radius": 1.0,
+                "rotate": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "size": {
+                    "x": 30.0,
+                    "y": 30.0,
+                    "z": 1.0
+                }
+            },
+            "colliderKind": 1,
+            "guid": "a84b193d-0e58-4e61-940a-a9a1478ffdb3",
+            "modelConfig": {
+                "blendMode": 5,
+                "materialGuid": "00000000-0000-0000-0000-000000000000",
+                "modelName": "plane.obj",
+                "textureGuid": "872b65b5-4991-45b2-9d66-d39017e4385e",
+                "uvTransConfig": {
+                    "rotation": 0.0,
+                    "scale": {
+                        "x": 3.0,
+                        "y": 3.0
+                    }
+                }
+            },
+            "name": "ground",
+            "objectType": 2,
+            "outlineColor": {
+                "w": 1.0,
+                "x": 0.019999999552965164,
+                "y": 0.019999999552965164,
+                "z": 0.02500000037252903
+            },
+            "outlineEnabled": false,
+            "outlineThickness": 0.03500000014901161,
+            "parentGuid": "00000000-0000-0000-0000-000000000000",
+            "physicsBodyConfig": {
+                "bodyType": 0,
+                "enabled": true,
+                "gravityScale": 1.0,
+                "mass": 1.0,
+                "pushbackRatio": 1.0,
+                "useGravity": true
+            },
+            "transform": {
+                "inheritRotate": true,
+                "inheritScale": true,
+                "inheritTranslate": true,
+                "rotation": {
+                    "w": 0.7069340944290161,
+                    "x": 0.7072794437408447,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "scale": {
+                    "x": 15.0,
+                    "y": 15.0,
+                    "z": 1.0
+                },
+                "translation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 5.0
                 }
             },
             "type": "BaseGameObject",
@@ -832,8 +1008,8 @@
                     "z": 1.0
                 },
                 "translation": {
-                    "x": -8.07968521118164,
-                    "y": 0.30977702140808105,
+                    "x": -10.792825698852539,
+                    "y": 0.9774986505508423,
                     "z": 5.456622123718262
                 }
             },
@@ -843,54 +1019,6 @@
                 "y": 0.0,
                 "z": 0.0
             }
-        },
-        {
-            "DemoCameraPivot": {
-                "autoFindTarget": true,
-                "cameraLocalOffset": {
-                    "x": 0.23999999463558197,
-                    "y": 0.6200000047683716,
-                    "z": -2.9600000381469727
-                },
-                "followSharpness": 18.0,
-                "keyRotateSpeed": 2.094395160675049,
-                "maxPitch": 1.0471975803375244,
-                "minPitch": -0.6108652949333191,
-                "pitch": 0.13962633907794952,
-                "pivotLocalOffset": {
-                    "x": 0.0,
-                    "y": 1.4500000476837158,
-                    "z": 0.0
-                },
-                "stickRotateSpeed": 3.1415927410125732,
-                "yaw": 0.5755281448364258
-            },
-            "guid": "75021bf6-2fe5-4abf-ae6a-4f890f2f106d",
-            "name": "DemoCameraPivot",
-            "objectType": 2,
-            "parentGuid": "7cf4af54-848a-4332-a62a-2b36e4c02dd8",
-            "transform": {
-                "inheritRotate": true,
-                "inheritScale": true,
-                "inheritTranslate": true,
-                "rotation": {
-                    "w": 1.0,
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0
-                },
-                "scale": {
-                    "x": 1.0,
-                    "y": 1.0,
-                    "z": 1.0
-                },
-                "translation": {
-                    "x": 0.0,
-                    "y": 1.4500000476837158,
-                    "z": 0.0
-                }
-            },
-            "type": "DemoCameraPivot"
         },
         {
             "cameraDitherEnabled": false,
@@ -922,9 +1050,15 @@
             "guid": "9c1299f0-f8c0-4f60-8993-2e24d76978c1",
             "modelConfig": {
                 "blendMode": 5,
+                "colorOverride": {
+                    "w": 1.0,
+                    "x": 1.0,
+                    "y": 0.699999988079071,
+                    "z": 0.800000011920929
+                },
                 "materialGuid": "00000000-0000-0000-0000-000000000000",
-                "modelName": "debugCube.obj",
-                "textureGuid": "00000000-0000-0000-0000-000000000000",
+                "modelName": "tentative_enemy.obj",
+                "textureGuid": "ec675a35-7435-45c0-b948-d23242ff7989",
                 "uvTransConfig": {
                     "rotation": 0.0,
                     "scale": {
@@ -970,6 +1104,7 @@
                 },
                 "Game/Actor/Enemy/Slime": {
                     "fields": {
+                        "PlayerPtr": "7cf4af54-848a-4332-a62a-2b36e4c02dd8",
                         "attackDamage": 2,
                         "attackInterval": 2.0,
                         "attackRange": 1.2000000476837158,
@@ -994,14 +1129,14 @@
                     "z": 0.0
                 },
                 "scale": {
-                    "x": 1.0,
-                    "y": 1.0,
-                    "z": 1.0
+                    "x": 0.5,
+                    "y": 0.5,
+                    "z": 0.5
                 },
                 "translation": {
-                    "x": -5.511527061462402,
-                    "y": 0.5100168585777283,
-                    "z": 4.9658308029174805
+                    "x": -5.575861930847168,
+                    "y": 0.5012606978416443,
+                    "z": 4.966153621673584
                 }
             },
             "type": "Slime",
@@ -1010,6 +1145,559 @@
                 "y": 0.0,
                 "z": 0.0
             }
+        },
+        {
+            "cameraDitherEnabled": false,
+            "colliderConfig": {
+                "capsuleHeight": 2.0,
+                "capsuleRadius": 0.5,
+                "isCollisionEnabled": true,
+                "isDraw": true,
+                "isTrigger": false,
+                "layerId": 3,
+                "offset": {
+                    "x": 0.0,
+                    "y": -0.5,
+                    "z": 0.0
+                },
+                "radius": 1.0,
+                "rotate": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "size": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                }
+            },
+            "colliderKind": 1,
+            "guid": "18ceae92-b9ba-42b3-875f-21688749f895",
+            "modelConfig": {
+                "blendMode": 5,
+                "colorOverride": {
+                    "w": 1.0,
+                    "x": 0.5,
+                    "y": 0.0,
+                    "z": 0.5
+                },
+                "materialGuid": "00000000-0000-0000-0000-000000000000",
+                "modelName": "tentative_enemy.obj",
+                "textureGuid": "ec675a35-7435-45c0-b948-d23242ff7989",
+                "uvTransConfig": {
+                    "rotation": 0.0,
+                    "scale": {
+                        "x": 1.0,
+                        "y": 1.0
+                    }
+                }
+            },
+            "name": "HeavyShieldEnemy",
+            "objectType": 2,
+            "outlineColor": {
+                "w": 1.0,
+                "x": 0.019999999552965164,
+                "y": 0.019999999552965164,
+                "z": 0.02500000037252903
+            },
+            "outlineEnabled": false,
+            "outlineThickness": 0.03500000014901161,
+            "parentGuid": "00000000-0000-0000-0000-000000000000",
+            "physicsBodyConfig": {
+                "bodyType": 1,
+                "enabled": true,
+                "gravityScale": 1.0,
+                "mass": 1.0,
+                "pushbackRatio": 1.0,
+                "useGravity": true
+            },
+            "serializableParams": {
+                "Game/Actor/Enemy/AttackParam/MeleeAttack": {
+                    "fields": {
+                        "attackDuration": 0.6000000238418579,
+                        "drawHitbox": true,
+                        "hitboxActiveEnd": 0.4000000059604645,
+                        "hitboxActiveStart": 0.25,
+                        "hitboxForwardOffset": 1.2000000476837158,
+                        "hitboxHeightOffset": 1.0,
+                        "hitboxSize": [
+                            1.0,
+                            0.800000011920929,
+                            1.0
+                        ]
+                    }
+                },
+                "Game/Actor/Enemy/HeavyShieldEnemy": {
+                    "fields": {
+                        "PlayerPtr": "7cf4af54-848a-4332-a62a-2b36e4c02dd8",
+                        "attackDamage": 2,
+                        "attackInterval": 2.0,
+                        "attackRange": 1.2000000476837158,
+                        "contactDamage": 1,
+                        "detectionRange": 6.0,
+                        "knockbackDamping": 8.0,
+                        "knockbackInitialSpeed": 0.0,
+                        "knockbackStopSpeed": 0.20000000298023224,
+                        "maxHp": 5,
+                        "moveSpeed": 1.5
+                    }
+                },
+                "Game/Actor/Enemy/ShieldParam/ShieldEnemy": {
+                    "fields": {
+                        "blockAngleDeg": 180.0,
+                        "blockCountMax": 3,
+                        "blockCountMin": 3,
+                        "defenseDuration": 2.0
+                    }
+                }
+            },
+            "transform": {
+                "inheritRotate": true,
+                "inheritScale": true,
+                "inheritTranslate": true,
+                "rotation": {
+                    "w": 1.0,
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "scale": {
+                    "x": 0.5,
+                    "y": 0.5,
+                    "z": 0.5
+                },
+                "translation": {
+                    "x": -4.233502388000488,
+                    "y": 1.1872122287750244,
+                    "z": 8.202238082885742
+                }
+            },
+            "type": "HeavyShieldEnemy",
+            "visualOffset": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            }
+        },
+        {
+            "cameraDitherEnabled": false,
+            "colliderConfig": {
+                "capsuleHeight": 2.0,
+                "capsuleRadius": 0.5,
+                "isCollisionEnabled": true,
+                "isDraw": true,
+                "isTrigger": false,
+                "layerId": 3,
+                "offset": {
+                    "x": 0.0,
+                    "y": -0.5,
+                    "z": 0.0
+                },
+                "radius": 1.0,
+                "rotate": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "size": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                }
+            },
+            "colliderKind": 1,
+            "guid": "efca7fd4-7cda-4c82-a600-058a4c0f073c",
+            "modelConfig": {
+                "blendMode": 5,
+                "colorOverride": {
+                    "w": 1.0,
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "materialGuid": "00000000-0000-0000-0000-000000000000",
+                "modelName": "tentative_enemy.obj",
+                "textureGuid": "ec675a35-7435-45c0-b948-d23242ff7989",
+                "uvTransConfig": {
+                    "rotation": 0.0,
+                    "scale": {
+                        "x": 1.0,
+                        "y": 1.0
+                    }
+                }
+            },
+            "name": "DoomEnemy",
+            "objectType": 2,
+            "outlineColor": {
+                "w": 1.0,
+                "x": 0.019999999552965164,
+                "y": 0.019999999552965164,
+                "z": 0.02500000037252903
+            },
+            "outlineEnabled": false,
+            "outlineThickness": 0.03500000014901161,
+            "parentGuid": "00000000-0000-0000-0000-000000000000",
+            "physicsBodyConfig": {
+                "bodyType": 1,
+                "enabled": true,
+                "gravityScale": 1.0,
+                "mass": 1.0,
+                "pushbackRatio": 1.0,
+                "useGravity": true
+            },
+            "serializableParams": {
+                "Game/Actor/Enemy/AttackParam/PunchAttack": {
+                    "fields": {
+                        "attackDuration": 1.0,
+                        "drawHitbox": true,
+                        "hitboxActiveEnd": 0.699999988079071,
+                        "hitboxActiveStart": 0.550000011920929,
+                        "hitboxForwardOffset": 1.2000000476837158,
+                        "hitboxHeightOffset": 1.0,
+                        "hitboxSize": [
+                            1.600000023841858,
+                            1.2000000476837158,
+                            1.600000023841858
+                        ],
+                        "knockbackPower": 18.0
+                    }
+                },
+                "Game/Actor/Enemy/DoomEnemy": {
+                    "fields": {
+                        "PlayerPtr": "7cf4af54-848a-4332-a62a-2b36e4c02dd8",
+                        "attackDamage": 5,
+                        "attackInterval": 2.0,
+                        "attackRange": 1.2000000476837158,
+                        "contactDamage": 1,
+                        "detectionRange": 6.0,
+                        "knockbackDamping": 8.0,
+                        "knockbackInitialSpeed": 16.0,
+                        "knockbackStopSpeed": 0.20000000298023224,
+                        "maxHp": 5,
+                        "moveSpeed": 1.5
+                    }
+                }
+            },
+            "transform": {
+                "inheritRotate": true,
+                "inheritScale": true,
+                "inheritTranslate": true,
+                "rotation": {
+                    "w": 1.0,
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "scale": {
+                    "x": 0.5,
+                    "y": 0.5,
+                    "z": 0.5
+                },
+                "translation": {
+                    "x": -7.543068885803223,
+                    "y": 1.2035744190216064,
+                    "z": 3.1642568111419678
+                }
+            },
+            "type": "DoomEnemy",
+            "visualOffset": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            }
+        },
+        {
+            "cameraDitherEnabled": false,
+            "colliderConfig": {
+                "capsuleHeight": 2.0,
+                "capsuleRadius": 0.5,
+                "isCollisionEnabled": true,
+                "isDraw": true,
+                "isTrigger": false,
+                "layerId": 3,
+                "offset": {
+                    "x": 0.0,
+                    "y": -0.5,
+                    "z": 0.0
+                },
+                "radius": 1.0,
+                "rotate": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "size": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                }
+            },
+            "colliderKind": 1,
+            "guid": "869cefe6-7fe7-45e7-8bca-844997ebc467",
+            "modelConfig": {
+                "blendMode": 5,
+                "colorOverride": {
+                    "w": 1.0,
+                    "x": 0.6000000238418579,
+                    "y": 0.800000011920929,
+                    "z": 1.0
+                },
+                "materialGuid": "00000000-0000-0000-0000-000000000000",
+                "modelName": "tentative_enemy.obj",
+                "textureGuid": "00000000-0000-0000-0000-000000000000",
+                "uvTransConfig": {
+                    "rotation": 0.0,
+                    "scale": {
+                        "x": 1.0,
+                        "y": 1.0
+                    }
+                }
+            },
+            "name": "Archer",
+            "objectType": 2,
+            "outlineColor": {
+                "w": 1.0,
+                "x": 0.019999999552965164,
+                "y": 0.019999999552965164,
+                "z": 0.02500000037252903
+            },
+            "outlineEnabled": false,
+            "outlineThickness": 0.03500000014901161,
+            "parentGuid": "00000000-0000-0000-0000-000000000000",
+            "physicsBodyConfig": {
+                "bodyType": 1,
+                "enabled": true,
+                "gravityScale": 1.0,
+                "mass": 1.0,
+                "pushbackRatio": 1.0,
+                "useGravity": true
+            },
+            "serializableParams": {
+                "Game/Actor/Enemy/Archer": {
+                    "fields": {
+                        "PlayerPtr": "7cf4af54-848a-4332-a62a-2b36e4c02dd8",
+                        "attackDamage": 2,
+                        "attackInterval": 1.5,
+                        "attackRange": 6.0,
+                        "contactDamage": 1,
+                        "detectionRange": 12.0,
+                        "knockbackDamping": 8.0,
+                        "knockbackInitialSpeed": 16.0,
+                        "knockbackStopSpeed": 0.20000000298023224,
+                        "maxHp": 5,
+                        "moveSpeed": 2.0
+                    }
+                },
+                "Game/Actor/Enemy/AttackParam/RangedAttack": {
+                    "fields": {
+                        "arrowLifeTime": 3.0,
+                        "arrowSize": [
+                            0.30000001192092896,
+                            0.30000001192092896,
+                            0.6000000238418579
+                        ],
+                        "arrowSpeed": 8.0,
+                        "drawHitbox": false,
+                        "spawnForwardOffset": 1.0,
+                        "spawnHeight": 1.0
+                    }
+                }
+            },
+            "transform": {
+                "inheritRotate": true,
+                "inheritScale": true,
+                "inheritTranslate": true,
+                "rotation": {
+                    "w": 1.0,
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "scale": {
+                    "x": 0.5,
+                    "y": 0.5,
+                    "z": 0.5
+                },
+                "translation": {
+                    "x": -3.5040953159332275,
+                    "y": 0.6550717353820801,
+                    "z": 2.8942177295684814
+                }
+            },
+            "type": "Archer",
+            "visualOffset": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            }
+        },
+        {
+            "cameraDitherEnabled": false,
+            "colliderConfig": {
+                "capsuleHeight": 2.0,
+                "capsuleRadius": 0.5,
+                "isCollisionEnabled": true,
+                "isDraw": true,
+                "isTrigger": false,
+                "layerId": 3,
+                "offset": {
+                    "x": 0.0,
+                    "y": -0.5,
+                    "z": 0.0
+                },
+                "radius": 1.0,
+                "rotate": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "size": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                }
+            },
+            "colliderKind": 1,
+            "guid": "3726c2dd-ee97-4529-a83b-a7ccc967c2ca",
+            "modelConfig": {
+                "blendMode": 5,
+                "colorOverride": {
+                    "w": 1.0,
+                    "x": 0.5,
+                    "y": 0.30000001192092896,
+                    "z": 0.6000000238418579
+                },
+                "materialGuid": "00000000-0000-0000-0000-000000000000",
+                "modelName": "tentative_enemy.obj",
+                "textureGuid": "00000000-0000-0000-0000-000000000000",
+                "uvTransConfig": {
+                    "rotation": 0.0,
+                    "scale": {
+                        "x": 1.0,
+                        "y": 1.0
+                    }
+                }
+            },
+            "name": "Bat",
+            "objectType": 2,
+            "outlineColor": {
+                "w": 1.0,
+                "x": 0.019999999552965164,
+                "y": 0.019999999552965164,
+                "z": 0.02500000037252903
+            },
+            "outlineEnabled": false,
+            "outlineThickness": 0.03500000014901161,
+            "parentGuid": "00000000-0000-0000-0000-000000000000",
+            "physicsBodyConfig": {
+                "bodyType": 1,
+                "enabled": true,
+                "gravityScale": 1.0,
+                "mass": 1.0,
+                "pushbackRatio": 1.0,
+                "useGravity": true
+            },
+            "serializableParams": {
+                "Game/Actor/Enemy/AttackParam/ChargeAttack": {
+                    "fields": {
+                        "chargeSpeed": 12.0,
+                        "drawHitbox": true,
+                        "hitboxHeightOffset": 1.0,
+                        "hitboxSize": [
+                            1.0,
+                            0.800000011920929,
+                            1.0
+                        ],
+                        "maxChargeTime": 1.2000000476837158,
+                        "overshootDistance": 2.0,
+                        "recoverTime": 0.5,
+                        "windupTime": 0.4000000059604645
+                    }
+                },
+                "Game/Actor/Enemy/Bat": {
+                    "fields": {
+                        "PlayerPtr": "7cf4af54-848a-4332-a62a-2b36e4c02dd8",
+                        "attackDamage": 2,
+                        "attackInterval": 2.0,
+                        "attackRange": 5.0,
+                        "contactDamage": 1,
+                        "detectionRange": 10.0,
+                        "knockbackDamping": 8.0,
+                        "knockbackInitialSpeed": 16.0,
+                        "knockbackStopSpeed": 0.20000000298023224,
+                        "maxHp": 5,
+                        "moveSpeed": 3.0
+                    }
+                }
+            },
+            "transform": {
+                "inheritRotate": true,
+                "inheritScale": true,
+                "inheritTranslate": true,
+                "rotation": {
+                    "w": 1.0,
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "scale": {
+                    "x": 0.5,
+                    "y": 0.5,
+                    "z": 0.5
+                },
+                "translation": {
+                    "x": 6.800229549407959,
+                    "y": 1.5692660808563232,
+                    "z": 1.5778449773788452
+                }
+            },
+            "type": "Bat",
+            "visualOffset": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            }
+        },
+        {
+            "guid": "e0bb1d9a-dd6a-4c53-b0b5-eb1db8c6580e",
+            "name": "CameraPivot",
+            "objectType": 2,
+            "parentGuid": "7cf4af54-848a-4332-a62a-2b36e4c02dd8",
+            "serializableParams": {
+                "Game/Camera/CameraPivot": {
+                    "fields": {
+                        "pivotLocalOffset": [
+                            0.0,
+                            1.5,
+                            0.0
+                        ],
+                        "playerRef": "7cf4af54-848a-4332-a62a-2b36e4c02dd8"
+                    }
+                }
+            },
+            "transform": {
+                "inheritRotate": false,
+                "inheritScale": true,
+                "inheritTranslate": true,
+                "rotation": {
+                    "w": 0.9090253114700317,
+                    "x": 0.3455536663532257,
+                    "y": 0.21774815022945404,
+                    "z": -0.08277400583028793
+                },
+                "scale": {
+                    "x": 1.0000001192092896,
+                    "y": 1.000000238418579,
+                    "z": 1.0000001192092896
+                },
+                "translation": {
+                    "x": -5.548999786376953,
+                    "y": 10.884000778198242,
+                    "z": -10.918000221252441
+                }
+            },
+            "type": "CameraPivot"
         }
     ],
     "sceneName": "TestScene",
@@ -1043,17 +1731,21 @@
                 {
                     "id": 6,
                     "name": "PlayerClone"
+                },
+                {
+                    "id": 7,
+                    "name": "StageGimmick"
                 }
             ],
             "matrixRows": [
                 0,
-                78,
-                42,
-                86,
-                8,
+                206,
+                170,
+                214,
+                136,
                 68,
-                106,
-                0,
+                234,
+                94,
                 0,
                 0,
                 0,

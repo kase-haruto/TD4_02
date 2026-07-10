@@ -57,7 +57,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Label="CalyxEngineSdk">
-    <CalyxEngineVersion>v1.2.0</CalyxEngineVersion>
+    <CalyxEngineVersion>v1.2.3</CalyxEngineVersion>
     <CalyxEngineSdkDir Condition="'$(CalyxEngineSdkDir)'=='' and Exists('$(LOCALAPPDATA)\CalyxEngine\Engines\$(CalyxEngineVersion)\SDK\Include\CalyxEngine\Application.h') and Exists('$(LOCALAPPDATA)\CalyxEngine\Engines\$(CalyxEngineVersion)\SDK\Include\Data\Engine') and Exists('$(LOCALAPPDATA)\CalyxEngine\Engines\$(CalyxEngineVersion)\SDK\Include\externals\nlohmann\json.hpp')">$(LOCALAPPDATA)\CalyxEngine\Engines\$(CalyxEngineVersion)\SDK</CalyxEngineSdkDir>
     <CalyxEngineSdkDir Condition="'$(CalyxEngineSdkDir)'=='' and '$(CALYX_ENGINE_SDK_DIR)'!='' and Exists('$(CALYX_ENGINE_SDK_DIR)\Include\CalyxEngine\Application.h') and Exists('$(CALYX_ENGINE_SDK_DIR)\Include\Data\Engine') and Exists('$(CALYX_ENGINE_SDK_DIR)\Include\externals\nlohmann\json.hpp')">$(CALYX_ENGINE_SDK_DIR)</CalyxEngineSdkDir>
     <CalyxEngineSdkDir Condition="'$(CalyxEngineSdkDir)'==''">$(LOCALAPPDATA)\CalyxEngine\Engines\$(CalyxEngineVersion)\SDK</CalyxEngineSdkDir>
@@ -180,6 +180,7 @@ if exist "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" copy "$(Win
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Game\Camera\CameraPivot.cpp" />
     <ClCompile Include="Game/Demo/3D/Actor/DemoCamera/DemoCameraPivot.cpp" />
     <ClCompile Include="Game/Demo/3D/Actor/DemoPlayer/DemoPlayer.cpp" />
     <ClCompile Include="Game/Demo/3D/Actor/DemoPlayer/DemoPlayerMotor.cpp" />
@@ -188,9 +189,13 @@ if exist "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" copy "$(Win
     <ClCompile Include="Game/GameApplication.cpp" />
     <ClCompile Include="Game/GameMain.cpp" />
     <ClCompile Include="Game/GameObjectRegistry.generated.cpp" />
+    <ClCompile Include="Game\Enemy\Attack\ChargeAttack.cpp" />
     <ClCompile Include="Game\Enemy\Attack\MeleeAttack.cpp" />
     <ClCompile Include="Game\Enemy\Attack\PunchAttack.cpp" />
+    <ClCompile Include="Game\Enemy\Attack\RangedAttack.cpp" />
     <ClCompile Include="Game\Enemy\BaseEnemy.cpp" />
+    <ClCompile Include="Game\Enemy\Enemies\Archer.cpp" />
+    <ClCompile Include="Game\Enemy\Enemies\Bat.cpp" />
     <ClCompile Include="Game\Enemy\Enemies\DoomEnemy.cpp" />
     <ClCompile Include="Game\Enemy\Enemies\HeavyShieldEnemy.cpp" />
     <ClCompile Include="Game\Enemy\Enemies\HeavySlime.cpp" />
@@ -198,6 +203,11 @@ if exist "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" copy "$(Win
     <ClCompile Include="Game\Enemy\Enemies\ShieldEnemyBase.cpp" />
     <ClCompile Include="Game\Enemy\Enemies\Slime.cpp" />
     <ClCompile Include="Game\Enemy\Movement\HomingMove.cpp" />
+    <ClCompile Include="Game\Enemy\Movement\KiteMove.cpp" />
+    <ClCompile Include="Game\Enemy\Projectile\Arrow.cpp" />
+    <ClCompile Include="Game\Gimmick\Bridge\Bridge.cpp" />
+    <ClCompile Include="Game\Gimmick\Bridge\InteractZone.cpp" />
+    <ClCompile Include="Game\Gimmick\Checkpoint\Checkpoint.cpp" />
     <ClCompile Include="Game\Player\Clone\Clone.cpp" />
     <ClCompile Include="Game\Player\Player.cpp" />
     <ClCompile Include="Game\Player\PlayerDodge.cpp" />
@@ -206,8 +216,10 @@ if exist "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" copy "$(Win
     <ClCompile Include="Game\Player\Ability\PlayerAbility.cpp" />
     <ClCompile Include="Game\Player\Base\PlayerBase.cpp" />
     <ClCompile Include="Game\Player\Attack\PlayerAttack.cpp" />
+    <ClCompile Include="Game\Editor\GameEditorExtension.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Game\Camera\CameraPivot.h" />
     <ClInclude Include="Game\Collision\CollisionLayerUtil.h" />
     <ClInclude Include="Game\Player\Ability\PlayerAbility.h" />
     <ClInclude Include="Game\Player\Base\PlayerBase.h" />
