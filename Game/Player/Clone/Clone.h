@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 // クローン
 #include "../Base/PlayerBase.h"
@@ -14,7 +14,7 @@
  * - Playerのクローン
  * - プレイヤーのコピーであり、プレイヤーと同じ動作をする
  *---------------------------------------------------------------------------------------*/
-CALYX_OBJECT(Category = GameObject, DisplayName = "PlayerClone")
+CALYX_OBJECT(Category = GameObject, DisplayName = "PlayerClone", Placeable = false, SceneSerializable = false, PrefabSerializable = true, PrefabRoot = true)
 class PlayerClone
 	:public PlayerBase {
 public:

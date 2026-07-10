@@ -1,11 +1,11 @@
-#pragma once
+﻿#pragma once
 #include <Engine\Objects\3D\Actor\BaseGameObject.h>
 
 /*-----------------------------------------------------------------------------------------
  * Sword
  * - playerの所有する武器
  *---------------------------------------------------------------------------------------*/
-CALYX_OBJECT(Category = GameObject, DisplayName = "Sword")
+CALYX_OBJECT(Category = GameObject, DisplayName = "Sword", Placeable = false, SceneSerializable = false, PrefabSerializable = false)
 class Sword
 	: public BaseGameObject {
 public:

@@ -29,7 +29,7 @@ namespace CalyxEngine {
 			"Archer",
 			ObjectType::GameObject,
 			"UI/Tool/AssetPanel/generic.png",
-			true,
+			false,
 			false,
 			false,
 			&CreateSceneObject<Archer>);
@@ -39,7 +39,7 @@ namespace CalyxEngine {
 			"Bat",
 			ObjectType::GameObject,
 			"UI/Tool/AssetPanel/generic.png",
-			true,
+			false,
 			false,
 			false,
 			&CreateSceneObject<Bat>);
@@ -89,7 +89,7 @@ namespace CalyxEngine {
 			"DoomEnemy",
 			ObjectType::GameObject,
 			"UI/Tool/AssetPanel/generic.png",
-			true,
+			false,
 			false,
 			false,
 			&CreateSceneObject<DoomEnemy>);
@@ -99,7 +99,7 @@ namespace CalyxEngine {
 			"HeavyShieldEnemy",
 			ObjectType::GameObject,
 			"UI/Tool/AssetPanel/generic.png",
-			true,
+			false,
 			false,
 			false,
 			&CreateSceneObject<HeavyShieldEnemy>);
@@ -109,7 +109,7 @@ namespace CalyxEngine {
 			"HeavySlime",
 			ObjectType::GameObject,
 			"UI/Tool/AssetPanel/generic.png",
-			true,
+			false,
 			false,
 			false,
 			&CreateSceneObject<HeavySlime>);
@@ -139,9 +139,9 @@ namespace CalyxEngine {
 			"PlayerClone",
 			ObjectType::GameObject,
 			"UI/Tool/AssetPanel/generic.png",
+			false,
+			false,
 			true,
-			false,
-			false,
 			&CreateSceneObject<PlayerClone>);
 
 		SceneObjectRegistry::Get().Register(
@@ -149,7 +149,7 @@ namespace CalyxEngine {
 			"ShieldEnemy",
 			ObjectType::GameObject,
 			"UI/Tool/AssetPanel/generic.png",
-			true,
+			false,
 			false,
 			false,
 			&CreateSceneObject<ShieldEnemy>);
@@ -159,7 +159,7 @@ namespace CalyxEngine {
 			"Slime",
 			ObjectType::GameObject,
 			"UI/Tool/AssetPanel/generic.png",
-			true,
+			false,
 			false,
 			false,
 			&CreateSceneObject<Slime>);
@@ -169,7 +169,7 @@ namespace CalyxEngine {
 			"Sword",
 			ObjectType::GameObject,
 			"UI/Tool/AssetPanel/generic.png",
-			true,
+			false,
 			false,
 			false,
 			&CreateSceneObject<Sword>);
@@ -179,7 +179,7 @@ namespace CalyxEngine {
 			"Weapon",
 			ObjectType::GameObject,
 			"UI/Tool/AssetPanel/generic.png",
-			true,
+			false,
 			false,
 			false,
 			&CreateSceneObject<Weapon>);

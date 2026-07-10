@@ -1,16 +1,35 @@
-param(
+﻿param(
     [string]$Root = (Resolve-Path (Join-Path $PSScriptRoot "..\..")).Path,
     [string[]]$ScanRoots = @("Game"),
     [string]$OutputDir = "Game",
     [string]$OutputName = "GameObjectRegistry.generated",
     [string]$Namespace = "CalyxEngine",
-    [string]$FunctionName = "RegisterGeneratedGameSceneObjects"
+    [string]$FunctionName = "RegisterGeneratedGameSceneObjects",
+    [string]$ApiMacro = "",
+    [string]$ProjectFile = ""
 )
 
 $ErrorActionPreference = "Stop"
 
-$mutexName = "Global\CalyxGameReflectionGenerator_" + [Convert]::ToBase64String(
-    [System.Text.Encoding]::UTF8.GetBytes((Resolve-Path $Root).Path)
+$Root = [System.IO.Path]::GetFullPath($Root)
+
+# A game build can derive all paths from its .calyxproj. Explicit command-line
+# values remain supported for engine builds and older generated projects.
+if (![string]::IsNullOrWhiteSpace($ProjectFile)) {
+    $projectPath = [System.IO.Path]::GetFullPath($ProjectFile)
+    if (!(Test-Path -LiteralPath $projectPath)) {
+        throw "Calyx project file was not found: $projectPath"
+    }
+    $project = Get-Content -LiteralPath $projectPath -Raw | ConvertFrom-Json
+    $Root = Split-Path -Parent $projectPath
+    $sourceRoot = if ($project.sourceDirectory) { $project.sourceDirectory } elseif ($project.SourceRoot) { $project.SourceRoot } else { "Game" }
+    $generatedRoot = if ($project.generatedDirectory) { $project.generatedDirectory } elseif ($project.GeneratedRoot) { $project.GeneratedRoot } else { "Generated" }
+    $ScanRoots = @([string]$sourceRoot)
+    $OutputDir = Join-Path ([string]$generatedRoot) "Foundation\Reflection"
+}
+
+$mutexName = "Global\CalyxReflectionGenerator_" + [Convert]::ToBase64String(
+    [System.Text.Encoding]::UTF8.GetBytes($Root)
 ).Replace("+", "-").Replace("/", "_").TrimEnd("=")
 $mutex = [System.Threading.Mutex]::new($false, $mutexName)
 $hasLock = $false
@@ -66,9 +85,7 @@ foreach ($scanRoot in $ScanRoots) {
 
     Get-ChildItem -Path $resolvedScanRoot -Recurse -Filter *.h | ForEach-Object {
         $path = $_.FullName
-        # Windows PowerShell returns $null for an empty file with -Raw.
-        # Regex.Matches requires a non-null string, so normalize it here.
-        $text = [string](Get-Content $path -Raw)
+        $text = Get-Content $path -Raw
         foreach ($match in $objectRegex.Matches($text)) {
             $meta = @{}
             foreach ($part in ($match.Groups["meta"].Value -replace "`r|`n", " ").Split(",")) {
@@ -87,6 +104,8 @@ foreach ($scanRoot in $ScanRoots) {
             $placeable = if ($meta.ContainsKey("Placeable")) { $meta["Placeable"].ToLower() -ne "false" } else { $true }
             $prefabEditable = if ($meta.ContainsKey("PrefabEditable")) { $meta["PrefabEditable"].ToLower() -eq "true" } else { $false }
             $prefabRoot = if ($meta.ContainsKey("PrefabRoot")) { $meta["PrefabRoot"].ToLower() -eq "true" } else { $false }
+            $sceneSerializable = if ($meta.ContainsKey("SceneSerializable")) { $meta["SceneSerializable"].ToLower() -ne "false" } else { $placeable }
+            $prefabSerializable = if ($meta.ContainsKey("PrefabSerializable")) { $meta["PrefabSerializable"].ToLower() -ne "false" } else { $true }
             $include = (Get-RelativePathCompat $Root $path).Replace('\', '/')
 
             $entries.Add([pscustomobject]@{
@@ -98,6 +117,8 @@ foreach ($scanRoot in $ScanRoots) {
                 Placeable = if ($placeable) { "true" } else { "false" }
                 PrefabEditable = if ($prefabEditable) { "true" } else { "false" }
                 PrefabRoot = if ($prefabRoot) { "true" } else { "false" }
+                SceneSerializable = if ($sceneSerializable) { "true" } else { "false" }
+                PrefabSerializable = if ($prefabSerializable) { "true" } else { "false" }
                 Include = $include
             })
         }
@@ -106,13 +127,19 @@ foreach ($scanRoot in $ScanRoots) {
 
 $entries = $entries | Sort-Object TypeName
 
+# TD4_02 generates functions inside the game DLL; CALYX_API is dllimport here.
+$apiInclude = ""
+$apiPrefix = ""
+
 $header = @"
 #pragma once
 
-namespace $Namespace {
-	void $FunctionName();
+$apiInclude
+namespace CalyxEngine {
+	${apiPrefix}void RegisterGeneratedSceneObjects();
 }
 "@
+$header = $header.Replace("namespace CalyxEngine", "namespace $Namespace").Replace("RegisterGeneratedSceneObjects", $FunctionName)
 
 $includeLines = ($entries | ForEach-Object { "#include <$($_.Include)>" }) -join "`n"
 $registrationBlocks = ($entries | ForEach-Object {
@@ -143,7 +170,7 @@ $source = @"
 $includeLines
 
 namespace $Namespace {
-	void $FunctionName() {
+	${apiPrefix}void $FunctionName() {
 $registrationBlocks
 	}
 }

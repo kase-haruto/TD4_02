@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include <Enemy/BaseEnemy.h>
 
@@ -6,7 +6,7 @@
  * DoomEnemy
  * - パンチの敵
  *---------------------------------------------------------------------------------------*/
-CALYX_OBJECT(Category = GameObject, DisplayName = "DoomEnemy")
+CALYX_OBJECT(Category = GameObject, DisplayName = "DoomEnemy", Placeable = false, SceneSerializable = false, PrefabSerializable = false)
 class DoomEnemy
 	: public BaseEnemy {
 public:

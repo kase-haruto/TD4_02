@@ -29,7 +29,7 @@ public:
 	~CameraPivot() = default;
 
 	void Initialize()override;
-
+	
 	/**
 	 * @brief 常時更新
 	 * @param dt 

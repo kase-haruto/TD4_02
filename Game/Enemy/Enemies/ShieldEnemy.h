@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include <Enemy/Enemies/ShieldEnemyBase.h>
 
@@ -6,7 +6,7 @@
  * ShieldEnemy
  * - 盾持ち
  *---------------------------------------------------------------------------------------*/
-CALYX_OBJECT(Category = GameObject, DisplayName = "ShieldEnemy")
+CALYX_OBJECT(Category = GameObject, DisplayName = "ShieldEnemy", Placeable = false, SceneSerializable = false, PrefabSerializable = false)
 class ShieldEnemy
 	: public ShieldEnemyBase {
 public:

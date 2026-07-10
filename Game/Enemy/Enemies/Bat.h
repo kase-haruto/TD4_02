@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include <Enemy/BaseEnemy.h>
 
@@ -6,7 +6,7 @@
  * Bat
  * - 突撃する敵(仮)
  *---------------------------------------------------------------------------------------*/
-CALYX_OBJECT(Category = GameObject, DisplayName = "Bat")
+CALYX_OBJECT(Category = GameObject, DisplayName = "Bat", Placeable = false, SceneSerializable = false, PrefabSerializable = false)
 class Bat
 	: public BaseEnemy {
 public:

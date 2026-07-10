@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include <Enemy/BaseEnemy.h>
 
@@ -6,7 +6,7 @@
  * Archer
  * - 弓兵
  *---------------------------------------------------------------------------------------*/
-CALYX_OBJECT(Category = GameObject, DisplayName = "Archer")
+CALYX_OBJECT(Category = GameObject, DisplayName = "Archer", Placeable = false, SceneSerializable = false, PrefabSerializable = false)
 class Archer
 	: public BaseEnemy {
 public:

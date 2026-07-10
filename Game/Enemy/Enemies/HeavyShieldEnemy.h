@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include <Enemy/Enemies/ShieldEnemyBase.h>
 
@@ -6,7 +6,7 @@
  * HeavyShieldEnemy
  * - 盾持ち(ノックバックしない) 
  *---------------------------------------------------------------------------------------*/
-CALYX_OBJECT(Category = GameObject, DisplayName = "HeavyShieldEnemy")
+CALYX_OBJECT(Category = GameObject, DisplayName = "HeavyShieldEnemy", Placeable = false, SceneSerializable = false, PrefabSerializable = false)
 class HeavyShieldEnemy
 	: public ShieldEnemyBase {
 public:

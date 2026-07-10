@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include <Enemy/BaseEnemy.h>
 
@@ -6,7 +6,7 @@
  * HeavySlime
  * - ノックバックしない敵(仮)
  *---------------------------------------------------------------------------------------*/
-CALYX_OBJECT(Category = GameObject, DisplayName = "HeavySlime")
+CALYX_OBJECT(Category = GameObject, DisplayName = "HeavySlime", Placeable = false, SceneSerializable = false, PrefabSerializable = false)
 class HeavySlime
 	: public BaseEnemy {
 public:
