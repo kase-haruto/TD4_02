@@ -13,21 +13,15 @@ void SpawnPoint::Initialize() {
 }
 
 void SpawnPoint::Update(float) {
-	if (!firstReset_) {
-		return;
-	}
+	if (!firstReset_) return;
 	firstReset_ = false;
 
 	auto& intent = TransitionIntent::Get();
-
-	if (!intent.HasPending() || intent.SpawnId() != param_.spawnId) {
-		return;
-	}
+	if (!intent.HasPending() || intent.SpawnId() != param_.spawnId) return;
 
 	if (auto* ctx = SceneContext::Current()) {
 		if (auto player = ctx->FindFirst<Player>()) {
-			player->SetPosition(worldTransform_.translation);
-			player->SetRespawnPoint(worldTransform_.translation);
+			player->SetPosition(worldTransform_.translation);   // 位置は出す
 		}
 	}
 	intent.Clear();

@@ -23,8 +23,8 @@ void Player::Initialize() {
 	PlayerBase::Initialize();
 	currentHp_ = stats_.maxHp;
 	knockbackVelocity_ = {};
-	lastCloneAnchor_ = GetWorldPosition();
-	respawnPoint_ = GetWorldPosition();
+	lastCloneAnchor_ = worldTransform_.translation;
+	respawnPoint_ = worldTransform_.translation;
 
 	if (collider_) {
 		collider_->SetOwner(this);
@@ -153,6 +153,6 @@ void Player::Respawn() {
 	}
 
 	const CalyxEngine::Vector3 target = rs.Has() ? rs.Position() : respawnPoint_;
-	SetPosition(respawnPoint_);        // チェックポイントへ戻す
-	lastCloneAnchor_ = respawnPoint_;
+	SetPosition(target);        // チェックポイントへ戻す
+	lastCloneAnchor_ = target;
 }
