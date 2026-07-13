@@ -46,6 +46,7 @@ CalyxEngine::SerializableObject& PunchAttack::SerializableParam() {
 void PunchAttack::StartAttack(BaseEnemy& self, const Actor* target) {
 	isAttacking_ = true;
 	attackTimer_ = 0.0f;
+	self.PlayNextAttackAnimation();
 
 	CalyxEngine::Vector3 toTarget = target->GetWorldPosition() - self.GetWorldPosition();
 	toTarget.y = 0.0f;

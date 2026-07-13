@@ -10,12 +10,24 @@
 #include "../Attack/PlayerAttack.h"
 #include "../Ability/PlayerAbility.h"
 
+#include <string>
+
 enum class PlayerAnimationID {
 	Idle,
-	Walk,
+	MoveFront,
+	MoveBack,
+	MoveLeft,
+	MoveRight,
 	Attack1,
 	Attack2,
+	Spirit,
 	Dodge,
+	Damage,
+};
+
+enum class PlayerModelSet {
+	Player,
+	Spirit,
 };
 
 /*-----------------------------------------------------------------------------------------
@@ -45,6 +57,7 @@ public:
 	bool AppliesMovement() const { return appliesMovement_; }
 
 protected:
+	explicit PlayerBase(PlayerModelSet modelSet);
 	bool UpdateKnockback(float dt);
 
 	void SetAppliesMovement(bool v) { appliesMovement_ = v; }
@@ -57,6 +70,8 @@ protected:
 	PlayerDodge dodge_;
 	PlayerAttack attack_;
 	PlayerAnimationID currentAnimationId_ = PlayerAnimationID::Idle;
+	PlayerModelSet modelSet_ = PlayerModelSet::Player;
+	std::string currentAnimationModel_;
 
 	CalyxEngine::Vector3 knockbackVelocity_{};
 	float knockbackFriction_ = 0.0f;

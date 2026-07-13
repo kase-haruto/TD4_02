@@ -14,6 +14,23 @@ RangedAttack::RangedAttack() {
 }
 
 void RangedAttack::Update(BaseEnemy& self, const Actor* target, float dt) {
+	if (isAiming_) {
+		aimTimer_ += dt;
+		if (!target) {
+			isAiming_ = false;
+			self.PlayAnimation(EnemyAnimationID::Idle);
+			return;
+		}
+		if (aimTimer_ >= param_.aimDuration) {
+			Fire(self, target);
+			isAiming_ = false;
+			aimTimer_ = 0.0f;
+			cooldownTimer_ = self.GetStats().attackInterval;
+			self.PlayAnimation(EnemyAnimationID::Idle);
+		}
+		return;
+	}
+
 	if (cooldownTimer_ > 0.0f) {
 		cooldownTimer_ -= dt;
 	}
@@ -23,8 +40,9 @@ void RangedAttack::Update(BaseEnemy& self, const Actor* target, float dt) {
 
 	const float range = self.GetStats().attackRange;
 	if (PlanarDistanceSq(self, target) <= range * range) {
-		Fire(self, target);
-		cooldownTimer_ = self.GetStats().attackInterval;
+		isAiming_ = true;
+		aimTimer_ = 0.0f;
+		self.PlayAnimation(EnemyAnimationID::Aim);
 	}
 }
 
@@ -57,7 +75,7 @@ void RangedAttack::Fire(BaseEnemy& self, const Actor* target) {
 		CalyxEngine::Vector3(0.0f, param_.spawnHeight, 0.0f);
 
 	auto arrow = SceneAPI::Instantiate<Arrow>(
-		std::string("debugCube.obj"),
+		std::string("Arrow.obj"),
 		std::optional<std::string>("EnemyArrow"));
 	if (!arrow) {
 		return;

@@ -7,7 +7,7 @@
 //			ctor
 /////////////////////////////////////////////////////////////////////////////////////////
 Slime::Slime()
-	: BaseEnemy("tentative_enemy.obj", "Slime", statsImpl_) {
+	: BaseEnemy({ "Enemy_01_idle.gltf", "Enemy_01_move.gltf", "Enemy_01_attack.gltf", "", "Enemy_01_damage.gltf", "", "" }, "Slime", statsImpl_) {
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -20,6 +20,5 @@ void Slime::Initialize() {
 	SetMovement(std::make_unique<HomingMove>());
 	SetAttack(std::make_unique<MeleeAttack>());
 	BaseEnemy::Initialize();
-  SetColor({1.0f, 0.7f, 0.8f, 1.0f});
 
 }

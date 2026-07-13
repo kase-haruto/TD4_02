@@ -10,7 +10,7 @@
  *---------------------------------------------------------------------------------------*/
 class ShieldEnemyBase : public BaseEnemy {
 public:
-	ShieldEnemyBase(const std::string& modelName, const std::string& objName, EnemyStats& stats);
+	ShieldEnemyBase(EnemyAnimationSet animations, const std::string& objName, EnemyStats& stats);
 	~ShieldEnemyBase() override = default;
 
 	void Initialize() override;
