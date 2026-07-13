@@ -128,13 +128,6 @@
                 "pushbackRatio": 1.0,
                 "useGravity": true
             },
-            "serializableParams": {
-                "Game/Actor/World/SpawnPoint/77dfc57c-3f4d-494c-8b61-43e0008dd982": {
-                    "fields": {
-                        "spawnId": 2
-                    }
-                }
-            },
             "transform": {
                 "inheritRotate": true,
                 "inheritScale": true,
@@ -174,9 +167,9 @@
                 "inheritTranslate": true,
                 "rotation": {
                     "w": 0.6321097016334534,
-                    "x": 0.2010192573070526,
+                    "x": 0.2010193020105362,
                     "y": -0.7131572365760803,
-                    "z": 0.22679346799850464
+                    "z": 0.22679351270198822
                 },
                 "scale": {
                     "x": 1.0,
@@ -184,9 +177,9 @@
                     "z": 1.0
                 },
                 "translation": {
-                    "x": 13.994367599487305,
-                    "y": 20.68449592590332,
-                    "z": -2.871154546737671
+                    "x": 16.830793380737305,
+                    "y": 22.706134796142578,
+                    "z": -2.5281405448913574
                 }
             },
             "type": "DebugCamera"
@@ -272,7 +265,7 @@
                     "z": -9.5
                 }
             },
-            "type": "BaseGameObject",
+            "type": "StaticModelObject",
             "visualOffset": {
                 "x": 0.0,
                 "y": 0.0,
@@ -339,35 +332,6 @@
                 "pushbackRatio": 1.0,
                 "useGravity": true
             },
-            "serializableParams": {
-                "Game/Actor/Gimmick/Bridge/4cb97baa-1e38-4048-9b8f-8b5d948ec2a8": {
-                    "fields": {
-                        "bodySize": [
-                            10.0,
-                            1.0,
-                            4.0
-                        ],
-                        "fallAxis": [
-                            0.0,
-                            0.0,
-                            -1.0
-                        ],
-                        "fallSpeedDeg": 120.0,
-                        "leverOffset": [
-                            2.0,
-                            0.0,
-                            2.0
-                        ],
-                        "loweredAngleDeg": 0.0,
-                        "raisedAngleDeg": 90.0,
-                        "zoneSize": [
-                            2.5,
-                            2.5,
-                            2.5
-                        ]
-                    }
-                }
-            },
             "transform": {
                 "inheritRotate": true,
                 "inheritScale": true,
@@ -426,6 +390,12 @@
             "guid": "ec67088c-4163-478a-9823-c4bdcf7dbc60",
             "modelConfig": {
                 "blendMode": 5,
+                "colorOverride": {
+                    "w": 1.0,
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
                 "materialGuid": "00000000-0000-0000-0000-000000000000",
                 "modelName": "debugCube.obj",
                 "textureGuid": "00000000-0000-0000-0000-000000000000",
@@ -565,7 +535,7 @@
                     "z": 5.0
                 }
             },
-            "type": "BaseGameObject",
+            "type": "StaticModelObject",
             "visualOffset": {
                 "x": 0.0,
                 "y": 0.0,
@@ -653,7 +623,7 @@
                     "z": 19.5
                 }
             },
-            "type": "BaseGameObject",
+            "type": "StaticModelObject",
             "visualOffset": {
                 "x": 0.0,
                 "y": 0.0,
@@ -741,7 +711,7 @@
                     "z": 5.0
                 }
             },
-            "type": "BaseGameObject",
+            "type": "StaticModelObject",
             "visualOffset": {
                 "x": 0.0,
                 "y": 0.0,
@@ -807,19 +777,6 @@
                 "mass": 1.0,
                 "pushbackRatio": 1.0,
                 "useGravity": true
-            },
-            "serializableParams": {
-                "Game/Actor/World/Door/6052b36a-1754-485b-9292-2bf1d082b9b7": {
-                    "fields": {
-                        "targetScene": "c796c7ee-42ef-47ef-adb5-adcacd4a51bb",
-                        "targetSpawnId": 1,
-                        "triggerSize": [
-                            1.0,
-                            2.0,
-                            1.0
-                        ]
-                    }
-                }
             },
             "transform": {
                 "inheritRotate": true,
@@ -930,7 +887,7 @@
                     "z": 5.0
                 }
             },
-            "type": "BaseGameObject",
+            "type": "StaticModelObject",
             "visualOffset": {
                 "x": 0.0,
                 "y": 0.0,
@@ -1209,19 +1166,6 @@
                 "pushbackRatio": 1.0,
                 "useGravity": true
             },
-            "serializableParams": {
-                "Game/Actor/World/Door/5c01360a-3dce-4a77-879d-0849cb12d54f": {
-                    "fields": {
-                        "targetScene": "c796c7ee-42ef-47ef-adb5-adcacd4a51bb",
-                        "targetSpawnId": 2,
-                        "triggerSize": [
-                            1.0,
-                            2.0,
-                            1.0
-                        ]
-                    }
-                }
-            },
             "transform": {
                 "inheritRotate": true,
                 "inheritScale": true,
@@ -1310,14 +1254,6 @@
                 "pushbackRatio": 1.0,
                 "useGravity": true
             },
-            "serializableParams": {
-                "Game/Default": {
-                    "fields": {
-                        "jumpForce": 5.0,
-                        "moveSpeed": 5.0
-                    }
-                }
-            },
             "transform": {
                 "inheritRotate": true,
                 "inheritScale": true,
@@ -1334,9 +1270,9 @@
                     "z": 1.0
                 },
                 "translation": {
-                    "x": -10.792825698852539,
-                    "y": 0.9774986505508423,
-                    "z": 5.456622123718262
+                    "x": -5.188474178314209,
+                    "y": 1.0832074880599976,
+                    "z": -3.1612894535064697
                 }
             },
             "type": "Player",
@@ -1412,38 +1348,6 @@
                 "pushbackRatio": 1.0,
                 "useGravity": true
             },
-            "serializableParams": {
-                "Game/Actor/Enemy/AttackParam/MeleeAttack": {
-                    "fields": {
-                        "attackDuration": 0.6000000238418579,
-                        "drawHitbox": true,
-                        "hitboxActiveEnd": 0.4000000059604645,
-                        "hitboxActiveStart": 0.25,
-                        "hitboxForwardOffset": 1.2000000476837158,
-                        "hitboxHeightOffset": 1.0,
-                        "hitboxSize": [
-                            1.0,
-                            0.800000011920929,
-                            1.0
-                        ]
-                    }
-                },
-                "Game/Actor/Enemy/Slime": {
-                    "fields": {
-                        "PlayerPtr": "7cf4af54-848a-4332-a62a-2b36e4c02dd8",
-                        "attackDamage": 2,
-                        "attackInterval": 2.0,
-                        "attackRange": 1.2000000476837158,
-                        "contactDamage": 1,
-                        "detectionRange": 6.0,
-                        "knockbackDamping": 8.0,
-                        "knockbackInitialSpeed": 16.0,
-                        "knockbackStopSpeed": 0.20000000298023224,
-                        "maxHp": 5,
-                        "moveSpeed": 1.5
-                    }
-                }
-            },
             "transform": {
                 "inheritRotate": true,
                 "inheritScale": true,
@@ -1462,7 +1366,7 @@
                 "translation": {
                     "x": -5.575861930847168,
                     "y": 0.5012606978416443,
-                    "z": 4.966153621673584
+                    "z": 5.309737205505371
                 }
             },
             "type": "Slime",
@@ -1538,46 +1442,6 @@
                 "pushbackRatio": 1.0,
                 "useGravity": true
             },
-            "serializableParams": {
-                "Game/Actor/Enemy/AttackParam/MeleeAttack": {
-                    "fields": {
-                        "attackDuration": 0.6000000238418579,
-                        "drawHitbox": true,
-                        "hitboxActiveEnd": 0.4000000059604645,
-                        "hitboxActiveStart": 0.25,
-                        "hitboxForwardOffset": 1.2000000476837158,
-                        "hitboxHeightOffset": 1.0,
-                        "hitboxSize": [
-                            1.0,
-                            0.800000011920929,
-                            1.0
-                        ]
-                    }
-                },
-                "Game/Actor/Enemy/HeavyShieldEnemy": {
-                    "fields": {
-                        "PlayerPtr": "7cf4af54-848a-4332-a62a-2b36e4c02dd8",
-                        "attackDamage": 2,
-                        "attackInterval": 2.0,
-                        "attackRange": 1.2000000476837158,
-                        "contactDamage": 1,
-                        "detectionRange": 6.0,
-                        "knockbackDamping": 8.0,
-                        "knockbackInitialSpeed": 0.0,
-                        "knockbackStopSpeed": 0.20000000298023224,
-                        "maxHp": 5,
-                        "moveSpeed": 1.5
-                    }
-                },
-                "Game/Actor/Enemy/ShieldParam/ShieldEnemy": {
-                    "fields": {
-                        "blockAngleDeg": 180.0,
-                        "blockCountMax": 3,
-                        "blockCountMin": 3,
-                        "defenseDuration": 2.0
-                    }
-                }
-            },
             "transform": {
                 "inheritRotate": true,
                 "inheritScale": true,
@@ -1596,7 +1460,7 @@
                 "translation": {
                     "x": -4.233502388000488,
                     "y": 1.1872122287750244,
-                    "z": 8.202238082885742
+                    "z": 8.468433380126953
                 }
             },
             "type": "HeavyShieldEnemy",
@@ -1671,39 +1535,6 @@
                 "mass": 1.0,
                 "pushbackRatio": 1.0,
                 "useGravity": true
-            },
-            "serializableParams": {
-                "Game/Actor/Enemy/AttackParam/PunchAttack": {
-                    "fields": {
-                        "attackDuration": 1.0,
-                        "drawHitbox": true,
-                        "hitboxActiveEnd": 0.699999988079071,
-                        "hitboxActiveStart": 0.550000011920929,
-                        "hitboxForwardOffset": 1.2000000476837158,
-                        "hitboxHeightOffset": 1.0,
-                        "hitboxSize": [
-                            1.600000023841858,
-                            1.2000000476837158,
-                            1.600000023841858
-                        ],
-                        "knockbackPower": 50.0
-                    }
-                },
-                "Game/Actor/Enemy/DoomEnemy": {
-                    "fields": {
-                        "PlayerPtr": "7cf4af54-848a-4332-a62a-2b36e4c02dd8",
-                        "attackDamage": 5,
-                        "attackInterval": 2.0,
-                        "attackRange": 2.0,
-                        "contactDamage": 1,
-                        "detectionRange": 6.0,
-                        "knockbackDamping": 8.0,
-                        "knockbackInitialSpeed": 16.0,
-                        "knockbackStopSpeed": 0.20000000298023224,
-                        "maxHp": 5,
-                        "moveSpeed": 1.5
-                    }
-                }
             },
             "transform": {
                 "inheritRotate": true,
@@ -1799,37 +1630,6 @@
                 "pushbackRatio": 1.0,
                 "useGravity": true
             },
-            "serializableParams": {
-                "Game/Actor/Enemy/Archer": {
-                    "fields": {
-                        "PlayerPtr": "7cf4af54-848a-4332-a62a-2b36e4c02dd8",
-                        "attackDamage": 2,
-                        "attackInterval": 3.0,
-                        "attackRange": 6.0,
-                        "contactDamage": 1,
-                        "detectionRange": 12.0,
-                        "knockbackDamping": 8.0,
-                        "knockbackInitialSpeed": 16.0,
-                        "knockbackStopSpeed": 0.20000000298023224,
-                        "maxHp": 5,
-                        "moveSpeed": 2.0
-                    }
-                },
-                "Game/Actor/Enemy/AttackParam/RangedAttack": {
-                    "fields": {
-                        "arrowLifeTime": 3.0,
-                        "arrowSize": [
-                            0.10000000149011612,
-                            0.10000000149011612,
-                            0.6000000238418579
-                        ],
-                        "arrowSpeed": 8.0,
-                        "drawHitbox": false,
-                        "spawnForwardOffset": 1.0,
-                        "spawnHeight": 1.0
-                    }
-                }
-            },
             "transform": {
                 "inheritRotate": true,
                 "inheritScale": true,
@@ -1924,39 +1724,6 @@
                 "pushbackRatio": 1.0,
                 "useGravity": true
             },
-            "serializableParams": {
-                "Game/Actor/Enemy/AttackParam/ChargeAttack": {
-                    "fields": {
-                        "chargeSpeed": 12.0,
-                        "drawHitbox": true,
-                        "hitboxHeightOffset": 1.0,
-                        "hitboxSize": [
-                            1.0,
-                            0.800000011920929,
-                            1.0
-                        ],
-                        "maxChargeTime": 1.2000000476837158,
-                        "overshootDistance": 2.0,
-                        "recoverTime": 0.5,
-                        "windupTime": 0.4000000059604645
-                    }
-                },
-                "Game/Actor/Enemy/Bat": {
-                    "fields": {
-                        "PlayerPtr": "7cf4af54-848a-4332-a62a-2b36e4c02dd8",
-                        "attackDamage": 2,
-                        "attackInterval": 2.0,
-                        "attackRange": 5.0,
-                        "contactDamage": 1,
-                        "detectionRange": 10.0,
-                        "knockbackDamping": 8.0,
-                        "knockbackInitialSpeed": 16.0,
-                        "knockbackStopSpeed": 0.20000000298023224,
-                        "maxHp": 5,
-                        "moveSpeed": 3.0
-                    }
-                }
-            },
             "transform": {
                 "inheritRotate": true,
                 "inheritScale": true,
@@ -1975,7 +1742,7 @@
                 "translation": {
                     "x": 6.800229549407959,
                     "y": 1.5692660808563232,
-                    "z": 1.5778449773788452
+                    "z": 1.7655909061431885
                 }
             },
             "type": "Bat",
@@ -1990,18 +1757,6 @@
             "name": "CameraPivot",
             "objectType": 2,
             "parentGuid": "7cf4af54-848a-4332-a62a-2b36e4c02dd8",
-            "serializableParams": {
-                "Game/Camera/CameraPivot": {
-                    "fields": {
-                        "pivotLocalOffset": [
-                            0.0,
-                            1.5,
-                            0.0
-                        ],
-                        "playerRef": "00000000-0000-0000-0000-000000000000"
-                    }
-                }
-            },
             "transform": {
                 "inheritRotate": false,
                 "inheritScale": true,
@@ -2084,13 +1839,6 @@
                 "mass": 1.0,
                 "pushbackRatio": 1.0,
                 "useGravity": true
-            },
-            "serializableParams": {
-                "Game/Actor/World/SpawnPoint/721ba8b1-b924-4d7a-95b7-06005d72cccd": {
-                    "fields": {
-                        "spawnId": 1
-                    }
-                }
             },
             "transform": {
                 "inheritRotate": true,

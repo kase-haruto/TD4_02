@@ -1,0 +1,15 @@
+{
+    "fields": {
+        "attackDuration": 0.6010000109672546,
+        "drawHitbox": true,
+        "hitboxActiveEnd": 0.4000000059604645,
+        "hitboxActiveStart": 0.25,
+        "hitboxForwardOffset": 1.2000000476837158,
+        "hitboxHeightOffset": 1.0,
+        "hitboxSize": [
+            1.0,
+            0.800000011920929,
+            1.0
+        ]
+    }
+}
