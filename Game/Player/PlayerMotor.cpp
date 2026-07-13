@@ -33,16 +33,29 @@ void PlayerMotor::Update(PlayerBase* player, const PlayerInputState& input, floa
 
 	// --- 向き ---
 	if (input.aimWithMouse) {
-		// マウスカーソルの方を向く
-		// 向きの基準位置：クローンは親Playerの位置を使う（未設定なら自分）
+		// カーソルからカメラのレイを作り、プレイヤーの高さの水平面と交差させて狙点を求める
 		const PlayerBase* originObj = aimOrigin_ ? aimOrigin_ : player;
-		CalyxEngine::Vector2 originScreen = CalyxEngine::WorldToScreen(originObj->GetWorldPosition());
-		CalyxEngine::Vector2 delta = input.aimScreen - originScreen;
+		CalyxEngine::Vector3 originPos = originObj->GetWorldPosition();
 
-		constexpr float kCursorDeadZoneSq = 4.0f;
-		if (delta.LengthSquared() > kCursorDeadZoneSq) {
-			CalyxEngine::Vector2 aim2D = { delta.x, -delta.y };
-			FaceMoveDirection(player, BuildWorldMoveDirection(aim2D));
+		// 同じスクリーン座標を 2つの深度でワールドに戻し、視線レイの向きを作る
+		// （near/far の2点差分にすることで depthZ の規約が [0,1] でも何でも向きは正しく出る）
+		CalyxEngine::Vector3 nearP = CalyxEngine::ScreenToWorld(input.aimScreen, 0.0f);
+		CalyxEngine::Vector3 farP = CalyxEngine::ScreenToWorld(input.aimScreen, 1.0f);
+		CalyxEngine::Vector3 rayDir = farP - nearP;
+
+		// レイ (nearP + t*rayDir) と 水平面 y = originPos.y の交点
+		constexpr float kEps = 1e-6f;
+		if (rayDir.y < -kEps || rayDir.y > kEps) {
+			float t = (originPos.y - nearP.y) / rayDir.y;
+			if (t > 0.0f) {  // カメラより奥（前方）で交わるときだけ
+				CalyxEngine::Vector3 hit = nearP + rayDir * t;
+				CalyxEngine::Vector3 toCursor = { hit.x - originPos.x, 0.0f, hit.z - originPos.z };
+
+				constexpr float kAimDeadZoneSq = 0.01f; // ≈0.1m 以内なら向きを変えない
+				if (toCursor.LengthSquared() > kAimDeadZoneSq) {
+					FaceMoveDirection(player, toCursor);
+				}
+			}
 		}
 	} else {
 		// パッド右スティックの方を向く（中立ならFaceMoveDirection側で何もしない）
