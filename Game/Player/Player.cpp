@@ -9,6 +9,7 @@
 #include <Engine/Physics/Character/CharacterMovementComponent.h>
 #include <Engine/Scene/Utility/SceneUtility.h>
 #include <Engine/Scene/Context/SceneContext.h>
+#include <Engine/Foundation/Clock/ClockManager.h>
 #include <filesystem>
 
 
@@ -146,6 +147,8 @@ void Player::Respawn() {
 	ability_.ClearClones();
 
 	EnemyState::Get().Clear();
+
+	ClockManager::GetInstance()->SetTimeScale(1.0f);
 
 	auto& rs = RespawnState::Get();
 	const std::string dst = rs.Has() ? rs.ScenePath() : (SceneContext::Current() ? SceneContext::Current()->GetScenePath() : "");
