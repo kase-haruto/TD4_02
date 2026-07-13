@@ -7,7 +7,7 @@
 //			ctor
 /////////////////////////////////////////////////////////////////////////////////////////
 Bat::Bat()
-	: BaseEnemy("tentative_enemy.obj", "Bat", statsImpl_) {
+	: BaseEnemy({ "Enemy_05_idle.gltf", "", "Enemy_05_attack.gltf", "", "", "", "Enemy_05_aim.gltf" }, "Bat", statsImpl_) {
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -20,6 +20,5 @@ void Bat::Initialize() {
 	SetMovement(std::make_unique<HomingMove>());
 	SetAttack(std::make_unique<ChargeAttack>());
 	BaseEnemy::Initialize();
-	SetColor({ 0.5f, 0.3f, 0.6f, 1.0f });
 
 }

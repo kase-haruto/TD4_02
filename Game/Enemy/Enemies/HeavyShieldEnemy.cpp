@@ -7,7 +7,7 @@
 //			ctor
 /////////////////////////////////////////////////////////////////////////////////////////
 HeavyShieldEnemy::HeavyShieldEnemy()
-	: ShieldEnemyBase("tentative_enemy.obj", "HeavyShieldEnemy", statsImpl_) {
+	: ShieldEnemyBase({ "Enemy_03_idle.gltf", "", "Enemy_03_attack1.gltf", "Enemy_03_attack2.gltf", "", "Enemy_03_defence.gltf", "" }, "HeavyShieldEnemy", statsImpl_) {
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -20,7 +20,6 @@ void HeavyShieldEnemy::Initialize() {
 	SetMovement(std::make_unique<HomingMove>());
 	SetAttack(std::make_unique<MeleeAttack>());
 	ShieldEnemyBase::Initialize();
-	SetColor({ 0.5f, 0.0f, 0.5f, 1.0f });
 
 
 }

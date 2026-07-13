@@ -5,7 +5,8 @@
 #include <Engine/Objects/Collider/Collider.h>
 #include <Engine/Scene/Context/SceneContext.h>
 
-PlayerClone::PlayerClone() {
+PlayerClone::PlayerClone()
+	: PlayerBase(PlayerModelSet::Spirit) {
 	SetAppliesMovement(false);
 }
 

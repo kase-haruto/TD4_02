@@ -51,6 +51,7 @@ private:
 	//===================================================================*/
 	PlayerAbility ability_;
 	PlayerStats stats_;
+	float damageAnimationTimer_ = 0.0f;
 
 	int        currentHp_ = 0;  // 現在HP
 	CalyxEngine::Vector3 lastCloneAnchor_{};

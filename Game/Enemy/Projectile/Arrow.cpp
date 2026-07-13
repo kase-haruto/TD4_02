@@ -6,7 +6,7 @@
 #include <Engine/Scene/Context/SceneContext.h>
 
 Arrow::Arrow()
-	: Sword("debugCube.obj") {}
+	: Sword("Arrow.obj") {}
 
 Arrow::Arrow(const std::string& modelName, std::optional<std::string> objectName)
 	: Sword(modelName, objectName) {}

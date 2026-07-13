@@ -15,6 +15,9 @@ public:
 
 	void Initialize() override;
 
+protected:
+	bool AllowMovement() const override { return !(attack_ && attack_->IsAttacking()); }
+
 private:
 	struct ArcherStats : EnemyStats {
 		ArcherStats() {

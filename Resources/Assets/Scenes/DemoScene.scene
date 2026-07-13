@@ -1225,7 +1225,7 @@
             "modelConfig": {
                 "blendMode": 5,
                 "materialGuid": "00000000-0000-0000-0000-000000000000",
-                "modelName": "PlayerIdle.gltf",
+                "modelName": "Player_idle.gltf",
                 "textureGuid": "00000000-0000-0000-0000-000000000000",
                 "uvTransConfig": {
                     "rotation": 0.0,
@@ -1319,7 +1319,7 @@
                     "z": 0.800000011920929
                 },
                 "materialGuid": "00000000-0000-0000-0000-000000000000",
-                "modelName": "tentative_enemy.obj",
+                "modelName": "Enemy_01_idle.gltf",
                 "textureGuid": "ec675a35-7435-45c0-b948-d23242ff7989",
                 "uvTransConfig": {
                     "rotation": 0.0,
@@ -1413,7 +1413,7 @@
                     "z": 0.5
                 },
                 "materialGuid": "00000000-0000-0000-0000-000000000000",
-                "modelName": "tentative_enemy.obj",
+                "modelName": "Enemy_03_idle.gltf",
                 "textureGuid": "ec675a35-7435-45c0-b948-d23242ff7989",
                 "uvTransConfig": {
                     "rotation": 0.0,
@@ -1507,7 +1507,7 @@
                     "z": 0.0
                 },
                 "materialGuid": "00000000-0000-0000-0000-000000000000",
-                "modelName": "tentative_enemy.obj",
+                "modelName": "Enemy_02_idle.gltf",
                 "textureGuid": "ec675a35-7435-45c0-b948-d23242ff7989",
                 "uvTransConfig": {
                     "rotation": 0.0,
@@ -1601,7 +1601,7 @@
                     "z": 1.0
                 },
                 "materialGuid": "00000000-0000-0000-0000-000000000000",
-                "modelName": "tentative_enemy.obj",
+                "modelName": "Enemy_06_idle.gltf",
                 "textureGuid": "00000000-0000-0000-0000-000000000000",
                 "uvTransConfig": {
                     "rotation": 0.0,
@@ -1695,7 +1695,7 @@
                     "z": 0.6000000238418579
                 },
                 "materialGuid": "00000000-0000-0000-0000-000000000000",
-                "modelName": "tentative_enemy.obj",
+                "modelName": "Enemy_05_idle.gltf",
                 "textureGuid": "00000000-0000-0000-0000-000000000000",
                 "uvTransConfig": {
                     "rotation": 0.0,
