@@ -4,23 +4,52 @@
 //			ctor / dtor
 /////////////////////////////////////////////////////////////////////////////////////////
 PlayerBase::PlayerBase()
-	: Actor("PlayerIdle.gltf", "Player") {}
+	: PlayerBase(PlayerModelSet::Player) {}
+
+PlayerBase::PlayerBase(PlayerModelSet modelSet)
+	: Actor(modelSet == PlayerModelSet::Spirit ? "Spirit_idle.gltf" : "Player_idle.gltf", "Player"),
+	modelSet_(modelSet) {}
 
 namespace {
-	const char* GetPlayerAnimationModelName(PlayerAnimationID animationId) {
+	const char* GetPlayerAnimationModelName(PlayerModelSet modelSet, PlayerAnimationID animationId) {
+		if (modelSet == PlayerModelSet::Spirit) {
+			switch (animationId) {
+			case PlayerAnimationID::Attack1: return "Spirit_attack1.gltf";
+			case PlayerAnimationID::Attack2: return "Spirit_attack2.gltf";
+			case PlayerAnimationID::Dodge:   return "Spirit_dodge.gltf";
+			case PlayerAnimationID::MoveFront:
+			case PlayerAnimationID::MoveBack:
+			case PlayerAnimationID::MoveLeft:
+			case PlayerAnimationID::MoveRight:
+				return "Spirit_move.gltf";
+			default:
+				return "Spirit_idle.gltf";
+			}
+		}
+
 		switch (animationId) {
 		case PlayerAnimationID::Idle:
-			return "PlayerIdle.gltf";
-		case PlayerAnimationID::Walk:
-			return "PlayerWalk.gltf";
+			return "Player_idle.gltf";
+		case PlayerAnimationID::MoveFront:
+			return "Player_move_front.gltf";
+		case PlayerAnimationID::MoveBack:
+			return "Player_move_back.gltf";
+		case PlayerAnimationID::MoveLeft:
+			return "Player_move_left.gltf";
+		case PlayerAnimationID::MoveRight:
+			return "Player_move_right.gltf";
 		case PlayerAnimationID::Attack1:
-			return "PlayerAttack1.gltf";
+			return "Player_attack1.gltf";
 		case PlayerAnimationID::Attack2:
-			return "PlayerAttack2.gltf";
+			return "Player_attack2.gltf";
+		case PlayerAnimationID::Spirit:
+			return "Player_spilit.gltf";
 		case PlayerAnimationID::Dodge:
-			return "PlayerDodge.gltf";
+			return "Player_dodge.gltf";
+		case PlayerAnimationID::Damage:
+			return "Player_damage.gltf";
 		default:
-			return "PlayerIdle.gltf";
+			return "Player_idle.gltf";
 		}
 	}
 }
@@ -66,12 +95,15 @@ void PlayerBase::Update(float dt) {
 }
 
 void PlayerBase::PlayAnimation(PlayerAnimationID animationId) {
-	if (currentAnimationId_ == animationId) {
+	const std::string modelName = GetPlayerAnimationModelName(modelSet_, animationId);
+	if (currentAnimationModel_ == modelName) {
+		currentAnimationId_ = animationId;
 		return;
 	}
 
 	currentAnimationId_ = animationId;
-	SetModelFileNameForEditor(GetPlayerAnimationModelName(animationId));
+	currentAnimationModel_ = modelName;
+	SetModelFileNameForEditor(modelName);
 }
 
 void PlayerBase::ApplyKnockback(const CalyxEngine::Vector3& velocity, float friction) {

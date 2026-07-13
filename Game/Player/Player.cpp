@@ -44,6 +44,7 @@ void Player::Initialize() {
 //			更新
 /////////////////////////////////////////////////////////////////////////////////////////
 void Player::Update(float dt) {
+	damageAnimationTimer_ = damageAnimationTimer_ > dt ? damageAnimationTimer_ - dt : 0.0f;
 	if (currentHp_ <= 0) {
 		Respawn();
 		Actor::Update(dt);
@@ -76,6 +77,12 @@ void Player::Update(float dt) {
 	if (!dodge_.IsDodging() && !attack_.BlocksMovement()) {
 		motor_.Update(this, in, dt);
 	}
+	if (in.cloneAbilityHeld && !dodge_.IsDodging() && !attack_.BlocksMovement()) {
+		PlayAnimation(PlayerAnimationID::Spirit);
+	}
+	if (damageAnimationTimer_ > 0.0f) {
+		PlayAnimation(PlayerAnimationID::Damage);
+	}
 	Actor::Update(dt);
 }
 
@@ -98,6 +105,8 @@ void Player::TakeDamage(int amount) {
 	if (currentHp_ < 0) {
 		currentHp_ = 0;
 	}
+	damageAnimationTimer_ = 0.25f;
+	PlayAnimation(PlayerAnimationID::Damage);
 }
 
 void Player::DerivativeGui(){

@@ -12,6 +12,26 @@
 #include "IEnemyMovement.h"
 #include "Attack/IEnemyAttack.h"
 
+enum class EnemyAnimationID {
+	Idle,
+	Move,
+	Attack,
+	Attack2,
+	Damage,
+	Defence,
+	Aim,
+};
+
+struct EnemyAnimationSet {
+	std::string idle;
+	std::string move;
+	std::string attack;
+	std::string attack2;
+	std::string damage;
+	std::string defence;
+	std::string aim;
+};
+
 /*-----------------------------------------------------------------------------------------
  * BaseEnemy
  * - すべての敵の基礎
@@ -22,7 +42,7 @@ public:
 	//===================================================================*/
 	//						public methods
 	//===================================================================*/
-	BaseEnemy(const std::string& modelName, const std::string& objName, EnemyStats& stats);
+	BaseEnemy(EnemyAnimationSet animations, const std::string& objName, EnemyStats& stats);
 	~BaseEnemy() override = default;
 
 	void Initialize() override;
@@ -35,6 +55,8 @@ public:
 
 	void TakeDamage(int amount);
 	bool IsDead() const { return currentHp_ <= 0; }
+	void PlayAnimation(EnemyAnimationID animationId);
+	void PlayNextAttackAnimation();
 
 	const EnemyStats& GetStats() const { return stats_; }
 
@@ -61,6 +83,11 @@ protected:
 
 	std::unique_ptr<IEnemyMovement> movement_;       // 動き
 	std::unique_ptr<IEnemyAttack> attack_;           // 攻撃
+
+	EnemyAnimationSet animations_;
+	std::string currentAnimationModel_;
+	float damageAnimationTimer_ = 0.0f;
+	bool useSecondAttackAnimation_ = false;
 
 	//CalyxEngine::EffectAsset hit_;
 };

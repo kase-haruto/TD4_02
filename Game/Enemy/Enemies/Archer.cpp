@@ -7,7 +7,7 @@
 //			ctor
 /////////////////////////////////////////////////////////////////////////////////////////
 Archer::Archer()
-	: BaseEnemy("tentative_enemy.obj", "Archer", statsImpl_) {
+	: BaseEnemy({ "Enemy_06_idle.gltf", "", "", "", "", "", "Enemy_06_aim.gltf" }, "Archer", statsImpl_) {
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -20,6 +20,5 @@ void Archer::Initialize() {
 	SetMovement(std::make_unique<KiteMove>());
 	SetAttack(std::make_unique<RangedAttack>());
 	BaseEnemy::Initialize();
-	SetColor({ 0.6f, 0.8f, 1.0f, 1.0f });
 
 }

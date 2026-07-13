@@ -10,8 +10,8 @@
 
 #include <cmath>
 
-ShieldEnemyBase::ShieldEnemyBase(const std::string& modelName, const std::string& objName, EnemyStats& stats)
-	: BaseEnemy(modelName, objName, stats) {}
+ShieldEnemyBase::ShieldEnemyBase(EnemyAnimationSet animations, const std::string& objName, EnemyStats& stats)
+	: BaseEnemy(std::move(animations), objName, stats) {}
 
 void ShieldEnemyBase::Initialize() {
 	param_.LoadParams();
@@ -30,6 +30,9 @@ void ShieldEnemyBase::Update(float dt) {
 	}
 
 	BaseEnemy::Update(dt);
+	if (isDefending_) {
+		PlayAnimation(EnemyAnimationID::Defence);
+	}
 }
 
 void ShieldEnemyBase::OnHitByPlayerAttack(Collider* attacker) {
@@ -55,11 +58,13 @@ void ShieldEnemyBase::EnterDefense() {
 	isDefending_ = true;
 	defenseTimer_ = param_.defenseDuration;
 	hitCount_ = 0;
+	PlayAnimation(EnemyAnimationID::Defence);
 }
 
 void ShieldEnemyBase::ExitDefense() {
 	isDefending_ = false;
 	RollThreshold();
+	PlayAnimation(EnemyAnimationID::Idle);
 }
 
 void ShieldEnemyBase::RollThreshold() {

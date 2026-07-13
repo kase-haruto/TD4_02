@@ -7,7 +7,7 @@
 //			ctor
 /////////////////////////////////////////////////////////////////////////////////////////
 ShieldEnemy::ShieldEnemy()
-	: ShieldEnemyBase("tentative_enemy.obj", "ShieldEnemy", statsImpl_) {
+	: ShieldEnemyBase({ "Enemy_03_idle.gltf", "", "Enemy_03_attack1.gltf", "Enemy_03_attack2.gltf", "", "Enemy_03_defence.gltf", "" }, "ShieldEnemy", statsImpl_) {
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -20,6 +20,5 @@ void ShieldEnemy::Initialize() {
 	SetMovement(std::make_unique<HomingMove>());
 	SetAttack(std::make_unique<MeleeAttack>());
 	ShieldEnemyBase::Initialize();
-	SetColor({ 0.55f, 0.2f, 1.0f, 1.0f });
 
 }

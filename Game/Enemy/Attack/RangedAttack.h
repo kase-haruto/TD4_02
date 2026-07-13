@@ -16,7 +16,7 @@ public:
 
 	void Update(BaseEnemy& self, const Actor* target, float dt) override;
 	void ShowGui() override;
-	bool IsAttacking() const override { return false; }
+	bool IsAttacking() const override { return isAiming_; }
 	CalyxEngine::SerializableObject& SerializableParam() override;
 
 private:
@@ -26,6 +26,8 @@ private:
 private:
 	struct RangedAttackParam : CalyxEngine::SerializableObject {
 		RangedAttackParam() {
+			AddField("aimDuration", aimDuration)
+				.Category("Arrow").Tooltip("Time spent playing the aim animation before firing");
 			AddField("arrowSpeed", arrowSpeed)
 				.Category("Arrow").Tooltip("矢の速さ");
 			AddField("arrowLifeTime", arrowLifeTime)
@@ -44,6 +46,7 @@ private:
 			return { CalyxEngine::ParamDomain::Game, "RangedAttack", "Actor/Enemy/AttackParam" };
 		}
 
+		float aimDuration = 0.4f;
 		float arrowSpeed = 8.0f;
 		float arrowLifeTime = 3.0f;
 		float spawnForwardOffset = 1.0f;
@@ -54,4 +57,6 @@ private:
 
 	RangedAttackParam param_;
 	float cooldownTimer_ = 0.0f;
+	float aimTimer_ = 0.0f;
+	bool isAiming_ = false;
 };

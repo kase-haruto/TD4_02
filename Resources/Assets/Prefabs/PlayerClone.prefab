@@ -34,7 +34,7 @@
         "modelConfig":  {
                             "blendMode":  5,
                             "materialGuid":  "00000000-0000-0000-0000-000000000000",
-                            "modelName":  "PlayerIdle.gltf",
+                            "modelName":  "Spirit_idle.gltf",
                             "textureGuid":  "00000000-0000-0000-0000-000000000000",
                             "uvTransConfig":  {
                                                   "rotation":  0.0,

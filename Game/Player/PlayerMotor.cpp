@@ -7,6 +7,8 @@
 #include <Engine/Physics/Character/CharacterMovementComponent.h>
 #include <Engine/Foundation/Math/MathUtil.h>
 
+#include <cmath>
+
 
 void PlayerMotor::Initialize(PlayerBase* player) {
 	param_.LoadParams();
@@ -19,8 +21,19 @@ void PlayerMotor::Update(PlayerBase* player, const PlayerInputState& input, floa
 	CalyxEngine::Vector3 worldDirection = BuildWorldMoveDirection(input.move);
 	if (worldDirection.LengthSquared() > 0.0f) {
 		lastMoveDir_ = worldDirection;
-		if (player->GetCurrentAnimationId() != PlayerAnimationID::Walk) {
-			player->PlayAnimation(PlayerAnimationID::Walk);
+
+		CalyxEngine::Vector3 forward = CalyxEngine::Quaternion::RotateVector(
+			CalyxEngine::Vector3::Forward(), player->GetWorldTransform().rotation);
+		forward.y = 0.0f;
+		forward = forward.LengthSquared() > 0.0001f ? forward.Normalize() : CalyxEngine::Vector3::Forward();
+		const CalyxEngine::Vector3 right{ forward.z, 0.0f, -forward.x };
+		const CalyxEngine::Vector3 move = worldDirection.Normalize();
+		const float forwardAmount = CalyxEngine::Vector3::Dot(move, forward);
+		const float rightAmount = CalyxEngine::Vector3::Dot(move, right);
+		if (std::abs(forwardAmount) >= std::abs(rightAmount)) {
+			player->PlayAnimation(forwardAmount >= 0.0f ? PlayerAnimationID::MoveFront : PlayerAnimationID::MoveBack);
+		} else {
+			player->PlayAnimation(rightAmount >= 0.0f ? PlayerAnimationID::MoveRight : PlayerAnimationID::MoveLeft);
 		}
 		if (player->AppliesMovement()) {
 			player->GetCharacterMovement().AddMovementInput(worldDirection);
