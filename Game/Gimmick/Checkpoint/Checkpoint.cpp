@@ -34,6 +34,12 @@ void Checkpoint::Initialize() {
 			sphere->SetSize({ kActivateRadius ,kActivateRadius, kActivateRadius });
 		}
 	}
+
+	RefreshVisual();
+}
+
+void Checkpoint::Update(float dt) {
+	RefreshVisual();
 }
 
 void Checkpoint::OnCollisionEnter(Collider* other) {
@@ -42,8 +48,17 @@ void Checkpoint::OnCollisionEnter(Collider* other) {
 	if (!player) return;
 
 	if (auto* ctx = SceneContext::Current()) {
-		RespawnState::Get().SetCheckpoint(ctx->GetScenePath(), GetWorldPosition());
+		RespawnState::Get().SetCheckpoint(ctx->GetScenePath(), GetWorldPosition(), GetGuid());
 	}
+}
 
-	if (!activated_) { activated_ = true; SetColor({ 0.4f, 1.0f, 0.4f, 1.0f }); }
+void Checkpoint::RefreshVisual() {
+	auto& rs = RespawnState::Get();
+	const bool active = rs.Has() && rs.ActivateGuid() == GetGuid();
+
+	if (visualApplied_ && active == isActiveVisual_) return;  // 変化なし即return
+	visualApplied_ = true;
+	isActiveVisual_ = active;
+
+	SetColor(active ? CalyxEngine::Vector4{ 0.4f, 1.0f, 0.4f, 1.0f } : CalyxEngine::Vector4{ 1.0f, 1.0f, 1.0f, 1.0f });;
 }
