@@ -13,6 +13,7 @@
 #include <Game/Demo/3D/Actor/DemoCamera/DemoCameraPivot.h>
 #include <Game/Demo/3D/Actor/DemoPlayer/DemoPlayer.h>
 #include <Game/Enemy/Enemies/DoomEnemy.h>
+#include <Game/World/Door.h>
 #include <Game/Enemy/Enemies/HeavyShieldEnemy.h>
 #include <Game/Enemy/Enemies/HeavySlime.h>
 #include <Game/Player/Player.h>
@@ -20,6 +21,7 @@
 #include <Game/Player/Clone/Clone.h>
 #include <Game/Enemy/Enemies/ShieldEnemy.h>
 #include <Game/Enemy/Enemies/Slime.h>
+#include <Game/World/SpawnPoint.h>
 #include <Game/Player/Sword/Sword.h>
 #include <Game/Demo/3D/Actor/DemoPlayer/Weapon/Weapon.h>
 
@@ -106,6 +108,16 @@ namespace CalyxEngine {
 			&CreateSceneObject<DoomEnemy>);
 
 		SceneObjectRegistry::Get().Register(
+			"Door",
+			"Door",
+			ObjectType::GameObject,
+			"UI/Tool/cube.dds",
+			true,
+			false,
+			false,
+			&CreateSceneObject<Door>);
+
+		SceneObjectRegistry::Get().Register(
 			"HeavyShieldEnemy",
 			"HeavyShieldEnemy",
 			ObjectType::GameObject,
@@ -174,6 +186,16 @@ namespace CalyxEngine {
 			false,
 			false,
 			&CreateSceneObject<Slime>);
+
+		SceneObjectRegistry::Get().Register(
+			"SpawnPoint",
+			"SpawnPoint",
+			ObjectType::GameObject,
+			"UI/Tool/cube.dds",
+			true,
+			false,
+			false,
+			&CreateSceneObject<SpawnPoint>);
 
 		SceneObjectRegistry::Get().Register(
 			"Sword",

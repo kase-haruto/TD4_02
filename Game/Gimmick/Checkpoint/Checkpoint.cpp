@@ -1,10 +1,12 @@
 #include "Checkpoint.h"
 
 #include <Game/Player/Player.h>
-#include <Engine/Objects/Collider/Collider.h>
 #include <Game/Collision/CollisionLayerUtil.h>
+#include <Game/World/RespawnState.h>
+#include <Engine/Objects/Collider/Collider.h>
 #include <Data/Engine/Configs/Scene/Objects/Collider/ColliderConfig.h>
 #include <Engine/Objects/Collider/BoxCollider.h>
+#include <Engine/Scene/Context/SceneContext.h>
 
 Checkpoint::Checkpoint()
 	: BaseGameObject("debugCube.obj", "Checkpoint") {}
@@ -32,23 +34,31 @@ void Checkpoint::Initialize() {
 			sphere->SetSize({ kActivateRadius ,kActivateRadius, kActivateRadius });
 		}
 	}
+
+	RefreshVisual();
+}
+
+void Checkpoint::Update(float dt) {
+	RefreshVisual();
 }
 
 void Checkpoint::OnCollisionEnter(Collider* other) {
-	if (!other) {
-		return;
-	}
-	// 触れた相手が Player か
+	if (!other) return;
 	auto* player = dynamic_cast<Player*>(other->GetOwner());
-	if (!player) {
-		return;
-	}
+	if (!player) return;
 
-	// この位置をチェックポイントとして登録
-	player->SetRespawnPoint(GetWorldPosition());
-
-	if (!activated_) {
-		activated_ = true;
-		SetColor({ 0.4f, 1.0f, 0.4f, 1.0f });
+	if (auto* ctx = SceneContext::Current()) {
+		RespawnState::Get().SetCheckpoint(ctx->GetScenePath(), GetWorldPosition(), GetGuid());
 	}
+}
+
+void Checkpoint::RefreshVisual() {
+	auto& rs = RespawnState::Get();
+	const bool active = rs.Has() && rs.ActivateGuid() == GetGuid();
+
+	if (visualApplied_ && active == isActiveVisual_) return;  // 変化なし即return
+	visualApplied_ = true;
+	isActiveVisual_ = active;
+
+	SetColor(active ? CalyxEngine::Vector4{ 0.4f, 1.0f, 0.4f, 1.0f } : CalyxEngine::Vector4{ 1.0f, 1.0f, 1.0f, 1.0f });;
 }

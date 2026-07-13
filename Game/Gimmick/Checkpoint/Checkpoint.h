@@ -13,8 +13,12 @@ public:
 	~Checkpoint() override = default;
 
 	void Initialize() override;
+	void Update(float dt) override;
 	void OnCollisionEnter(Collider* other) override;
 
 private:
-	bool activated_ = false;   // 演出を初回だけ出すため
+	void RefreshVisual();
+
+	bool isActiveVisual_ = false;
+	bool visualApplied_ = false;
 };
