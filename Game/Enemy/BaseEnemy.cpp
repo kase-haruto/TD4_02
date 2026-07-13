@@ -1,6 +1,7 @@
 #include "BaseEnemy.h"
 
 #include <Game/Collision/CollisionLayerUtil.h>
+#include <Game/World/EnemyState.h>
 
 #include <Engine/Objects/Collider/Collider.h>
 #include <Engine/Foundation/Math/Quaternion.h>
@@ -20,12 +21,23 @@ void BaseEnemy::Initialize() {
 	worldTransform_.scale = { 0.5f,0.5f,0.5f };
 	currentHp_ = stats_.maxHp;
 	//hit_.Load("EnemyHit");
+
+	if (EnemyState::Get().IsDefeated(GetGuid())) {
+		pendingRemove_ = true;
+		SetDrawEnable(false);
+	}
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
 //			更新
 /////////////////////////////////////////////////////////////////////////////////////////
 void BaseEnemy::Update(float dt) {
+	if (pendingRemove_) {
+		if (auto* ctx = SceneContext::Current())
+			ctx->RemoveObject(std::static_pointer_cast<SceneObject>(shared_from_this()));
+		return;
+	}
+
 	auto targetPlayer = stats_.target.Resolve().get();
 	const float stopSq = stats_.knockbackStopSpeed * stats_.knockbackStopSpeed;
 	if (knockbackVelocity_.LengthSquared() > stopSq) {
@@ -55,6 +67,7 @@ void BaseEnemy::Update(float dt) {
 	Actor::Update(dt);
 
 	if (IsDead()) {
+		EnemyState::Get().MarkDefeated(GetGuid());     // 倒したら記録
 		if (auto* context = SceneContext::Current()) {
 			context->RemoveObject(
 				std::static_pointer_cast<SceneObject>(shared_from_this()));

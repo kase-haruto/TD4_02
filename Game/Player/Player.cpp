@@ -2,6 +2,7 @@
 
 #include <Game/Collision/CollisionLayerUtil.h>
 #include <Game/World/RespawnState.h>
+#include <Game/World/EnemyState.h>
 
 #include <Engine/Foundation/Math/Quaternion.h>
 #include <Engine/Graphics/Camera/Manager/CameraManager.h>
@@ -144,15 +145,14 @@ void Player::Respawn() {
 	attack_.Reset();
 	ability_.ClearClones();
 
-	auto& rs = RespawnState::Get();
-	const std::string cur = SceneContext::Current() ? SceneContext::Current()->GetScenePath() : "";
-	if (rs.Has() && rs.ScenePath() != cur) {
-		rs.MarkPendingApply();
-		SceneAPI::RequestSceneChange(std::filesystem::path(rs.ScenePath()));
-		return;
-	}
+	EnemyState::Get().Clear();
 
-	const CalyxEngine::Vector3 target = rs.Has() ? rs.Position() : respawnPoint_;
-	SetPosition(target);        // チェックポイントへ戻す
-	lastCloneAnchor_ = target;
+	auto& rs = RespawnState::Get();
+	const std::string dst = rs.Has() ? rs.ScenePath() : (SceneContext::Current() ? SceneContext::Current()->GetScenePath() : "");
+	if (dst.empty()) return;
+
+	if (rs.Has()) {
+		rs.MarkPendingApply();
+	}
+	SceneAPI::RequestSceneChange(std::filesystem::path(dst));
 }

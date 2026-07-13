@@ -54,6 +54,7 @@ protected:
 	//===================================================================*/
 	//						protected variables
 	//===================================================================*/
+	bool pendingRemove_ = false;
 	EnemyStats& stats_;        // 個体値
 	int        currentHp_ = 0;  // 現在HP
 	CalyxEngine::Vector3 knockbackVelocity_{};
