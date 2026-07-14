@@ -81,7 +81,7 @@ private:
 		CalyxEngine::SceneObjectRef<Player> playerRef_; //< 追従対象プレイヤー
 		GameCameraViewSettings view;
 		GameCameraFocusSettings focus;
-		float positionFollowSpeed = 8.0f;       //< カメラ位置の1秒あたりの追従速度
+		float positionFollowSpeed = 3.0f;       //< カメラ位置の1秒あたりの追従速度
 		float focusFollowSpeed = 10.0f;         //< 注視点の1秒あたりの追従速度
 		float lockOnZoomOffset = 2.0f;          //< ロックオン中に縮める水平距離
 		float lockOnHeightOffset = 1.6f;        //< ロックオン中に追加する高さ
