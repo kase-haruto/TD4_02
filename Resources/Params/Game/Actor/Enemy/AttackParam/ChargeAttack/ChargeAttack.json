@@ -1,0 +1,16 @@
+{
+    "fields": {
+        "chargeSpeed": 12.0,
+        "drawHitbox": true,
+        "hitboxHeightOffset": 1.0,
+        "hitboxSize": [
+            1.0,
+            0.800000011920929,
+            1.0
+        ],
+        "maxChargeTime": 1.2000000476837158,
+        "overshootDistance": 2.0,
+        "recoverTime": 0.5,
+        "windupTime": 0.4009999930858612
+    }
+}

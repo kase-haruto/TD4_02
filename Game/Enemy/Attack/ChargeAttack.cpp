@@ -65,6 +65,7 @@ void ChargeAttack::StartCharge(BaseEnemy& self, const Actor* target) {
 
 	phase_ = Phase::Windup;
 	phaseTimer_ = 0.0f;
+	self.PlayAnimation(EnemyAnimationID::Aim);
 }
 
 void ChargeAttack::UpdateWindup(BaseEnemy& self, float dt) {
@@ -72,6 +73,7 @@ void ChargeAttack::UpdateWindup(BaseEnemy& self, float dt) {
 	if (phaseTimer_ >= param_.windupTime) {
 		phase_ = Phase::Dash;
 		phaseTimer_ = 0.0f;
+		self.PlayAnimation(EnemyAnimationID::Attack);
 		CreateHitbox(self);   // 突進の瞬間に当たり判定を出す
 	}
 }
@@ -107,6 +109,7 @@ void ChargeAttack::UpdateRecover(BaseEnemy& self, float dt) {
 void ChargeAttack::EndCharge(BaseEnemy& self) {
 	phase_ = Phase::Idle;
 	phaseTimer_ = 0.0f;
+	self.PlayAnimation(EnemyAnimationID::Idle);
 	RemoveHitbox();
 	cooldownTimer_ = self.GetStats().attackInterval;   // 次の突進まで間隔をあける
 }

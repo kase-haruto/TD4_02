@@ -8,8 +8,8 @@
 #include <Engine/Foundation/Input/Input.h>
 
 
-BaseEnemy::BaseEnemy(const std::string& modelName, const std::string& objectName, EnemyStats& stats)
-	: Actor(modelName, objectName), stats_(stats) {
+BaseEnemy::BaseEnemy(EnemyAnimationSet animations, const std::string& objectName, EnemyStats& stats)
+	: Actor(animations.idle, objectName), stats_(stats), animations_(std::move(animations)) {
 	SerializableParamObjectsMutable().push_back(&lockOnTarget_);
 }
 
@@ -23,6 +23,7 @@ void BaseEnemy::Initialize() {
 	worldTransform_.scale = { 0.5f,0.5f,0.5f };
 	currentHp_ = stats_.maxHp;
 	lockOnTarget_.Initialize(*this);
+	PlayAnimation(EnemyAnimationID::Idle);
 	//hit_.Load("EnemyHit");
 
 	if (EnemyState::Get().IsDefeated(GetGuid())) {
@@ -43,6 +44,8 @@ void BaseEnemy::Update(float dt) {
 		return;
 	}
 
+	const CalyxEngine::Vector3 frameStartPosition = GetWorldPosition();
+	damageAnimationTimer_ = damageAnimationTimer_ > dt ? damageAnimationTimer_ - dt : 0.0f;
 	auto targetPlayer = stats_.target.Resolve().get();
 	const float stopSq = stats_.knockbackStopSpeed * stats_.knockbackStopSpeed;
 	if (knockbackVelocity_.LengthSquared() > stopSq) {
@@ -70,6 +73,11 @@ void BaseEnemy::Update(float dt) {
 	}
 
 	Actor::Update(dt);
+
+	if (damageAnimationTimer_ <= 0.0f && !(attack_ && attack_->IsAttacking())) {
+		const CalyxEngine::Vector3 moved = GetWorldPosition() - frameStartPosition;
+		PlayAnimation(moved.LengthSquared() > 1.0e-6f ? EnemyAnimationID::Move : EnemyAnimationID::Idle);
+	}
 
 	if (IsDead()) {
 		EnemyState::Get().MarkDefeated(GetGuid());     // 倒したら記録
@@ -170,6 +178,39 @@ void BaseEnemy::TakeDamage(int amount) {
 	if (currentHp_ < 0) {
 		currentHp_ = 0;
 	}
+	if (!animations_.damage.empty()) {
+		damageAnimationTimer_ = 0.25f;
+		PlayAnimation(EnemyAnimationID::Damage);
+	}
 	// 死亡時の処理は後で IsDead() を見て呼び出し側で行う
+}
+
+void BaseEnemy::PlayAnimation(EnemyAnimationID animationId) {
+	const std::string* requested = &animations_.idle;
+	switch (animationId) {
+	case EnemyAnimationID::Move:    requested = &animations_.move; break;
+	case EnemyAnimationID::Attack:  requested = &animations_.attack; break;
+	case EnemyAnimationID::Attack2: requested = &animations_.attack2; break;
+	case EnemyAnimationID::Damage:  requested = &animations_.damage; break;
+	case EnemyAnimationID::Defence: requested = &animations_.defence; break;
+	case EnemyAnimationID::Aim:     requested = &animations_.aim; break;
+	default: break;
+	}
+
+	const std::string& modelName = requested->empty() ? animations_.idle : *requested;
+	if (modelName.empty() || currentAnimationModel_ == modelName) {
+		return;
+	}
+	currentAnimationModel_ = modelName;
+	SetModelFileNameForEditor(modelName);
+}
+
+void BaseEnemy::PlayNextAttackAnimation() {
+	if (animations_.attack2.empty()) {
+		PlayAnimation(EnemyAnimationID::Attack);
+		return;
+	}
+	PlayAnimation(useSecondAttackAnimation_ ? EnemyAnimationID::Attack2 : EnemyAnimationID::Attack);
+	useSecondAttackAnimation_ = !useSecondAttackAnimation_;
 }
 

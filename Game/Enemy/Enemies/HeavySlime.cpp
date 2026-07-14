@@ -7,7 +7,7 @@
 //			ctor
 /////////////////////////////////////////////////////////////////////////////////////////
 HeavySlime::HeavySlime()
-	: BaseEnemy("tentative_enemy.obj", "HeavySlime", statsImpl_) {}
+	: BaseEnemy({ "Enemy_01_idle.gltf", "Enemy_01_move.gltf", "Enemy_01_attack.gltf", "", "Enemy_01_damage.gltf", "", "" }, "HeavySlime", statsImpl_) {}
 
 /////////////////////////////////////////////////////////////////////////////////////////
 //			初期化
@@ -19,6 +19,5 @@ void HeavySlime::Initialize() {
 	SetMovement(std::make_unique<HomingMove>());
 	SetAttack(std::make_unique<MeleeAttack>());
 	BaseEnemy::Initialize();
-	SetColor({ 0.55f, 0.0f, 0.0f, 1.0f });
 
 }

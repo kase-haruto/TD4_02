@@ -7,7 +7,7 @@
 //			ctor
 /////////////////////////////////////////////////////////////////////////////////////////
 DoomEnemy::DoomEnemy()
-	: BaseEnemy("tentative_enemy.obj", "DoomEnemy", statsImpl_) {
+	: BaseEnemy({ "Enemy_02_idle.gltf", "Enemy_02_move.gltf", "Enemy_02_attack.gltf", "", "", "", "" }, "DoomEnemy", statsImpl_) {
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -20,6 +20,5 @@ void DoomEnemy::Initialize() {
 	SetMovement(std::make_unique<HomingMove>());
 	SetAttack(std::make_unique<PunchAttack>());
 	BaseEnemy::Initialize();
-	SetColor({ 0.0f, 0.0f, 0.0f, 1.0f });
 
 }
