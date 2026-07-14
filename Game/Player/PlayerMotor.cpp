@@ -17,6 +17,8 @@ void PlayerMotor::Initialize(PlayerBase* player) {
 }
 
 void PlayerMotor::Update(PlayerBase* player, const PlayerInputState& input, float /*dt*/) {
+	player->GetCharacterMovement().SetMaxWalkSpeed(input.dashHeld ? param_.dashSpeed : param_.moveSpeed);
+
 	// --- 移動 ---
 	CalyxEngine::Vector3 worldDirection = BuildWorldMoveDirection(input.move);
 	if (worldDirection.LengthSquared() > 0.0f) {

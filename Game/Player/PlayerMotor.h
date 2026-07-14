@@ -42,10 +42,12 @@ private:
 	struct PlayerMoveParam : CalyxEngine::SerializableObject{
 		PlayerMoveParam() {
 			AddField("moveSpeed", moveSpeed).Category("Movement").Tooltip("移動速度");
+			AddField("dashSpeed", dashSpeed).Category("Movement").Tooltip("ダッシュ速度（回避ボタン長押し）");
 			AddField("jumpForce", jumpForce).Category("Movement").Tooltip("ジャンプ力");
 		}
 
 		float moveSpeed = 5.0f; //!< 移動速度
+		float dashSpeed = 8.0f; //!< ダッシュ速度
 		float jumpForce = 5.0f; //!< ジャンプ力
 	}param_;
 
