@@ -5,6 +5,7 @@
 #include <Engine/Foundation/Serialization/SerializableObject.h>
 
 class PlayerBase;
+class ILockOnStateReader;
 
 /**
  * \brief Playerの入力をキャラクター移動へ変換するクラス
@@ -31,6 +32,7 @@ public:
 	CalyxEngine::Vector3 GetMoveDir() const { return lastMoveDir_; }
 
 	void SetAimOrigin(const PlayerBase* origin) { aimOrigin_ = origin; }
+	void SetLockOnStateReader(const ILockOnStateReader* reader) { lockOnState_ = reader; }
 
 private:
 	/// 2D入力(x=右, y=前)をカメラ基準のXZ平面移動方向へ変換
@@ -38,6 +40,7 @@ private:
 
 	/// 移動方向へ見た目の向きを合わせる
 	void FaceMoveDirection(PlayerBase* player, const CalyxEngine::Vector3& worldDirection) const;
+	void FaceLockOnTarget(PlayerBase* player, float dt) const;
 
 	struct PlayerMoveParam : CalyxEngine::SerializableObject{
 		PlayerMoveParam() {
@@ -51,4 +54,5 @@ private:
 
 	CalyxEngine::Vector3 lastMoveDir_{};
 	const PlayerBase* aimOrigin_ = nullptr;
+	const ILockOnStateReader* lockOnState_ = nullptr;
 };

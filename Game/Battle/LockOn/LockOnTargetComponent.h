@@ -1,47 +1,36 @@
 #pragma once
+
 #include "ILockOnTarget.h"
-#include <Engine/Objects/Transform/Transform.h>
- 
-/*------------------------------------------------------------------------------------------
- * LockOnTargetComponent
- * - ロックオン対象のコンポーネント
- * - このコンポーネントを持つアクターはロックオン対象となる
- -----------------------------------------------------------------------------------------*/
+#include "LockOnTargetEntry.h"
 
-class LockOnTargetComponent final : 
-	public ILockOnTarget {
+#include <Engine/Foundation/Serialization/SerializableObject.h>
+
+class SceneObject;
+
+class LockOnTargetComponent final : public ILockOnTarget, public CalyxEngine::SerializableObject {
 public:
-	//===================================================================*/
-	//                    public methods
-	//===================================================================*/
-	~LockOnTargetComponent() override = default;
+	LockOnTargetComponent();
+	~LockOnTargetComponent() override;
 
-	/**
-	 * @brief ロックオン対象の種類を取得する
-	 * @return LockOnTargetType ロックオン対象の種類
-	 */
-	LockOnTargetType GetLockOnTargetType() const override;
+	void Initialize(SceneObject& owner);
+	void Register();
+	void Unregister();
+	void SetOwnerAlive(bool alive);
 
-	/**
-	 * @brief ロックオン可能かどうかを取得する
-	 * @return bool ロックオン可能かどうか
-	 */
-	bool IsLockable() const override;
+	LockOnTargetType GetLockOnTargetType() const override { return targetType_; }
+	bool IsLockable() const override { return isLockable_ && ownerIsAlive_; }
+	int GetPriority() const override { return priority_; }
+	const CalyxEngine::TransformRef& GetTargetTransform() const override { return targetTransform_; }
 
-	/**
-	 * @brief ロックオンの基準となるトランスフォームを取得する
-	 * @return BaseTransform* ロックオンの基準となるトランスフォーム
-	 */
 	CalyxEngine::Vector3 GetWorldPosition() const;
 
 private:
-	//===================================================================*/
-	//                    private methods
-	//===================================================================*/
-	LockOnTargetType targetType_ = LockOnTargetType::Enemy;	//< ロックオン対象の種類
-	BaseTransform* lockOnAnchor_ = nullptr;	//< ロックオンの基準となるトランスフォーム
+	LockOnTargetEntry BuildEntry() const;
 
-	bool isLockable_ = true;	//< ロックオン可能かどうか
-	bool ownerIsAlive_ = true;	//< 所有者が生存しているかどうか
+	LockOnTargetType targetType_ = LockOnTargetType::Enemy;
+	CalyxEngine::TransformRef targetTransform_;
+	bool isLockable_ = true;
+	bool ownerIsAlive_ = true;
+	int priority_ = 0;
+	bool registered_ = false;
 };
-

@@ -21,6 +21,10 @@ struct PlayerInputState {
 	bool cloneAbilityPressed = false; //!< クローン生成が押された瞬間か
 	bool cloneAbilityHeld = false; //!< クローン生成ボタンを押し続けているか
 	bool cloneAbilityReleased = false; //!< クローン生成ボタンを離した瞬間か
+	bool lockOnPressed = false;
+	bool unlockPressed = false;
+	bool switchLeftPressed = false;
+	bool switchRightPressed = false;
 };
 
 /**

@@ -2,6 +2,8 @@
 
 #include "Base/PlayerBase.h"
 
+#include <Game/Battle/LockOn/ILockOnStateReader.h>
+
 #include <Engine/Foundation/Math/Quaternion.h>
 #include <Engine/Graphics/Camera/Manager/CameraManager.h>
 #include <Engine/Physics/Character/CharacterMovementComponent.h>
@@ -14,7 +16,15 @@ void PlayerMotor::Initialize(PlayerBase* player) {
 	player->GetCharacterMovement().SetJumpVelocity(param_.jumpForce);
 }
 
-void PlayerMotor::Update(PlayerBase* player, const PlayerInputState& input, float /*dt*/) {
+namespace {
+	float Clamp01(float value) {
+		if (value < 0.0f) return 0.0f;
+		if (value > 1.0f) return 1.0f;
+		return value;
+	}
+}
+
+void PlayerMotor::Update(PlayerBase* player, const PlayerInputState& input, float dt) {
 	// --- 移動 ---
 	CalyxEngine::Vector3 worldDirection = BuildWorldMoveDirection(input.move);
 	if (worldDirection.LengthSquared() > 0.0f) {
@@ -32,7 +42,9 @@ void PlayerMotor::Update(PlayerBase* player, const PlayerInputState& input, floa
 	}
 
 	// --- 向き ---
-	if (input.aimWithMouse) {
+	if (lockOnState_ && lockOnState_->IsLockingOn()) {
+		FaceLockOnTarget(player, dt);
+	} else if (input.aimWithMouse) {
 		// マウスカーソルの方を向く
 		// 向きの基準位置：クローンは親Playerの位置を使う（未設定なら自分）
 		const PlayerBase* originObj = aimOrigin_ ? aimOrigin_ : player;
@@ -95,4 +107,27 @@ void PlayerMotor::FaceMoveDirection(PlayerBase* player, const CalyxEngine::Vecto
 	// モデルの基準前方(Forward)を、移動方向(to)へ回す回転を作る
 	player->GetWorldTransform().rotation =
 		CalyxEngine::Quaternion::FromToQuaternion(CalyxEngine::Vector3::Forward(), to);
+}
+
+void PlayerMotor::FaceLockOnTarget(PlayerBase* player, float dt) const {
+	if (!lockOnState_) {
+		return;
+	}
+
+	const WorldTransform* target = lockOnState_->ResolveCurrentTarget();
+	if (!target) {
+		return;
+	}
+
+	CalyxEngine::Vector3 toTarget = target->GetWorldPosition() - player->GetWorldPosition();
+	toTarget.y = 0.0f;
+	if (toTarget.LengthSquared() <= 0.0001f) {
+		return;
+	}
+
+	const CalyxEngine::Quaternion targetRotation =
+		CalyxEngine::Quaternion::FromToQuaternion(CalyxEngine::Vector3::Forward(), toTarget.Normalize());
+	const float t = Clamp01(lockOnState_->GetPlayerTurnSpeed() * dt);
+	player->GetWorldTransform().rotation =
+		CalyxEngine::Quaternion::Slerp(player->GetWorldTransform().rotation, targetRotation, t);
 }

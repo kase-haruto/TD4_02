@@ -54,6 +54,11 @@ void PlayerInput::Update() {
 	state_.cloneAbilityReleased = prevCloneAbilityHeld_ && !state_.cloneAbilityHeld;
 	prevCloneAbilityHeld_ = state_.cloneAbilityHeld;
 
+	state_.lockOnPressed = IsTriggerAction(InputAction::LockOn) || IsTriggerGamepadAction(InputAction::LockOn);
+	state_.unlockPressed = IsTriggerAction(InputAction::UnlockLockOn) || IsTriggerGamepadAction(InputAction::UnlockLockOn);
+	state_.switchLeftPressed = IsTriggerAction(InputAction::SwitchLockOnLeft) || IsTriggerGamepadAction(InputAction::SwitchLockOnLeft);
+	state_.switchRightPressed = IsTriggerAction(InputAction::SwitchLockOnRight) || IsTriggerGamepadAction(InputAction::SwitchLockOnRight);
+
 	// ダッシュは押し続け状態として扱う。
 	// 移動速度変更などの継続効果で使えるように、トリガーではなくPushを参照する。
 	state_.dashHeld = IsPushAction(InputAction::Dash) || IsPushGamepadAction(InputAction::Dash) || Input::PushMouseButton(CalyxFoundation::MouseButton::Right);
@@ -72,6 +77,10 @@ void PlayerInput::ResetBindings() {
 		{InputAction::Ability, DIK_SPACE},
 		{InputAction::Attack, DIK_K},
 		{InputAction::Dash, DIK_LSHIFT},
+		{InputAction::LockOn, DIK_TAB},
+		{InputAction::UnlockLockOn, DIK_R},
+		{InputAction::SwitchLockOnLeft, DIK_Q},
+		{InputAction::SwitchLockOnRight, DIK_E},
 	};
 
 	gamepadBindings_ = {
@@ -81,8 +90,12 @@ void PlayerInput::ResetBindings() {
 		{InputAction::MoveRight, PadButton::DPAD_RIGHT},
 		//{InputAction::Jump, PadButton::A},
 		{InputAction::Attack, PadButton::RB},
-		{InputAction::Ability, PadButton::LB},
+		{InputAction::Ability, PadButton::Y},
 		{InputAction::Dash, PadButton::A},
+		{InputAction::LockOn, PadButton::LB},
+		{InputAction::UnlockLockOn, PadButton::B},
+		{InputAction::SwitchLockOnLeft, PadButton::DPAD_LEFT},
+		{InputAction::SwitchLockOnRight, PadButton::DPAD_RIGHT},
 	};
 }
 

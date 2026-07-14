@@ -11,6 +11,7 @@
 #include "EnemyStats.h"
 #include "IEnemyMovement.h"
 #include "Attack/IEnemyAttack.h"
+#include <Game/Battle/LockOn/LockOnTargetComponent.h>
 
 /*-----------------------------------------------------------------------------------------
  * BaseEnemy
@@ -39,6 +40,7 @@ public:
 	const EnemyStats& GetStats() const { return stats_; }
 
 	void DerivativeGui() override;
+	void Destroy() override;
 
 protected:
 	// 敵ごとの反応
@@ -61,6 +63,7 @@ protected:
 
 	std::unique_ptr<IEnemyMovement> movement_;       // 動き
 	std::unique_ptr<IEnemyAttack> attack_;           // 攻撃
+	LockOnTargetComponent lockOnTarget_;
 
 	//CalyxEngine::EffectAsset hit_;
 };

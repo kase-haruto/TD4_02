@@ -26,6 +26,8 @@ void Player::Initialize() {
 	knockbackVelocity_ = {};
 	lastCloneAnchor_ = worldTransform_.translation;
 	respawnPoint_ = worldTransform_.translation;
+	lockOn_.Initialize();
+	motor_.SetLockOnStateReader(&lockOn_);
 
 	if (collider_) {
 		collider_->SetOwner(this);
@@ -61,6 +63,14 @@ void Player::Update(float dt) {
 	input_.Update();
 
 	const PlayerInputState& in = input_.GetState();
+	lockOn_.HandleInput(
+		GetWorldPosition(),
+		in.lockOnPressed,
+		in.unlockPressed,
+		in.switchLeftPressed,
+		in.switchRightPressed);
+	lockOn_.Update(GetWorldPosition(), dt);
+
 	ability_.Update(*this, &in, dt);
 
 	// 回避を先に処理,回避中は移動/向き/ジャンプを受け付けない
@@ -102,12 +112,17 @@ void Player::TakeDamage(int amount) {
 void Player::DerivativeGui(){
 	PlayerBase::DerivativeGui();
 	ability_.ShowGui();
+	lockOn_.ShowGui();
 }
 
 bool Player::IsDodgeButtonTriggered() const {
 	return input_.IsTriggerAction(InputAction::Dash)
 		|| input_.IsTriggerGamepadAction(InputAction::Dash)
 		|| CalyxFoundation::Input::TriggerMouseButton(CalyxFoundation::MouseButton::Right);
+}
+
+std::vector<CalyxEngine::TransformRef> Player::QueryVisibleLockOnTargets(size_t maxCount) const {
+	return lockOn_.QueryVisibleTargets(GetWorldPosition(), maxCount);
 }
 
 void Player::OnHitByEnemyAttack(Collider* attacker) {
