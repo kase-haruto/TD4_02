@@ -1,0 +1,11 @@
+{
+    "fields": {
+        "targetScene": "c796c7ee-42ef-47ef-adb5-adcacd4a51bb",
+        "targetSpawnId": 4,
+        "triggerSize": [
+            1.0,
+            2.0,
+            1.0
+        ]
+    }
+}
