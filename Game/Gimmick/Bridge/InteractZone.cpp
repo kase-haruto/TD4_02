@@ -12,7 +12,7 @@ void InteractZone::Configure(const CalyxEngine::Vector3& size, bool draw) {
 	SetDrawEnable(draw);
 	SetEnablePicking(true);
 	SetCastShadow(true);
-	SetTransient(true);
+	//SetTransient(true);
 
 	InitializeCollider(ColliderKind::Box);
 	const auto layerId = GameCollision::FindLayerId("StageGimmick");
