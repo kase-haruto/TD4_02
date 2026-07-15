@@ -48,6 +48,7 @@ public:
 	virtual void Update(float dt) override;
 	void DerivativeGui() override;
 	void PlayAnimation(PlayerAnimationID animationId);
+	void RegisterPlayerAnimations();
 	PlayerAnimationID GetCurrentAnimationId() const { return currentAnimationId_; }
 	CalyxEngine::Vector3 GetMoveDir() const { return motor_.GetMoveDir(); }
 
@@ -71,7 +72,7 @@ protected:
 	PlayerAttack attack_;
 	PlayerAnimationID currentAnimationId_ = PlayerAnimationID::Idle;
 	PlayerModelSet modelSet_ = PlayerModelSet::Player;
-	std::string currentAnimationModel_;
+	bool playerAnimationsRegistered_ = false;
 
 	CalyxEngine::Vector3 knockbackVelocity_{};
 	float knockbackFriction_ = 0.0f;
