@@ -92,5 +92,5 @@ protected:
 	float damageAnimationTimer_ = 0.0f;
 	bool useSecondAttackAnimation_ = false;
 
-	//CalyxEngine::EffectAsset hit_;
+	CalyxEngine::EffectAsset hit_;
 };

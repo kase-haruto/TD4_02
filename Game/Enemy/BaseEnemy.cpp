@@ -24,7 +24,7 @@ void BaseEnemy::Initialize() {
 	currentHp_ = stats_.maxHp;
 	lockOnTarget_.Initialize(*this);
 	PlayAnimation(EnemyAnimationID::Idle);
-	//hit_.Load("EnemyHit");
+	hit_.Load("EnemyHit");
 
 	if (EnemyState::Get().IsDefeated(GetGuid())) {
 		pendingRemove_ = true;
@@ -67,7 +67,7 @@ void BaseEnemy::Update(float dt) {
 		if (dir.LengthSquared() <= 0.0001f) {
 			return;
 		}
-		//EffectAPI::Play(hit_, worldTransform_.GetWorldPosition());
+		EffectAPI::Play(hit_, worldTransform_.GetWorldPosition());
 
 		knockbackVelocity_ = dir.Normalize() * stats_.knockbackInitialSpeed;
 	}
@@ -102,7 +102,7 @@ void BaseEnemy::OnCollisionEnter(Collider* other) {
 	const auto playerAttackLayer = GameCollision::FindLayerId("PlayerAttack");
 	if (playerAttackLayer && other->GetLayerId() == *playerAttackLayer) {
 		OnHitByPlayerAttack(other);
-		//EffectAPI::Play(hit_, worldTransform_.GetWorldPosition());
+		EffectAPI::Play(hit_, worldTransform_.GetWorldPosition());
 	}
 
 
