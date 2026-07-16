@@ -82,6 +82,7 @@ void PlayerBase::Initialize() {
 
 	// 初期化
 	motor_.Initialize(this);
+	dodge_.Initialize(this);
 	RegisterPlayerAnimations();
 	PlayAnimation(PlayerAnimationID::Idle);
 }
@@ -185,4 +186,6 @@ bool PlayerBase::UpdateKnockback(float dt) {
 
 void PlayerBase::DerivativeGui() {
 	attack_.ShowGui();
+	motor_.ShowGui();
+	dodge_.ShowGui();
 }
