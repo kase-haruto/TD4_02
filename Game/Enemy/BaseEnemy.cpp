@@ -102,7 +102,7 @@ void BaseEnemy::OnCollisionEnter(Collider* other) {
 	const auto playerAttackLayer = GameCollision::FindLayerId("PlayerAttack");
 	if (playerAttackLayer && other->GetLayerId() == *playerAttackLayer) {
 		OnHitByPlayerAttack(other);
-		//EffectAPI::Play(hit_, worldTransform_.GetWorldPosition());
+		EffectAPI::Play(hit_, worldTransform_.GetWorldPosition());
 	}
 
 

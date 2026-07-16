@@ -44,9 +44,13 @@ private:
 
 	struct PlayerMoveParam : CalyxEngine::SerializableObject{
 		PlayerMoveParam() {
-			AddField("moveSpeed", moveSpeed).Category("Movement").Tooltip("移動速度");
-			AddField("dashSpeed", dashSpeed).Category("Movement").Tooltip("ダッシュ速度（回避ボタン長押し）");
-			AddField("jumpForce", jumpForce).Category("Movement").Tooltip("ジャンプ力");
+			AddField("moveSpeed", moveSpeed).Category("MotorMovement").Tooltip("移動速度");
+			AddField("dashSpeed", dashSpeed).Category("MotorMovement").Tooltip("ダッシュ速度（回避ボタン長押し）");
+			AddField("jumpForce", jumpForce).Category("MotorMovement").Tooltip("ジャンプ力");
+		}
+
+		CalyxEngine::ParamPath GetParamPath() const override {
+			return { CalyxEngine::ParamDomain::Game, "PlayerMotor", "Actor/Player/Motor" };
 		}
 
 		float moveSpeed = 5.0f; //!< 移動速度

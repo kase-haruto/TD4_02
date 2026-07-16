@@ -73,10 +73,10 @@ void Player::Update(float dt) {
 		in.switchRightPressed);
 	lockOn_.Update(GetWorldPosition(), dt);
 
-	ability_.Update(*this, &in, dt);
-
 	// 回避を先に処理,回避中は移動/向き/ジャンプを受け付けない
 	dodge_.Update(this, in, dt);
+	// 回避中はアビリティの入力を受け付けない（チャージは中断）
+	ability_.Update(*this, dodge_.IsDodging() ? nullptr : &in, dt);
 
 	// 回避中は攻撃しない
 	if (!dodge_.IsDodging()) {
