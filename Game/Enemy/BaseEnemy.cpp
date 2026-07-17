@@ -2,6 +2,7 @@
 
 #include <Game/Collision/CollisionLayerUtil.h>
 #include <Game/World/EnemyState.h>
+#include <Game/Player/Sword/Sword.h>
 
 #include <Engine/Objects/Collider/Collider.h>
 #include <Engine/Foundation/Math/Quaternion.h>
@@ -129,7 +130,10 @@ void BaseEnemy::Destroy() {
 
 void BaseEnemy::OnHitByPlayerAttack(Collider* attacker) {
 	ApplyKnockbackFrom(attacker);
-	TakeDamage(1);
+
+	auto* hitbox = attacker ? dynamic_cast<Sword*>(attacker->GetOwner()) : nullptr;
+	const int   damage = hitbox ? hitbox->GetDamage() : 1;
+	TakeDamage(damage);
 }
 
 void BaseEnemy::ApplyKnockbackFrom(Collider* attacker) {
