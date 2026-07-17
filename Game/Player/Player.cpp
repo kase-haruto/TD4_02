@@ -10,6 +10,7 @@
 #include <Engine/Scene/Utility/SceneUtility.h>
 #include <Engine/Scene/Context/SceneContext.h>
 #include <Engine/Foundation/Clock/ClockManager.h>
+#include <algorithm>
 #include <filesystem>
 
 
@@ -40,6 +41,9 @@ void Player::Initialize() {
 		respawnPoint_ = p;
 		lastCloneAnchor_ = p;
 	}
+	if (RespawnState::Get().ConsumeJustRespawned()) {
+		StartInvincible(stats_.respawnInvincibleTime);
+	}
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -47,6 +51,7 @@ void Player::Initialize() {
 /////////////////////////////////////////////////////////////////////////////////////////
 void Player::Update(float dt) {
 	damageAnimationTimer_ = damageAnimationTimer_ > dt ? damageAnimationTimer_ - dt : 0.0f;
+	UpdateInvincible(dt);
 	if (currentHp_ <= 0) {
 		Respawn();
 		Actor::Update(dt);
@@ -116,6 +121,7 @@ void Player::TakeDamage(int amount) {
 		currentHp_ = 0;
 	}
 	damageAnimationTimer_ = 0.25f;
+	StartInvincible(stats_.damageInvincibleTime);
 	PlayAnimation(PlayerAnimationID::Damage);
 }
 
@@ -137,7 +143,7 @@ std::vector<CalyxEngine::TransformRef> Player::QueryVisibleLockOnTargets(size_t 
 }
 
 void Player::OnHitByEnemyAttack(Collider* attacker) {
-	if (dodge_.IsInvincible()) {
+	if (dodge_.IsInvincible() || invincibleTimer_ > 0.0f) {
 		return;
 	}
 
@@ -170,6 +176,8 @@ void Player::Respawn() {
 	dodge_.Reset();
 	attack_.Reset();
 	ability_.ClearClones();
+	invincibleTimer_ = 0.0f;
+	SetDrawEnable(true);
 
 	EnemyState::Get().Clear();
 
@@ -179,8 +187,31 @@ void Player::Respawn() {
 	const std::string dst = rs.Has() ? rs.ScenePath() : (SceneContext::Current() ? SceneContext::Current()->GetScenePath() : "");
 	if (dst.empty()) return;
 
+	rs.MarkJustRespawned();
 	if (rs.Has()) {
 		rs.MarkPendingApply();
 	}
 	SceneAPI::RequestSceneChange(std::filesystem::path(dst));
+}
+
+void Player::UpdateInvincible(float dt) {
+	if (invincibleTimer_ <= 0.0f) {
+		return;
+	}
+
+	invincibleTimer_ = invincibleTimer_ > dt ? invincibleTimer_ - dt : 0.0f;
+
+	if (invincibleTimer_ <= 0.0f) {
+		SetDrawEnable(true);
+		return;
+	}
+
+	// 残り時間を間隔で割った回数の偶奇で表示/非表示を切り替える
+	const float interval = (std::max)(stats_.damageFlashInterval, 0.001f);
+	const int   step = static_cast<int>(invincibleTimer_ / interval);
+	SetDrawEnable((step % 2) == 0);
+}
+
+void Player::StartInvincible(float duration) {
+	invincibleTimer_ = duration;
 }

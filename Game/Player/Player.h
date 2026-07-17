@@ -51,6 +51,9 @@ private:
 	void OnHitByEnemyAttack(Collider* attacker);
 	void Respawn();
 
+	void UpdateInvincible(float dt);
+	void StartInvincible(float duration);
+
 	//===================================================================*/
 	//						private variables
 	//===================================================================*/
@@ -60,6 +63,7 @@ private:
 	float damageAnimationTimer_ = 0.0f;
 
 	int        currentHp_ = 0;  // 現在HP
+	float      invincibleTimer_ = 0.0f;
 	CalyxEngine::Vector3 lastCloneAnchor_{};
 
 	CalyxEngine::Vector3 respawnPoint_{};
