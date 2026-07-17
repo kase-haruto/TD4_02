@@ -123,6 +123,7 @@ void Player::DerivativeGui(){
 	PlayerBase::DerivativeGui();
 	ability_.ShowGui();
 	lockOn_.ShowGui();
+	stats_.ShowGui();
 }
 
 bool Player::IsDodgeButtonTriggered() const {

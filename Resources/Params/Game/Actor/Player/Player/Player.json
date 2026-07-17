@@ -1,0 +1,6 @@
+{
+    "fields": {
+        "knockbackFriction": 8.0,
+        "maxHp": 100
+    }
+}
