@@ -44,6 +44,8 @@ void Player::Initialize() {
 	if (RespawnState::Get().ConsumeJustRespawned()) {
 		StartInvincible(stats_.respawnInvincibleTime);
 	}
+
+	walk_.Load("playerWalk");
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -53,12 +55,14 @@ void Player::Update(float dt) {
 	damageAnimationTimer_ = damageAnimationTimer_ > dt ? damageAnimationTimer_ - dt : 0.0f;
 	UpdateInvincible(dt);
 	if (currentHp_ <= 0) {
+		UpdateWalkEffect(false);
 		Respawn();
 		Actor::Update(dt);
 		return;
 	}
 
-	if (UpdateKnockback(dt)) {   // ← base の実装。ノックバック中は技も入力も止める
+	if (UpdateKnockback(dt)) {   // ノックバック中は技も入力も止める
+		UpdateWalkEffect(false);
 		Actor::Update(dt);
 		lastCloneAnchor_ = GetWorldPosition();
 		return;
@@ -89,9 +93,12 @@ void Player::Update(float dt) {
 	}
 
 	// 回避中・攻撃中は通常移動しない
-	if (!dodge_.IsDodging() && !attack_.BlocksMovement()) {
+	const bool canMove = !dodge_.IsDodging() && !attack_.BlocksMovement();
+	if (canMove) {
 		motor_.Update(this, in, dt);
 	}
+	UpdateWalkEffect(canMove && in.move.LengthSquared() > 0.0f && GetCharacterMovement().IsMovingOnGround());
+
 	if (in.cloneAbilityHeld && !dodge_.IsDodging() && !attack_.BlocksMovement()) {
 		PlayAnimation(PlayerAnimationID::Spirit);
 	}
@@ -179,6 +186,8 @@ void Player::Respawn() {
 	invincibleTimer_ = 0.0f;
 	SetDrawEnable(true);
 
+	isWalk_ = false;
+
 	EnemyState::Get().Clear();
 
 	ClockManager::GetInstance()->SetTimeScale(1.0f);
@@ -214,4 +223,24 @@ void Player::UpdateInvincible(float dt) {
 
 void Player::StartInvincible(float duration) {
 	invincibleTimer_ = duration;
+}
+
+void Player::UpdateWalkEffect(bool isWalking) {
+	if (isWalking) {
+		if (!isWalk_) {
+			walkHandle_ = EffectAPI::Play(walk_, GetWorldPosition());
+			isWalk_ = true;
+		} else {
+			// 再生中はエミッターをプレイヤーに追従させる
+			EffectAPI::Player()->SetTransform(
+				walkHandle_,
+				GetWorldPosition(),
+				CalyxEngine::Quaternion::MakeIdentity(),
+				{ 1.0f, 1.0f, 1.0f });
+		}
+	} else if (isWalk_) {
+		EffectAPI::Stop(walkHandle_);
+		walkHandle_ = {};
+		isWalk_ = false;
+	}
 }

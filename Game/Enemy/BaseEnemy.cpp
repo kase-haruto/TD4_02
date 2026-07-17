@@ -26,6 +26,7 @@ void BaseEnemy::Initialize() {
 	lockOnTarget_.Initialize(*this);
 	PlayAnimation(EnemyAnimationID::Idle);
 	hit_.Load("EnemyHit");
+	hitLight_.Load("hitLight");
 
 	if (EnemyState::Get().IsDefeated(GetGuid())) {
 		pendingRemove_ = true;
@@ -69,6 +70,7 @@ void BaseEnemy::Update(float dt) {
 			return;
 		}
 		EffectAPI::Play(hit_, worldTransform_.GetWorldPosition());
+		EffectAPI::Play(hitLight_, worldTransform_.GetWorldPosition());
 
 		knockbackVelocity_ = dir.Normalize() * stats_.knockbackInitialSpeed;
 	}
@@ -104,6 +106,8 @@ void BaseEnemy::OnCollisionEnter(Collider* other) {
 	if (playerAttackLayer && other->GetLayerId() == *playerAttackLayer) {
 		OnHitByPlayerAttack(other);
 		EffectAPI::Play(hit_, worldTransform_.GetWorldPosition());
+		EffectAPI::Play(hitLight_, worldTransform_.GetWorldPosition());
+
 	}
 
 

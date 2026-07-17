@@ -11,6 +11,9 @@
 #include "Ability/PlayerAbility.h"
 #include <Game/Battle/LockOn/PlayerLockOnController.h>
 
+#include <Engine/Application/Effects/EffectAsset.h>
+#include <Engine/Application/Effects/EffectPlayer.h>
+
 #include <cstddef>
 #include <vector>
 
@@ -54,6 +57,8 @@ private:
 	void UpdateInvincible(float dt);
 	void StartInvincible(float duration);
 
+	void UpdateWalkEffect(bool isWalking);
+
 	//===================================================================*/
 	//						private variables
 	//===================================================================*/
@@ -67,4 +72,8 @@ private:
 	CalyxEngine::Vector3 lastCloneAnchor_{};
 
 	CalyxEngine::Vector3 respawnPoint_{};
+
+	bool isWalk_ = false;
+	CalyxEngine::EffectAsset walk_;
+	CalyxEngine::EffectHandle walkHandle_{};
 };
