@@ -5,6 +5,10 @@
 #include <Engine/Foundation/Math/Quaternion.h>
 #include <Engine/Physics/Character/CharacterMovementComponent.h>
 
+void PlayerDodge::Initialize([[maybe_unused]] PlayerBase* player) {
+	param_.LoadParams();
+}
+
 void PlayerDodge::Update(PlayerBase* player, const PlayerInputState& input, float dt) {
 	// タイマー減衰
 	if (invincibleTimer_ > 0.0f) invincibleTimer_ -= dt;
@@ -19,9 +23,9 @@ void PlayerDodge::Update(PlayerBase* player, const PlayerInputState& input, floa
 			player->GetCharacterMovement().AddMovementInput(dodgeDir_);
 		}
 
-		if (dodgeTimer_ >= kDodgeDuration) {
+		if (dodgeTimer_ >= param_.dodgeDuration) {
 			isDodging_ = false;
-			cooldownTimer_ = kCooldown;
+			cooldownTimer_ = param_.cooldown;
 		}
 		return;
 	}
@@ -30,6 +34,10 @@ void PlayerDodge::Update(PlayerBase* player, const PlayerInputState& input, floa
 	if (enabled_ && input.dodgePressed && cooldownTimer_ <= 0.0f) {
 		StartDodge(player);
 	}
+}
+
+void PlayerDodge::ShowGui() {
+	param_.ShowGui();
 }
 
 void PlayerDodge::Reset() {
@@ -53,6 +61,13 @@ void PlayerDodge::StartDodge(PlayerBase* player) {
 
 	isDodging_ = true;
 	dodgeTimer_ = 0.0f;
-	invincibleTimer_ = kInvincibleTime;
+	invincibleTimer_ = param_.invincibleTime;
 	player->PlayAnimation(PlayerAnimationID::Dodge);
+	player->GetCharacterMovement().SetMaxWalkSpeed(param_.dodgeSpeed);
+
+	dodgeDir_ = forward.Normalize();
+	// 回避方向を向く（マウスの狙い向きより優先）
+	player->GetWorldTransform().rotation =
+		CalyxEngine::Quaternion::FromToQuaternion(CalyxEngine::Vector3::Forward(), dodgeDir_);
+	isDodging_ = true;
 }

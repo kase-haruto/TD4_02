@@ -29,6 +29,14 @@ void Bridge::Initialize() {
 	angleDeg_ = param_.raisedAngleDeg;
 	worldTransform_.rotationSource = RotationSource::Euler;
 	ApplyBridgeRotation();
+
+	// レバーを生成
+	zone_ = SceneAPI::Instantiate<InteractZone>();
+	zone_->Configure(param_.zoneSize, true);
+	zone_->SetParent(shared_from_this());
+	zone_->GetWorldTransform().inheritRotate = false;
+	zone_->GetWorldTransform().inheritScale = false;
+	zone_->SetTranslate(param_.leverOffset);
 }
 
 void Bridge::Update(float dt) {
@@ -86,14 +94,6 @@ void Bridge::FirstReset() {
 			box->SetSize(param_.bodySize);
 		}
 	}
-
-	// レバーを生成
-	zone_ = SceneAPI::Instantiate<InteractZone>();
-	zone_->Configure(param_.zoneSize, true);
-	zone_->SetParent(shared_from_this());
-	zone_->GetWorldTransform().inheritRotate = false;
-	zone_->GetWorldTransform().inheritScale = false;
-	zone_->SetTranslate(param_.leverOffset);
 
 	// 初期は跳ね橋
 	angleDeg_ = param_.raisedAngleDeg;

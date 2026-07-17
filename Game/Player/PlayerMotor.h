@@ -5,6 +5,7 @@
 #include <Engine/Foundation/Serialization/SerializableObject.h>
 
 class PlayerBase;
+class ILockOnStateReader;
 
 /**
  * \brief Playerの入力をキャラクター移動へ変換するクラス
@@ -31,6 +32,7 @@ public:
 	CalyxEngine::Vector3 GetMoveDir() const { return lastMoveDir_; }
 
 	void SetAimOrigin(const PlayerBase* origin) { aimOrigin_ = origin; }
+	void SetLockOnStateReader(const ILockOnStateReader* reader) { lockOnState_ = reader; }
 
 private:
 	/// 2D入力(x=右, y=前)をカメラ基準のXZ平面移動方向へ変換
@@ -38,17 +40,25 @@ private:
 
 	/// 移動方向へ見た目の向きを合わせる
 	void FaceMoveDirection(PlayerBase* player, const CalyxEngine::Vector3& worldDirection) const;
+	void FaceLockOnTarget(PlayerBase* player, float dt) const;
 
 	struct PlayerMoveParam : CalyxEngine::SerializableObject{
 		PlayerMoveParam() {
-			AddField("moveSpeed", moveSpeed).Category("Movement").Tooltip("移動速度");
-			AddField("jumpForce", jumpForce).Category("Movement").Tooltip("ジャンプ力");
+			AddField("moveSpeed", moveSpeed).Category("MotorMovement").Tooltip("移動速度");
+			AddField("dashSpeed", dashSpeed).Category("MotorMovement").Tooltip("ダッシュ速度（回避ボタン長押し）");
+			AddField("jumpForce", jumpForce).Category("MotorMovement").Tooltip("ジャンプ力");
+		}
+
+		CalyxEngine::ParamPath GetParamPath() const override {
+			return { CalyxEngine::ParamDomain::Game, "PlayerMotor", "Actor/Player/Motor" };
 		}
 
 		float moveSpeed = 5.0f; //!< 移動速度
+		float dashSpeed = 8.0f; //!< ダッシュ速度
 		float jumpForce = 5.0f; //!< ジャンプ力
 	}param_;
 
 	CalyxEngine::Vector3 lastMoveDir_{};
 	const PlayerBase* aimOrigin_ = nullptr;
+	const ILockOnStateReader* lockOnState_ = nullptr;
 };

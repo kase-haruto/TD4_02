@@ -9,7 +9,9 @@
 
 
 BaseEnemy::BaseEnemy(EnemyAnimationSet animations, const std::string& objectName, EnemyStats& stats)
-	: Actor(animations.idle, objectName), stats_(stats), animations_(std::move(animations)) {}
+	: Actor(animations.idle, objectName), stats_(stats), animations_(std::move(animations)) {
+	SerializableParamObjectsMutable().push_back(&lockOnTarget_);
+}
 
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -20,11 +22,13 @@ void BaseEnemy::Initialize() {
 
 	worldTransform_.scale = { 0.5f,0.5f,0.5f };
 	currentHp_ = stats_.maxHp;
+	lockOnTarget_.Initialize(*this);
 	PlayAnimation(EnemyAnimationID::Idle);
-	//hit_.Load("EnemyHit");
+	hit_.Load("EnemyHit");
 
 	if (EnemyState::Get().IsDefeated(GetGuid())) {
 		pendingRemove_ = true;
+		lockOnTarget_.SetOwnerAlive(false);
 		SetDrawEnable(false);
 	}
 }
@@ -34,6 +38,7 @@ void BaseEnemy::Initialize() {
 /////////////////////////////////////////////////////////////////////////////////////////
 void BaseEnemy::Update(float dt) {
 	if (pendingRemove_) {
+		lockOnTarget_.Unregister();
 		if (auto* ctx = SceneContext::Current())
 			ctx->RemoveObject(std::static_pointer_cast<SceneObject>(shared_from_this()));
 		return;
@@ -62,7 +67,7 @@ void BaseEnemy::Update(float dt) {
 		if (dir.LengthSquared() <= 0.0001f) {
 			return;
 		}
-		//EffectAPI::Play(hit_, worldTransform_.GetWorldPosition());
+		EffectAPI::Play(hit_, worldTransform_.GetWorldPosition());
 
 		knockbackVelocity_ = dir.Normalize() * stats_.knockbackInitialSpeed;
 	}
@@ -76,6 +81,8 @@ void BaseEnemy::Update(float dt) {
 
 	if (IsDead()) {
 		EnemyState::Get().MarkDefeated(GetGuid());     // 倒したら記録
+		lockOnTarget_.SetOwnerAlive(false);
+		lockOnTarget_.Unregister();
 		if (auto* context = SceneContext::Current()) {
 			context->RemoveObject(
 				std::static_pointer_cast<SceneObject>(shared_from_this()));
@@ -95,7 +102,7 @@ void BaseEnemy::OnCollisionEnter(Collider* other) {
 	const auto playerAttackLayer = GameCollision::FindLayerId("PlayerAttack");
 	if (playerAttackLayer && other->GetLayerId() == *playerAttackLayer) {
 		OnHitByPlayerAttack(other);
-		//EffectAPI::Play(hit_, worldTransform_.GetWorldPosition());
+		EffectAPI::Play(hit_, worldTransform_.GetWorldPosition());
 	}
 
 
@@ -109,9 +116,15 @@ void BaseEnemy::OnCollisionEnter(Collider* other) {
 void BaseEnemy::DerivativeGui() {
 	GuiCmd::SceneObjectReferenceField("PlayerTrans", stats_.target);
 	stats_.ShowGui();
+	lockOnTarget_.ShowGui();
 	if (attack_) {
 		attack_->ShowGui();
 	}
+}
+
+void BaseEnemy::Destroy() {
+	lockOnTarget_.Unregister();
+	Actor::Destroy();
 }
 
 void BaseEnemy::OnHitByPlayerAttack(Collider* attacker) {

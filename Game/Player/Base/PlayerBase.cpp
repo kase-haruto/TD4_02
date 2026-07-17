@@ -1,5 +1,7 @@
 #include "PlayerBase.h"
 
+#include <array>
+
 /////////////////////////////////////////////////////////////////////////////////////////
 //			ctor / dtor
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -11,6 +13,24 @@ PlayerBase::PlayerBase(PlayerModelSet modelSet)
 	modelSet_(modelSet) {}
 
 namespace {
+	constexpr float kPlayerAnimationBlendDuration = 0.2f;
+
+	const char* GetPlayerAnimationName(PlayerAnimationID animationId) {
+		switch (animationId) {
+		case PlayerAnimationID::Idle:      return "Idle";
+		case PlayerAnimationID::MoveFront: return "MoveFront";
+		case PlayerAnimationID::MoveBack:  return "MoveBack";
+		case PlayerAnimationID::MoveLeft:  return "MoveLeft";
+		case PlayerAnimationID::MoveRight: return "MoveRight";
+		case PlayerAnimationID::Attack1:   return "Attack1";
+		case PlayerAnimationID::Attack2:   return "Attack2";
+		case PlayerAnimationID::Spirit:    return "Spirit";
+		case PlayerAnimationID::Dodge:     return "Dodge";
+		case PlayerAnimationID::Damage:    return "Damage";
+		default: return "Idle";
+		}
+	}
+
 	const char* GetPlayerAnimationModelName(PlayerModelSet modelSet, PlayerAnimationID animationId) {
 		if (modelSet == PlayerModelSet::Spirit) {
 			switch (animationId) {
@@ -62,6 +82,8 @@ void PlayerBase::Initialize() {
 
 	// 初期化
 	motor_.Initialize(this);
+	dodge_.Initialize(this);
+	RegisterPlayerAnimations();
 	PlayAnimation(PlayerAnimationID::Idle);
 }
 
@@ -94,16 +116,55 @@ void PlayerBase::Update(float dt) {
 	Actor::Update(dt);
 }
 
+void PlayerBase::RegisterPlayerAnimations() {
+	if (playerAnimationsRegistered_) {
+		return;
+	}
+
+	auto* model = AnimationModel();
+	if (!model) {
+		return;
+	}
+
+	constexpr std::array<PlayerAnimationID, 10> kAnimations = {
+		PlayerAnimationID::Idle,
+		PlayerAnimationID::MoveFront,
+		PlayerAnimationID::MoveBack,
+		PlayerAnimationID::MoveLeft,
+		PlayerAnimationID::MoveRight,
+		PlayerAnimationID::Attack1,
+		PlayerAnimationID::Attack2,
+		PlayerAnimationID::Spirit,
+		PlayerAnimationID::Dodge,
+		PlayerAnimationID::Damage,
+	};
+
+	for (PlayerAnimationID id : kAnimations) {
+		RegisterAnimationClip(
+			static_cast<int16_t>(id),
+			GetPlayerAnimationName(id),
+			GetPlayerAnimationModelName(modelSet_, id));
+	}
+
+	playerAnimationsRegistered_ = true;
+}
+
 void PlayerBase::PlayAnimation(PlayerAnimationID animationId) {
-	const std::string modelName = GetPlayerAnimationModelName(modelSet_, animationId);
-	if (currentAnimationModel_ == modelName) {
-		currentAnimationId_ = animationId;
+	if (currentAnimationId_ == animationId) {
 		return;
 	}
 
 	currentAnimationId_ = animationId;
-	currentAnimationModel_ = modelName;
-	SetModelFileNameForEditor(modelName);
+
+	auto* model = AnimationModel();
+	if (!model) {
+		SetModelFileNameForEditor(GetPlayerAnimationModelName(modelSet_, animationId));
+		playerAnimationsRegistered_ = false;
+		return;
+	}
+
+	RegisterPlayerAnimations();
+	PlayRegisteredAnimation(static_cast<int16_t>(animationId), kPlayerAnimationBlendDuration);
 }
 
 void PlayerBase::ApplyKnockback(const CalyxEngine::Vector3& velocity, float friction) {
@@ -125,4 +186,6 @@ bool PlayerBase::UpdateKnockback(float dt) {
 
 void PlayerBase::DerivativeGui() {
 	attack_.ShowGui();
+	motor_.ShowGui();
+	dodge_.ShowGui();
 }

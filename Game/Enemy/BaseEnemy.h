@@ -11,6 +11,7 @@
 #include "EnemyStats.h"
 #include "IEnemyMovement.h"
 #include "Attack/IEnemyAttack.h"
+#include <Game/Battle/LockOn/LockOnTargetComponent.h>
 
 enum class EnemyAnimationID {
 	Idle,
@@ -61,6 +62,7 @@ public:
 	const EnemyStats& GetStats() const { return stats_; }
 
 	void DerivativeGui() override;
+	void Destroy() override;
 
 protected:
 	// 敵ごとの反応
@@ -83,11 +85,12 @@ protected:
 
 	std::unique_ptr<IEnemyMovement> movement_;       // 動き
 	std::unique_ptr<IEnemyAttack> attack_;           // 攻撃
+	LockOnTargetComponent lockOnTarget_;
 
 	EnemyAnimationSet animations_;
 	std::string currentAnimationModel_;
 	float damageAnimationTimer_ = 0.0f;
 	bool useSecondAttackAnimation_ = false;
 
-	//CalyxEngine::EffectAsset hit_;
+	CalyxEngine::EffectAsset hit_;
 };

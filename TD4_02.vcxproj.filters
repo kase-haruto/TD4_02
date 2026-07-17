@@ -61,6 +61,12 @@
     <ClCompile Include="Game\Gimmick\Bridge\InteractZone.cpp" />
     <ClCompile Include="Game\World\SpawnPoint.cpp" />
     <ClCompile Include="Game\World\Door.cpp" />
+    <ClCompile Include="Game\Battle\LockOn\DefaultLockOnTargetQuery.cpp" />
+    <ClCompile Include="Game\Battle\LockOn\DefaultLockOnTargetSelector.cpp" />
+    <ClCompile Include="Game\Battle\LockOn\ILockOnTarget.cpp" />
+    <ClCompile Include="Game\Battle\LockOn\LockOnTargetComponent.cpp" />
+    <ClCompile Include="Game\Battle\LockOn\LockOnTargetRegistry.cpp" />
+    <ClCompile Include="Game\Battle\LockOn\PlayerLockOnController.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Collision\CollisionLayerUtil.h" />
@@ -68,5 +74,17 @@
     <ClInclude Include="Game\Player\Base\PlayerBase.h" />
     <ClInclude Include="Game\Player\Attack\PlayerAttack.h" />
     <ClInclude Include="Game\Camera\CameraPivot.h" />
+    <ClInclude Include="Game\Battle\LockOn\DefaultLockOnTargetQuery.h" />
+    <ClInclude Include="Game\Battle\LockOn\DefaultLockOnTargetSelector.h" />
+    <ClInclude Include="Game\Battle\LockOn\ILockOnTarget.h" />
+    <ClInclude Include="Game\Battle\LockOn\ILockOnStateReader.h" />
+    <ClInclude Include="Game\Battle\LockOn\ILockOnTargetQuery.h" />
+    <ClInclude Include="Game\Battle\LockOn\ILockOnTargetSelector.h" />
+    <ClInclude Include="Game\Battle\LockOn\LockOnEvents.h" />
+    <ClInclude Include="Game\Battle\LockOn\LockOnSettings.h" />
+    <ClInclude Include="Game\Battle\LockOn\LockOnTargetEntry.h" />
+    <ClInclude Include="Game\Battle\LockOn\LockOnTargetComponent.h" />
+    <ClInclude Include="Game\Battle\LockOn\LockOnTargetRegistry.h" />
+    <ClInclude Include="Game\Battle\LockOn\PlayerLockOnController.h" />
   </ItemGroup>
 </Project>

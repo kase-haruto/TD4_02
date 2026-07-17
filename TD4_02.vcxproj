@@ -57,7 +57,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Label="CalyxEngineSdk">
-    <CalyxEngineVersion>v1.2.5</CalyxEngineVersion>
+    <CalyxEngineVersion>v1.2.7</CalyxEngineVersion>
     <CalyxEngineSdkDir Condition="'$(CalyxEngineSdkDir)'=='' and Exists('$(LOCALAPPDATA)\CalyxEngine\Engines\$(CalyxEngineVersion)\SDK\Include\CalyxEngine\Application.h') and Exists('$(LOCALAPPDATA)\CalyxEngine\Engines\$(CalyxEngineVersion)\SDK\Include\Data\Engine') and Exists('$(LOCALAPPDATA)\CalyxEngine\Engines\$(CalyxEngineVersion)\SDK\Include\externals\nlohmann\json.hpp')">$(LOCALAPPDATA)\CalyxEngine\Engines\$(CalyxEngineVersion)\SDK</CalyxEngineSdkDir>
     <CalyxEngineSdkDir Condition="'$(CalyxEngineSdkDir)'=='' and '$(CALYX_ENGINE_SDK_DIR)'!='' and Exists('$(CALYX_ENGINE_SDK_DIR)\Include\CalyxEngine\Application.h') and Exists('$(CALYX_ENGINE_SDK_DIR)\Include\Data\Engine') and Exists('$(CALYX_ENGINE_SDK_DIR)\Include\externals\nlohmann\json.hpp')">$(CALYX_ENGINE_SDK_DIR)</CalyxEngineSdkDir>
     <CalyxEngineSdkDir Condition="'$(CalyxEngineSdkDir)'==''">$(LOCALAPPDATA)\CalyxEngine\Engines\$(CalyxEngineVersion)\SDK</CalyxEngineSdkDir>
@@ -219,6 +219,12 @@ if exist "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" copy "$(Win
     <ClCompile Include="Game\Editor\GameEditorExtension.cpp" />
     <ClCompile Include="Game\World\Door.cpp" />
     <ClCompile Include="Game\World\SpawnPoint.cpp" />
+    <ClCompile Include="Game\Battle\LockOn\DefaultLockOnTargetQuery.cpp" />
+    <ClCompile Include="Game\Battle\LockOn\DefaultLockOnTargetSelector.cpp" />
+    <ClCompile Include="Game\Battle\LockOn\ILockOnTarget.cpp" />
+    <ClCompile Include="Game\Battle\LockOn\LockOnTargetComponent.cpp" />
+    <ClCompile Include="Game\Battle\LockOn\LockOnTargetRegistry.cpp" />
+    <ClCompile Include="Game\Battle\LockOn\PlayerLockOnController.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Camera\CameraPivot.h" />
@@ -226,6 +232,18 @@ if exist "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" copy "$(Win
     <ClInclude Include="Game\Player\Ability\PlayerAbility.h" />
     <ClInclude Include="Game\Player\Base\PlayerBase.h" />
     <ClInclude Include="Game\Player\Attack\PlayerAttack.h" />
+    <ClInclude Include="Game\Battle\LockOn\DefaultLockOnTargetQuery.h" />
+    <ClInclude Include="Game\Battle\LockOn\DefaultLockOnTargetSelector.h" />
+    <ClInclude Include="Game\Battle\LockOn\ILockOnTarget.h" />
+    <ClInclude Include="Game\Battle\LockOn\ILockOnStateReader.h" />
+    <ClInclude Include="Game\Battle\LockOn\ILockOnTargetQuery.h" />
+    <ClInclude Include="Game\Battle\LockOn\ILockOnTargetSelector.h" />
+    <ClInclude Include="Game\Battle\LockOn\LockOnEvents.h" />
+    <ClInclude Include="Game\Battle\LockOn\LockOnSettings.h" />
+    <ClInclude Include="Game\Battle\LockOn\LockOnTargetEntry.h" />
+    <ClInclude Include="Game\Battle\LockOn\LockOnTargetComponent.h" />
+    <ClInclude Include="Game\Battle\LockOn\LockOnTargetRegistry.h" />
+    <ClInclude Include="Game\Battle\LockOn\PlayerLockOnController.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <Target Name="EnsureCalyxEngineSdk" BeforeTargets="PrepareForBuild" Condition="!Exists('$(CalyxEngineSdkDir)\Include\CalyxEngine\Application.h') or !Exists('$(CalyxEngineSdkDir)\Include\Data\Engine') or !Exists('$(CalyxEngineSdkDir)\Include\externals\nlohmann\json.hpp')">

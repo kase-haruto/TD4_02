@@ -1,0 +1,8 @@
+{
+    "fields": {
+        "cooldown": 0.5,
+        "dodgeDuration": 0.6499999761581421,
+        "dodgeSpeed": 10.0,
+        "invincibleTime": 0.4000000059604645
+    }
+}

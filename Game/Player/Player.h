@@ -9,7 +9,10 @@
 #include "PlayerStats.h"
 #include "Sword/Sword.h"
 #include "Ability/PlayerAbility.h"
+#include <Game/Battle/LockOn/PlayerLockOnController.h>
 
+#include <cstddef>
+#include <vector>
 
 
 /*-----------------------------------------------------------------------------------------
@@ -41,6 +44,8 @@ public:
 	void SetDodgeEnabled(bool e) { dodge_.SetEnabled(e); }
 
 	bool IsDodgeButtonTriggered() const;
+	const ILockOnStateReader& GetLockOnStateReader() const { return lockOn_; }
+	std::vector<CalyxEngine::TransformRef> QueryVisibleLockOnTargets(size_t maxCount) const;
 
 private:
 	void OnHitByEnemyAttack(Collider* attacker);
@@ -50,6 +55,7 @@ private:
 	//						private variables
 	//===================================================================*/
 	PlayerAbility ability_;
+	PlayerLockOnController lockOn_;
 	PlayerStats stats_;
 	float damageAnimationTimer_ = 0.0f;
 

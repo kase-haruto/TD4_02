@@ -12,4 +12,8 @@ enum class InputAction {
 	Attack,
 	Ability,
 	Dash,
+	LockOn,
+	UnlockLockOn,
+	SwitchLockOnLeft,
+	SwitchLockOnRight,
 };

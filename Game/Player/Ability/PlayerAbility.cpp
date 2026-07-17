@@ -9,6 +9,7 @@
 #include <Engine/Objects/Collider/Collider.h>
 #include <Engine/Scene/Context/SceneContext.h>
 #include <Engine/Scene/Utility/SceneUtility.h>
+#include <Engine/Foundation/Clock/ClockManager.h>
 
 //game
 #include "../Player.h"
@@ -19,13 +20,25 @@ PlayerAbility::PlayerAbility() {
 }
 
 void PlayerAbility::Update(Player& player, const PlayerInputState* input, float dt) {
+	if (!input) {
+		// 入力を受け付けない状態（回避中など）。チャージを中断して元に戻す
+		if (cloneChargeTime_ > 0.0f) {
+			ClockManager::GetInstance()->SetTimeScale(1.0f);
+			cloneChargeTime_ = 0.0f;
+		}
+		ClearCloneGhost();
+		return;
+	}
+
 	if (input->cloneAbilityHeld) {
 		cloneChargeTime_ += dt;
+		ClockManager::GetInstance()->SetTimeScale(0.5f);
 		UpdateCloneGhost(player, CalculateCloneSpawnDistance());
 	}
 
 	if (input->cloneAbilityReleased) {
 		const float spawnDistance = CalculateCloneSpawnDistance();
+		ClockManager::GetInstance()->SetTimeScale(1.0f);
 		ClearCloneGhost();
 		SpawnClone(player, spawnDistance);
 		cloneChargeTime_ = 0.0f;
