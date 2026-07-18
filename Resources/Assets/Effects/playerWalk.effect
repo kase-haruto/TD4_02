@@ -10,9 +10,9 @@
         "cameraDitherNear": 0.0,
         "color": {
           "w": 1.0,
-          "x": 0.7473309636116028,
-          "y": 0.7473309636116028,
-          "z": 0.7473309636116028
+          "x": 0.6441280841827393,
+          "y": 0.455150306224823,
+          "z": 0.2727802097797394
         },
         "direction": {
           "enabled": false,
@@ -45,10 +45,10 @@
         "emitCount": 10,
         "emitDelay": 0.0,
         "emitDuration": -1.0,
-        "emitRate": 0.6000000238418579,
-        "emitterShape": 2,
+        "emitRate": 0.07000000029802322,
+        "emitterShape": 4,
         "followOneShot": false,
-        "isComplement": true,
+        "isComplement": false,
         "isDrawEnable": true,
         "isOneShot": false,
         "lifetime": {
@@ -75,7 +75,7 @@
             "invert": false,
             "name": "OverLifetimeModule",
             "start": [
-              0.6000000238418579,
+              0.4000000059604645,
               0.0,
               0.0,
               1.0
@@ -86,10 +86,32 @@
             "enabled": true,
             "gravity": {
               "x": 0.0,
-              "y": 2.0,
+              "y": 0.5,
               "z": 0.0
             },
             "name": "GravityModule"
+          },
+          {
+            "blend": 0,
+            "clamp01": true,
+            "ease": 0,
+            "enabled": true,
+            "end": [
+              0.0,
+              0.0,
+              1.0,
+              1.0
+            ],
+            "guid": "1918ca7f-8226-4f98-b472-49755d55deb5",
+            "invert": false,
+            "name": "OverLifetimeModule",
+            "start": [
+              0.25,
+              0.25,
+              0.0,
+              1.0
+            ],
+            "target": 0
           }
         ],
         "offset": {
@@ -102,7 +124,7 @@
           "y": 0.0,
           "z": 0.0
         },
-        "randomSpinEmit": false,
+        "randomSpinEmit": true,
         "rotation": {
           "w": 1.0,
           "x": 0.0,
@@ -111,8 +133,8 @@
         },
         "scale": {
           "constant": {
-            "x": 1.0,
-            "y": 1.0,
+            "x": 0.5,
+            "y": 0.5,
             "z": 1.0
           },
           "max": {
@@ -125,14 +147,14 @@
             "y": 0.10000000149011612,
             "z": 0.5
           },
-          "mode": 1
+          "mode": 0
         },
         "shapeAngle": 30.0,
         "shapeRadius": 0.5,
         "shapeSize": {
-          "x": 1.0,
-          "y": 1.0,
-          "z": 1.0
+          "x": 0.5,
+          "y": 0.10000000149011612,
+          "z": 0.5
         },
         "spin": {
           "constant": {
@@ -162,12 +184,12 @@
           },
           "max": {
             "x": 0.30000001192092896,
-            "y": 0.699999988079071,
+            "y": 0.20000000298023224,
             "z": 0.30000001192092896
           },
           "min": {
             "x": -0.30000001192092896,
-            "y": 0.20000000298023224,
+            "y": 0.0,
             "z": -0.30000001192092896
           },
           "mode": 1
