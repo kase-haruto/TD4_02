@@ -12,13 +12,14 @@ void HomingMove::Update(BaseEnemy& self, const CalyxEngine::Vector3& targetPos, 
 
 	const float distanceSq = toTarget.LengthSquared();
 	// 探索範囲外なら何もしない
-	if (distanceSq > stats.detectionRange * stats.detectionRange) {
+	if (distanceSq > stats.detectionRange * stats.detectionRange && !isFound_) {
 		return;
 	}
 	// 攻撃範囲まで近づいたら何もしない
 	if (distanceSq <= stats.attackRange * stats.attackRange) {
 		return;
 	}
+	if (!isFound_) { isFound_ = true; }
 
 	CalyxEngine::Vector3 dir = toTarget.Normalize();
 	self.GetCharacterMovement().AddMovementInput(dir);
