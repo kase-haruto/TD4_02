@@ -34,9 +34,25 @@ public:
 
 	void ClearClones();
 
-	void OnCloneWallDeath();
+	void OnCloneWallDeath(PlayerClone* clone);
 
-private:	
+	//===================================================================*/
+	//						UI 連携
+	//===================================================================*/
+	struct CloneSlotView {
+		enum class State {
+			Usable, // 使える（青）
+			InUse,  // 使用中（灰）
+			Locked, // クールタイム中（赤・残量で縮む）
+		};
+		State state = State::Usable;
+		float cooldownRatio = 0.0f; // Locked時のみ: 残り/全体 (1→0)
+	};
+
+	int MaxCloneCount() const { return param_.maxCloneCount; }
+	std::vector<CloneSlotView> BuildSlotViews() const;
+
+private:
 	//===================================================================*/
 	//						private method
 	//===================================================================*/
@@ -73,12 +89,19 @@ private:
 		float cloneLockDuration = 5.0f;
 	}param_;
 
-	std::vector<std::weak_ptr<PlayerClone>> clones_; //!< 生成されたクローンのリスト
+	// 固定スロット
+	struct CloneSlot {
+		enum class State { Free, InUse, Cooldown };
+		State state = State::Free;
+		std::weak_ptr<PlayerClone> clone; //!< InUse時に生成中のクローン
+		float cooldown = 0.0f;            //!< Cooldown時の残り秒数
+	};
+	std::vector<CloneSlot> slots_;          //!< maxCloneCount 個の固定スロット
 	std::weak_ptr<PlayerClone> cloneGhost_; //!< 長押し中に表示する生成位置のプレビュー
 	float cloneChargeTime_ = 0.0f;
-	std::vector<float> slotCooldowns_;
 
-	void RefreshClones();
+	void EnsureSlots();    //!< slots_ を maxCloneCount 個に揃える
+	void ReconcileSlots(); //!< 壁以外で消えたクローンのスロットを空きに戻す
 	float CalculateCloneSpawnDistance() const;
 	CalyxEngine::Vector3 CalculateCloneSpawnPosition(Player& player, float spawnDistance) const;
 	void UpdateCloneGhost(Player& player, float spawnDistance);

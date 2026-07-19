@@ -7,6 +7,7 @@
 #include "PlayerMotor.h"
 #include "PlayerDodge.h"
 #include "PlayerStats.h"
+#include "PlayerUI.h"
 #include "Sword/Sword.h"
 #include "Ability/PlayerAbility.h"
 #include <Game/Battle/LockOn/PlayerLockOnController.h>
@@ -65,6 +66,7 @@ private:
 	PlayerAbility ability_;
 	PlayerLockOnController lockOn_;
 	PlayerStats stats_;
+	PlayerUI    ui_;
 	float damageAnimationTimer_ = 0.0f;
 
 	int        currentHp_ = 0;  // 現在HP

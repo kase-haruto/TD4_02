@@ -17,11 +17,14 @@
 
 PlayerAbility::PlayerAbility() {
 	param_.LoadParams();
+	EnsureSlots();
 }
 
 void PlayerAbility::Update(Player& player, const PlayerInputState* input, float dt) {
+	EnsureSlots();
+	ReconcileSlots();
 	UpdateSlotCooldowns(ClockManager::GetInstance()->GetDeltaTime());
-	
+
 	if (!input) {
 		// 入力を受け付けない状態（回避中など）。チャージを中断して元に戻す
 		if (cloneChargeTime_ > 0.0f) {
@@ -58,9 +61,11 @@ CalyxEngine::SerializableObject& PlayerAbility::SerializableParam() {
 }
 
 void PlayerAbility::ApplyKnockbackToClones(const CalyxEngine::Vector3& velocity, float friction) {
-	RefreshClones();
-	for (auto& weak : clones_) {
-		if (auto clone = weak.lock()) {
+	for (auto& slot : slots_) {
+		if (slot.state != CloneSlot::State::InUse) {
+			continue;
+		}
+		if (auto clone = slot.clone.lock()) {
 			clone->ApplyKnockback(velocity, friction);
 		}
 	}
@@ -70,29 +75,40 @@ void PlayerAbility::MoveClones(const CalyxEngine::Vector3& delta) {
 	if (delta.LengthSquared() <= 0.0f) {
 		return;
 	}
-	RefreshClones();
-	for (auto& weak : clones_) {
-		if (auto clone = weak.lock()) {
+	for (auto& slot : slots_) {
+		if (slot.state != CloneSlot::State::InUse) {
+			continue;
+		}
+		if (auto clone = slot.clone.lock()) {
 			clone->AddWorldOffset(delta);
 		}
 	}
 }
 
 void PlayerAbility::ClearClones() {
-	for (auto& weak : clones_) {
-		if (auto clone = weak.lock()) {
+	for (auto& slot : slots_) {
+		if (auto clone = slot.clone.lock()) {
 			if (auto* context = SceneContext::Current()) {
 				context->RemoveObject(std::static_pointer_cast<SceneObject>(clone));
 			}
 		}
+		slot.state = CloneSlot::State::Free;
+		slot.clone.reset();
+		slot.cooldown = 0.0f;
 	}
-	clones_.clear();
-	slotCooldowns_.clear();
 	ClearCloneGhost();
 }
 
-void PlayerAbility::OnCloneWallDeath() {
-	slotCooldowns_.push_back(param_.cloneLockDuration);
+void PlayerAbility::OnCloneWallDeath(PlayerClone* clone) {
+	// 壁で消えたクローンのスロットを特定してクールタイム開始（その場で回復させる）
+	for (auto& slot : slots_) {
+		if (slot.state == CloneSlot::State::InUse && slot.clone.lock().get() == clone) {
+			slot.state = CloneSlot::State::Cooldown;
+			slot.cooldown = param_.cloneLockDuration;
+			slot.clone.reset();
+			return;
+		}
+	}
 }
 
 void PlayerAbility::SpawnClone(Player& player) {
@@ -100,10 +116,19 @@ void PlayerAbility::SpawnClone(Player& player) {
 }
 
 void PlayerAbility::SpawnClone(Player& player, float spawnDistance) {
-	RefreshClones();
+	EnsureSlots();
+	ReconcileSlots();
 
-	if (!CanSpawnClone()) {
-		// 最大クローン数に達している場合は生成しない
+	// 先頭の空きスロットを使う
+	CloneSlot* freeSlot = nullptr;
+	for (auto& slot : slots_) {
+		if (slot.state == CloneSlot::State::Free) {
+			freeSlot = &slot;
+			break;
+		}
+	}
+	if (!freeSlot) {
+		// 空きスロットが無い（最大数 or クール中で埋まっている）
 		return;
 	}
 
@@ -115,15 +140,26 @@ void PlayerAbility::SpawnClone(Player& player, float spawnDistance) {
 	clone->SetAimOrigin(&player);
 	clone->SetOwnerAbility(this);
 	clone->SetRotate(player.GetWorldTransform().rotation);
-	clones_.push_back(clone);
+
+	freeSlot->state = CloneSlot::State::InUse;
+	freeSlot->clone = clone;
 }
 
-void PlayerAbility::RefreshClones() {
-	clones_.erase(
-		std::remove_if(clones_.begin(), clones_.end(), [](const std::weak_ptr<PlayerClone>& clone) {
-			return clone.expired();
-		}),
-		clones_.end());
+void PlayerAbility::EnsureSlots() {
+	const int want = param_.maxCloneCount < 0 ? 0 : param_.maxCloneCount;
+	if (static_cast<int>(slots_.size()) < want) {
+		slots_.resize(static_cast<size_t>(want));
+	}
+}
+
+void PlayerAbility::ReconcileSlots() {
+	// 壁以外の理由（シーン破棄など）でクローンが消えたスロットを空きに戻す
+	for (auto& slot : slots_) {
+		if (slot.state == CloneSlot::State::InUse && slot.clone.expired()) {
+			slot.state = CloneSlot::State::Free;
+			slot.clone.reset();
+		}
+	}
 }
 
 float PlayerAbility::CalculateCloneSpawnDistance() const {
@@ -149,8 +185,6 @@ CalyxEngine::Vector3 PlayerAbility::CalculateCloneSpawnPosition(Player& player, 
 }
 
 void PlayerAbility::UpdateCloneGhost(Player& player, float spawnDistance) {
-	RefreshClones();
-
 	if (!param_.showCloneGhost || !CanSpawnClone()) {
 		ClearCloneGhost();
 		return;
@@ -201,18 +235,52 @@ void PlayerAbility::ClearCloneGhost() {
 }
 
 bool PlayerAbility::CanSpawnClone() const {
-	const int32_t maxCloneCount = param_.maxCloneCount < 0 ? 0 : param_.maxCloneCount;
-	const int32_t locked = static_cast<int32_t>(slotCooldowns_.size());
-	const int32_t effectiveMax = (std::max)(0, maxCloneCount - locked);
-	return static_cast<int32_t>(clones_.size()) < effectiveMax;
+	for (const auto& slot : slots_) {
+		if (slot.state == CloneSlot::State::Free) {
+			return true;
+		}
+	}
+	return false;
 }
 
 void PlayerAbility::UpdateSlotCooldowns(float dt) {
-	for (auto& remain : slotCooldowns_) {
-		remain -= dt;
+	for (auto& slot : slots_) {
+		if (slot.state != CloneSlot::State::Cooldown) {
+			continue;
+		}
+		slot.cooldown -= dt;
+		if (slot.cooldown <= 0.0f) {
+			slot.cooldown = 0.0f;
+			slot.state = CloneSlot::State::Free;
+		}
 	}
-	slotCooldowns_.erase(
-		std::remove_if(slotCooldowns_.begin(), slotCooldowns_.end(),
-			[](float remain) { return remain <= 0.0f; }),
-		slotCooldowns_.end());
+}
+
+std::vector<PlayerAbility::CloneSlotView> PlayerAbility::BuildSlotViews() const {
+	std::vector<CloneSlotView> views;
+	views.reserve(slots_.size());
+
+	const float duration = param_.cloneLockDuration > 0.0f ? param_.cloneLockDuration : 1.0f;
+
+	// スロット順そのまま（ピップ i ⇄ スロット i）。並び替えなし
+	for (const auto& slot : slots_) {
+		CloneSlotView view;
+		switch (slot.state) {
+		case CloneSlot::State::Free:
+			view.state = CloneSlotView::State::Usable;
+			break;
+		case CloneSlot::State::InUse:
+			// 既に消えている場合は空き扱い（次のUpdateで解放される）
+			view.state = slot.clone.expired()
+				? CloneSlotView::State::Usable
+				: CloneSlotView::State::InUse;
+			break;
+		case CloneSlot::State::Cooldown:
+			view.state = CloneSlotView::State::Locked;
+			view.cooldownRatio = std::clamp(slot.cooldown / duration, 0.0f, 1.0f);
+			break;
+		}
+		views.push_back(view);
+	}
+	return views;
 }

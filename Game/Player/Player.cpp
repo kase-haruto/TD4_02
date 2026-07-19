@@ -46,6 +46,8 @@ void Player::Initialize() {
 	}
 
 	walk_.Load("playerWalk");
+
+	ui_.Initialize(ability_.MaxCloneCount());
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -54,6 +56,7 @@ void Player::Initialize() {
 void Player::Update(float dt) {
 	damageAnimationTimer_ = damageAnimationTimer_ > dt ? damageAnimationTimer_ - dt : 0.0f;
 	UpdateInvincible(dt);
+	ui_.Update(currentHp_, stats_.maxHp, ability_.BuildSlotViews());
 	if (currentHp_ <= 0) {
 		UpdateWalkEffect(false);
 		Respawn();
