@@ -1,7 +1,7 @@
 {
     "fields": {
         "PlayerPtr": "7cf4af54-848a-4332-a62a-2b36e4c02dd8",
-        "attackDamage": 2,
+        "attackDamage": 4,
         "attackInterval": 3.0,
         "attackRange": 6.0,
         "contactDamage": 1,
@@ -10,6 +10,6 @@
         "knockbackInitialSpeed": 16.0,
         "knockbackStopSpeed": 0.20000000298023224,
         "maxHp": 5,
-        "moveSpeed": 2.0
+        "moveSpeed": 1.5
     }
 }

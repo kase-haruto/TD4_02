@@ -153,7 +153,7 @@ void PlayerAbility::EnsureSlots() {
 }
 
 void PlayerAbility::ReconcileSlots() {
-	// 壁以外の理由（シーン破棄など）でクローンが消えたスロットを空きに戻す
+	// 壁以外の理由でクローンが消えたスロットを空きに戻す
 	for (auto& slot : slots_) {
 		if (slot.state == CloneSlot::State::InUse && slot.clone.expired()) {
 			slot.state = CloneSlot::State::Free;
@@ -262,7 +262,7 @@ std::vector<PlayerAbility::CloneSlotView> PlayerAbility::BuildSlotViews() const 
 
 	const float duration = param_.cloneLockDuration > 0.0f ? param_.cloneLockDuration : 1.0f;
 
-	// スロット順そのまま（ピップ i ⇄ スロット i）。並び替えなし
+	// スロット順そのまま
 	for (const auto& slot : slots_) {
 		CloneSlotView view;
 		switch (slot.state) {
