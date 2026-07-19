@@ -20,6 +20,8 @@ PlayerAbility::PlayerAbility() {
 }
 
 void PlayerAbility::Update(Player& player, const PlayerInputState* input, float dt) {
+	UpdateSlotCooldowns(ClockManager::GetInstance()->GetDeltaTime());
+	
 	if (!input) {
 		// 入力を受け付けない状態（回避中など）。チャージを中断して元に戻す
 		if (cloneChargeTime_ > 0.0f) {
@@ -85,8 +87,12 @@ void PlayerAbility::ClearClones() {
 		}
 	}
 	clones_.clear();
-
+	slotCooldowns_.clear();
 	ClearCloneGhost();
+}
+
+void PlayerAbility::OnCloneWallDeath() {
+	slotCooldowns_.push_back(param_.cloneLockDuration);
 }
 
 void PlayerAbility::SpawnClone(Player& player) {
@@ -107,6 +113,7 @@ void PlayerAbility::SpawnClone(Player& player, float spawnDistance) {
 		return;
 	}
 	clone->SetAimOrigin(&player);
+	clone->SetOwnerAbility(this);
 	clone->SetRotate(player.GetWorldTransform().rotation);
 	clones_.push_back(clone);
 }
@@ -195,5 +202,17 @@ void PlayerAbility::ClearCloneGhost() {
 
 bool PlayerAbility::CanSpawnClone() const {
 	const int32_t maxCloneCount = param_.maxCloneCount < 0 ? 0 : param_.maxCloneCount;
-	return clones_.size() < static_cast<size_t>(maxCloneCount);
+	const int32_t locked = static_cast<int32_t>(slotCooldowns_.size());
+	const int32_t effectiveMax = (std::max)(0, maxCloneCount - locked);
+	return static_cast<int32_t>(clones_.size()) < effectiveMax;
+}
+
+void PlayerAbility::UpdateSlotCooldowns(float dt) {
+	for (auto& remain : slotCooldowns_) {
+		remain -= dt;
+	}
+	slotCooldowns_.erase(
+		std::remove_if(slotCooldowns_.begin(), slotCooldowns_.end(),
+			[](float remain) { return remain <= 0.0f; }),
+		slotCooldowns_.end());
 }
