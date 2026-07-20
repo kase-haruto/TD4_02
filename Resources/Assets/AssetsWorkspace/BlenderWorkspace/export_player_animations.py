@@ -93,6 +93,25 @@ def main() -> None:
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     results: list[dict[str, object]] = []
     clear_active_animations()
+    exported_objects = [
+        obj
+        for obj in bpy.data.objects
+        if obj == armature or (obj.type == "MESH" and obj.visible_get())
+    ]
+
+    def enable_layer_collections(layer_collection: bpy.types.LayerCollection) -> None:
+        layer_collection.exclude = False
+        layer_collection.hide_viewport = False
+        for child in layer_collection.children:
+            enable_layer_collections(child)
+
+    enable_layer_collections(bpy.context.view_layer.layer_collection)
+    armature.hide_set(False)
+    bpy.context.view_layer.update()
+    bpy.ops.object.select_all(action="DESELECT")
+    for obj in exported_objects:
+        obj.select_set(True)
+    bpy.context.view_layer.objects.active = armature
 
     for action_name in action_names:
         action = bpy.data.actions[action_name]
@@ -113,6 +132,7 @@ def main() -> None:
             export_frame_range=True,
             export_force_sampling=True,
             export_materials="NONE",
+            use_selection=True,
             export_cameras=False,
             export_lights=False,
         )
