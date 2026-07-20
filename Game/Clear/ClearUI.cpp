@@ -15,17 +15,19 @@ void ClearUI::Initialize() {
 	logo_->SetSizePx(MenuLayout::kLogoW, MenuLayout::kLogoH);
 
 	menu_.Initialize(MenuLayout::kBaseX, MenuLayout::kFirstItemY, MenuLayout::kLineGap);
-	menu_.SetSelector("", MenuLayout::kSelectorW, MenuLayout::kSelectorH);
+	menu_.SetSelector("Textures/Game/UI/select.png", MenuLayout::kSelectorW, MenuLayout::kSelectorH);
 
 	MenuUI::ItemDesc toTitle{};
 	toTitle.width = MenuLayout::kItemW;
 	toTitle.height = MenuLayout::kItemH;
+	toTitle.texturePath = "Textures/Game/Text/titleback.png";
 	toTitle.onDecide = [this] { OnTitle(); };
 	menu_.AddItem(toTitle);
 
 	MenuUI::ItemDesc exit{};
 	exit.width = MenuLayout::kItemW;
 	exit.height = MenuLayout::kItemH;
+	exit.texturePath = "Textures/Game/Text/owaru.png";
 	exit.onDecide = [this] { OnExit(); };
 	menu_.AddItem(exit);
 }

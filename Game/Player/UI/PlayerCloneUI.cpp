@@ -32,7 +32,7 @@ void PlayerCloneUI::Initialize(int maxCount) {
 		const float cx = PipCenterX(i, maxCount_);
 
 		// 状態色
-		auto fill = SceneAPI::Instantiate<UiSprite>("Textures/Game/UI/tamashi_blue.png");
+		auto fill = SceneAPI::Instantiate<UiSprite>("Textures/Game/UI/tamashi_main.png");
 		fill->SetAnchor({ 0.5f, 1.0f });
 		fill->SetPositionPx(cx, kPipsBottomY);
 		fill->SetSizePx(kPipSize, kPipSize);
