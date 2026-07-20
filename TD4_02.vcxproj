@@ -57,7 +57,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Label="CalyxEngineSdk">
-    <CalyxEngineVersion>v1.2.7</CalyxEngineVersion>
+    <CalyxEngineVersion>v1.2.8</CalyxEngineVersion>
     <CalyxEngineSdkDir Condition="'$(CalyxEngineSdkDir)'=='' and Exists('$(LOCALAPPDATA)\CalyxEngine\Engines\$(CalyxEngineVersion)\SDK\Include\CalyxEngine\Application.h') and Exists('$(LOCALAPPDATA)\CalyxEngine\Engines\$(CalyxEngineVersion)\SDK\Include\Data\Engine') and Exists('$(LOCALAPPDATA)\CalyxEngine\Engines\$(CalyxEngineVersion)\SDK\Include\externals\nlohmann\json.hpp')">$(LOCALAPPDATA)\CalyxEngine\Engines\$(CalyxEngineVersion)\SDK</CalyxEngineSdkDir>
     <CalyxEngineSdkDir Condition="'$(CalyxEngineSdkDir)'=='' and '$(CALYX_ENGINE_SDK_DIR)'!='' and Exists('$(CALYX_ENGINE_SDK_DIR)\Include\CalyxEngine\Application.h') and Exists('$(CALYX_ENGINE_SDK_DIR)\Include\Data\Engine') and Exists('$(CALYX_ENGINE_SDK_DIR)\Include\externals\nlohmann\json.hpp')">$(CALYX_ENGINE_SDK_DIR)</CalyxEngineSdkDir>
     <CalyxEngineSdkDir Condition="'$(CalyxEngineSdkDir)'==''">$(LOCALAPPDATA)\CalyxEngine\Engines\$(CalyxEngineVersion)\SDK</CalyxEngineSdkDir>
@@ -189,6 +189,7 @@ if exist "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" copy "$(Win
     <ClCompile Include="Game/GameApplication.cpp" />
     <ClCompile Include="Game/GameMain.cpp" />
     <ClCompile Include="Game/GameObjectRegistry.generated.cpp" />
+    <ClCompile Include="Game\Clear\ClearUI.cpp" />
     <ClCompile Include="Game\Enemy\Attack\ChargeAttack.cpp" />
     <ClCompile Include="Game\Enemy\Attack\MeleeAttack.cpp" />
     <ClCompile Include="Game\Enemy\Attack\PunchAttack.cpp" />
@@ -212,11 +213,16 @@ if exist "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" copy "$(Win
     <ClCompile Include="Game\Player\Player.cpp" />
     <ClCompile Include="Game\Player\PlayerDodge.cpp" />
     <ClCompile Include="Game\Player\PlayerMotor.cpp" />
+    <ClCompile Include="Game\Player\PlayerUI.cpp" />
     <ClCompile Include="Game\Player\Sword\Sword.cpp" />
     <ClCompile Include="Game\Player\Ability\PlayerAbility.cpp" />
     <ClCompile Include="Game\Player\Base\PlayerBase.cpp" />
     <ClCompile Include="Game\Player\Attack\PlayerAttack.cpp" />
     <ClCompile Include="Game\Editor\GameEditorExtension.cpp" />
+    <ClCompile Include="Game\Player\UI\PlayerCloneUI.cpp" />
+    <ClCompile Include="Game\Player\UI\PlayerHPUI.cpp" />
+    <ClCompile Include="Game\Title\TitleUI.cpp" />
+    <ClCompile Include="Game\UI\MenuUI.cpp" />
     <ClCompile Include="Game\World\Door.cpp" />
     <ClCompile Include="Game\World\SpawnPoint.cpp" />
     <ClCompile Include="Game\Battle\LockOn\DefaultLockOnTargetQuery.cpp" />

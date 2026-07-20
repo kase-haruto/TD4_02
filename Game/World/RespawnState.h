@@ -1,3 +1,4 @@
+#pragma once
 #include <string>
 #include <Engine/Foundation/Math/Vector3.h>
 #include <Engine/Foundation/Utility/Guid/Guid.h>
@@ -17,7 +18,10 @@ public:
 	void MarkPendingApply() { pendingApply_ = true; }
 	bool ConsumePendingApply() { bool p = pendingApply_; pendingApply_ = false; return p; }
 
-	void Clear() { has_ = false; pendingApply_ = false; activated_ = {}; }
+	void MarkJustRespawned() { justRespawned_ = true; }
+	bool ConsumeJustRespawned() { bool p = justRespawned_; justRespawned_ = false; return p; }
+
+	void Clear() { has_ = false; pendingApply_ = false; justRespawned_ = false; activated_ = {}; }
 
 	const Guid& ActivateGuid() const { return activated_; }
 
@@ -25,6 +29,7 @@ private:
 	RespawnState() = default;
 	bool has_ = false;
 	bool pendingApply_ = false;
+	bool justRespawned_ = false;
 	std::string scenePath_;
 	CalyxEngine::Vector3 pos_{};
 	Guid activated_;

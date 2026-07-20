@@ -1,0 +1,151 @@
+[
+    {
+        "cameraDitherEnabled": false,
+        "castShadow": true,
+        "colliderConfig": {
+            "capsuleHeight": 2.0,
+            "capsuleRadius": 0.5,
+            "isCollisionEnabled": true,
+            "isDraw": true,
+            "isTrigger": false,
+            "layerId": 3,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "radius": 1.0,
+            "rotate": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "size": {
+                "x": 1.0,
+                "y": 1.7000000476837158,
+                "z": 1.0
+            }
+        },
+        "colliderKind": 1,
+        "drawEnable": true,
+        "guid": "9c1299f0-f8c0-4f60-8993-2e24d76978c1",
+        "modelConfig": {
+            "blendMode": 5,
+            "colorOverride": {
+                "w": 1.0,
+                "x": 1.0,
+                "y": 0.699999988079071,
+                "z": 0.800000011920929
+            },
+            "materialGuid": "00000000-0000-0000-0000-000000000000",
+            "modelName": "Enemy_01_idle.gltf",
+            "textureGuid": "ec675a35-7435-45c0-b948-d23242ff7989",
+            "uvTransConfig": {
+                "rotation": 0.0,
+                "scale": {
+                    "x": 1.0,
+                    "y": 1.0
+                }
+            }
+        },
+        "name": "Slime",
+        "objectType": 2,
+        "outlineColor": {
+            "w": 1.0,
+            "x": 0.019999999552965164,
+            "y": 0.019999999552965164,
+            "z": 0.02500000037252903
+        },
+        "outlineEnabled": false,
+        "outlineThickness": 0.03500000014901161,
+        "parentGuid": "00000000-0000-0000-0000-000000000000",
+        "physicsBodyConfig": {
+            "bodyType": 1,
+            "enabled": true,
+            "gravityScale": 1.0,
+            "mass": 1.0,
+            "pushbackRatio": 1.0,
+            "useGravity": true
+        },
+        "serializableParams": {
+            "Game/Actor/Enemy/AttackParam/MeleeAttack": {
+                "fields": {
+                    "attackDuration": 0.6010000109672546,
+                    "drawHitbox": true,
+                    "hitboxActiveEnd": 0.4000000059604645,
+                    "hitboxActiveStart": 0.25,
+                    "hitboxForwardOffset": 1.2000000476837158,
+                    "hitboxHeightOffset": 1.0,
+                    "hitboxSize": [
+                        1.0,
+                        0.800000011920929,
+                        1.0
+                    ]
+                }
+            },
+            "Game/Actor/Enemy/Slime": {
+                "fields": {
+                    "PlayerPtr": "7cf4af54-848a-4332-a62a-2b36e4c02dd8",
+                    "attackDamage": 5,
+                    "attackInterval": 2.0,
+                    "attackRange": 1.2000000476837158,
+                    "contactDamage": 1,
+                    "detectionRange": 6.0,
+                    "knockbackDamping": 8.0,
+                    "knockbackInitialSpeed": 16.0,
+                    "knockbackStopSpeed": 0.20000000298023224,
+                    "maxHp": 5,
+                    "moveSpeed": 2.0
+                }
+            }
+        },
+        "transform": {
+            "inheritRotate": true,
+            "inheritScale": true,
+            "inheritTranslate": true,
+            "rotation": {
+                "w": 1.0,
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "scale": {
+                "x": 0.5,
+                "y": 0.5,
+                "z": 0.5
+            },
+            "translation": {
+                "x": -5.575861930847168,
+                "y": 0.0010150078451260924,
+                "z": 5.469261646270752
+            }
+        },
+        "type": "Slime",
+        "visualOffset": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        },
+        "worldTransform": {
+            "inheritRotate": true,
+            "inheritScale": true,
+            "inheritTranslate": true,
+            "rotation": {
+                "w": 1.0,
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "scale": {
+                "x": 0.5,
+                "y": 0.5,
+                "z": 0.5
+            },
+            "translation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            }
+        }
+    }
+]

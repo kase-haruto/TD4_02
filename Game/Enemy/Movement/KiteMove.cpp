@@ -20,8 +20,9 @@ void KiteMove::Update(BaseEnemy& self, const CalyxEngine::Vector3& targetPos, fl
 	const float distanceSq = toTarget.LengthSquared();
 
 	// 索敵範囲外なら何もしない
-	if (distanceSq > stats.detectionRange * stats.detectionRange) { return; }
+	if (distanceSq > stats.detectionRange * stats.detectionRange && !isFound_) { return; }
 	if (distanceSq <= 1.0e-6f) { return; }
+	if (!isFound_) { isFound_ = true; }
 
 	CalyxEngine::Vector3 dir = toTarget.Normalize();
 

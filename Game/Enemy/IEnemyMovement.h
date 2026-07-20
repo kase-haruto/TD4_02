@@ -14,4 +14,7 @@ public:
 	virtual ~IEnemyMovement() = default;
 
 	virtual void Update(BaseEnemy& self, const CalyxEngine::Vector3& targetPosition, float dt) = 0;
+
+protected:
+	bool isFound_ = false;
 };

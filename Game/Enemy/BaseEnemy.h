@@ -93,4 +93,5 @@ protected:
 	bool useSecondAttackAnimation_ = false;
 
 	CalyxEngine::EffectAsset hit_;
+	CalyxEngine::EffectAsset hitLight_;
 };

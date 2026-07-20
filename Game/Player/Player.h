@@ -7,9 +7,13 @@
 #include "PlayerMotor.h"
 #include "PlayerDodge.h"
 #include "PlayerStats.h"
+#include "PlayerUI.h"
 #include "Sword/Sword.h"
 #include "Ability/PlayerAbility.h"
 #include <Game/Battle/LockOn/PlayerLockOnController.h>
+
+#include <Engine/Application/Effects/EffectAsset.h>
+#include <Engine/Application/Effects/EffectPlayer.h>
 
 #include <cstddef>
 #include <vector>
@@ -51,16 +55,28 @@ private:
 	void OnHitByEnemyAttack(Collider* attacker);
 	void Respawn();
 
+	void UpdateInvincible(float dt);
+	void StartInvincible(float duration);
+
+	void UpdateWalkEffect(bool isWalking);
+
 	//===================================================================*/
 	//						private variables
 	//===================================================================*/
 	PlayerAbility ability_;
 	PlayerLockOnController lockOn_;
 	PlayerStats stats_;
+	PlayerUI    ui_;
 	float damageAnimationTimer_ = 0.0f;
 
 	int        currentHp_ = 0;  // 現在HP
+	float      invincibleTimer_ = 0.0f;
 	CalyxEngine::Vector3 lastCloneAnchor_{};
 
 	CalyxEngine::Vector3 respawnPoint_{};
+
+	bool isWalk_ = false;
+	CalyxEngine::EffectAsset walk_;
+	CalyxEngine::EffectHandle walkHandle_{};
+
 };

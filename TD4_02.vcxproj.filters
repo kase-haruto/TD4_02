@@ -67,6 +67,12 @@
     <ClCompile Include="Game\Battle\LockOn\LockOnTargetComponent.cpp" />
     <ClCompile Include="Game\Battle\LockOn\LockOnTargetRegistry.cpp" />
     <ClCompile Include="Game\Battle\LockOn\PlayerLockOnController.cpp" />
+    <ClCompile Include="Game\Player\PlayerUI.cpp" />
+    <ClCompile Include="Game\Player\UI\PlayerHPUI.cpp" />
+    <ClCompile Include="Game\Player\UI\PlayerCloneUI.cpp" />
+    <ClCompile Include="Game\Title\TitleUI.cpp" />
+    <ClCompile Include="Game\Clear\ClearUI.cpp" />
+    <ClCompile Include="Game\UI\MenuUI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game\Collision\CollisionLayerUtil.h" />

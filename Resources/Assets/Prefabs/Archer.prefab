@@ -1,0 +1,151 @@
+[
+    {
+        "cameraDitherEnabled": false,
+        "castShadow": true,
+        "colliderConfig": {
+            "capsuleHeight": 2.0,
+            "capsuleRadius": 0.5,
+            "isCollisionEnabled": true,
+            "isDraw": true,
+            "isTrigger": false,
+            "layerId": 3,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "radius": 1.0,
+            "rotate": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "size": {
+                "x": 1.0,
+                "y": 1.2999999523162842,
+                "z": 1.0
+            }
+        },
+        "colliderKind": 1,
+        "drawEnable": true,
+        "guid": "869cefe6-7fe7-45e7-8bca-844997ebc467",
+        "modelConfig": {
+            "blendMode": 5,
+            "colorOverride": {
+                "w": 1.0,
+                "x": 0.6000000238418579,
+                "y": 0.800000011920929,
+                "z": 1.0
+            },
+            "materialGuid": "00000000-0000-0000-0000-000000000000",
+            "modelName": "Enemy_06_idle.gltf",
+            "textureGuid": "00000000-0000-0000-0000-000000000000",
+            "uvTransConfig": {
+                "rotation": 0.0,
+                "scale": {
+                    "x": 1.0,
+                    "y": 1.0
+                }
+            }
+        },
+        "name": "Archer",
+        "objectType": 2,
+        "outlineColor": {
+            "w": 1.0,
+            "x": 0.019999999552965164,
+            "y": 0.019999999552965164,
+            "z": 0.02500000037252903
+        },
+        "outlineEnabled": false,
+        "outlineThickness": 0.03500000014901161,
+        "parentGuid": "00000000-0000-0000-0000-000000000000",
+        "physicsBodyConfig": {
+            "bodyType": 1,
+            "enabled": true,
+            "gravityScale": 1.0,
+            "mass": 1.0,
+            "pushbackRatio": 1.0,
+            "useGravity": true
+        },
+        "serializableParams": {
+            "Game/Actor/Enemy/Archer": {
+                "fields": {
+                    "PlayerPtr": "7cf4af54-848a-4332-a62a-2b36e4c02dd8",
+                    "attackDamage": 4,
+                    "attackInterval": 3.0,
+                    "attackRange": 6.0,
+                    "contactDamage": 1,
+                    "detectionRange": 12.0,
+                    "knockbackDamping": 8.0,
+                    "knockbackInitialSpeed": 16.0,
+                    "knockbackStopSpeed": 0.20000000298023224,
+                    "maxHp": 5,
+                    "moveSpeed": 1.5
+                }
+            },
+            "Game/Actor/Enemy/AttackParam/RangedAttack": {
+                "fields": {
+                    "aimDuration": 0.4000000059604645,
+                    "arrowLifeTime": 3.0,
+                    "arrowSize": [
+                        0.10000000149011612,
+                        0.10000000149011612,
+                        0.6000000238418579
+                    ],
+                    "arrowSpeed": 8.0,
+                    "drawHitbox": false,
+                    "spawnForwardOffset": 1.0,
+                    "spawnHeight": 1.0
+                }
+            }
+        },
+        "transform": {
+            "inheritRotate": true,
+            "inheritScale": true,
+            "inheritTranslate": true,
+            "rotation": {
+                "w": 1.0,
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "scale": {
+                "x": 0.5,
+                "y": 0.5,
+                "z": 0.5
+            },
+            "translation": {
+                "x": -3.5040953159332275,
+                "y": 0.6550717353820801,
+                "z": 2.8942177295684814
+            }
+        },
+        "type": "Archer",
+        "visualOffset": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        },
+        "worldTransform": {
+            "inheritRotate": true,
+            "inheritScale": true,
+            "inheritTranslate": true,
+            "rotation": {
+                "w": 1.0,
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "scale": {
+                "x": 0.5,
+                "y": 0.5,
+                "z": 0.5
+            },
+            "translation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            }
+        }
+    }
+]

@@ -2,6 +2,7 @@
 
 #include <Game/Collision/CollisionLayerUtil.h>
 #include <Game/World/EnemyState.h>
+#include <Game/Player/Sword/Sword.h>
 
 #include <Engine/Objects/Collider/Collider.h>
 #include <Engine/Foundation/Math/Quaternion.h>
@@ -25,6 +26,7 @@ void BaseEnemy::Initialize() {
 	lockOnTarget_.Initialize(*this);
 	PlayAnimation(EnemyAnimationID::Idle);
 	hit_.Load("EnemyHit");
+	hitLight_.Load("hitLight");
 
 	if (EnemyState::Get().IsDefeated(GetGuid())) {
 		pendingRemove_ = true;
@@ -68,6 +70,7 @@ void BaseEnemy::Update(float dt) {
 			return;
 		}
 		EffectAPI::Play(hit_, worldTransform_.GetWorldPosition());
+		EffectAPI::Play(hitLight_, worldTransform_.GetWorldPosition());
 
 		knockbackVelocity_ = dir.Normalize() * stats_.knockbackInitialSpeed;
 	}
@@ -103,6 +106,8 @@ void BaseEnemy::OnCollisionEnter(Collider* other) {
 	if (playerAttackLayer && other->GetLayerId() == *playerAttackLayer) {
 		OnHitByPlayerAttack(other);
 		EffectAPI::Play(hit_, worldTransform_.GetWorldPosition());
+		EffectAPI::Play(hitLight_, worldTransform_.GetWorldPosition());
+
 	}
 
 
@@ -129,7 +134,10 @@ void BaseEnemy::Destroy() {
 
 void BaseEnemy::OnHitByPlayerAttack(Collider* attacker) {
 	ApplyKnockbackFrom(attacker);
-	TakeDamage(1);
+
+	auto* hitbox = attacker ? dynamic_cast<Sword*>(attacker->GetOwner()) : nullptr;
+	const int   damage = hitbox ? hitbox->GetDamage() : 1;
+	TakeDamage(damage);
 }
 
 void BaseEnemy::ApplyKnockbackFrom(Collider* attacker) {

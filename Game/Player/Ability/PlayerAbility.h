@@ -34,7 +34,25 @@ public:
 
 	void ClearClones();
 
-private:	
+	void OnCloneWallDeath(PlayerClone* clone);
+
+	//===================================================================*/
+	//						UI 連携
+	//===================================================================*/
+	struct CloneSlotView {
+		enum class State {
+			Usable, // 使える（青）
+			InUse,  // 使用中（灰）
+			Locked, // クールタイム中（赤・残量で縮む）
+		};
+		State state = State::Usable;
+		float cooldownRatio = 0.0f; // Locked時のみ: 残り/全体 (1→0)
+	};
+
+	int MaxCloneCount() const { return param_.maxCloneCount; }
+	std::vector<CloneSlotView> BuildSlotViews() const;
+
+private:
 	//===================================================================*/
 	//						private method
 	//===================================================================*/
@@ -57,6 +75,7 @@ private:
 			AddField("chargeTimeToMax", chargeTimeToMax).Category("Ability").Tooltip("最大距離までのチャージ時間");
 			AddField("showCloneGhost", showCloneGhost).Category("Clone Ghost").Tooltip("長押し中にクローンの生成位置を表示する");
 			AddField("cloneGhostAlpha", cloneGhostAlpha).Category("Clone Ghost").Tooltip("クローン位置表示の透明度");
+			AddField("cloneLockDuration", cloneLockDuration).Category("Ability").Tooltip("壁で消えた枠が再使用可能になるまでの秒数");
 		}
 
 		CalyxEngine::ParamPath GetParamPath() const override { return { CalyxEngine::ParamDomain::Game, "PlayerAbility", "Actor/Player/AbilityParam" }; }
@@ -67,17 +86,27 @@ private:
 		float chargeTimeToMax = 1.0f;	//!< 最大距離までのチャージ時間
 		bool showCloneGhost = true;		//!< 長押し中にクローン位置を表示する
 		float cloneGhostAlpha = 0.35f;	//!< クローン位置表示の透明度
+		float cloneLockDuration = 5.0f;
 	}param_;
 
-	std::vector<std::weak_ptr<PlayerClone>> clones_; //!< 生成されたクローンのリスト
+	// 固定スロット
+	struct CloneSlot {
+		enum class State { Free, InUse, Cooldown };
+		State state = State::Free;
+		std::weak_ptr<PlayerClone> clone; //!< InUse時に生成中のクローン
+		float cooldown = 0.0f;            //!< Cooldown時の残り秒数
+	};
+	std::vector<CloneSlot> slots_;          //!< maxCloneCount 個の固定スロット
 	std::weak_ptr<PlayerClone> cloneGhost_; //!< 長押し中に表示する生成位置のプレビュー
 	float cloneChargeTime_ = 0.0f;
 
-	void RefreshClones();
+	void EnsureSlots();    //!< slots_ を maxCloneCount 個に揃える
+	void ReconcileSlots(); //!< 壁以外で消えたクローンのスロットを空きに戻す
 	float CalculateCloneSpawnDistance() const;
 	CalyxEngine::Vector3 CalculateCloneSpawnPosition(Player& player, float spawnDistance) const;
 	void UpdateCloneGhost(Player& player, float spawnDistance);
 	void ClearCloneGhost();
 	bool CanSpawnClone() const;
+	void UpdateSlotCooldowns(float dt);
 };
 

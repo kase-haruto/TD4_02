@@ -33,6 +33,9 @@ void PlayerClone::OnCollisionEnter(Collider* other) {
 		return;
 	}
 
+	if (ownerAbility_) {
+		ownerAbility_->OnCloneWallDeath(this);   // どのスロットが消えたかAbilityへ伝える
+	}
 	if (auto* context = SceneContext::Current()) {
 		context->RemoveObject(std::static_pointer_cast<SceneObject>(shared_from_this()));
 	}

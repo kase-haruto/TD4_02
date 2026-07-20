@@ -1,0 +1,152 @@
+[
+    {
+        "cameraDitherEnabled": false,
+        "castShadow": true,
+        "colliderConfig": {
+            "capsuleHeight": 2.0,
+            "capsuleRadius": 0.5,
+            "isCollisionEnabled": true,
+            "isDraw": true,
+            "isTrigger": false,
+            "layerId": 3,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "radius": 1.0,
+            "rotate": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "size": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+            }
+        },
+        "colliderKind": 1,
+        "drawEnable": true,
+        "guid": "efca7fd4-7cda-4c82-a600-058a4c0f073c",
+        "modelConfig": {
+            "blendMode": 5,
+            "colorOverride": {
+                "w": 1.0,
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "materialGuid": "00000000-0000-0000-0000-000000000000",
+            "modelName": "Enemy_02_idle.gltf",
+            "textureGuid": "ec675a35-7435-45c0-b948-d23242ff7989",
+            "uvTransConfig": {
+                "rotation": 0.0,
+                "scale": {
+                    "x": 1.0,
+                    "y": 1.0
+                }
+            }
+        },
+        "name": "DoomEnemy",
+        "objectType": 2,
+        "outlineColor": {
+            "w": 1.0,
+            "x": 0.019999999552965164,
+            "y": 0.019999999552965164,
+            "z": 0.02500000037252903
+        },
+        "outlineEnabled": false,
+        "outlineThickness": 0.03500000014901161,
+        "parentGuid": "00000000-0000-0000-0000-000000000000",
+        "physicsBodyConfig": {
+            "bodyType": 1,
+            "enabled": true,
+            "gravityScale": 1.0,
+            "mass": 1.0,
+            "pushbackRatio": 1.0,
+            "useGravity": true
+        },
+        "serializableParams": {
+            "Game/Actor/Enemy/AttackParam/PunchAttack": {
+                "fields": {
+                    "attackDuration": 1.0,
+                    "drawHitbox": true,
+                    "hitboxActiveEnd": 0.699999988079071,
+                    "hitboxActiveStart": 0.550000011920929,
+                    "hitboxForwardOffset": 1.2000000476837158,
+                    "hitboxHeightOffset": 1.0,
+                    "hitboxSize": [
+                        1.600000023841858,
+                        1.2000000476837158,
+                        1.600000023841858
+                    ],
+                    "knockbackPower": 50.0
+                }
+            },
+            "Game/Actor/Enemy/DoomEnemy": {
+                "fields": {
+                    "PlayerPtr": "7cf4af54-848a-4332-a62a-2b36e4c02dd8",
+                    "attackDamage": 10,
+                    "attackInterval": 2.0,
+                    "attackRange": 2.0,
+                    "contactDamage": 1,
+                    "detectionRange": 6.0,
+                    "knockbackDamping": 8.0,
+                    "knockbackInitialSpeed": 16.0,
+                    "knockbackStopSpeed": 0.20000000298023224,
+                    "maxHp": 5,
+                    "moveSpeed": 1.5
+                }
+            }
+        },
+        "transform": {
+            "inheritRotate": true,
+            "inheritScale": true,
+            "inheritTranslate": true,
+            "rotation": {
+                "w": 1.0,
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "scale": {
+                "x": 0.5,
+                "y": 0.5,
+                "z": 0.5
+            },
+            "translation": {
+                "x": -7.543068885803223,
+                "y": 1.2035744190216064,
+                "z": 3.1642568111419678
+            }
+        },
+        "type": "DoomEnemy",
+        "visualOffset": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        },
+        "worldTransform": {
+            "inheritRotate": true,
+            "inheritScale": true,
+            "inheritTranslate": true,
+            "rotation": {
+                "w": 1.0,
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "scale": {
+                "x": 0.5,
+                "y": 0.5,
+                "z": 0.5
+            },
+            "translation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            }
+        }
+    }
+]
