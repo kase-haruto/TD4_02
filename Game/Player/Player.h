@@ -78,4 +78,5 @@ private:
 	bool isWalk_ = false;
 	CalyxEngine::EffectAsset walk_;
 	CalyxEngine::EffectHandle walkHandle_{};
+
 };

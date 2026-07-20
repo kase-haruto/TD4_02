@@ -5,7 +5,7 @@
 namespace {
 	constexpr float kScreenW     = 1280.0f;
 	constexpr float kCenterX     = kScreenW * 0.5f;
-	constexpr float kPipSize     = 40.0f;  // 1個の一辺(px)
+	constexpr float kPipSize     = 80.0f;  // 1個の一辺(px)
 	constexpr float kPipGap      = 14.0f;  // 隙間(px)
 	constexpr float kPipsBottomY = 640.0f; // 下端のY
 
@@ -32,14 +32,14 @@ void PlayerCloneUI::Initialize(int maxCount) {
 		const float cx = PipCenterX(i, maxCount_);
 
 		// 状態色
-		auto fill = SceneAPI::Instantiate<UiSprite>();
+		auto fill = SceneAPI::Instantiate<UiSprite>("Textures/Game/UI/tamashi_blue.png");
 		fill->SetAnchor({ 0.5f, 1.0f });
 		fill->SetPositionPx(cx, kPipsBottomY);
 		fill->SetSizePx(kPipSize, kPipSize);
 		fills_.push_back(fill);
 
 		// 灰
-		auto top = SceneAPI::Instantiate<UiSprite>();
+		auto top = SceneAPI::Instantiate<UiSprite>("Textures/Game/UI/tamashi_gray.png");
 		top->SetAnchor({ 0.5f, 0.0f });
 		top->SetPositionPx(cx, kPipsBottomY - kPipSize);
 		top->SetColorRGBA(kGray[0], kGray[1], kGray[2], kGray[3]);
