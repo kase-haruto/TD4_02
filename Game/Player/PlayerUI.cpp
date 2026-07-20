@@ -11,8 +11,8 @@ void PlayerUI::Initialize(int maxCloneCount) {
 	if (!hpFrame_) {
 		hpFrame_ = SceneAPI::Instantiate<UiSprite>("Textures/Game/UI/HP_back.png");
 		hpFrame_->SetAnchor({ 0.0f, 0.5f });
-		hpFrame_->SetPositionPx(HpBarLayout::kLeftX + 10.0f, HpBarLayout::kCenterY);
-		hpFrame_->SetSizePx(HpBarLayout::kWidth, HpBarLayout::kHeight);
+		hpFrame_->SetPositionPx(HpBarLayout::kLeftX-7.5f, HpBarLayout::kCenterY);
+		hpFrame_->SetSizePx(HpBarLayout::kWidth + 22.0f, HpBarLayout::kHeight);
 	}
 	// HPバー本体
 	if (!hp_) {
