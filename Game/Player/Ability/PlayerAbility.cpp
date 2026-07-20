@@ -146,6 +146,7 @@ void PlayerAbility::SpawnClone(Player& player, float spawnDistance) {
 
 	freeSlot->state = CloneSlot::State::InUse;
 	freeSlot->clone = clone;
+	justSpawned_ = true;
 }
 
 void PlayerAbility::EnsureSlots() {

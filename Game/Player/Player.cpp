@@ -70,6 +70,7 @@ void Player::Update(float dt) {
 			isRespawning_ = true;
 			Respawn();
 		}
+		FlushAnimation(dt);
 		Actor::Update(dt);
 		return;
 	}
@@ -78,6 +79,7 @@ void Player::Update(float dt) {
 
 	if (UpdateKnockback(dt)) {   // ノックバック中は技も入力も止める
 		UpdateWalkEffect(false);
+		FlushAnimation(dt);
 		Actor::Update(dt);
 		lastCloneAnchor_ = GetWorldPosition();
 		return;
@@ -114,12 +116,17 @@ void Player::Update(float dt) {
 	}
 	UpdateWalkEffect(canMove && in.move.LengthSquared() > 0.0f && GetCharacterMovement().IsMovingOnGround());
 
-	if (in.cloneAbilityHeld && !dodge_.IsDodging() && !attack_.BlocksMovement()) {
-		PlayAnimation(PlayerAnimationID::Spirit);
+	spiritAnimTimer_ = spiritAnimTimer_ > dt ? spiritAnimTimer_ - dt : 0.0f;
+	if (ability_.ConsumeJustSpawned()) {
+		spiritAnimTimer_ = 0.3f;
+	}
+	if (ability_.IsCharging() || spiritAnimTimer_ > 0.0f) {
+		RequestAnimation(PlayerAnimationID::Spirit);
 	}
 	if (damageAnimationTimer_ > 0.0f) {
-		PlayAnimation(PlayerAnimationID::Damage);
+		RequestAnimation(PlayerAnimationID::Damage);
 	}
+	FlushAnimation(dt);
 	Actor::Update(dt);
 }
 

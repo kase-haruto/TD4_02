@@ -16,6 +16,7 @@ void PlayerDodge::Update(PlayerBase* player, const PlayerInputState& input, floa
 
 	// --- 回避中 ---
 	if (isDodging_) {
+		player->RequestAnimation(PlayerAnimationID::Dodge);
 		dodgeTimer_ += dt;
 
 		// 開始時に決めた向きへ進み続ける
@@ -62,7 +63,7 @@ void PlayerDodge::StartDodge(PlayerBase* player) {
 	isDodging_ = true;
 	dodgeTimer_ = 0.0f;
 	invincibleTimer_ = param_.invincibleTime;
-	player->PlayAnimation(PlayerAnimationID::Dodge);
+	player->RequestAnimation(PlayerAnimationID::Dodge);
 	player->GetCharacterMovement().SetMaxWalkSpeed(param_.dodgeSpeed);
 
 	dodgeDir_ = forward.Normalize();

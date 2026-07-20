@@ -68,6 +68,7 @@ private:
 	PlayerStats stats_;
 	PlayerUI    ui_;
 	float damageAnimationTimer_ = 0.0f;
+	float spiritAnimTimer_ = 0.0f;
 
 	int        currentHp_ = 0;  // 現在HP
 	bool       isRespawning_ = false; // リスポーン要求済み(シーン遷移待ち)
