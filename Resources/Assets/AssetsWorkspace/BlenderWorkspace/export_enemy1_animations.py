@@ -45,6 +45,40 @@ def reverse_forward_direction() -> None:
             obj.rotation_euler.rotate_axis("Z", math.pi)
 
 
+def select_visible_rig(armature: bpy.types.Object) -> list[bpy.types.Object]:
+    """Select only visible meshes driven by the armature, plus the required rig."""
+    rigged_meshes = []
+    for obj in bpy.context.scene.objects:
+        if obj.type != "MESH" or not obj.visible_get():
+            continue
+        parent = obj.parent
+        parented_to_rig = False
+        while parent is not None:
+            if parent == armature:
+                parented_to_rig = True
+                break
+            parent = parent.parent
+        modified_by_rig = any(
+            modifier.type == "ARMATURE" and modifier.object == armature
+            for modifier in obj.modifiers
+        )
+        if parented_to_rig or modified_by_rig:
+            rigged_meshes.append(obj)
+
+    if not rigged_meshes:
+        raise RuntimeError("No visible mesh is driven by the Enemy1 armature")
+
+    bpy.ops.object.select_all(action="DESELECT")
+    # The rig may be hidden in the viewport for authoring, but it is a required
+    # dependency of the visible skinned mesh.
+    armature.hide_set(False)
+    armature.select_set(True)
+    for obj in rigged_meshes:
+        obj.select_set(True)
+    bpy.context.view_layer.objects.active = armature
+    return rigged_meshes
+
+
 def file_hash(path: Path) -> str:
     digest = hashlib.sha256()
     with path.open("rb") as source:
@@ -100,6 +134,7 @@ def main() -> None:
     WORKSPACE_DIR.mkdir(parents=True, exist_ok=True)
     clear_active_animations()
     reverse_forward_direction()
+    selected_meshes = select_visible_rig(armature)
     results = []
 
     for action_name in action_names:
@@ -114,6 +149,7 @@ def main() -> None:
         result = bpy.ops.export_scene.gltf(
             filepath=str(gltf_path),
             export_format="GLTF_SEPARATE",
+            use_selection=True,
             export_animations=True,
             export_animation_mode="ACTIVE_ACTIONS",
             export_nla_strips=False,
@@ -154,6 +190,7 @@ def main() -> None:
                 "nodes": len(data.get("nodes", [])),
                 "meshes": len(data.get("meshes", [])),
                 "skins": len(data.get("skins", [])),
+                "selected_meshes": [obj.name for obj in selected_meshes],
                 "orientation": "Z+180deg",
             }
         )
