@@ -1,11 +1,11 @@
 #pragma once
 
 #include <Engine/Objects/3D/Actor/BaseGameObject.h>
+#include <Player/UI/UiSprite.h>
+#include <UI/MenuUI.h>
 
-/*-----------------------------------------------------------------------------------------
- * TitleUI
- * - TitleUI
- *---------------------------------------------------------------------------------------*/
+#include <memory>
+
 CALYX_OBJECT(Category = GameObject, DisplayName = "TitleUI", Icon = "UI/Tool/cube.dds")
 class TitleUI : public BaseGameObject {
 public:
@@ -16,7 +16,9 @@ public:
 	void Update(float dt) override;
 
 private:
+	void OnStart();
+	void OnExit();
 
-	bool isActiveVisual_ = false;
-	bool visualApplied_ = false;
+	std::shared_ptr<UiSprite> logo_;
+	MenuUI                    menu_;
 };
