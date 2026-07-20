@@ -33,13 +33,13 @@
             "blendMode": 5,
             "colorOverride": {
                 "w": 1.0,
-                "x": 0.5,
-                "y": 0.0,
-                "z": 0.5
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
             },
             "materialGuid": "00000000-0000-0000-0000-000000000000",
             "modelName": "Enemy_03_idle.gltf",
-            "textureGuid": "ec675a35-7435-45c0-b948-d23242ff7989",
+            "textureGuid": "89b2dd1d-ac85-463b-8350-2ecfd4eb4e85",
             "uvTransConfig": {
                 "rotation": 0.0,
                 "scale": {
@@ -123,9 +123,9 @@
                 "z": 0.5
             },
             "translation": {
-                "x": -4.233502388000488,
-                "y": 1.1872122287750244,
-                "z": 8.468433380126953
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
             }
         },
         "type": "HeavyShieldEnemy",

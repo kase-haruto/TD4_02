@@ -8,7 +8,7 @@
             "isCollisionEnabled": true,
             "isDraw": true,
             "isTrigger": false,
-            "layerId": 3,
+            "layerId": 0,
             "offset": {
                 "x": 0.0,
                 "y": 0.0,
@@ -22,24 +22,18 @@
             },
             "size": {
                 "x": 1.0,
-                "y": 1.2999999523162842,
+                "y": 1.0,
                 "z": 1.0
             }
         },
-        "colliderKind": 1,
+        "colliderKind": 0,
         "drawEnable": true,
-        "guid": "869cefe6-7fe7-45e7-8bca-844997ebc467",
+        "guid": "f3c74189-e401-4956-8751-68d34fd2b1c6",
         "modelConfig": {
             "blendMode": 5,
-            "colorOverride": {
-                "w": 1.0,
-                "x": 0.6000000238418579,
-                "y": 0.800000011920929,
-                "z": 1.0
-            },
             "materialGuid": "00000000-0000-0000-0000-000000000000",
-            "modelName": "Enemy_06_idle.gltf",
-            "textureGuid": "c58276ec-1096-4d8f-bafc-bbd157635c2e",
+            "modelName": "Enemy_03_idle.gltf",
+            "textureGuid": "414df225-9398-404c-9bfc-ef351afbf881",
             "uvTransConfig": {
                 "rotation": 0.0,
                 "scale": {
@@ -48,7 +42,7 @@
                 }
             }
         },
-        "name": "Archer",
+        "name": "ShieldEnemy",
         "objectType": 2,
         "outlineColor": {
             "w": 1.0,
@@ -68,14 +62,29 @@
             "useGravity": true
         },
         "serializableParams": {
-            "Game/Actor/Enemy/Archer": {
+            "Game/Actor/Enemy/AttackParam/MeleeAttack": {
+                "fields": {
+                    "attackDuration": 0.6010000109672546,
+                    "drawHitbox": true,
+                    "hitboxActiveEnd": 0.4000000059604645,
+                    "hitboxActiveStart": 0.25,
+                    "hitboxForwardOffset": 1.2000000476837158,
+                    "hitboxHeightOffset": 1.0,
+                    "hitboxSize": [
+                        1.0,
+                        0.800000011920929,
+                        1.0
+                    ]
+                }
+            },
+            "Game/Actor/Enemy/ShieldEnemy": {
                 "fields": {
                     "PlayerPtr": "7cf4af54-848a-4332-a62a-2b36e4c02dd8",
-                    "attackDamage": 4,
-                    "attackInterval": 3.0,
-                    "attackRange": 6.0,
+                    "attackDamage": 2,
+                    "attackInterval": 2.0,
+                    "attackRange": 1.2000000476837158,
                     "contactDamage": 1,
-                    "detectionRange": 12.0,
+                    "detectionRange": 6.0,
                     "knockbackDamping": 8.0,
                     "knockbackInitialSpeed": 16.0,
                     "knockbackStopSpeed": 0.20000000298023224,
@@ -83,19 +92,12 @@
                     "moveSpeed": 1.5
                 }
             },
-            "Game/Actor/Enemy/AttackParam/RangedAttack": {
+            "Game/Actor/Enemy/ShieldParam/ShieldEnemy": {
                 "fields": {
-                    "aimDuration": 0.4000000059604645,
-                    "arrowLifeTime": 3.0,
-                    "arrowSize": [
-                        0.10000000149011612,
-                        0.10000000149011612,
-                        0.6000000238418579
-                    ],
-                    "arrowSpeed": 8.0,
-                    "drawHitbox": false,
-                    "spawnForwardOffset": 1.0,
-                    "spawnHeight": 1.0
+                    "blockAngleDeg": 180.0,
+                    "blockCountMax": 3,
+                    "blockCountMin": 3,
+                    "defenseDuration": 2.0
                 }
             }
         },
@@ -120,7 +122,7 @@
                 "z": 0.0
             }
         },
-        "type": "Archer",
+        "type": "ShieldEnemy",
         "visualOffset": {
             "x": 0.0,
             "y": 0.0,
