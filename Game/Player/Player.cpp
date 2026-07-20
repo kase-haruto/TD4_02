@@ -3,6 +3,7 @@
 #include <Game/Collision/CollisionLayerUtil.h>
 #include <Game/World/RespawnState.h>
 #include <Game/World/EnemyState.h>
+#include <Game/World/WorldState.h>
 
 #include <Engine/Foundation/Math/Quaternion.h>
 #include <Engine/Graphics/Camera/Manager/CameraManager.h>
@@ -41,9 +42,13 @@ void Player::Initialize() {
 		respawnPoint_ = p;
 		lastCloneAnchor_ = p;
 	}
+	// 死亡リスポーンなら満タン、エリア移動なら前のエリアのHPを引き継ぐ
 	if (RespawnState::Get().ConsumeJustRespawned()) {
 		StartInvincible(stats_.respawnInvincibleTime);
+	} else if (WorldState::Get().IsPlayerHpStored()) {
+		currentHp_ = std::clamp(WorldState::Get().PlayerHp(), 1, stats_.maxHp);
 	}
+	WorldState::Get().SetPlayerHp(currentHp_);
 
 	walk_.Load("playerWalk");
 
@@ -54,15 +59,22 @@ void Player::Initialize() {
 //			更新
 /////////////////////////////////////////////////////////////////////////////////////////
 void Player::Update(float dt) {
+	WorldState::Get().SetPlayerHp(currentHp_);   // エリア移動で引き継ぐ用(途中returnがあるので先頭で保存)
 	damageAnimationTimer_ = damageAnimationTimer_ > dt ? damageAnimationTimer_ - dt : 0.0f;
 	UpdateInvincible(dt);
-	ui_.Update(currentHp_, stats_.maxHp, ability_.BuildSlotViews());
 	if (currentHp_ <= 0) {
+		// 遷移が終わるまでHP0のまま見せる(UIも0で更新しておく)
+		ui_.Update(currentHp_, stats_.maxHp, ability_.BuildSlotViews());
 		UpdateWalkEffect(false);
-		Respawn();
+		if (!isRespawning_) {
+			isRespawning_ = true;
+			Respawn();
+		}
 		Actor::Update(dt);
 		return;
 	}
+	ability_.CooldownUpdate(dt);
+	ui_.Update(currentHp_, stats_.maxHp, ability_.BuildSlotViews());
 
 	if (UpdateKnockback(dt)) {   // ノックバック中は技も入力も止める
 		UpdateWalkEffect(false);
@@ -180,7 +192,7 @@ void Player::OnHitByEnemyAttack(Collider* attacker) {
 }
 
 void Player::Respawn() {
-	currentHp_ = stats_.maxHp;   // 体力を元に
+	// HPは遷移先で Initialize() が満タンに戻すので、ここでは戻さない
 	knockbackVelocity_ = {};
 	SetVelocity({});
 	dodge_.Reset();
@@ -197,7 +209,12 @@ void Player::Respawn() {
 
 	auto& rs = RespawnState::Get();
 	const std::string dst = rs.Has() ? rs.ScenePath() : (SceneContext::Current() ? SceneContext::Current()->GetScenePath() : "");
-	if (dst.empty()) return;
+	if (dst.empty()) {
+		// 遷移先が無い＝Initialize()が走らないので、その場で復帰させる
+		currentHp_ = stats_.maxHp;
+		isRespawning_ = false;
+		return;
+	}
 
 	rs.MarkJustRespawned();
 	if (rs.Has()) {

@@ -70,6 +70,7 @@ private:
 	float damageAnimationTimer_ = 0.0f;
 
 	int        currentHp_ = 0;  // 現在HP
+	bool       isRespawning_ = false; // リスポーン要求済み(シーン遷移待ち)
 	float      invincibleTimer_ = 0.0f;
 	CalyxEngine::Vector3 lastCloneAnchor_{};
 

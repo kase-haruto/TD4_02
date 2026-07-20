@@ -3,6 +3,10 @@
 #include <Engine/Scene/Utility/SceneUtility.h>
 #include <CalyxEngine/Project.h>
 
+#include <Game/World/WorldState.h>
+#include <Game/World/EnemyState.h>
+#include <Game/World/RespawnState.h>
+
 
 TitleUI::TitleUI()
 	: BaseGameObject("debugCube.obj", "TitleUI") {}
@@ -40,6 +44,11 @@ void TitleUI::Update(float dt) {
 }
 
 void TitleUI::OnStart() {
+	// 前回プレイのセッション状態を捨ててから始める
+	WorldState::Get().Clear();   // ギミックの起動フラグ / 持ち越しHP
+	EnemyState::Get().Clear();   // 倒した敵の記録
+	RespawnState::Get().Clear(); // チェックポイント
+
 	SceneAPI::RequestSceneChange(Calyx::ResolveAssetPath("Scenes/Area001.scene"));
 }
 

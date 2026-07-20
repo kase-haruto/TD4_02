@@ -24,7 +24,8 @@ public:
 	/**
 	* 更新処理
 	*/
-	void Update(Player& player, const PlayerInputState* input,float dt);
+	void Update(Player& player, const PlayerInputState* input, float dt);
+	void CooldownUpdate(float dt);
 	void ShowGui();
 	CalyxEngine::SerializableObject& SerializableParam();
 
