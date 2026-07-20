@@ -134,6 +134,10 @@ private:
 			AddField("drawHitbox", drawHitbox)
 				.Category("AttackHitbox")
 				.Tooltip("攻撃判定をデバッグ表示するか");
+
+			AddField("damage", damage)
+				.Category("AttackDamage")
+				.Tooltip("攻撃力");
 		}
 
 		CalyxEngine::ParamPath GetParamPath() const override {
@@ -158,6 +162,8 @@ private:
 		float hitboxActiveStart = 0.05f;
 		float hitboxActiveEnd = 0.25f;
 		bool drawHitbox = true;
+
+		float damage = 10;
 	};
 
 	AttackParam param_;

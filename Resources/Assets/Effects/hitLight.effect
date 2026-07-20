@@ -1,0 +1,200 @@
+{
+  "emitters": [
+    {
+      "emitter": {
+        "autoDestroy": false,
+        "billboardMode": 1,
+        "blendMode": 2,
+        "cameraDitherEnabled": false,
+        "cameraDitherFar": 20.0,
+        "cameraDitherNear": 0.0,
+        "color": {
+          "w": 1.0,
+          "x": 0.41992855072021484,
+          "y": 0.0,
+          "z": 1.0
+        },
+        "direction": {
+          "enabled": false,
+          "rotateToDirection": false,
+          "speed": {
+            "constant": 1.0,
+            "max": 1.0,
+            "min": 0.0,
+            "mode": 0
+          },
+          "vector": {
+            "constant": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "max": {
+              "x": 1.0,
+              "y": 0.0,
+              "z": 1.0
+            },
+            "min": {
+              "x": -1.0,
+              "y": 0.0,
+              "z": -1.0
+            },
+            "mode": 0
+          }
+        },
+        "emitCount": 1,
+        "emitDelay": 0.0,
+        "emitDuration": -1.0,
+        "emitRate": 0.10000000149011612,
+        "emitterShape": 4,
+        "followOneShot": false,
+        "isComplement": true,
+        "isDrawEnable": true,
+        "isOneShot": true,
+        "lifetime": {
+          "constant": 0.10000000149011612,
+          "max": 1.0,
+          "min": 0.0,
+          "mode": 0
+        },
+        "modelGuid": "00000000-0000-0000-0000-000000000000",
+        "modelPath": "plane.obj",
+        "modules": [
+          {
+            "blend": 0,
+            "clamp01": true,
+            "ease": 1,
+            "enabled": true,
+            "end": [
+              3.0,
+              0.10000000149011612,
+              1.0,
+              1.0
+            ],
+            "guid": "9e96c77e-0b7a-4c49-8a84-5d1fdfc97b7d",
+            "invert": false,
+            "name": "OverLifetimeModule",
+            "start": [
+              20.0,
+              0.20000000298023224,
+              0.0,
+              1.0
+            ],
+            "target": 0
+          }
+        ],
+        "offset": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "randomSpinEmit": false,
+        "rotation": {
+          "w": 1.0,
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "scale": {
+          "constant": {
+            "x": 5.110000133514404,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "max": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "min": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+          },
+          "mode": 0
+        },
+        "shapeAngle": 30.0,
+        "shapeRadius": 1.0,
+        "shapeSize": {
+          "x": 0.20000000298023224,
+          "y": 0.20000000298023224,
+          "z": 0.20000000298023224
+        },
+        "spin": {
+          "constant": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+          },
+          "max": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+          },
+          "min": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+          },
+          "mode": 0
+        },
+        "textureGuid": "a6432373-88ba-494c-89ce-1c1725c34fd5",
+        "texturePath": "Textures/white1x1.dds",
+        "velocity": {
+          "constant": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+          },
+          "max": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "min": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+          },
+          "mode": 0
+        },
+        "worldScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "isDrawEnable": true,
+      "isGpu": false,
+      "name": "Emitter",
+      "transform": {
+        "inheritRotate": true,
+        "inheritScale": true,
+        "inheritTranslate": true,
+        "rotation": {
+          "w": 1.0,
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "translation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        }
+      }
+    }
+  ],
+  "name": "hitLight",
+  "type": "EffectAsset"
+}

@@ -138,6 +138,7 @@ void PlayerAttack::CreateAttackHitbox(PlayerBase& player) {
 		std::optional<std::string>("PlayerAttackHitbox"));
 	if (attackHitbox_) {
 		attackHitbox_->ConfigureAsAttackHitbox(param_.hitboxSize, param_.drawHitbox);
+		attackHitbox_->SetDamage(param_.damage);
 		UpdateAttackHitbox(player);
 	}
 }

@@ -10,6 +10,7 @@
 #include <Game/Gimmick/Bridge/Bridge.h>
 #include <Game/Camera/CameraPivot.h>
 #include <Game/Gimmick/Checkpoint/Checkpoint.h>
+#include <Game/Clear/ClearUI.h>
 #include <Game/Demo/3D/Actor/DemoCamera/DemoCameraPivot.h>
 #include <Game/Demo/3D/Actor/DemoPlayer/DemoPlayer.h>
 #include <Game/Enemy/Enemies/DoomEnemy.h>
@@ -23,6 +24,7 @@
 #include <Game/Enemy/Enemies/Slime.h>
 #include <Game/World/SpawnPoint.h>
 #include <Game/Player/Sword/Sword.h>
+#include <Game/Title/TitleUI.h>
 #include <Game/Demo/3D/Actor/DemoPlayer/Weapon/Weapon.h>
 
 namespace CalyxEngine {
@@ -76,6 +78,16 @@ namespace CalyxEngine {
 			false,
 			false,
 			&CreateSceneObject<Checkpoint>);
+
+		SceneObjectRegistry::Get().Register(
+			"ClearUI",
+			"ClearUI",
+			ObjectType::GameObject,
+			"UI/Tool/cube.dds",
+			true,
+			false,
+			false,
+			&CreateSceneObject<ClearUI>);
 
 		SceneObjectRegistry::Get().Register(
 			"DemoCameraPivot",
@@ -206,6 +218,16 @@ namespace CalyxEngine {
 			false,
 			false,
 			&CreateSceneObject<Sword>);
+
+		SceneObjectRegistry::Get().Register(
+			"TitleUI",
+			"TitleUI",
+			ObjectType::GameObject,
+			"UI/Tool/cube.dds",
+			true,
+			false,
+			false,
+			&CreateSceneObject<TitleUI>);
 
 		SceneObjectRegistry::Get().Register(
 			"Weapon",

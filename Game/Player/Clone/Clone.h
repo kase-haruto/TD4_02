@@ -30,8 +30,11 @@ public:
 
 	void SetAimOrigin(const PlayerBase* origin) { motor_.SetAimOrigin(origin); }
 
+	void SetOwnerAbility(PlayerAbility* ability) { ownerAbility_ = ability; }
+
 	void AddWorldOffset(const CalyxEngine::Vector3& delta);
 
 private:
 	bool isGhost_ = false;
+	PlayerAbility* ownerAbility_ = nullptr;
 };

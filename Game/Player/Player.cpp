@@ -3,6 +3,7 @@
 #include <Game/Collision/CollisionLayerUtil.h>
 #include <Game/World/RespawnState.h>
 #include <Game/World/EnemyState.h>
+#include <Game/World/WorldState.h>
 
 #include <Engine/Foundation/Math/Quaternion.h>
 #include <Engine/Graphics/Camera/Manager/CameraManager.h>
@@ -10,6 +11,7 @@
 #include <Engine/Scene/Utility/SceneUtility.h>
 #include <Engine/Scene/Context/SceneContext.h>
 #include <Engine/Foundation/Clock/ClockManager.h>
+#include <algorithm>
 #include <filesystem>
 
 
@@ -40,20 +42,42 @@ void Player::Initialize() {
 		respawnPoint_ = p;
 		lastCloneAnchor_ = p;
 	}
+	// 死亡リスポーンなら満タン、エリア移動なら前のエリアのHPを引き継ぐ
+	if (RespawnState::Get().ConsumeJustRespawned()) {
+		StartInvincible(stats_.respawnInvincibleTime);
+	} else if (WorldState::Get().IsPlayerHpStored()) {
+		currentHp_ = std::clamp(WorldState::Get().PlayerHp(), 1, stats_.maxHp);
+	}
+	WorldState::Get().SetPlayerHp(currentHp_);
+
+	walk_.Load("playerWalk");
+
+	ui_.Initialize(ability_.MaxCloneCount());
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
 //			更新
 /////////////////////////////////////////////////////////////////////////////////////////
 void Player::Update(float dt) {
+	WorldState::Get().SetPlayerHp(currentHp_);   // エリア移動で引き継ぐ用(途中returnがあるので先頭で保存)
 	damageAnimationTimer_ = damageAnimationTimer_ > dt ? damageAnimationTimer_ - dt : 0.0f;
+	UpdateInvincible(dt);
 	if (currentHp_ <= 0) {
-		Respawn();
+		// 遷移が終わるまでHP0のまま見せる(UIも0で更新しておく)
+		ui_.Update(currentHp_, stats_.maxHp, ability_.BuildSlotViews());
+		UpdateWalkEffect(false);
+		if (!isRespawning_) {
+			isRespawning_ = true;
+			Respawn();
+		}
 		Actor::Update(dt);
 		return;
 	}
+	ability_.CooldownUpdate(dt);
+	ui_.Update(currentHp_, stats_.maxHp, ability_.BuildSlotViews());
 
-	if (UpdateKnockback(dt)) {   // ← base の実装。ノックバック中は技も入力も止める
+	if (UpdateKnockback(dt)) {   // ノックバック中は技も入力も止める
+		UpdateWalkEffect(false);
 		Actor::Update(dt);
 		lastCloneAnchor_ = GetWorldPosition();
 		return;
@@ -84,9 +108,12 @@ void Player::Update(float dt) {
 	}
 
 	// 回避中・攻撃中は通常移動しない
-	if (!dodge_.IsDodging() && !attack_.BlocksMovement()) {
+	const bool canMove = !dodge_.IsDodging() && !attack_.BlocksMovement();
+	if (canMove) {
 		motor_.Update(this, in, dt);
 	}
+	UpdateWalkEffect(canMove && in.move.LengthSquared() > 0.0f && GetCharacterMovement().IsMovingOnGround());
+
 	if (in.cloneAbilityHeld && !dodge_.IsDodging() && !attack_.BlocksMovement()) {
 		PlayAnimation(PlayerAnimationID::Spirit);
 	}
@@ -116,6 +143,7 @@ void Player::TakeDamage(int amount) {
 		currentHp_ = 0;
 	}
 	damageAnimationTimer_ = 0.25f;
+	StartInvincible(stats_.damageInvincibleTime);
 	PlayAnimation(PlayerAnimationID::Damage);
 }
 
@@ -123,6 +151,7 @@ void Player::DerivativeGui(){
 	PlayerBase::DerivativeGui();
 	ability_.ShowGui();
 	lockOn_.ShowGui();
+	stats_.ShowGui();
 }
 
 bool Player::IsDodgeButtonTriggered() const {
@@ -136,7 +165,7 @@ std::vector<CalyxEngine::TransformRef> Player::QueryVisibleLockOnTargets(size_t 
 }
 
 void Player::OnHitByEnemyAttack(Collider* attacker) {
-	if (dodge_.IsInvincible()) {
+	if (dodge_.IsInvincible() || invincibleTimer_ > 0.0f) {
 		return;
 	}
 
@@ -163,12 +192,16 @@ void Player::OnHitByEnemyAttack(Collider* attacker) {
 }
 
 void Player::Respawn() {
-	currentHp_ = stats_.maxHp;   // 体力を元に
+	// HPは遷移先で Initialize() が満タンに戻すので、ここでは戻さない
 	knockbackVelocity_ = {};
 	SetVelocity({});
 	dodge_.Reset();
 	attack_.Reset();
 	ability_.ClearClones();
+	invincibleTimer_ = 0.0f;
+	SetDrawEnable(true);
+
+	isWalk_ = false;
 
 	EnemyState::Get().Clear();
 
@@ -176,10 +209,58 @@ void Player::Respawn() {
 
 	auto& rs = RespawnState::Get();
 	const std::string dst = rs.Has() ? rs.ScenePath() : (SceneContext::Current() ? SceneContext::Current()->GetScenePath() : "");
-	if (dst.empty()) return;
+	if (dst.empty()) {
+		// 遷移先が無い＝Initialize()が走らないので、その場で復帰させる
+		currentHp_ = stats_.maxHp;
+		isRespawning_ = false;
+		return;
+	}
 
+	rs.MarkJustRespawned();
 	if (rs.Has()) {
 		rs.MarkPendingApply();
 	}
 	SceneAPI::RequestSceneChange(std::filesystem::path(dst));
+}
+
+void Player::UpdateInvincible(float dt) {
+	if (invincibleTimer_ <= 0.0f) {
+		return;
+	}
+
+	invincibleTimer_ = invincibleTimer_ > dt ? invincibleTimer_ - dt : 0.0f;
+
+	if (invincibleTimer_ <= 0.0f) {
+		SetDrawEnable(true);
+		return;
+	}
+
+	// 残り時間を間隔で割った回数の偶奇で表示/非表示を切り替える
+	const float interval = (std::max)(stats_.damageFlashInterval, 0.001f);
+	const int   step = static_cast<int>(invincibleTimer_ / interval);
+	SetDrawEnable((step % 2) == 0);
+}
+
+void Player::StartInvincible(float duration) {
+	invincibleTimer_ = duration;
+}
+
+void Player::UpdateWalkEffect(bool isWalking) {
+	if (isWalking) {
+		if (!isWalk_) {
+			walkHandle_ = EffectAPI::Play(walk_, GetWorldPosition());
+			isWalk_ = true;
+		} else {
+			// 再生中はエミッターをプレイヤーに追従させる
+			EffectAPI::Player()->SetTransform(
+				walkHandle_,
+				GetWorldPosition(),
+				CalyxEngine::Quaternion::MakeIdentity(),
+				{ 1.0f, 1.0f, 1.0f });
+		}
+	} else if (isWalk_) {
+		EffectAPI::Stop(walkHandle_);
+		walkHandle_ = {};
+		isWalk_ = false;
+	}
 }
