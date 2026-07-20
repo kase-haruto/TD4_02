@@ -1,0 +1,159 @@
+[
+    {
+        "cameraDitherEnabled": false,
+        "castShadow": true,
+        "colliderConfig": {
+            "capsuleHeight": 2.0,
+            "capsuleRadius": 0.5,
+            "isCollisionEnabled": true,
+            "isDraw": true,
+            "isTrigger": false,
+            "layerId": 3,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "radius": 1.0,
+            "rotate": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "size": {
+                "x": 1.0,
+                "y": 1.399999976158142,
+                "z": 1.0
+            }
+        },
+        "colliderKind": 1,
+        "drawEnable": true,
+        "guid": "18ceae92-b9ba-42b3-875f-21688749f895",
+        "modelConfig": {
+            "blendMode": 5,
+            "colorOverride": {
+                "w": 1.0,
+                "x": 0.5,
+                "y": 0.0,
+                "z": 0.5
+            },
+            "materialGuid": "00000000-0000-0000-0000-000000000000",
+            "modelName": "Enemy_03_idle.gltf",
+            "textureGuid": "ec675a35-7435-45c0-b948-d23242ff7989",
+            "uvTransConfig": {
+                "rotation": 0.0,
+                "scale": {
+                    "x": 1.0,
+                    "y": 1.0
+                }
+            }
+        },
+        "name": "HeavyShieldEnemy",
+        "objectType": 2,
+        "outlineColor": {
+            "w": 1.0,
+            "x": 0.019999999552965164,
+            "y": 0.019999999552965164,
+            "z": 0.02500000037252903
+        },
+        "outlineEnabled": false,
+        "outlineThickness": 0.03500000014901161,
+        "parentGuid": "00000000-0000-0000-0000-000000000000",
+        "physicsBodyConfig": {
+            "bodyType": 1,
+            "enabled": true,
+            "gravityScale": 1.0,
+            "mass": 1.0,
+            "pushbackRatio": 1.0,
+            "useGravity": true
+        },
+        "serializableParams": {
+            "Game/Actor/Enemy/AttackParam/MeleeAttack": {
+                "fields": {
+                    "attackDuration": 0.6010000109672546,
+                    "drawHitbox": true,
+                    "hitboxActiveEnd": 0.4000000059604645,
+                    "hitboxActiveStart": 0.25,
+                    "hitboxForwardOffset": 1.2000000476837158,
+                    "hitboxHeightOffset": 1.0,
+                    "hitboxSize": [
+                        1.0,
+                        0.800000011920929,
+                        1.0
+                    ]
+                }
+            },
+            "Game/Actor/Enemy/HeavyShieldEnemy": {
+                "fields": {
+                    "PlayerPtr": "7cf4af54-848a-4332-a62a-2b36e4c02dd8",
+                    "attackDamage": 5,
+                    "attackInterval": 2.0,
+                    "attackRange": 1.2000000476837158,
+                    "contactDamage": 1,
+                    "detectionRange": 6.0,
+                    "knockbackDamping": 8.0,
+                    "knockbackInitialSpeed": 0.0,
+                    "knockbackStopSpeed": 0.20000000298023224,
+                    "maxHp": 5,
+                    "moveSpeed": 1.0
+                }
+            },
+            "Game/Actor/Enemy/ShieldParam/ShieldEnemy": {
+                "fields": {
+                    "blockAngleDeg": 180.0,
+                    "blockCountMax": 3,
+                    "blockCountMin": 3,
+                    "defenseDuration": 2.0
+                }
+            }
+        },
+        "transform": {
+            "inheritRotate": true,
+            "inheritScale": true,
+            "inheritTranslate": true,
+            "rotation": {
+                "w": 1.0,
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "scale": {
+                "x": 0.5,
+                "y": 0.5,
+                "z": 0.5
+            },
+            "translation": {
+                "x": -4.233502388000488,
+                "y": 1.1872122287750244,
+                "z": 8.468433380126953
+            }
+        },
+        "type": "HeavyShieldEnemy",
+        "visualOffset": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        },
+        "worldTransform": {
+            "inheritRotate": true,
+            "inheritScale": true,
+            "inheritTranslate": true,
+            "rotation": {
+                "w": 1.0,
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "scale": {
+                "x": 0.5,
+                "y": 0.5,
+                "z": 0.5
+            },
+            "translation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            }
+        }
+    }
+]

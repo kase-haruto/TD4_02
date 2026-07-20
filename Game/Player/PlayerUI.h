@@ -2,6 +2,8 @@
 
 #include "UI/PlayerHPUI.h"
 #include "UI/PlayerCloneUI.h"
+#include "UI/UiSprite.h"
+#include "UI/UiSprite.h"
 
 #include <Game/Player/Ability/PlayerAbility.h> // CloneSlotView
 
@@ -21,5 +23,6 @@ public:
 private:
 
 	std::shared_ptr<PlayerHPUI> hp_;
+	std::shared_ptr<UiSprite>   hpFrame_;
 	PlayerCloneUI               clones_;
 };

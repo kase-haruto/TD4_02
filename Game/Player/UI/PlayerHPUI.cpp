@@ -5,11 +5,15 @@
 /////////////////////////////////////////////////////////////////////////////////////////
 //			ctor / dtor
 /////////////////////////////////////////////////////////////////////////////////////////
-PlayerHPUI::PlayerHPUI() {
-	worldTransform_.translation = { 640.0f - fullWidth_ * 0.5f, 665.0f, 0.0f }; // 画面中央下（左端基準で中央寄せ）
+PlayerHPUI::PlayerHPUI(const std::string& texturePath) {
+	if (!texturePath.empty()) {
+		texturePath_ = texturePath; // sprite_ が作られる前に入れておく必要がある
+	}
+
+	worldTransform_.translation = { HpBarLayout::kLeftX, HpBarLayout::kCenterY, 0.0f }; // 画面中央下（左端基準で中央寄せ）
 	worldTransform_.scale       = { fullWidth_, height_, 1.0f };
 
-	color_ = { 0.2f, 0.9f, 0.3f, 1.0f };
+	color_ = { 1.0f, 1.0f, 1.0f, 1.0f }; // 色は乗算なので、絵をそのまま出すなら白
 	SetAnchor({ 0.0f, 0.5f });
 }
 

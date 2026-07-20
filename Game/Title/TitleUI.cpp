@@ -11,24 +11,26 @@ void TitleUI::Initialize() {
 	SetDrawEnable(false);
 
 	// タイトルロゴ
-	logo_ = SceneAPI::Instantiate<UiSprite>();
+	logo_ = SceneAPI::Instantiate<UiSprite>("Textures/Game/Text/title.png");
 	logo_->SetAnchor({ 0.0f, 0.5f });
 	logo_->SetPositionPx(MenuLayout::kBaseX, MenuLayout::kLogoY);
 	logo_->SetSizePx(MenuLayout::kLogoW, MenuLayout::kLogoH);
 
 	// メニュー
 	menu_.Initialize(MenuLayout::kBaseX, MenuLayout::kFirstItemY, MenuLayout::kLineGap);
-	menu_.SetSelector("", MenuLayout::kSelectorW, MenuLayout::kSelectorH);
+	menu_.SetSelector("Textures/Game/UI/select.png", MenuLayout::kSelectorW, MenuLayout::kSelectorH);
 
 	MenuUI::ItemDesc start{};
 	start.width = MenuLayout::kItemW;
 	start.height = MenuLayout::kItemH;
+	start.texturePath = "Textures/Game/Text/hajimer.png";
 	start.onDecide = [this] { OnStart(); };
 	menu_.AddItem(start);
 
 	MenuUI::ItemDesc exit{};
 	exit.width = MenuLayout::kItemW;
 	exit.height = MenuLayout::kItemH;
+	exit.texturePath = "Textures/Game/Text/owaru.png";
 	exit.onDecide = [this] { OnExit(); };
 	menu_.AddItem(exit);
 }
