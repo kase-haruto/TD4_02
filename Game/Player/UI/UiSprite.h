@@ -23,4 +23,29 @@ public:
 	void SetSizePx(float w, float h) { worldTransform_.scale = { w, h, 1.0f }; }
 	void SetColorRGBA(float r, float g, float b, float a = 1.0f) { color_ = { r, g, b, a }; }
 	void SetVisible(bool visible) { SetDrawEnable(visible); }
+
+	/// 塗りつぶしで見せる範囲を指定する(method: 1=横, 2=縦, 3=マスク / origin: 0=左下, 1=右上)
+	void SetFill(int method, float originX, float originY, float amount) {
+		fillMethod_  = method;
+		fillOriginX_ = originX;
+		fillOriginY_ = originY;
+		fillAmount_  = amount;
+	}
+
+	void AlwaysUpdate(float dt) override {
+		CalyxEngine::SpriteSceneObject2d::AlwaysUpdate(dt);
+
+		if (!sprite_) {
+			return;
+		}
+		SetFillMethod(fillMethod_);
+		SetFillOrigin(fillOriginX_, fillOriginY_);
+		SetFillAmount(fillAmount_);
+	}
+
+private:
+	int   fillMethod_  = 0;    //!< 0=none(全部描画)
+	float fillOriginX_ = 0.0f;
+	float fillOriginY_ = 0.0f;
+	float fillAmount_  = 1.0f;
 };

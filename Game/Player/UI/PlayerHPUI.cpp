@@ -2,6 +2,13 @@
 
 #include <algorithm>
 
+namespace {
+	// Material2D::fillMethod (0=none, 1=horizontal, 2=vertical, 3=mask)
+	constexpr int kFillHorizontal = 1;
+	// fillOrigin: (0,0)=左/下
+	constexpr float kFillFromLeft = 0.0f;
+}
+
 /////////////////////////////////////////////////////////////////////////////////////////
 //			ctor / dtor
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -21,8 +28,17 @@ PlayerHPUI::PlayerHPUI(const std::string& texturePath) {
 //			更新
 /////////////////////////////////////////////////////////////////////////////////////////
 void PlayerHPUI::AlwaysUpdate(float dt) {
-	worldTransform_.scale.x = fullWidth_ * hpRatio_;
+	// 横に潰さず左から削れるように、原寸のまま塗りつぶし量で表現する
+	worldTransform_.scale.x = fullWidth_;
+
 	SpriteSceneObject2d::AlwaysUpdate(dt);
+
+	if (!sprite_) {
+		return;
+	}
+	SetFillMethod(kFillHorizontal);
+	SetFillOrigin(kFillFromLeft, 0.0f);
+	SetFillAmount(hpRatio_);
 }
 
 void PlayerHPUI::SetHp(int current, int max) {

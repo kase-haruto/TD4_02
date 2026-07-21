@@ -14,6 +14,12 @@ namespace {
 	constexpr float kBlue[4] = { 0.25f, 0.55f, 1.00f, 1.0f }; // 使える
 	constexpr float kRed[4]  = { 0.90f, 0.25f, 0.20f, 1.0f }; // クールタイム中
 
+	// Material2D::fillMethod (0=none, 1=horizontal, 2=vertical, 3=mask)
+	constexpr int kFillMethod = 1;
+	// fillOrigin: 0=左/下, 1=右/上
+	constexpr float kFillFromStart = 0.0f; // 下(縦) / 左(横)
+	constexpr float kFillFromEnd   = 1.0f; // 上(縦) / 右(横)
+
 	// index番目の中心X。全体を画面中央に揃える
 	float PipCenterX(int index, int count) {
 		const float rowWidth    = count * kPipSize + (count - 1) * kPipGap;
@@ -31,17 +37,18 @@ void PlayerCloneUI::Initialize(int maxCount) {
 	for (int i = 0; i < maxCount_; ++i) {
 		const float cx = PipCenterX(i, maxCount_);
 
-		// 状態色
+		// 状態色。サイズは常に原寸で、見せる範囲は塗りつぶし量で決める
 		auto fill = SceneAPI::Instantiate<UiSprite>("Textures/Game/UI/tamashi_main.png");
 		fill->SetAnchor({ 0.5f, 1.0f });
 		fill->SetPositionPx(cx, kPipsBottomY);
 		fill->SetSizePx(kPipSize, kPipSize);
 		fills_.push_back(fill);
 
-		// 灰
+		// 灰。状態色と同じ矩形に重ね、互いに補い合う範囲だけを描く
 		auto top = SceneAPI::Instantiate<UiSprite>("Textures/Game/UI/tamashi_gray.png");
-		top->SetAnchor({ 0.5f, 0.0f });
-		top->SetPositionPx(cx, kPipsBottomY - kPipSize);
+		top->SetAnchor({ 0.5f, 1.0f });
+		top->SetPositionPx(cx, kPipsBottomY);
+		top->SetSizePx(kPipSize, kPipSize);
 		top->SetColorRGBA(kGray[0], kGray[1], kGray[2], kGray[3]);
 		top->SetVisible(false);
 		tops_.push_back(top);
@@ -68,12 +75,13 @@ void PlayerCloneUI::Update(const std::vector<PlayerAbility::CloneSlotView>& slot
 			}
 		}
 
+		// スケールを変えると絵が縦に潰れるので、原寸のまま塗りつぶし量で見せる範囲を変える
 		fill->SetColorRGBA(fillColor[0], fillColor[1], fillColor[2], fillColor[3]);
-		fill->SetSizePx(kPipSize, kPipSize * ratio);
+		fill->SetFill(kFillMethod, kFillFromStart, kFillFromStart, ratio);
 		fill->SetVisible(ratio > 0.001f);
 
 		const float topRatio = 1.0f - ratio;
-		top->SetSizePx(kPipSize, kPipSize * topRatio);
+		top->SetFill(kFillMethod, kFillFromEnd, kFillFromEnd, topRatio);
 		top->SetVisible(topRatio > 0.001f);
 	}
 }
