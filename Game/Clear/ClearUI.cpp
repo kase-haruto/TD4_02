@@ -9,7 +9,7 @@ ClearUI::ClearUI()
 void ClearUI::Initialize() {
 	SetDrawEnable(false);
 
-	logo_ = SceneAPI::Instantiate<UiSprite>();
+	logo_ = SceneAPI::Instantiate<UiSprite>("Textures/Game/Text/clear.png");
 	logo_->SetAnchor({ 0.0f, 0.5f });
 	logo_->SetPositionPx(MenuLayout::kBaseX, MenuLayout::kLogoY);
 	logo_->SetSizePx(MenuLayout::kLogoW, MenuLayout::kLogoH);
