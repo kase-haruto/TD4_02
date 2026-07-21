@@ -18,6 +18,12 @@ void PlayerUI::Initialize(int maxCloneCount) {
 	if (!hp_) {
 		hp_ = SceneAPI::Instantiate<PlayerHPUI>("Textures/Game/UI/HP.png");
 	}
+	if (!controlUI_) {
+		controlUI_ = SceneAPI::Instantiate<UiSprite>("Textures/Game/UI/sousa.png");
+		controlUI_->SetAnchor({ 0.5f, 0.5f });
+		controlUI_->SetPositionPx(1160.0f, 600.0f);
+		controlUI_->SetSizePx(200.0f, 200.0f);
+	}
 	clones_.Initialize(maxCloneCount);
 }
 

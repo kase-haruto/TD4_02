@@ -7,6 +7,7 @@ namespace {
 	constexpr int kFillHorizontal = 1;
 	// fillOrigin: (0,0)=左/下
 	constexpr float kFillFromLeft = 0.0f;
+	constexpr float kRedHPBorder = 20.0f;
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -20,8 +21,9 @@ PlayerHPUI::PlayerHPUI(const std::string& texturePath) {
 	worldTransform_.translation = { HpBarLayout::kLeftX, HpBarLayout::kCenterY, 0.0f }; // 画面中央下（左端基準で中央寄せ）
 	worldTransform_.scale       = { fullWidth_, height_, 1.0f };
 
-	color_ = { 1.0f, 1.0f, 1.0f, 1.0f }; // 色は乗算なので、絵をそのまま出すなら白
+	color_ = { 0.0f, 1.0f, 0.0f, 1.0f }; // 色は乗算なので、絵をそのまま出すなら白
 	SetAnchor({ 0.0f, 0.5f });
+	SetOrderInLayer(1);
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -45,6 +47,9 @@ void PlayerHPUI::SetHp(int current, int max) {
 	if (max <= 0) {
 		hpRatio_ = 0.0f;
 		return;
+	}
+	if (current <= kRedHPBorder) {
+		color_ = { 1.0f,0.0f,0.0f,1.0f };
 	}
 	const float ratio = static_cast<float>(current) / static_cast<float>(max);
 	hpRatio_ = std::clamp(ratio, 0.0f, 1.0f);
