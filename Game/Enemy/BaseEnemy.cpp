@@ -2,6 +2,7 @@
 
 #include <Game/Collision/CollisionLayerUtil.h>
 #include <Game/World/EnemyState.h>
+#include <Game/World/KillPlane.h>
 #include <Game/Player/Sword/Sword.h>
 
 #include <Engine/Objects/Collider/Collider.h>
@@ -44,6 +45,11 @@ void BaseEnemy::Update(float dt) {
 		if (auto* ctx = SceneContext::Current())
 			ctx->RemoveObject(std::static_pointer_cast<SceneObject>(shared_from_this()));
 		return;
+	}
+
+	// 落下死。ステージ外に落ちたら倒された扱いにして、末尾の IsDead() で消す
+	if (!IsDead() && KillPlane::IsFallenOut(GetWorldPosition())) {
+		currentHp_ = 0;
 	}
 
 	const CalyxEngine::Vector3 frameStartPosition = GetWorldPosition();
