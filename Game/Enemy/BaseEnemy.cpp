@@ -68,19 +68,6 @@ void BaseEnemy::Update(float dt) {
 		attack_->Update(*this, targetPlayer, dt);
 	}
 
-	if (CalyxFoundation::Input::TriggerKey(DIK_P)|| CalyxFoundation::Input::TriggerGamepadButton(CalyxFoundation::PadButton::X)) {
-		CalyxEngine::Vector3 dir = CalyxEngine::Quaternion::RotateVector(
-			CalyxEngine::Vector3::Forward(), targetPlayer->GetRenderWorldTransform().rotation);
-		dir.y = 0.0f;
-		if (dir.LengthSquared() <= 0.0001f) {
-			return;
-		}
-		EffectAPI::Play(hit_, worldTransform_.GetWorldPosition());
-		EffectAPI::Play(hitLight_, worldTransform_.GetWorldPosition());
-
-		knockbackVelocity_ = dir.Normalize() * stats_.knockbackInitialSpeed;
-	}
-
 	Actor::Update(dt);
 
 	if (damageAnimationTimer_ <= 0.0f && !(attack_ && attack_->IsAttacking())) {

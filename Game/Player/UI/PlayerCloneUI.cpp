@@ -42,6 +42,7 @@ void PlayerCloneUI::Initialize(int maxCount) {
 		fill->SetAnchor({ 0.5f, 1.0f });
 		fill->SetPositionPx(cx, kPipsBottomY);
 		fill->SetSizePx(kPipSize, kPipSize);
+		fill->SetOrderInLayer(1);
 		fills_.push_back(fill);
 
 		// 灰。状態色と同じ矩形に重ね、互いに補い合う範囲だけを描く
