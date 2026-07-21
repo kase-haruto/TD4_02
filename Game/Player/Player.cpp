@@ -1,6 +1,7 @@
 #include "Player.h"
 
 #include <Game/Collision/CollisionLayerUtil.h>
+#include <Game/World/KillPlane.h>
 #include <Game/World/RespawnState.h>
 #include <Game/World/EnemyState.h>
 #include <Game/World/WorldState.h>
@@ -62,6 +63,12 @@ void Player::Update(float dt) {
 	WorldState::Get().SetPlayerHp(currentHp_);   // エリア移動で引き継ぐ用(途中returnがあるので先頭で保存)
 	damageAnimationTimer_ = damageAnimationTimer_ > dt ? damageAnimationTimer_ - dt : 0.0f;
 	UpdateInvincible(dt);
+
+	// 落下死。床をすり抜けたら通常の死亡と同じ扱いにしてリスポーンさせる
+	if (currentHp_ > 0 && KillPlane::IsFallenOut(GetWorldPosition())) {
+		currentHp_ = 0;
+	}
+
 	if (currentHp_ <= 0) {
 		// 遷移が終わるまでHP0のまま見せる(UIも0で更新しておく)
 		ui_.Update(currentHp_, stats_.maxHp, ability_.BuildSlotViews());
