@@ -27,7 +27,6 @@ void Bridge::Initialize() {
 	param_.LoadParams();
 	firstReset_ = true;
 	angleDeg_ = param_.raisedAngleDeg;
-	worldTransform_.rotationSource = RotationSource::Euler;
 	ApplyBridgeRotation();
 
 	// レバーを生成
@@ -97,7 +96,6 @@ void Bridge::FirstReset() {
 
 	// 初期は跳ね橋
 	angleDeg_ = param_.raisedAngleDeg;
-	worldTransform_.rotationSource = RotationSource::Euler;
 	if (WorldState::Get().IsActivated(GetGuid())) {
 		activated_ = true;
 		angleDeg_ = param_.loweredAngleDeg;
@@ -118,10 +116,20 @@ void Bridge::UpdateDodgeSuppression() {
 }
 
 void Bridge::ApplyBridgeRotation() {
-	SetRotate(param_.fallAxis * (angleDeg_ * kDeg2Rad));
-	if (param_.fallAxis.z == 1.0f) {
-		
+	using CalyxEngine::Quaternion;
+	const float tip = angleDeg_ * kDeg2Rad;
+
+	Quaternion q;
+	if (param_.fallAxis.z > 0.5f || param_.fallAxis.z < -0.5f) {
+		const float sign = (param_.fallAxis.z < 0.0f) ? -1.0f : 1.0f;
+		const Quaternion yaw = Quaternion::MakeRotateY(90.0f * kDeg2Rad);
+		const Quaternion fall = Quaternion::MakeRotateZ(tip * sign);
+		q = fall * yaw;
+	} else {
+		const float sign = (param_.fallAxis.x < 0.0f) ? -1.0f : 1.0f;
+		q = Quaternion::MakeRotateX(tip * sign);
 	}
+	SetRotate(q);
 }
 
 void Bridge::ApplyZoneParams() {
