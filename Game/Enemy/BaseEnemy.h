@@ -4,6 +4,8 @@
 #include <Engine/Scene/Utility/SceneUtility.h>
 #include <Engine/Scene/Reference/TransformReference.h>
 #include <Engine/Scene/Reference/SceneObjectReference.h>
+#include <Engine/Application/Effects/EffectAsset.h>
+#include <Engine/Application/Effects/EffectPlayer.h>
 
 #include <memory>
 #include <string>
@@ -94,4 +96,5 @@ protected:
 
 	CalyxEngine::EffectAsset hit_;
 	CalyxEngine::EffectAsset hitLight_;
+	CalyxEngine::EffectAsset walk_;
 };

@@ -19,6 +19,7 @@ public:
 
 	bool IsDodging() const { return isDodging_; }
 	bool IsInvincible() const { return invincibleTimer_ > 0.0f; }
+	bool IsStartDodge();
 
 	void Reset();
 
@@ -47,6 +48,7 @@ private:
 	}param_;
 
 	bool  isDodging_ = false;
+	bool  isStartDodge_ = false;
 	bool  enabled_ = true;   // 橋などから一時的に回避を封じる
 	float dodgeTimer_ = 0.0f; // 回避の経過時間
 	float invincibleTimer_ = 0.0f; // 無敵の残り時間

@@ -79,6 +79,6 @@ private:
 
 	bool isWalk_ = false;
 	CalyxEngine::EffectAsset walk_;
+	CalyxEngine::EffectAsset dodgeEffect_;
 	CalyxEngine::EffectHandle walkHandle_{};
-
 };

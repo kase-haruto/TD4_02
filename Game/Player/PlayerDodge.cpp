@@ -41,6 +41,12 @@ void PlayerDodge::ShowGui() {
 	param_.ShowGui();
 }
 
+bool PlayerDodge::IsStartDodge() {
+	bool result = isStartDodge_;
+	isStartDodge_ = false;
+	return result;
+}
+
 void PlayerDodge::Reset() {
 	isDodging_ = false;
 	enabled_ = true;
@@ -71,4 +77,5 @@ void PlayerDodge::StartDodge(PlayerBase* player) {
 	player->GetWorldTransform().rotation =
 		CalyxEngine::Quaternion::FromToQuaternion(CalyxEngine::Vector3::Forward(), dodgeDir_);
 	isDodging_ = true;
+	isStartDodge_ = true;
 }

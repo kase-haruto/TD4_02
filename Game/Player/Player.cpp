@@ -52,6 +52,7 @@ void Player::Initialize() {
 	WorldState::Get().SetPlayerHp(currentHp_);
 
 	walk_.Load("playerWalk");
+	dodgeEffect_.Load("playerDodge");
 
 	ui_.Initialize(ability_.MaxCloneCount());
 }
@@ -108,6 +109,9 @@ void Player::Update(float dt) {
 
 	// 回避を先に処理,回避中は移動/向き/ジャンプを受け付けない
 	dodge_.Update(this, in, dt);
+	if (dodge_.IsStartDodge()) {
+		EffectAPI::Play(dodgeEffect_, GetWorldPosition());
+	}
 	// 回避中はアビリティの入力を受け付けない（チャージは中断）
 	ability_.Update(*this, dodge_.IsDodging() ? nullptr : &in, dt);
 
