@@ -70,8 +70,8 @@
         ],
         "outputs": [],
         "position": [
-          862.0,
-          112.0
+          720.0,
+          120.0
         ],
         "properties": {},
         "title": "Output",
@@ -236,12 +236,12 @@
         "properties": {
           "applyMode": "Triggered",
           "autoDisable": true,
-          "duration": 0.25,
+          "duration": 0.20000000298023224,
           "easeIndex": 8,
           "enabled": false,
           "floatAnimations": [],
           "parameters": {
-            "radius": 0.44999998807907104,
+            "radius": 0.4000000059604645,
             "strength": 1.0
           }
         },
@@ -297,14 +297,14 @@
     {
       "applyMode": "Triggered",
       "autoDisable": true,
-      "duration": 0.25,
+      "duration": 0.20000000298023224,
       "ease": "",
       "easeIndex": 8,
       "enabled": false,
       "floatAnimations": [],
       "id": 73,
       "parameters": {
-        "radius": 0.44999998807907104,
+        "radius": 0.4000000059604645,
         "strength": 1.0
       },
       "title": "Vignette",

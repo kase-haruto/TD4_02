@@ -80,5 +80,4 @@ void PlayerDodge::StartDodge(PlayerBase* player) {
 		CalyxEngine::Quaternion::FromToQuaternion(CalyxEngine::Vector3::Forward(), dodgeDir_);
 	isDodging_ = true;
 	isStartDodge_ = true;
-	PostEffectAPI::PlayTriggered("RadialBlur");
 }
