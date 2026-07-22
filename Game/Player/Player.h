@@ -57,6 +57,7 @@ private:
 
 	void UpdateInvincible(float dt);
 	void StartInvincible(float duration);
+	void UpdateLowHpRim(float dt);
 
 	void UpdateWalkEffect(bool isWalking);
 
@@ -73,6 +74,8 @@ private:
 	int        currentHp_ = 0;  // 現在HP
 	bool       isRespawning_ = false; // リスポーン要求済み(シーン遷移待ち)
 	float      invincibleTimer_ = 0.0f;
+	float      lowHpRimPhase_ = 0.0f;
+	bool       isLowHpRim_ = false;
 	CalyxEngine::Vector3 lastCloneAnchor_{};
 
 	CalyxEngine::Vector3 respawnPoint_{};

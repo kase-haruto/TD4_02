@@ -13,6 +13,7 @@
 #include <Engine/Scene/Context/SceneContext.h>
 #include <Engine/Foundation/Clock/ClockManager.h>
 #include <algorithm>
+#include <cmath>
 #include <filesystem>
 
 
@@ -64,6 +65,7 @@ void Player::Update(float dt) {
 	WorldState::Get().SetPlayerHp(currentHp_);   // エリア移動で引き継ぐ用(途中returnがあるので先頭で保存)
 	damageAnimationTimer_ = damageAnimationTimer_ > dt ? damageAnimationTimer_ - dt : 0.0f;
 	UpdateInvincible(dt);
+	UpdateLowHpRim(dt);
 
 	// 落下死。床をすり抜けたら通常の死亡と同じ扱いにしてリスポーンさせる
 	if (currentHp_ > 0 && KillPlane::IsFallenOut(GetWorldPosition())) {
@@ -219,6 +221,7 @@ void Player::Respawn() {
 	invincibleTimer_ = 0.0f;
 	SetDrawEnable(true);
 	ClearRimLight();
+	isLowHpRim_ = false;
 
 	isWalk_ = false;
 
@@ -259,6 +262,48 @@ void Player::UpdateInvincible(float dt) {
 	const float interval = (std::max)(stats_.damageFlashInterval, 0.001f);
 	const int   step = static_cast<int>(invincibleTimer_ / interval);
 	SetDrawEnable((step % 2) == 0);
+}
+
+void Player::UpdateLowHpRim(float dt) {
+	// 被弾直後は赤いダメージリムを優先する
+	if (invincibleTimer_ > 0.0f) {
+		isLowHpRim_ = false;
+		return;
+	}
+
+	const float hpRate = stats_.maxHp > 0
+		? static_cast<float>(currentHp_) / static_cast<float>(stats_.maxHp)
+		: 0.0f;
+
+	// 死亡中と、まだHPに余裕があるときは点滅させない
+	if (currentHp_ <= 0 || hpRate > stats_.lowHpRatio) {
+		if (isLowHpRim_) {          // 点滅していたときだけ消す
+			isLowHpRim_ = false;
+			lowHpRimPhase_ = 0.0f;
+			ClearRimLight();
+		}
+		return;
+	}
+
+	// HPが低いほど速くする(0=しきい値ちょうど, 1=瀕死)
+	const float danger = stats_.lowHpRatio > 0.0f
+		? std::clamp(1.0f - hpRate / stats_.lowHpRatio, 0.0f, 1.0f)
+		: 1.0f;
+
+	constexpr float kTwoPi = 6.28318530718f;
+	lowHpRimPhase_ += dt * stats_.lowHpRimSpeed * (1.0f + danger);
+	if (lowHpRimPhase_ > kTwoPi) {
+		lowHpRimPhase_ -= kTwoPi;
+	}
+
+	// 0→1→0 で滑らかに脈動させる
+	const float t = 0.5f * (1.0f - std::cos(lowHpRimPhase_));
+	const float intensity = stats_.lowHpRimIntensityMin
+		+ (stats_.lowHpRimIntensityMax - stats_.lowHpRimIntensityMin) * t;
+
+	// モデル差し替えで消えても復帰できるよう毎フレーム貼り直す
+	isLowHpRim_ = true;
+	SetRimLight({ 1.0f, 0.15f, 0.15f, 1.0f }, intensity, 1.0f);
 }
 
 void Player::StartInvincible(float duration) {
