@@ -70,10 +70,14 @@ void BaseEnemy::Update(float dt) {
 
 	Actor::Update(dt);
 
+	const CalyxEngine::Vector3 moved = GetWorldPosition() - frameStartPosition;
+	const bool isMoving = moved.LengthSquared() > 1.0e-6f;
+
 	if (damageAnimationTimer_ <= 0.0f && !(attack_ && attack_->IsAttacking())) {
-		const CalyxEngine::Vector3 moved = GetWorldPosition() - frameStartPosition;
-		PlayAnimation(moved.LengthSquared() > 1.0e-6f ? EnemyAnimationID::Move : EnemyAnimationID::Idle);
+		PlayAnimation(isMoving ? EnemyAnimationID::Move : EnemyAnimationID::Idle);
 	}
+
+	UpdateDustEffect(isMoving);
 
 	if (IsDead()) {
 		EnemyState::Get().MarkDefeated(GetGuid());     // 倒したら記録
@@ -160,6 +164,30 @@ void BaseEnemy::UpdateKnockback(float dt) {
 	const float stopSq = stats_.knockbackStopSpeed * stats_.knockbackStopSpeed;
 	if (knockbackVelocity_.LengthSquared() <= stopSq) {
 		knockbackVelocity_ = {};
+	}
+}
+
+void BaseEnemy::UpdateDustEffect(bool isMoving) {
+	if (walk_.GetData().emitters.empty()) {
+		return;
+	}
+
+	if (isMoving) {
+		if (!isDust_) {
+			dustHandle_ = EffectAPI::Play(walk_, GetWorldPosition());
+			isDust_ = true;
+		} else {
+			// 再生中はエミッターを敵に追従させる
+			EffectAPI::Player()->SetTransform(
+				dustHandle_,
+				GetWorldPosition(),
+				CalyxEngine::Quaternion::MakeIdentity(),
+				{ 1.0f, 1.0f, 1.0f });
+		}
+	} else if (isDust_) {
+		EffectAPI::Stop(dustHandle_);
+		dustHandle_ = {};
+		isDust_ = false;
 	}
 }
 

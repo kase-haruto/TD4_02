@@ -119,6 +119,9 @@ void Bridge::UpdateDodgeSuppression() {
 
 void Bridge::ApplyBridgeRotation() {
 	SetRotate(param_.fallAxis * (angleDeg_ * kDeg2Rad));
+	if (param_.fallAxis.z == 1.0f) {
+		
+	}
 }
 
 void Bridge::ApplyZoneParams() {

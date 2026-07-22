@@ -73,6 +73,7 @@ protected:
 	void ApplyKnockbackFrom(Collider* attacker);
 
 	void UpdateKnockback(float dt);
+	void UpdateDustEffect(bool isMoving);
 
 	virtual bool AllowMovement() const { return true; }
 	virtual bool AllowAttack()   const { return true; }
@@ -96,5 +97,8 @@ protected:
 
 	CalyxEngine::EffectAsset hit_;
 	CalyxEngine::EffectAsset hitLight_;
+
 	CalyxEngine::EffectAsset walk_;
+	CalyxEngine::EffectHandle dustHandle_{};
+	bool                      isDust_ = false;
 };
