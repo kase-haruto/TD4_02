@@ -290,20 +290,30 @@ void Player::UpdateLowHpRim(float dt) {
 		? std::clamp(1.0f - hpRate / stats_.lowHpRatio, 0.0f, 1.0f)
 		: 1.0f;
 
-	constexpr float kTwoPi = 6.28318530718f;
-	lowHpRimPhase_ += dt * stats_.lowHpRimSpeed * (1.0f + danger);
-	if (lowHpRimPhase_ > kTwoPi) {
-		lowHpRimPhase_ -= kTwoPi;
+	if (!lowHpPostFxReady_) {
+		lowHpPostFxReady_ = PostEffectAPI::LoadPreset("LowHP.postfx");
 	}
 
-	// 0→1→0 で滑らかに脈動させる
-	const float t = 0.5f * (1.0f - std::cos(lowHpRimPhase_));
-	const float intensity = stats_.lowHpRimIntensityMin
-		+ (stats_.lowHpRimIntensityMax - stats_.lowHpRimIntensityMin) * t;
+	constexpr float kPi = 3.14159265359f;
+	//constexpr float kTwoPi = 6.28318530718f;
+	const float prevPhase = lowHpRimPhase_;
+	lowHpRimPhase_ += dt * stats_.lowHpRimSpeed * (1.0f + danger);
 
-	// モデル差し替えで消えても復帰できるよう毎フレーム貼り直す
-	isLowHpRim_ = true;
-	SetRimLight({ 1.0f, 0.15f, 0.15f, 1.0f }, intensity, 1.0f);
+	if (lowHpPostFxReady_ && prevPhase < kPi && lowHpRimPhase_ >= kPi) {
+		PostEffectAPI::PlayTriggered("Vignette");
+	}
+
+	//if (lowHpRimPhase_ > kTwoPi) {
+	//	lowHpRimPhase_ -= kTwoPi;
+	//}
+
+	//// 0→1→0 で滑らかに脈動させる
+	//const float t = 0.5f * (1.0f - std::cos(lowHpRimPhase_));
+	//const float intensity = stats_.lowHpRimIntensityMin
+	//	+ (stats_.lowHpRimIntensityMax - stats_.lowHpRimIntensityMin) * t;
+	//// モデル差し替えで消えても復帰できるよう毎フレーム貼り直す
+	//isLowHpRim_ = true;
+	//SetRimLight({ 1.0f, 0.15f, 0.15f, 1.0f }, intensity, 1.0f);
 }
 
 void Player::StartInvincible(float duration) {
