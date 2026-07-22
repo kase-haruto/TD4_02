@@ -82,6 +82,13 @@ void PunchAttack::EndAttack(BaseEnemy& self) {
 	cooldownTimer_ = self.GetStats().attackInterval;
 }
 
+void PunchAttack::Cancel() {
+	RemoveAttackHitbox();
+	isAttacking_ = false;
+	attackTimer_ = 0.0f;
+	cooldownTimer_ = 0.0f;
+}
+
 bool PunchAttack::IsHitboxActive() const {
 	return isAttacking_ &&
 		attackTimer_ >= param_.hitboxActiveStart &&

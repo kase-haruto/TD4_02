@@ -17,6 +17,7 @@ public:
 	ChargeAttack();
 
 	void Update(BaseEnemy& self, const Actor* target, float dt) override;
+	void Cancel() override;
 	void ShowGui() override;
 	bool IsAttacking() const override { return phase_ != Phase::Idle; }
 	CalyxEngine::SerializableObject& SerializableParam() override;

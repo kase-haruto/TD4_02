@@ -35,6 +35,12 @@ struct EnemyAnimationSet {
 	std::string aim;
 };
 
+enum class EnemyDeathPhase {
+	None,  //!< 生存中
+	Shake, //!< 小刻みに震えている
+	Burst, //!< モデルを消し、その場で爆散エフェクトを出している
+};
+
 /*-----------------------------------------------------------------------------------------
  * BaseEnemy
  * - すべての敵の基礎
@@ -76,6 +82,11 @@ protected:
 	void UpdateKnockback(float dt);
 	void UpdateDustEffect(bool isMoving);
 
+	// 死亡演出を開始する（多重呼び出しは無視される）
+	void BeginDeathSequence();
+	// 死亡演出を進める
+	bool UpdateDeathSequence(float dt);
+
 	virtual bool AllowMovement() const { return true; }
 	virtual bool AllowAttack()   const { return true; }
 
@@ -103,4 +114,11 @@ protected:
 	CalyxEngine::EffectAsset walk_;
 	CalyxEngine::EffectHandle dustHandle_{};
 	bool                      isDust_ = false;
+
+	EnemyDeathPhase deathPhase_ = EnemyDeathPhase::None;
+	float deathTimer_ = 0.0f;
+	CalyxEngine::Vector3 deathBasePosition_{};   //!< 震えの基準位置
+	CalyxEngine::Vector3 deathEffectPosition_{}; //!< 爆散エフェクトの発生位置
+
+	CalyxEngine::EffectAsset  death_;
 };

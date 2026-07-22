@@ -6,9 +6,16 @@
 #include <Game/Player/Sword/Sword.h>
 
 #include <Engine/Objects/Collider/Collider.h>
+#include <Data/Engine/Configs/Scene/Objects/Collider/ColliderConfig.h>
 #include <Engine/Foundation/Math/Quaternion.h>
 #include <Engine/Foundation/Input/Input.h>
+#include <Engine/Foundation/Utility/Random/Random.h>
 
+namespace {
+	constexpr float kDeathShakeTime = 0.45f; // 震えている時間(秒)
+	constexpr float kDeathShakeAmplitude = 0.06f; // 震え幅(m)
+	constexpr float kDeathBurstTime = 0.4f;  // エフェクト時間
+}
 
 BaseEnemy::BaseEnemy(EnemyAnimationSet animations, const std::string& objectName, EnemyStats& stats)
 	: Actor(animations.idle, objectName), stats_(stats), animations_(std::move(animations)) {
@@ -28,6 +35,7 @@ void BaseEnemy::Initialize() {
 	PlayAnimation(EnemyAnimationID::Idle);
 	hit_.Load("EnemyHit");
 	hitLight_.Load("hitLight");
+	//death_.Load("EnemyDeath");
 
 	if (EnemyState::Get().IsDefeated(GetGuid())) {
 		pendingRemove_ = true;
@@ -53,6 +61,16 @@ void BaseEnemy::Update(float dt) {
 		if (damageRimTime_ <= 0.0f) {
 			ClearRimLight();
 		}
+	}
+
+	// 死亡演出中は移動・攻撃・アニメを止めて、演出だけを進める
+	if (deathPhase_ != EnemyDeathPhase::None) {
+		if (UpdateDeathSequence(dt)) {
+			if (auto* context = SceneContext::Current()) {
+				context->RemoveObject(std::static_pointer_cast<SceneObject>(shared_from_this()));
+			}
+		}
+		return;
 	}
 
 	// 落下死。ステージ外に落ちたら倒された扱いにして、末尾の IsDead() で消す
@@ -88,16 +106,7 @@ void BaseEnemy::Update(float dt) {
 	UpdateDustEffect(isMoving);
 
 	if (IsDead()) {
-		EnemyState::Get().MarkDefeated(GetGuid());     // 倒したら記録
-		lockOnTarget_.SetOwnerAlive(false);
-		lockOnTarget_.Unregister();
-		EffectAPI::Stop(dustHandle_);
-		dustHandle_ = {};
-		isDust_ = false;
-		if (auto* context = SceneContext::Current()) {
-			context->RemoveObject(
-				std::static_pointer_cast<SceneObject>(shared_from_this()));
-		}
+		BeginDeathSequence();
 		return;
 	}
 }
@@ -107,6 +116,11 @@ void BaseEnemy::Update(float dt) {
 /////////////////////////////////////////////////////////////////////////////////////////
 void BaseEnemy::OnCollisionEnter(Collider* other) {
 	if (!other) {
+		return;
+	}
+
+	// 死亡演出中は被弾を受け付けない
+	if (deathPhase_ != EnemyDeathPhase::None) {
 		return;
 	}
 
@@ -136,6 +150,10 @@ void BaseEnemy::DerivativeGui() {
 }
 
 void BaseEnemy::Destroy() {
+	// 攻撃中に消される場合、攻撃判定だけがシーンに残るのを防ぐ
+	if (attack_) {
+		attack_->Cancel();
+	}
 	lockOnTarget_.Unregister();
 	Actor::Destroy();
 }
@@ -204,6 +222,73 @@ void BaseEnemy::UpdateDustEffect(bool isMoving) {
 		dustHandle_ = {};
 		isDust_ = false;
 	}
+}
+
+void BaseEnemy::BeginDeathSequence() {
+	if (deathPhase_ != EnemyDeathPhase::None) {
+		return;
+	}
+
+	// 撃破記録とロックオン解除は演出の開始時点で
+	EnemyState::Get().MarkDefeated(GetGuid());
+	lockOnTarget_.SetOwnerAlive(false);
+	lockOnTarget_.Unregister();
+
+	// 土煙止める
+	EffectAPI::Stop(dustHandle_);
+	dustHandle_ = {};
+	isDust_ = false;
+
+	// 震えている間に動かないよう、ノックバックは打ち切る
+	knockbackVelocity_ = {};
+
+	deathPhase_ = EnemyDeathPhase::Shake;
+	deathTimer_ = 0.0f;
+	deathBasePosition_ = GetWorldTransform().translation;
+
+	// 攻撃を中断し
+	if (attack_) {
+		attack_->Cancel();
+	}
+
+	// 自分の当たり判定を切る。
+	/*if (auto* collider = GetCollider()) {
+		
+	}*/
+}
+
+bool BaseEnemy::UpdateDeathSequence(float dt) {
+	deathTimer_ += dt;
+
+	if (deathPhase_ == EnemyDeathPhase::Shake) {
+		// 終わりに近づくほど大きく震わせて、弾ける直前の溜めを作る
+		const float shakeRate = deathTimer_ / kDeathShakeTime;
+		CalyxEngine::Vector3 jitter =
+			Random::GenerateVector3(-kDeathShakeAmplitude, kDeathShakeAmplitude) * (0.3f + 0.7f * shakeRate);
+		jitter.y *= 0.3f;
+		GetWorldTransform().translation = deathBasePosition_ + jitter;
+
+		if (deathTimer_ >= kDeathShakeTime) {
+			// 震え終了
+			GetWorldTransform().translation = deathBasePosition_;
+			SetDrawEnable(false);
+			ClearRimLight();
+
+			deathPhase_ = EnemyDeathPhase::Burst;
+			deathTimer_ = 0.0f;
+			deathEffectPosition_ = deathBasePosition_ + CalyxEngine::Vector3{ 0.0f, 0.5f, 0.0f };
+
+			if (!death_.GetData().emitters.empty()) {
+				EffectAPI::Play(death_, deathEffectPosition_);
+			}
+		}
+		return false;
+	}
+
+	if (deathTimer_ >= kDeathBurstTime) {
+		return true; // 演出完了
+	}
+	return false;
 }
 
 void BaseEnemy::SetMovement(std::unique_ptr<IEnemyMovement> movement) {
