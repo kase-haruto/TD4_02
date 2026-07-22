@@ -218,6 +218,7 @@ void Player::Respawn() {
 	ability_.ClearClones();
 	invincibleTimer_ = 0.0f;
 	SetDrawEnable(true);
+	ClearRimLight();
 
 	isWalk_ = false;
 
@@ -250,6 +251,7 @@ void Player::UpdateInvincible(float dt) {
 
 	if (invincibleTimer_ <= 0.0f) {
 		SetDrawEnable(true);
+		ClearRimLight();
 		return;
 	}
 
@@ -261,6 +263,7 @@ void Player::UpdateInvincible(float dt) {
 
 void Player::StartInvincible(float duration) {
 	invincibleTimer_ = duration;
+	SetRimLight({ 1.0f, 0.1f, 0.1f, 1.0f }, 8.0f, 1.0f);
 }
 
 void Player::UpdateWalkEffect(bool isWalking) {

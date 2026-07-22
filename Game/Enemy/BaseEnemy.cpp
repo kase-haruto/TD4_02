@@ -47,6 +47,14 @@ void BaseEnemy::Update(float dt) {
 		return;
 	}
 
+	if (damageRimTime_ > 0.0f) {
+		ApplyDamageRim();
+		damageRimTime_ = damageRimTime_ > dt ? damageRimTime_ - dt : 0.0f;
+		if (damageRimTime_ <= 0.0f) {
+			ClearRimLight();
+		}
+	}
+
 	// 落下死。ステージ外に落ちたら倒された扱いにして、末尾の IsDead() で消す
 	if (!IsDead() && KillPlane::IsFallenOut(GetWorldPosition())) {
 		currentHp_ = 0;
@@ -83,6 +91,9 @@ void BaseEnemy::Update(float dt) {
 		EnemyState::Get().MarkDefeated(GetGuid());     // 倒したら記録
 		lockOnTarget_.SetOwnerAlive(false);
 		lockOnTarget_.Unregister();
+		EffectAPI::Stop(dustHandle_);
+		dustHandle_ = {};
+		isDust_ = false;
 		if (auto* context = SceneContext::Current()) {
 			context->RemoveObject(
 				std::static_pointer_cast<SceneObject>(shared_from_this()));
@@ -154,6 +165,10 @@ void BaseEnemy::ApplyKnockbackFrom(Collider* attacker) {
 	knockbackVelocity_ = dir.Normalize() * stats_.knockbackInitialSpeed;
 }
 
+void BaseEnemy::ApplyDamageRim() {
+	SetRimLight({ 1.0f, 0.1f, 0.1f, 1.0f }, 12.0f, 1.0f);
+}
+
 void BaseEnemy::UpdateKnockback(float dt) {
 	GetWorldTransform().translation =
 		GetWorldTransform().translation + knockbackVelocity_ * dt;
@@ -207,6 +222,7 @@ void BaseEnemy::TakeDamage(int amount) {
 	if (currentHp_ < 0) {
 		currentHp_ = 0;
 	}
+	damageRimTime_ = 0.3f;
 	if (!animations_.damage.empty()) {
 		damageAnimationTimer_ = 0.25f;
 		PlayAnimation(EnemyAnimationID::Damage);

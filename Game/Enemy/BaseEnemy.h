@@ -71,6 +71,7 @@ protected:
 	virtual void OnHitByPlayerAttack(Collider* attacker);
 	// プレイヤーが向いている方向へ吹き飛ぶ
 	void ApplyKnockbackFrom(Collider* attacker);
+	void ApplyDamageRim();
 
 	void UpdateKnockback(float dt);
 	void UpdateDustEffect(bool isMoving);
@@ -94,6 +95,7 @@ protected:
 	std::string currentAnimationModel_;
 	float damageAnimationTimer_ = 0.0f;
 	bool useSecondAttackAnimation_ = false;
+	float damageRimTime_ = 0.0f;
 
 	CalyxEngine::EffectAsset hit_;
 	CalyxEngine::EffectAsset hitLight_;
