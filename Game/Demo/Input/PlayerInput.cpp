@@ -2,6 +2,12 @@
 
 using namespace CalyxFoundation;
 
+namespace {
+	// トリガーを「押した」とみなす押し込み量。
+	// 半分より深く握った時だけ反応させ、指を添えただけで暴発しないようにする。
+	constexpr float kTriggerPressThreshold = 0.5f;
+}
+
 PlayerInput::PlayerInput() {
 	ResetBindings();
 }
@@ -56,8 +62,11 @@ void PlayerInput::Update() {
 
 	state_.lockOnPressed = IsTriggerAction(InputAction::LockOn) || IsTriggerGamepadAction(InputAction::LockOn);
 	state_.unlockPressed = IsTriggerAction(InputAction::UnlockLockOn) || IsTriggerGamepadAction(InputAction::UnlockLockOn);
-	state_.switchLeftPressed = IsTriggerAction(InputAction::SwitchLockOnLeft) || IsTriggerGamepadAction(InputAction::SwitchLockOnLeft);
-	state_.switchRightPressed = IsTriggerAction(InputAction::SwitchLockOnRight) || IsTriggerGamepadAction(InputAction::SwitchLockOnRight);
+	
+	const bool leftTriggerPressed = ToTriggerPress(Input::GetLeftTrigger(), prevLeftTriggerHeld_);
+	const bool rightTriggerPressed = ToTriggerPress(Input::GetRightTrigger(), prevRightTriggerHeld_);
+	state_.switchLeftPressed = IsTriggerAction(InputAction::SwitchLockOnLeft) || leftTriggerPressed;
+	state_.switchRightPressed = IsTriggerAction(InputAction::SwitchLockOnRight) || rightTriggerPressed;
 
 	// ダッシュは押し続け状態として扱う。
 	// 移動速度変更などの継続効果で使えるように、トリガーではなくPushを参照する。
@@ -89,13 +98,13 @@ void PlayerInput::ResetBindings() {
 		{InputAction::MoveLeft, PadButton::DPAD_LEFT},
 		{InputAction::MoveRight, PadButton::DPAD_RIGHT},
 		//{InputAction::Jump, PadButton::A},
-		{InputAction::Attack, PadButton::RB},
-		{InputAction::Ability, PadButton::Y},
+		{InputAction::Attack, PadButton::X},
+		{InputAction::Ability, PadButton::B},
 		{InputAction::Dash, PadButton::A},
 		{InputAction::LockOn, PadButton::LB},
-		{InputAction::UnlockLockOn, PadButton::B},
-		{InputAction::SwitchLockOnLeft, PadButton::DPAD_LEFT},
-		{InputAction::SwitchLockOnRight, PadButton::DPAD_RIGHT},
+		{InputAction::UnlockLockOn, PadButton::RB},
+		/*{InputAction::SwitchLockOnLeft, PadButton::DPAD_LEFT},
+		{InputAction::SwitchLockOnRight, PadButton::DPAD_RIGHT},*/
 	};
 }
 
@@ -159,4 +168,16 @@ CalyxEngine::Vector2 PlayerInput::ClampMoveLength(const CalyxEngine::Vector2& mo
 	CalyxEngine::Vector2 clamped = move;
 	clamped.Normalize();
 	return clamped;
+}
+
+bool PlayerInput::ToTriggerPress(float value, bool& prevHeld) {
+	// しきい値以上なら押されている状態として扱う。
+	const bool held = value >= kTriggerPressThreshold;
+
+	// 前フレームが離れていた時だけ、押した瞬間として返す。
+	// これでボタンのTrigger判定と同じ挙動になる。
+	const bool pressed = held && !prevHeld;
+
+	prevHeld = held;
+	return pressed;
 }

@@ -85,10 +85,15 @@ void PlayerMotor::Update(PlayerBase* player, const PlayerInputState& input, floa
 			}
 		}
 	} else {
-		// パッド右スティックの方を向く（中立ならFaceMoveDirection側で何もしない）
+		// パッド操作時の向き。
+		// 右スティックを倒している間はそちらを優先し、中立の間は移動方向を向く。
 		constexpr float kAimThresholdSq = 0.04f;
 		if (input.look.LengthSquared() > kAimThresholdSq) {
 			FaceMoveDirection(player, BuildWorldMoveDirection(input.look));
+		} else if (worldDirection.LengthSquared() > 0.01f) {
+			// 移動入力がある時だけ向きを更新する。
+			// 停止中に向きが初期方向へ戻らないよう、入力ゼロでは何もしない。
+			FaceMoveDirection(player, worldDirection);
 		}
 	}
 
