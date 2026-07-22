@@ -5,7 +5,7 @@
 namespace {
 	constexpr float kScreenW     = 1280.0f;
 	constexpr float kCenterX     = kScreenW * 0.5f;
-	constexpr float kPipSize     = 80.0f;  // 1個の一辺(px)
+	constexpr float kPipSize     = 60.0f;  // 1個の一辺(px)
 	constexpr float kPipGap      = 14.0f;  // 隙間(px)
 	constexpr float kPipsBottomY = 640.0f; // 下端のY
 
@@ -15,7 +15,7 @@ namespace {
 	constexpr float kRed[4]  = { 0.90f, 0.25f, 0.20f, 1.0f }; // クールタイム中
 
 	// Material2D::fillMethod (0=none, 1=horizontal, 2=vertical, 3=mask)
-	constexpr int kFillMethod = 1;
+	constexpr int kFillMethod = 2;
 	// fillOrigin: 0=左/下, 1=右/上
 	constexpr float kFillFromStart = 0.0f; // 下(縦) / 左(横)
 	constexpr float kFillFromEnd   = 1.0f; // 上(縦) / 右(横)
