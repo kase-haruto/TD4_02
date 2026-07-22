@@ -1,0 +1,124 @@
+{
+  "graph": {
+    "links": [
+      {
+        "fromPinId": 2,
+        "id": 8,
+        "toPinId": 6
+      },
+      {
+        "fromPinId": 7,
+        "id": 9,
+        "toPinId": 4
+      }
+    ],
+    "nextId": 10,
+    "nodes": [
+      {
+        "id": 1,
+        "inputs": [],
+        "outputs": [
+          {
+            "id": 2,
+            "kind": 1,
+            "name": "Color",
+            "type": "core.color"
+          }
+        ],
+        "position": [
+          20.0,
+          120.0
+        ],
+        "properties": {},
+        "title": "Scene Color",
+        "type": "Input"
+      },
+      {
+        "id": 3,
+        "inputs": [
+          {
+            "id": 4,
+            "kind": 0,
+            "name": "Color",
+            "type": "core.color"
+          }
+        ],
+        "outputs": [],
+        "position": [
+          720.0,
+          120.0
+        ],
+        "properties": {},
+        "title": "Output",
+        "type": "Output"
+      },
+      {
+        "id": 5,
+        "inputs": [
+          {
+            "id": 6,
+            "kind": 0,
+            "name": "In",
+            "type": "core.color"
+          }
+        ],
+        "outputs": [
+          {
+            "id": 7,
+            "kind": 1,
+            "name": "Out",
+            "type": "core.color"
+          }
+        ],
+        "position": [
+          321.0,
+          -26.0
+        ],
+        "properties": {
+          "applyMode": "Triggered",
+          "autoDisable": true,
+          "duration": 0.4099999964237213,
+          "easeIndex": 8,
+          "enabled": false,
+          "floatAnimations": [],
+          "parameters": {
+            "center": [
+              0.5,
+              0.5
+            ],
+            "width": 0.05000000074505806
+          }
+        },
+        "title": "RadialBlur",
+        "type": "RadialBlur"
+      }
+    ]
+  },
+  "name": "Dodge",
+  "nodes": [
+    {
+      "applyMode": "Triggered",
+      "autoDisable": true,
+      "duration": 0.4099999964237213,
+      "ease": "",
+      "easeIndex": 8,
+      "enabled": false,
+      "floatAnimations": [],
+      "id": 5,
+      "parameters": {
+        "center": [
+          0.5,
+          0.5
+        ],
+        "width": 0.05000000074505806
+      },
+      "title": "RadialBlur",
+      "type": "RadialBlur"
+    }
+  ],
+  "outline": {
+    "enabled": true
+  },
+  "type": "PostEffectPreset",
+  "version": 1
+}
