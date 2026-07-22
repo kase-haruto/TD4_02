@@ -168,6 +168,9 @@ void Player::TakeDamage(int amount) {
 	}
 	damageAnimationTimer_ = 0.25f;
 	StartInvincible(stats_.damageInvincibleTime);
+	if (postFxPresetLoaded_) {
+		PostEffectAPI::PlayTriggered("Vignette");
+	}
 	PlayAnimation(PlayerAnimationID::Damage);
 }
 
