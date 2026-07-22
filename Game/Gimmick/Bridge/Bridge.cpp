@@ -18,7 +18,7 @@ namespace {
 }
 
 Bridge::Bridge()
-	: BaseGameObject("debugCube.obj", "Bridge") {}
+	: BaseGameObject("Darwbridge.obj", "Bridge") {}
 
 Bridge::~Bridge() = default;
 

@@ -2,6 +2,7 @@
 
 #include <Game/Collision/CollisionLayerUtil.h>
 #include <Game/World/EnemyState.h>
+#include <Game/World/KillPlane.h>
 #include <Game/Player/Sword/Sword.h>
 
 #include <Engine/Objects/Collider/Collider.h>
@@ -46,6 +47,11 @@ void BaseEnemy::Update(float dt) {
 		return;
 	}
 
+	// 落下死。ステージ外に落ちたら倒された扱いにして、末尾の IsDead() で消す
+	if (!IsDead() && KillPlane::IsFallenOut(GetWorldPosition())) {
+		currentHp_ = 0;
+	}
+
 	const CalyxEngine::Vector3 frameStartPosition = GetWorldPosition();
 	damageAnimationTimer_ = damageAnimationTimer_ > dt ? damageAnimationTimer_ - dt : 0.0f;
 	auto targetPlayer = stats_.target.Resolve().get();
@@ -60,19 +66,6 @@ void BaseEnemy::Update(float dt) {
 	// 攻撃（ノックバックで吹き飛んでいる間は攻撃しない）
 	if (knockbackVelocity_.LengthSquared() <= stopSq && attack_ && targetPlayer && AllowAttack()) {
 		attack_->Update(*this, targetPlayer, dt);
-	}
-
-	if (CalyxFoundation::Input::TriggerKey(DIK_P)|| CalyxFoundation::Input::TriggerGamepadButton(CalyxFoundation::PadButton::X)) {
-		CalyxEngine::Vector3 dir = CalyxEngine::Quaternion::RotateVector(
-			CalyxEngine::Vector3::Forward(), targetPlayer->GetRenderWorldTransform().rotation);
-		dir.y = 0.0f;
-		if (dir.LengthSquared() <= 0.0001f) {
-			return;
-		}
-		EffectAPI::Play(hit_, worldTransform_.GetWorldPosition());
-		EffectAPI::Play(hitLight_, worldTransform_.GetWorldPosition());
-
-		knockbackVelocity_ = dir.Normalize() * stats_.knockbackInitialSpeed;
 	}
 
 	Actor::Update(dt);
