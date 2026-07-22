@@ -55,6 +55,10 @@ void Player::Initialize() {
 	walk_.Load("playerWalk");
 	dodgeEffect_.Load("playerDodge");
 
+	// 読み込めるプリセットは1枚だけ。ここで別のプリセットを読むと、
+	// GamePlay.postfx のグラフごと差し替わって Bloom も Vignette も消える。
+	postFxPresetLoaded_ = PostEffectAPI::LoadPreset("GamePlay.postfx");
+
 	ui_.Initialize(ability_.MaxCloneCount());
 }
 
@@ -290,22 +294,18 @@ void Player::UpdateLowHpRim(float dt) {
 		? std::clamp(1.0f - hpRate / stats_.lowHpRatio, 0.0f, 1.0f)
 		: 1.0f;
 
-	if (!lowHpPostFxReady_) {
-		lowHpPostFxReady_ = PostEffectAPI::LoadPreset("LowHP.postfx");
-	}
-
 	constexpr float kPi = 3.14159265359f;
-	//constexpr float kTwoPi = 6.28318530718f;
+	constexpr float kTwoPi = 6.28318530718f;
 	const float prevPhase = lowHpRimPhase_;
 	lowHpRimPhase_ += dt * stats_.lowHpRimSpeed * (1.0f + danger);
 
-	if (lowHpPostFxReady_ && prevPhase < kPi && lowHpRimPhase_ >= kPi) {
+	if (postFxPresetLoaded_ && prevPhase < kPi && lowHpRimPhase_ >= kPi) {
 		PostEffectAPI::PlayTriggered("Vignette");
 	}
 
-	//if (lowHpRimPhase_ > kTwoPi) {
-	//	lowHpRimPhase_ -= kTwoPi;
-	//}
+	if (lowHpRimPhase_ > kTwoPi) {
+		lowHpRimPhase_ -= kTwoPi;
+	}
 
 	//// 0→1→0 で滑らかに脈動させる
 	//const float t = 0.5f * (1.0f - std::cos(lowHpRimPhase_));

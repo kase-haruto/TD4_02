@@ -4,6 +4,8 @@
 
 #include <Engine/Foundation/Math/Quaternion.h>
 #include <Engine/Physics/Character/CharacterMovementComponent.h>
+#include <Engine/Scene/Utility/SceneUtility.h>
+#include <Engine/Scene/Context/SceneContext.h>
 
 void PlayerDodge::Initialize([[maybe_unused]] PlayerBase* player) {
 	param_.LoadParams();
@@ -78,4 +80,5 @@ void PlayerDodge::StartDodge(PlayerBase* player) {
 		CalyxEngine::Quaternion::FromToQuaternion(CalyxEngine::Vector3::Forward(), dodgeDir_);
 	isDodging_ = true;
 	isStartDodge_ = true;
+	PostEffectAPI::PlayTriggered("RadialBlur");
 }
