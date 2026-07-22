@@ -75,6 +75,7 @@ void Player::Initialize() {
 /////////////////////////////////////////////////////////////////////////////////////////
 void Player::Update(float dt) {
 	WorldState::Get().SetPlayerHp(currentHp_);   // エリア移動で引き継ぐ用(途中returnがあるので先頭で保存)
+	WorldState::Get().AddPlayTime(dt);           // クリアタイムの計測。Playerがいる=ゲーム中
 	damageAnimationTimer_ = damageAnimationTimer_ > dt ? damageAnimationTimer_ - dt : 0.0f;
 	UpdateInvincible(dt);
 	UpdateLowHpRim(dt);
