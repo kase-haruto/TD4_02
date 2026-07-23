@@ -1,0 +1,113 @@
+[
+    {
+        "cameraDitherEnabled": false,
+        "castShadow": true,
+        "colliderConfig": {
+            "capsuleHeight": 2.0,
+            "capsuleRadius": 0.5,
+            "isCollisionEnabled": true,
+            "isDraw": true,
+            "isTrigger": false,
+            "layerId": 0,
+            "offset": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "radius": 1.0,
+            "rotate": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "size": {
+                "x": 1.0,
+                "y": 9.600000381469727,
+                "z": 37.400001525878906
+            }
+        },
+        "colliderKind": 1,
+        "drawEnable": true,
+        "guid": "2b757626-edda-4d05-a8ff-49c14cb0397a",
+        "modelConfig": {
+            "blendMode": 5,
+            "materialGuid": "00000000-0000-0000-0000-000000000000",
+            "modelName": "Door.obj",
+            "textureGuid": "00000000-0000-0000-0000-000000000000",
+            "uvTransConfig": {
+                "rotation": 0.0,
+                "scale": {
+                    "x": 1.0,
+                    "y": 1.0
+                }
+            }
+        },
+        "name": "Door",
+        "objectType": 2,
+        "outlineColor": {
+            "w": 1.0,
+            "x": 0.019999999552965164,
+            "y": 0.019999999552965164,
+            "z": 0.02500000037252903
+        },
+        "outlineEnabled": false,
+        "outlineThickness": 0.03500000014901161,
+        "parentGuid": "00000000-0000-0000-0000-000000000000",
+        "physicsBodyConfig": {
+            "bodyType": 0,
+            "enabled": true,
+            "gravityScale": 1.0,
+            "mass": 1.0,
+            "pushbackRatio": 1.0,
+            "useGravity": true
+        },
+        "transform": {
+            "inheritRotate": true,
+            "inheritScale": true,
+            "inheritTranslate": true,
+            "rotation": {
+                "w": 0.7210481762886047,
+                "x": 0.0,
+                "y": -0.6928849816322327,
+                "z": 0.0
+            },
+            "scale": {
+                "x": 1.2000000476837158,
+                "y": 1.2000000476837158,
+                "z": 1.2000000476837158
+            },
+            "translation": {
+                "x": 0.0,
+                "y": 0.26788318157196045,
+                "z": 18.996471405029297
+            }
+        },
+        "type": "StaticModelObject",
+        "visualOffset": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        },
+        "worldTransform": {
+            "inheritRotate": true,
+            "inheritScale": true,
+            "inheritTranslate": true,
+            "rotation": {
+                "w": 0.7210481762886047,
+                "x": 0.0,
+                "y": -0.6928849816322327,
+                "z": 0.0
+            },
+            "scale": {
+                "x": 1.2000000476837158,
+                "y": 1.2000000476837158,
+                "z": 1.2000000476837158
+            },
+            "translation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            }
+        }
+    }
+]
