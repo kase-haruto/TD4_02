@@ -139,19 +139,24 @@ private:
 				.Category("AttackDamage")
 				.Tooltip("攻撃力");
 
-			AddField("attack1Rotation_", attack1Rotation_)
-				.Category("AttackRotation")
-				.Tooltip("1段目の攻撃回転");
 			AddField("attack1Offset_", attack1Offset_)
-				.Category("AttackRotation")
-				.Tooltip("Attack 1 effect position offset");
+				.Category("AttackEffect1")
+				.Tooltip("1段目の攻撃エフェクト位置オフセット");
+			AddField("attack1Rotation_", attack1Rotation_)
+				.Category("AttackEffect1")
+				.Tooltip("1段目の攻撃エフェクト回転（ラジアン）");
 			AddField("attack2Offset_", attack2Offset_)
-				.Category("AttackRotation")
-				.Tooltip("Attack 2 and later effect position offset");
-
+				.Category("AttackEffect2")
+				.Tooltip("2段目の攻撃エフェクト位置オフセット");
 			AddField("attack2Rotation_", attack2Rotation_)
-				.Category("AttackRotation")
-				.Tooltip("2段目の攻撃回転");
+				.Category("AttackEffect2")
+				.Tooltip("2段目の攻撃エフェクト回転（ラジアン）");
+			AddField("attack3Offset_", attack3Offset_)
+				.Category("AttackEffect3")
+				.Tooltip("3段目の攻撃エフェクト位置オフセット");
+			AddField("attack3Rotation_", attack3Rotation_)
+				.Category("AttackEffect3")
+				.Tooltip("3段目の攻撃エフェクト回転（ラジアン）");
 		}
 
 		CalyxEngine::ParamPath GetParamPath() const override {
@@ -179,10 +184,12 @@ private:
 
 		float damage = 10;
 
-		CalyxEngine::Quaternion attack1Rotation_;
-		CalyxEngine::Quaternion attack2Rotation_;
-		CalyxEngine::Vector3 attack1Offset_{};
-		CalyxEngine::Vector3 attack2Offset_{};
+		CalyxEngine::Vector3 attack1Offset_ = {2.0f, 2.5f, 1.0f};
+		CalyxEngine::Vector3 attack1Rotation_ = {-2.49f, -0.70f, 2.596f};
+		CalyxEngine::Vector3 attack2Offset_ = {};
+		CalyxEngine::Vector3 attack2Rotation_ = {};
+		CalyxEngine::Vector3 attack3Offset_ = {};
+		CalyxEngine::Vector3 attack3Rotation_ = {};
 	};
 
 	AttackParam param_;
