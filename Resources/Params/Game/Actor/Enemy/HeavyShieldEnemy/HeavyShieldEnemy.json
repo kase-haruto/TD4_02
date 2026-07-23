@@ -9,7 +9,7 @@
         "knockbackDamping": 8.0,
         "knockbackInitialSpeed": 0.0,
         "knockbackStopSpeed": 0.20000000298023224,
-        "maxHp": 60,
+        "maxHp": 90,
         "moveSpeed": 1.0
     }
 }
