@@ -25,8 +25,9 @@ public:
 	 * \param player プレイヤー
 	 * \param input 入力状態
 	 * \param dt 時間差
+	 * \param ignoreLockOnFacing ロックオン中でも向きを手動入力で決めるか(アビリティのチャージ中など)
 	 */
-	void Update(PlayerBase* player, const PlayerInputState& input, float dt);
+	void Update(PlayerBase* player, const PlayerInputState& input, float dt, bool ignoreLockOnFacing = false);
 	void ShowGui();
 
 	CalyxEngine::Vector3 GetMoveDir() const { return lastMoveDir_; }

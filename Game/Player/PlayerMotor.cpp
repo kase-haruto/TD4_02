@@ -26,7 +26,7 @@ namespace {
 	}
 }
 
-void PlayerMotor::Update(PlayerBase* player, const PlayerInputState& input, float dt) {
+void PlayerMotor::Update(PlayerBase* player, const PlayerInputState& input, float dt, bool ignoreLockOnFacing) {
 	player->GetCharacterMovement().SetMaxWalkSpeed(input.dashHeld ? param_.dashSpeed : param_.moveSpeed);
 
 	// --- 移動 ---
@@ -55,7 +55,8 @@ void PlayerMotor::Update(PlayerBase* player, const PlayerInputState& input, floa
 	}
 
 	// --- 向き ---
-	if (lockOnState_ && lockOnState_->IsLockingOn()) {
+	// ignoreLockOnFacing のときはロックオン中でも狙いを手動で決めさせる
+	if (!ignoreLockOnFacing && lockOnState_ && lockOnState_->IsLockingOn()) {
 		FaceLockOnTarget(player, dt);
 	} else if (input.aimWithMouse) {
 		// マウスカーソルの方を向く

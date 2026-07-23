@@ -1,0 +1,975 @@
+{
+  "emitters": [
+    {
+      "emitter": {
+        "autoDestroy": false,
+        "billboardMode": 1,
+        "blendMode": 2,
+        "cameraDitherEnabled": false,
+        "cameraDitherFar": 20.0,
+        "cameraDitherNear": 0.0,
+        "color": {
+          "w": 1.0,
+          "x": 0.2064056396484375,
+          "y": 0.0,
+          "z": 1.0
+        },
+        "direction": {
+          "enabled": true,
+          "rotateToDirection": true,
+          "speed": {
+            "constant": 1.0,
+            "max": 9.0,
+            "min": 5.0,
+            "mode": 1
+          },
+          "vector": {
+            "constant": {
+              "x": 0.0,
+              "y": 1.0,
+              "z": 0.0
+            },
+            "max": {
+              "x": 7.0,
+              "y": 4.0,
+              "z": 7.0
+            },
+            "min": {
+              "x": -7.0,
+              "y": 1.0,
+              "z": -7.0
+            },
+            "mode": 1
+          }
+        },
+        "emitCount": 20,
+        "emitDelay": 0.0,
+        "emitDuration": -1.0,
+        "emitRate": 0.10000000149011612,
+        "emitterShape": 0,
+        "fixedRandomSeed": false,
+        "followOneShot": false,
+        "gpuCurlNoiseAmplitude": 1.0,
+        "gpuCurlNoiseEnabled": false,
+        "gpuCurlNoiseFrequency": 1.0,
+        "gpuCurlNoiseLacunarity": 2.0,
+        "gpuCurlNoiseOctaves": 1,
+        "gpuCurlNoiseOffset": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "gpuCurlNoiseRoughness": 0.5,
+        "gpuCurlNoiseScrollSpeed": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "initialRotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "isComplement": true,
+        "isDrawEnable": true,
+        "isOneShot": true,
+        "lifetime": {
+          "constant": 0.4000000059604645,
+          "max": 0.5,
+          "min": 0.0,
+          "mode": 1
+        },
+        "modelGuid": "00000000-0000-0000-0000-000000000000",
+        "modelPath": "plane.obj",
+        "modules": [
+          {
+            "blend": 0,
+            "clamp01": true,
+            "ease": 2,
+            "enabled": true,
+            "end": [
+              0.10000000149011612,
+              0.4000000059604645,
+              1.0,
+              1.0
+            ],
+            "guid": "1be6add3-dbee-4c44-be37-037e35d8c822",
+            "invert": false,
+            "name": "OverLifetimeModule",
+            "start": [
+              0.10000000149011612,
+              0.4000000059604645,
+              0.0,
+              1.0
+            ],
+            "target": 0
+          },
+          {
+            "blend": 0,
+            "clamp01": true,
+            "ease": 1,
+            "enabled": true,
+            "end": [
+              0.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "guid": "58737566-44af-4457-9bca-db0ae18d7f1f",
+            "invert": false,
+            "name": "OverLifetimeModule",
+            "start": [
+              1.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "target": 5
+          }
+        ],
+        "noiseMaskScale": 1.0,
+        "noiseMaskScrollSpeed": {
+          "x": 0.0,
+          "y": 0.0
+        },
+        "noiseMaskSoftness": 0.10000000149011612,
+        "noiseMaskStrength": 1.0,
+        "noiseMaskTextureGuid": "00000000-0000-0000-0000-000000000000",
+        "noiseMaskTexturePath": "",
+        "noiseMaskThreshold": 0.5,
+        "offset": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "randomSeed": 1,
+        "randomSpinEmit": false,
+        "rotation": {
+          "w": 1.0,
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "scale": {
+          "constant": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "max": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "min": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+          },
+          "mode": 0
+        },
+        "shapeAngle": 30.0,
+        "shapeRadius": 1.0,
+        "shapeSize": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "spin": {
+          "constant": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+          },
+          "max": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+          },
+          "min": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+          },
+          "mode": 0
+        },
+        "textureGuid": "a6432373-88ba-494c-89ce-1c1725c34fd5",
+        "texturePath": "Textures/white1x1.dds",
+        "trail": {
+          "alignInstancesToTangent": true,
+          "alphaOverLifetime": {
+            "constant": 1.0,
+            "constantMax": 1.0,
+            "constantMin": 0.0,
+            "keys": [
+              {
+                "time": 0.0,
+                "value": 0.0
+              },
+              {
+                "time": 1.0,
+                "value": 1.0
+              }
+            ],
+            "maxKeys": [
+              {
+                "time": 0.0,
+                "value": 1.0
+              },
+              {
+                "time": 1.0,
+                "value": 1.0
+              }
+            ],
+            "minKeys": [
+              {
+                "time": 0.0,
+                "value": 0.0
+              },
+              {
+                "time": 1.0,
+                "value": 0.0
+              }
+            ],
+            "mode": 0
+          },
+          "baseTextureGuid": "00000000-0000-0000-0000-000000000000",
+          "baseTexturePath": "Textures/white1x1.dds",
+          "baseWidth": 0.25,
+          "blendMode": 2,
+          "closeCrossSection": true,
+          "colorOverLifetime": {
+            "keys": [
+              {
+                "color": {
+                  "w": 1.0,
+                  "x": 1.0,
+                  "y": 1.0,
+                  "z": 1.0
+                },
+                "time": 0.0
+              },
+              {
+                "color": {
+                  "w": 1.0,
+                  "x": 1.0,
+                  "y": 1.0,
+                  "z": 1.0
+                },
+                "time": 1.0
+              }
+            ]
+          },
+          "emissiveOverLifetime": {
+            "constant": 1.0,
+            "constantMax": 1.0,
+            "constantMin": 0.0,
+            "keys": [
+              {
+                "time": 0.0,
+                "value": 0.0
+              },
+              {
+                "time": 1.0,
+                "value": 1.0
+              }
+            ],
+            "maxKeys": [
+              {
+                "time": 0.0,
+                "value": 1.0
+              },
+              {
+                "time": 1.0,
+                "value": 1.0
+              }
+            ],
+            "minKeys": [
+              {
+                "time": 0.0,
+                "value": 0.0
+              },
+              {
+                "time": 1.0,
+                "value": 0.0
+              }
+            ],
+            "mode": 0
+          },
+          "enabled": false,
+          "facingMode": 0,
+          "geometryMode": 0,
+          "geometryModelGuid": "00000000-0000-0000-0000-000000000000",
+          "geometryModelPath": "",
+          "geometryScale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "lifetime": 0.4000000059604645,
+          "localAxis": {
+            "x": 1.0,
+            "y": 0.0,
+            "z": 0.0
+          },
+          "material": {
+            "alphaClipThreshold": 0.0,
+            "baseScrollSpeed": {
+              "x": 0.0,
+              "y": 0.0
+            },
+            "baseTiling": {
+              "x": 1.0,
+              "y": 1.0
+            },
+            "color": {
+              "w": 1.0,
+              "x": 1.0,
+              "y": 1.0,
+              "z": 1.0
+            },
+            "dissolveEdgeColor": {
+              "x": 1.0,
+              "y": 1.0,
+              "z": 1.0
+            },
+            "dissolveEdgeEmissive": 0.0,
+            "dissolveEdgeWidth": 0.0,
+            "dissolveEnabled": false,
+            "dissolveEnd": 1.0,
+            "dissolveSoftness": 0.10000000149011612,
+            "dissolveStart": 0.0,
+            "distortionStrength": 0.0,
+            "emissiveColor": {
+              "x": 1.0,
+              "y": 1.0,
+              "z": 1.0
+            },
+            "emissiveIntensity": 0.0,
+            "headFade": 0.0,
+            "noiseScrollSpeed": {
+              "x": 0.0,
+              "y": 0.0
+            },
+            "noiseStrength": 1.0,
+            "noiseTiling": {
+              "x": 1.0,
+              "y": 1.0
+            },
+            "tailFade": 0.20000000298023224
+          },
+          "maxPointCount": 64,
+          "maxSampleInterval": 0.05000000074505806,
+          "minSampleDistance": 0.10000000149011612,
+          "noiseTextureGuid": "00000000-0000-0000-0000-000000000000",
+          "noiseTexturePath": "",
+          "splineSubdivision": 2,
+          "useSpline": false,
+          "uvMode": 0,
+          "uvTiling": 1.0,
+          "widthOverLifetime": {
+            "constant": 1.0,
+            "constantMax": 1.0,
+            "constantMin": 0.0,
+            "keys": [
+              {
+                "time": 0.0,
+                "value": 0.0
+              },
+              {
+                "time": 1.0,
+                "value": 1.0
+              }
+            ],
+            "maxKeys": [
+              {
+                "time": 0.0,
+                "value": 1.0
+              },
+              {
+                "time": 1.0,
+                "value": 1.0
+              }
+            ],
+            "minKeys": [
+              {
+                "time": 0.0,
+                "value": 0.0
+              },
+              {
+                "time": 1.0,
+                "value": 0.0
+              }
+            ],
+            "mode": 0
+          },
+          "worldAxis": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+          }
+        },
+        "uvSettings": {
+          "offset": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "scrollSpeed": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "tiling": {
+            "x": 1.0,
+            "y": 1.0
+          }
+        },
+        "velocity": {
+          "constant": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "max": {
+            "x": 5.0,
+            "y": 1.0,
+            "z": 5.0
+          },
+          "min": {
+            "x": -5.0,
+            "y": 0.30000001192092896,
+            "z": -5.0
+          },
+          "mode": 1
+        },
+        "vertexColor": {
+          "w": 1.0,
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "worldScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "isDrawEnable": true,
+      "isGpu": false,
+      "name": "Emitter",
+      "transform": {
+        "inheritRotate": true,
+        "inheritScale": true,
+        "inheritTranslate": true,
+        "rotation": {
+          "w": 1.0,
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "translation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        }
+      }
+    },
+    {
+      "emitter": {
+        "autoDestroy": false,
+        "billboardMode": 1,
+        "blendMode": 2,
+        "cameraDitherEnabled": false,
+        "cameraDitherFar": 20.0,
+        "cameraDitherNear": 0.0,
+        "color": {
+          "w": 1.0,
+          "x": 0.9715302586555481,
+          "y": 0.14521095156669617,
+          "z": 0.14521095156669617
+        },
+        "direction": {
+          "enabled": false,
+          "rotateToDirection": false,
+          "speed": {
+            "constant": 1.0,
+            "max": 1.0,
+            "min": 0.0,
+            "mode": 0
+          },
+          "vector": {
+            "constant": {
+              "x": 0.0,
+              "y": 1.0,
+              "z": 0.0
+            },
+            "max": {
+              "x": 1.0,
+              "y": 0.0,
+              "z": 1.0
+            },
+            "min": {
+              "x": -1.0,
+              "y": 0.0,
+              "z": -1.0
+            },
+            "mode": 0
+          }
+        },
+        "emitCount": 10,
+        "emitDelay": 0.0,
+        "emitDuration": -1.0,
+        "emitRate": 0.10000000149011612,
+        "emitterShape": 1,
+        "fixedRandomSeed": false,
+        "followOneShot": false,
+        "gpuCurlNoiseAmplitude": 1.0,
+        "gpuCurlNoiseEnabled": false,
+        "gpuCurlNoiseFrequency": 1.0,
+        "gpuCurlNoiseLacunarity": 2.0,
+        "gpuCurlNoiseOctaves": 1,
+        "gpuCurlNoiseOffset": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "gpuCurlNoiseRoughness": 0.5,
+        "gpuCurlNoiseScrollSpeed": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "initialRotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "isComplement": true,
+        "isDrawEnable": true,
+        "isOneShot": true,
+        "lifetime": {
+          "constant": 1.0,
+          "max": 1.0,
+          "min": 0.0,
+          "mode": 0
+        },
+        "modelGuid": "00000000-0000-0000-0000-000000000000",
+        "modelPath": "plane.obj",
+        "modules": [
+          {
+            "blend": 0,
+            "clamp01": true,
+            "ease": 1,
+            "enabled": true,
+            "end": [
+              0.6000000238418579,
+              0.6000000238418579,
+              1.0,
+              1.0
+            ],
+            "guid": "07cd0ca6-c648-49d9-99a0-7d797fc968b5",
+            "invert": false,
+            "name": "OverLifetimeModule",
+            "start": [
+              0.20000000298023224,
+              0.20000000298023224,
+              0.0,
+              1.0
+            ],
+            "target": 0
+          },
+          {
+            "blend": 0,
+            "clamp01": true,
+            "ease": 2,
+            "enabled": true,
+            "end": [
+              0.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "guid": "2c67b793-2744-4da9-acbc-9c3a5723a82f",
+            "invert": false,
+            "name": "OverLifetimeModule",
+            "start": [
+              1.0,
+              0.0,
+              0.0,
+              1.0
+            ],
+            "target": 5
+          }
+        ],
+        "noiseMaskScale": 1.0,
+        "noiseMaskScrollSpeed": {
+          "x": 0.0,
+          "y": 0.0
+        },
+        "noiseMaskSoftness": 0.10000000149011612,
+        "noiseMaskStrength": 1.0,
+        "noiseMaskTextureGuid": "00000000-0000-0000-0000-000000000000",
+        "noiseMaskTexturePath": "",
+        "noiseMaskThreshold": 0.5,
+        "offset": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "randomSeed": 1,
+        "randomSpinEmit": false,
+        "rotation": {
+          "w": 1.0,
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "scale": {
+          "constant": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "max": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "min": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+          },
+          "mode": 0
+        },
+        "shapeAngle": 30.0,
+        "shapeRadius": 1.0,
+        "shapeSize": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "spin": {
+          "constant": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+          },
+          "max": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+          },
+          "min": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+          },
+          "mode": 0
+        },
+        "textureGuid": "a6432373-88ba-494c-89ce-1c1725c34fd5",
+        "texturePath": "Textures/white1x1.dds",
+        "trail": {
+          "alignInstancesToTangent": true,
+          "alphaOverLifetime": {
+            "constant": 1.0,
+            "constantMax": 1.0,
+            "constantMin": 0.0,
+            "keys": [
+              {
+                "time": 0.0,
+                "value": 0.0
+              },
+              {
+                "time": 1.0,
+                "value": 1.0
+              }
+            ],
+            "maxKeys": [
+              {
+                "time": 0.0,
+                "value": 1.0
+              },
+              {
+                "time": 1.0,
+                "value": 1.0
+              }
+            ],
+            "minKeys": [
+              {
+                "time": 0.0,
+                "value": 0.0
+              },
+              {
+                "time": 1.0,
+                "value": 0.0
+              }
+            ],
+            "mode": 0
+          },
+          "baseTextureGuid": "00000000-0000-0000-0000-000000000000",
+          "baseTexturePath": "Textures/white1x1.dds",
+          "baseWidth": 0.25,
+          "blendMode": 2,
+          "closeCrossSection": true,
+          "colorOverLifetime": {
+            "keys": [
+              {
+                "color": {
+                  "w": 1.0,
+                  "x": 1.0,
+                  "y": 1.0,
+                  "z": 1.0
+                },
+                "time": 0.0
+              },
+              {
+                "color": {
+                  "w": 1.0,
+                  "x": 1.0,
+                  "y": 1.0,
+                  "z": 1.0
+                },
+                "time": 1.0
+              }
+            ]
+          },
+          "emissiveOverLifetime": {
+            "constant": 1.0,
+            "constantMax": 1.0,
+            "constantMin": 0.0,
+            "keys": [
+              {
+                "time": 0.0,
+                "value": 0.0
+              },
+              {
+                "time": 1.0,
+                "value": 1.0
+              }
+            ],
+            "maxKeys": [
+              {
+                "time": 0.0,
+                "value": 1.0
+              },
+              {
+                "time": 1.0,
+                "value": 1.0
+              }
+            ],
+            "minKeys": [
+              {
+                "time": 0.0,
+                "value": 0.0
+              },
+              {
+                "time": 1.0,
+                "value": 0.0
+              }
+            ],
+            "mode": 0
+          },
+          "enabled": false,
+          "facingMode": 0,
+          "geometryMode": 0,
+          "geometryModelGuid": "00000000-0000-0000-0000-000000000000",
+          "geometryModelPath": "",
+          "geometryScale": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "lifetime": 0.4000000059604645,
+          "localAxis": {
+            "x": 1.0,
+            "y": 0.0,
+            "z": 0.0
+          },
+          "material": {
+            "alphaClipThreshold": 0.0,
+            "baseScrollSpeed": {
+              "x": 0.0,
+              "y": 0.0
+            },
+            "baseTiling": {
+              "x": 1.0,
+              "y": 1.0
+            },
+            "color": {
+              "w": 1.0,
+              "x": 1.0,
+              "y": 1.0,
+              "z": 1.0
+            },
+            "dissolveEdgeColor": {
+              "x": 1.0,
+              "y": 1.0,
+              "z": 1.0
+            },
+            "dissolveEdgeEmissive": 0.0,
+            "dissolveEdgeWidth": 0.0,
+            "dissolveEnabled": false,
+            "dissolveEnd": 1.0,
+            "dissolveSoftness": 0.10000000149011612,
+            "dissolveStart": 0.0,
+            "distortionStrength": 0.0,
+            "emissiveColor": {
+              "x": 1.0,
+              "y": 1.0,
+              "z": 1.0
+            },
+            "emissiveIntensity": 0.0,
+            "headFade": 0.0,
+            "noiseScrollSpeed": {
+              "x": 0.0,
+              "y": 0.0
+            },
+            "noiseStrength": 1.0,
+            "noiseTiling": {
+              "x": 1.0,
+              "y": 1.0
+            },
+            "tailFade": 0.20000000298023224
+          },
+          "maxPointCount": 64,
+          "maxSampleInterval": 0.05000000074505806,
+          "minSampleDistance": 0.10000000149011612,
+          "noiseTextureGuid": "00000000-0000-0000-0000-000000000000",
+          "noiseTexturePath": "",
+          "splineSubdivision": 2,
+          "useSpline": false,
+          "uvMode": 0,
+          "uvTiling": 1.0,
+          "widthOverLifetime": {
+            "constant": 1.0,
+            "constantMax": 1.0,
+            "constantMin": 0.0,
+            "keys": [
+              {
+                "time": 0.0,
+                "value": 0.0
+              },
+              {
+                "time": 1.0,
+                "value": 1.0
+              }
+            ],
+            "maxKeys": [
+              {
+                "time": 0.0,
+                "value": 1.0
+              },
+              {
+                "time": 1.0,
+                "value": 1.0
+              }
+            ],
+            "minKeys": [
+              {
+                "time": 0.0,
+                "value": 0.0
+              },
+              {
+                "time": 1.0,
+                "value": 0.0
+              }
+            ],
+            "mode": 0
+          },
+          "worldAxis": {
+            "x": 0.0,
+            "y": 1.0,
+            "z": 0.0
+          }
+        },
+        "uvSettings": {
+          "offset": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "scrollSpeed": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "tiling": {
+            "x": 1.0,
+            "y": 1.0
+          }
+        },
+        "velocity": {
+          "constant": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "max": {
+            "x": 1.0,
+            "y": 3.0,
+            "z": 1.0
+          },
+          "min": {
+            "x": -1.0,
+            "y": 0.5,
+            "z": -1.0
+          },
+          "mode": 1
+        },
+        "vertexColor": {
+          "w": 1.0,
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "worldScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "isDrawEnable": true,
+      "isGpu": false,
+      "name": "Emitter",
+      "transform": {
+        "inheritRotate": true,
+        "inheritScale": true,
+        "inheritTranslate": true,
+        "rotation": {
+          "w": 1.0,
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "translation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        }
+      }
+    }
+  ],
+  "name": "EnemyExp",
+  "type": "EffectAsset",
+  "version": 1
+}

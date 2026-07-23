@@ -12,8 +12,8 @@
 #include <Engine/Foundation/Utility/Random/Random.h>
 
 namespace {
-	constexpr float kDeathShakeTime = 0.45f; // 震えている時間(秒)
-	constexpr float kDeathShakeAmplitude = 0.06f; // 震え幅(m)
+	constexpr float kDeathShakeTime = 0.75f; // 震えている時間(秒)
+	constexpr float kDeathShakeAmplitude = 0.1f; // 震え幅(m)
 	constexpr float kDeathBurstTime = 0.4f;  // エフェクト時間
 }
 
@@ -35,7 +35,7 @@ void BaseEnemy::Initialize() {
 	PlayAnimation(EnemyAnimationID::Idle);
 	hit_.Load("EnemyHit");
 	hitLight_.Load("hitLight");
-	//death_.Load("EnemyDeath");
+	death_.Load("EnemyExp");
 
 	if (EnemyState::Get().IsDefeated(GetGuid())) {
 		pendingRemove_ = true;
@@ -167,14 +167,24 @@ void BaseEnemy::OnHitByPlayerAttack(Collider* attacker) {
 }
 
 void BaseEnemy::ApplyKnockbackFrom(Collider* attacker) {
-	auto targetPlayer = stats_.target.Resolve().get();
-	if (!attacker || !targetPlayer) {
+	if (!attacker) {
 		return;
 	}
 
-	// プレイヤーが向いている方向へ吹き飛ばす
+	// 攻撃してきたヒットボックスは振った本人(プレイヤー or クローン)の向きを持っている。
+	// そちらを優先し、取れないときだけプレイヤーの向きを使う。
+	auto fallbackTarget = stats_.target.Resolve();   // 参照を保持したまま使う
+	const BaseGameObject* source = attacker->GetOwner();
+	if (!source) {
+		source = fallbackTarget.get();
+	}
+	if (!source) {
+		return;
+	}
+
+	// 攻撃してきた側が向いている方向へ吹き飛ばす
 	CalyxEngine::Vector3 dir = CalyxEngine::Quaternion::RotateVector(
-		CalyxEngine::Vector3::Forward(), targetPlayer->GetRenderWorldTransform().rotation);
+		CalyxEngine::Vector3::Forward(), source->GetRenderWorldTransform().rotation);
 	dir.y = 0.0f;
 	if (dir.LengthSquared() <= 0.0001f) {
 		return;

@@ -140,7 +140,8 @@ void Player::Update(float dt) {
 	// 回避中・攻撃中は通常移動しない
 	const bool canMove = !dodge_.IsDodging() && !attack_.BlocksMovement();
 	if (canMove) {
-		motor_.Update(this, in, dt);
+		// クローンのチャージ中はロックオンを無視して自由に狙わせる
+		motor_.Update(this, in, dt, ability_.IsCharging());
 	}
 	UpdateWalkEffect(canMove && in.move.LengthSquared() > 0.0f && GetCharacterMovement().IsMovingOnGround());
 
