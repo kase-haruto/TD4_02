@@ -36,6 +36,8 @@ void Bridge::Initialize() {
 	zone_->GetWorldTransform().inheritRotate = false;
 	zone_->GetWorldTransform().inheritScale = false;
 	zone_->SetTranslate(param_.leverOffset);
+
+	prompt_.Initialize("Textures/Game/UI/A.png", 48.0f);
 }
 
 void Bridge::Update(float dt) {
@@ -51,6 +53,13 @@ void Bridge::Update(float dt) {
 	if (p && !activated_ && p->IsDodgeButtonTriggered()) {
 		activated_ = true;
 		WorldState::Get().SetActivated(GetGuid());
+	}
+
+	// 範囲内かつ未起動なら、プレイヤーの頭上に「A」を出す
+	if (p && !activated_) {
+		prompt_.ShowAt(p->GetWorldPosition(), param_.promptHeight);
+	} else {
+		prompt_.Hide();
 	}
 
 	// 起動後、水平へ倒れていく

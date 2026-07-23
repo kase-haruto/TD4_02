@@ -21,6 +21,7 @@ namespace {
 	constexpr float kDodgeBlurAttack = 0.07f;   // 0→最大までの時間(秒)
 	constexpr float kDodgeBlurRelease = 0.30f;  // 最大→0までの時間(秒)
 	constexpr float kDodgeBlurMaxWidth = 0.2f; // ブラーの最大強度(RadialBlurのwidth)
+	constexpr float kLockOnHintHeight = 2.6f;  // 敵の足元から頭上マーカーまでの高さ
 }
 
 
@@ -70,6 +71,7 @@ void Player::Initialize() {
 	postFxPresetLoaded_ = false;
 
 	ui_.Initialize(ability_.MaxCloneCount());
+	lockOnHint_.Initialize("Textures/Game/UI/LB.png", 48.0f);
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -91,6 +93,7 @@ void Player::Update(float dt) {
 	if (currentHp_ <= 0) {
 		// 遷移が終わるまでHP0のまま見せる(UIも0で更新しておく)
 		ui_.Update(currentHp_, stats_.maxHp, ability_.BuildSlotViews());
+		lockOnHint_.Hide();
 		UpdateWalkEffect(false);
 		if (!isRespawning_) {
 			isRespawning_ = true;
@@ -102,6 +105,7 @@ void Player::Update(float dt) {
 	}
 	ability_.CooldownUpdate(dt);
 	ui_.Update(currentHp_, stats_.maxHp, ability_.BuildSlotViews());
+	UpdateLockOnHint();   // ノックバック中も取り残されないよう、早期returnより前で更新する
 
 	if (UpdateKnockback(dt)) {   // ノックバック中は技も入力も止める
 		UpdateWalkEffect(false);
@@ -200,6 +204,20 @@ bool Player::IsDodgeButtonTriggered() const {
 
 std::vector<CalyxEngine::TransformRef> Player::QueryVisibleLockOnTargets(size_t maxCount) const {
 	return lockOn_.QueryVisibleTargets(GetWorldPosition(), maxCount);
+}
+
+void Player::UpdateLockOnHint() {
+	// ロックオン中は「これから狙う敵」の案内は不要
+	if (lockOn_.IsLockingOn()) {
+		lockOnHint_.Hide();
+		return;
+	}
+	const auto best = lockOn_.PeekBestTarget(GetWorldPosition());
+	if (!best) {
+		lockOnHint_.Hide();
+		return;
+	}
+	lockOnHint_.ShowAt(best->worldPosition, kLockOnHintHeight);
 }
 
 void Player::OnHitByEnemyAttack(Collider* attacker) {

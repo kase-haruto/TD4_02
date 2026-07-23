@@ -9,6 +9,7 @@
 
 #include <cstddef>
 #include <memory>
+#include <optional>
 #include <vector>
 
 class PlayerLockOnController final : public ILockOnStateReader {
@@ -27,6 +28,8 @@ public:
 	std::vector<CalyxEngine::TransformRef> QueryVisibleTargets(
 		const CalyxEngine::Vector3& playerPosition,
 		size_t maxCount) const;
+	/// 今ロックオンしたら選ばれる対象を、確定させずに覗く
+	std::optional<LockOnCandidate> PeekBestTarget(const CalyxEngine::Vector3& playerPosition) const;
 
 	bool IsLockingOn() const override { return currentTarget_.IsAssigned() && currentTarget_.Resolve(); }
 	const CalyxEngine::TransformRef& GetCurrentTarget() const override { return currentTarget_; }

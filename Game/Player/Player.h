@@ -11,6 +11,7 @@
 #include "Sword/Sword.h"
 #include "Ability/PlayerAbility.h"
 #include <Game/Battle/LockOn/PlayerLockOnController.h>
+#include <Game/UI/WorldMarkerUI.h>
 
 #include <Engine/Application/Effects/EffectAsset.h>
 #include <Engine/Application/Effects/EffectPlayer.h>
@@ -55,6 +56,8 @@ private:
 	void OnHitByEnemyAttack(Collider* attacker);
 	void Respawn();
 
+	void UpdateLockOnHint();
+
 	void UpdateInvincible(float dt);
 	void StartInvincible(float duration);
 	void UpdateLowHpRim(float dt);
@@ -74,6 +77,7 @@ private:
 	PlayerLockOnController lockOn_;
 	PlayerStats stats_;
 	PlayerUI    ui_;
+	WorldMarkerUI lockOnHint_;   //!< 未ロックオン時、次に狙う敵の頭上に出す「LB」
 	float damageAnimationTimer_ = 0.0f;
 	float spiritAnimTimer_ = 0.0f;
 
