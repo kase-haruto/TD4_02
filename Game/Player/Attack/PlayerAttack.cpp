@@ -13,10 +13,9 @@
 #include <optional>
 #include <string>
 
-PlayerAttack::PlayerAttack(){
+PlayerAttack::PlayerAttack() {
 	param_.LoadParams();
 }
-
 void PlayerAttack::Update(PlayerBase& player, const PlayerInputState& input, float dt) {
 	if (isAttacking_) {
 		UpdateAttack(player, input, dt);
@@ -53,7 +52,7 @@ void PlayerAttack::ShowGui(PlayerBase& player) {
 		StartAttack(player, previewAttackIndex_);
 	}
 
-	ImGui::TextDisabled("Effect rotation and offset are configured in AttackRotation.");
+	ImGui::TextDisabled("Effect transforms are configured in AttackEffect1-3.");
 }
 
 CalyxEngine::SerializableObject& PlayerAttack::SerializableParam() {
@@ -67,28 +66,28 @@ void PlayerAttack::StartAttack(PlayerBase& player, int comboIndex) {
 	comboIndex_ = comboIndex;
 	attackTimer_ = 0.0f;
 
-	const CalyxEngine::Quaternion& playerRotation = player.GetWorldTransform().rotation;
-
 	if (comboIndex_ == 0) {
 		player.RequestAnimation(PlayerAnimationID::Attack1);
-		const CalyxEngine::Vector3 worldOffset =
-			CalyxEngine::Quaternion::RotateVector(param_.attack1Offset_, playerRotation);
-		const CalyxEngine::Quaternion worldRotation =
-			CalyxEngine::Quaternion::Multiply(playerRotation, param_.attack1Rotation_);
-		EffectAPI::PlayFromName(
-			"slashEffect",
-			player.GetWorldTransform().translation + worldOffset,
-			worldRotation);
 	} else {
 		player.RequestAnimation(PlayerAnimationID::Attack2);
-		const CalyxEngine::Vector3 worldOffset =
-			CalyxEngine::Quaternion::RotateVector(param_.attack2Offset_, playerRotation);
-		const CalyxEngine::Quaternion worldRotation =
-			CalyxEngine::Quaternion::Multiply(playerRotation, param_.attack2Rotation_);
-		EffectAPI::PlayFromName(
-			"slashEffect",
-			player.GetWorldTransform().translation + worldOffset,
-			worldRotation);
+	}
+
+	const CalyxEngine::Vector3* effectOffset = &param_.attack1Offset_;
+	const CalyxEngine::Vector3* effectRotation = &param_.attack1Rotation_;
+	if (comboIndex_ == 1) {
+		effectOffset = &param_.attack2Offset_;
+		effectRotation = &param_.attack2Rotation_;
+	} else if (comboIndex_ == 2) {
+		effectOffset = &param_.attack3Offset_;
+		effectRotation = &param_.attack3Rotation_;
+	}
+
+	if (auto* attackFx = player.GetAttackFx()) {
+		attackFx->GetWorldTransform().translation = *effectOffset;
+		attackFx->GetWorldTransform().rotation =
+			CalyxEngine::Quaternion::EulerToQuaternion(*effectRotation);
+		attackFx->SyncChildrenFromWorldTransform();
+		attackFx->RestartAll();
 	}
 
 	// 振った音。当たったかどうかに関係なく毎回鳴る
