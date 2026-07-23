@@ -7,12 +7,17 @@
         "toPinId": 6
       },
       {
-        "fromPinId": 7,
-        "id": 9,
-        "toPinId": 4
-      }
-    ],
-    "nextId": 10,
+		"fromPinId": 12,
+		"id": 9,
+		"toPinId": 4
+	  },
+	  {
+		"fromPinId": 7,
+		"id": 13,
+		"toPinId": 11
+	  }
+	],
+	"nextId": 14,
     "nodes": [
       {
         "boolValue": false,
@@ -123,9 +128,52 @@
             "width": 0.11999999731779099
           }
         },
-        "title": "RadialBlur",
-        "type": "RadialBlur"
-      }
+		"title": "RadialBlur",
+		"type": "RadialBlur"
+	  },
+	  {
+		"id": 10,
+		"inputs": [
+		  {
+			"id": 11,
+			"kind": 0,
+			"name": "In",
+			"valueType": 2
+		  }
+		],
+		"outputs": [
+		  {
+			"id": 12,
+			"kind": 1,
+			"name": "Out",
+			"valueType": 2
+		  }
+		],
+		"position": [
+		  590.0,
+		  46.0
+		],
+		"properties": {
+		  "applyMode": "Triggered",
+		  "autoDisable": true,
+		  "duration": 0.3,
+		  "easeIndex": 8,
+		  "enabled": false,
+		  "floatAnimations": [
+			{
+			  "from": 0.12,
+			  "parameter": "intensity",
+			  "to": 0.0,
+			  "useCurrentAsFrom": false
+			}
+		  ],
+		  "parameters": {
+			"intensity": 0.12
+		  }
+		},
+		"title": "ChromaticAberration",
+		"type": "ChromaticAberration"
+	  }
     ]
   },
   "name": "PlayerShock",
@@ -153,9 +201,31 @@
         ],
         "width": 0.11999999731779099
       },
-      "title": "RadialBlur",
-      "type": "RadialBlur"
-    }
+	  "title": "RadialBlur",
+	  "type": "RadialBlur"
+	},
+	{
+	  "applyMode": "Triggered",
+	  "autoDisable": true,
+	  "duration": 0.3,
+	  "ease": "",
+	  "easeIndex": 8,
+	  "enabled": false,
+	  "floatAnimations": [
+		{
+		  "from": 0.12,
+		  "parameter": "intensity",
+		  "to": 0.0,
+		  "useCurrentAsFrom": false
+		}
+	  ],
+	  "id": 10,
+	  "parameters": {
+		"intensity": 0.12
+	  },
+	  "title": "ChromaticAberration",
+	  "type": "ChromaticAberration"
+	}
   ],
   "outline": {
     "enabled": true

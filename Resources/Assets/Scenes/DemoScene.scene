@@ -205,9 +205,9 @@
                     "z": 0.0
                 },
                 "size": {
-                    "x": 4.0,
-                    "y": 0.5,
-                    "z": 2.0
+                    "x": 8.0,
+                    "y": 1.0,
+                    "z": 10.0
                 }
             },
             "colliderKind": 1,
@@ -249,10 +249,10 @@
                 "inheritScale": true,
                 "inheritTranslate": true,
                 "rotation": {
-                    "w": 0.7071067690849304,
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": -0.7071067690849304
+                    "w": 0.4999999701976776,
+                    "x": 0.4999999701976776,
+                    "y": 0.4999999701976776,
+                    "z": -0.4999999701976776
                 },
                 "scale": {
                     "x": 10.0,
@@ -293,9 +293,9 @@
                     "z": 0.0
                 },
                 "size": {
-                    "x": 2.5,
-                    "y": 2.5,
-                    "z": 2.5
+                    "x": 4.0,
+                    "y": 4.0,
+                    "z": 4.0
                 }
             },
             "colliderKind": 1,
@@ -637,8 +637,8 @@
                 "capsuleRadius": 0.5,
                 "isCollisionEnabled": true,
                 "isDraw": true,
-                "isTrigger": false,
-                "layerId": 0,
+                "isTrigger": true,
+                "layerId": 7,
                 "offset": {
                     "x": 0.0,
                     "y": 0.0,
@@ -652,11 +652,11 @@
                 },
                 "size": {
                     "x": 1.0,
-                    "y": 1.0,
+                    "y": 2.0,
                     "z": 1.0
                 }
             },
-            "colliderKind": 0,
+            "colliderKind": 1,
             "guid": "6052b36a-1754-485b-9292-2bf1d082b9b7",
             "modelConfig": {
                 "blendMode": 5,
@@ -989,7 +989,7 @@
                 },
                 "translation": {
                     "x": -9.82618522644043,
-                    "y": 0.5056518316268921,
+                    "y": 1.005651831626892,
                     "z": 13.903096199035645
                 }
             },
@@ -1007,8 +1007,8 @@
                 "capsuleRadius": 0.5,
                 "isCollisionEnabled": true,
                 "isDraw": true,
-                "isTrigger": false,
-                "layerId": 0,
+                "isTrigger": true,
+                "layerId": 7,
                 "offset": {
                     "x": 0.0,
                     "y": 0.0,
@@ -1022,11 +1022,11 @@
                 },
                 "size": {
                     "x": 1.0,
-                    "y": 1.0,
+                    "y": 2.0,
                     "z": 1.0
                 }
             },
-            "colliderKind": 0,
+            "colliderKind": 1,
             "guid": "5c01360a-3dce-4a77-879d-0849cb12d54f",
             "modelConfig": {
                 "blendMode": 5,
@@ -1183,7 +1183,7 @@
                 },
                 "translation": {
                     "x": 8.569681167602539,
-                    "y": 0.5138382911682129,
+                    "y": 1.0138381719589233,
                     "z": -2.8585622310638428
                 }
             },
@@ -1259,9 +1259,9 @@
                 "inheritScale": true,
                 "inheritTranslate": true,
                 "rotation": {
-                    "w": 0.878714382648468,
-                    "x": 0.0,
-                    "y": -0.4773479104042053,
+                    "w": 0.124546118080616,
+                    "x": -0.0,
+                    "y": -0.9922138452529907,
                     "z": 0.0
                 },
                 "scale": {
@@ -1270,9 +1270,9 @@
                     "z": 0.30000001192092896
                 },
                 "translation": {
-                    "x": -5.188474178314209,
-                    "y": 1.6974620819091797,
-                    "z": 10.240811347961426
+                    "x": 10.804622650146484,
+                    "y": 0.3102326989173889,
+                    "z": 4.5232157707214355
                 }
             },
             "type": "Player",
@@ -1289,8 +1289,8 @@
                 "capsuleRadius": 0.5,
                 "isCollisionEnabled": true,
                 "isDraw": true,
-                "isTrigger": false,
-                "layerId": 0,
+                "isTrigger": true,
+                "layerId": 7,
                 "offset": {
                     "x": 0.0,
                     "y": 0.0,
@@ -1304,11 +1304,11 @@
                 },
                 "size": {
                     "x": 1.0,
-                    "y": 1.0,
+                    "y": 2.0,
                     "z": 1.0
                 }
             },
-            "colliderKind": 0,
+            "colliderKind": 1,
             "guid": "e40525b1-e13b-41a7-ab0c-f9a3d356f47c",
             "modelConfig": {
                 "blendMode": 5,
@@ -1380,10 +1380,10 @@
                 "inheritScale": true,
                 "inheritTranslate": false,
                 "rotation": {
-                    "w": 0.9097046852111816,
-                    "x": 0.32473111152648926,
-                    "y": 0.2437542825937271,
-                    "z": -0.08701131492853165
+                    "w": 0.9096964597702026,
+                    "x": 0.3247290253639221,
+                    "y": 0.24378381669521332,
+                    "z": -0.0870220810174942
                 },
                 "scale": {
                     "x": 1.0000001192092896,
@@ -1391,12 +1391,100 @@
                     "z": 1.0000001192092896
                 },
                 "translation": {
-                    "x": -10.68846321105957,
-                    "y": 12.097452163696289,
-                    "z": 0.714530348777771
+                    "x": 3.9912972450256348,
+                    "y": 10.202652931213379,
+                    "z": -4.05557918548584
                 }
             },
             "type": "CameraPivot"
+        },
+        {
+            "cameraDitherEnabled": false,
+            "colliderConfig": {
+                "capsuleHeight": 2.0,
+                "capsuleRadius": 0.5,
+                "isCollisionEnabled": true,
+                "isDraw": true,
+                "isTrigger": false,
+                "layerId": 0,
+                "offset": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "radius": 1.0,
+                "rotate": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "size": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                }
+            },
+            "colliderKind": 0,
+            "guid": "046f2188-2a75-4643-ac20-c70a63e2ce5c",
+            "modelConfig": {
+                "blendMode": 5,
+                "materialGuid": "00000000-0000-0000-0000-000000000000",
+                "modelName": "Enemy_01_idle.gltf",
+                "textureGuid": "00000000-0000-0000-0000-000000000000",
+                "uvTransConfig": {
+                    "rotation": 5.254869241218064e-43,
+                    "scale": {
+                        "x": 1.0,
+                        "y": 1.0
+                    }
+                }
+            },
+            "name": "Slime",
+            "objectType": 2,
+            "outlineColor": {
+                "w": 1.0,
+                "x": 0.019999999552965164,
+                "y": 0.019999999552965164,
+                "z": 0.02500000037252903
+            },
+            "outlineEnabled": false,
+            "outlineThickness": 0.03500000014901161,
+            "parentGuid": "00000000-0000-0000-0000-000000000000",
+            "physicsBodyConfig": {
+                "bodyType": 1,
+                "enabled": true,
+                "gravityScale": 1.0,
+                "mass": 1.0,
+                "pushbackRatio": 1.0,
+                "useGravity": true
+            },
+            "transform": {
+                "inheritRotate": true,
+                "inheritScale": true,
+                "inheritTranslate": true,
+                "rotation": {
+                    "w": 1.0,
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "scale": {
+                    "x": 0.5,
+                    "y": 0.5,
+                    "z": 0.5
+                },
+                "translation": {
+                    "x": 3.7792446613311768,
+                    "y": -3.7809996604919434,
+                    "z": 12.972758293151855
+                }
+            },
+            "type": "Slime",
+            "visualOffset": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            }
         },
         {
             "cameraDitherEnabled": false,
@@ -1582,6 +1670,102 @@
                 "isCollisionEnabled": true,
                 "isDraw": true,
                 "isTrigger": false,
+                "layerId": 3,
+                "offset": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "radius": 1.0,
+                "rotate": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "size": {
+                    "x": 1.0,
+                    "y": 1.2999999523162842,
+                    "z": 1.0
+                }
+            },
+            "colliderKind": 1,
+            "guid": "e9907f3c-4605-4fb3-8308-050f8ce412a9",
+            "modelConfig": {
+                "blendMode": 5,
+                "colorOverride": {
+                    "w": 1.0,
+                    "x": 0.6000000238418579,
+                    "y": 0.800000011920929,
+                    "z": 1.0
+                },
+                "materialGuid": "00000000-0000-0000-0000-000000000000",
+                "modelName": "Enemy_06_idle.gltf",
+                "textureGuid": "c58276ec-1096-4d8f-bafc-bbd157635c2e",
+                "uvTransConfig": {
+                    "rotation": 0.0,
+                    "scale": {
+                        "x": 1.0,
+                        "y": 1.0
+                    }
+                }
+            },
+            "name": "Archer",
+            "objectType": 2,
+            "outlineColor": {
+                "w": 1.0,
+                "x": 0.019999999552965164,
+                "y": 0.019999999552965164,
+                "z": 0.02500000037252903
+            },
+            "outlineEnabled": false,
+            "outlineThickness": 0.03500000014901161,
+            "parentGuid": "00000000-0000-0000-0000-000000000000",
+            "physicsBodyConfig": {
+                "bodyType": 1,
+                "enabled": true,
+                "gravityScale": 1.0,
+                "mass": 1.0,
+                "pushbackRatio": 1.0,
+                "useGravity": true
+            },
+            "prefabAssetGuid": "91c64235-4c2e-49b8-8fe6-2e6ba7cfd861",
+            "prefabSourceGuid": "869cefe6-7fe7-45e7-8bca-844997ebc467",
+            "transform": {
+                "inheritRotate": true,
+                "inheritScale": true,
+                "inheritTranslate": true,
+                "rotation": {
+                    "w": 0.9082497954368591,
+                    "x": -0.0,
+                    "y": 0.4184283912181854,
+                    "z": -0.0
+                },
+                "scale": {
+                    "x": 0.5,
+                    "y": 0.5,
+                    "z": 0.5
+                },
+                "translation": {
+                    "x": 6.240570068359375,
+                    "y": 0.5121338367462158,
+                    "z": 0.6330063343048096
+                }
+            },
+            "type": "Archer",
+            "visualOffset": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            }
+        },
+        {
+            "cameraDitherEnabled": false,
+            "colliderConfig": {
+                "capsuleHeight": 2.0,
+                "capsuleRadius": 0.5,
+                "isCollisionEnabled": true,
+                "isDraw": true,
+                "isTrigger": false,
                 "layerId": 0,
                 "offset": {
                     "x": 0.0,
@@ -1601,21 +1785,21 @@
                 }
             },
             "colliderKind": 0,
-            "guid": "7da25d21-87b5-441a-902c-45a192ad700b",
+            "guid": "29ba3222-c02c-400b-8289-846edd9c0cb7",
             "modelConfig": {
                 "blendMode": 5,
                 "materialGuid": "00000000-0000-0000-0000-000000000000",
-                "modelName": "Enemy_03_idle.gltf",
+                "modelName": "Enemy_01_idle.gltf",
                 "textureGuid": "00000000-0000-0000-0000-000000000000",
                 "uvTransConfig": {
-                    "rotation": 0.0,
+                    "rotation": 1.1196374729955288e-42,
                     "scale": {
                         "x": 1.0,
                         "y": 1.0
                     }
                 }
             },
-            "name": "ShieldEnemy",
+            "name": "Slime",
             "objectType": 2,
             "outlineColor": {
                 "w": 1.0,
@@ -1634,8 +1818,6 @@
                 "pushbackRatio": 1.0,
                 "useGravity": true
             },
-            "prefabAssetGuid": "0334f776-3989-43f9-81f2-544300345f23",
-            "prefabSourceGuid": "7da25d21-87b5-441a-902c-45a192ad700b",
             "transform": {
                 "inheritRotate": true,
                 "inheritScale": true,
@@ -1652,12 +1834,100 @@
                     "z": 0.5
                 },
                 "translation": {
-                    "x": -8.758200645446777,
-                    "y": 0.01175430603325367,
-                    "z": 8.3861722946167
+                    "x": 3.8614203929901123,
+                    "y": -2.9256718158721924,
+                    "z": 10.668396949768066
                 }
             },
-            "type": "ShieldEnemy",
+            "type": "Slime",
+            "visualOffset": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            }
+        },
+        {
+            "cameraDitherEnabled": false,
+            "colliderConfig": {
+                "capsuleHeight": 2.0,
+                "capsuleRadius": 0.5,
+                "isCollisionEnabled": true,
+                "isDraw": true,
+                "isTrigger": false,
+                "layerId": 0,
+                "offset": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "radius": 1.0,
+                "rotate": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "size": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                }
+            },
+            "colliderKind": 0,
+            "guid": "48c1441d-f9d7-42ee-8a88-b800a0dd851b",
+            "modelConfig": {
+                "blendMode": 5,
+                "materialGuid": "00000000-0000-0000-0000-000000000000",
+                "modelName": "Enemy_01_idle.gltf",
+                "textureGuid": "00000000-0000-0000-0000-000000000000",
+                "uvTransConfig": {
+                    "rotation": 0.0015166421653702855,
+                    "scale": {
+                        "x": 1.0,
+                        "y": 1.0
+                    }
+                }
+            },
+            "name": "Slime",
+            "objectType": 2,
+            "outlineColor": {
+                "w": 1.0,
+                "x": 0.019999999552965164,
+                "y": 0.019999999552965164,
+                "z": 0.02500000037252903
+            },
+            "outlineEnabled": false,
+            "outlineThickness": 0.03500000014901161,
+            "parentGuid": "00000000-0000-0000-0000-000000000000",
+            "physicsBodyConfig": {
+                "bodyType": 1,
+                "enabled": true,
+                "gravityScale": 1.0,
+                "mass": 1.0,
+                "pushbackRatio": 1.0,
+                "useGravity": true
+            },
+            "transform": {
+                "inheritRotate": true,
+                "inheritScale": true,
+                "inheritTranslate": true,
+                "rotation": {
+                    "w": 1.0,
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "scale": {
+                    "x": 0.5,
+                    "y": 0.5,
+                    "z": 0.5
+                },
+                "translation": {
+                    "x": 5.080859184265137,
+                    "y": 0.026075884699821472,
+                    "z": 4.132484436035156
+                }
+            },
+            "type": "Slime",
             "visualOffset": {
                 "x": 0.0,
                 "y": 0.0,
@@ -1737,7 +2007,16 @@
                 0
             ]
         },
-        "version": 1
+        "sortingLayers": {
+            "layers": [
+                {
+                    "id": 0,
+                    "name": "Default",
+                    "order": 0
+                }
+            ]
+        },
+        "version": 2
     },
     "version": 2
 }

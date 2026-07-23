@@ -116,9 +116,7 @@ void main(uint3 DTid : SV_DispatchThreadID) {
 		p.isAlive = 1;
 		p.rotation = gEmitter.initialRotation;
 
-		// 速度はエミッターのローカル空間で設定されるため、
-		// FxObjectを含む親子階層のワールド回転を適用する。
-		p.velocity = RotateByQuaternion(gEmitter.velocity, gEmitter.rotation);
+		p.velocity = gEmitter.velocity;
         
 		uint particleIndex = gFreeList[freeListIndex];
 		gParticles[particleIndex] = p;
