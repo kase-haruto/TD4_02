@@ -2,6 +2,7 @@
 
 #include <Enemy/Movement/HomingMove.h>
 #include <Enemy/Attack/MeleeAttack.h>
+#include <Game/Audio/GameAudio.h>
 
 /////////////////////////////////////////////////////////////////////////////////////////
 //			ctor
@@ -18,7 +19,10 @@ void HeavyShieldEnemy::Initialize() {
 	characterMovement_.SetMaxWalkSpeed(statsImpl_.moveSpeed);
 
 	SetMovement(std::make_unique<HomingMove>());
-	SetAttack(std::make_unique<MeleeAttack>());
+
+	auto attack = std::make_unique<MeleeAttack>();
+	attack->SetAttackSe(GameAudio::kSeTurtleAttack);
+	SetAttack(std::move(attack));
 	walk_.Load("playerWalk");
 	ShieldEnemyBase::Initialize();
 }

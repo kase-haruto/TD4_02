@@ -14,6 +14,7 @@
 //game
 #include "../Player.h"
 #include "../Clone/Clone.h"
+#include <Game/Audio/GameAudio.h>
 
 PlayerAbility::PlayerAbility() {
 	param_.LoadParams();
@@ -148,6 +149,9 @@ void PlayerAbility::SpawnClone(Player& player, float spawnDistance) {
 	freeSlot->state = CloneSlot::State::InUse;
 	freeSlot->clone = clone;
 	justSpawned_ = true;
+
+	// 実際に魂が出た時だけ鳴らす
+	GameAudio::PlaySe(GameAudio::kSeSpirit, 0.4f);
 }
 
 void PlayerAbility::EnsureSlots() {

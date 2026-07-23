@@ -5,6 +5,7 @@
 
 #include <Game/World/WorldState.h>
 #include <Game/World/ClearTimeRecords.h>
+#include <Game/Audio/GameAudio.h>
 
 namespace {
 	// 画面右半分(1280x720想定)。左半分はロゴとメニュー
@@ -29,6 +30,9 @@ ClearUI::ClearUI()
 
 void ClearUI::Initialize() {
 	SetDrawEnable(false);
+
+	// タイトルと同じ曲
+	GameAudio::PlayBgm(GameAudio::kBgmTitleClear);
 
 	// クリア画面に来た時点で計測終了
 	WorldState::Get().StopPlayTime();

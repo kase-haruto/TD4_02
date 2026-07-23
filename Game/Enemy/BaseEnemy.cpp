@@ -4,6 +4,7 @@
 #include <Game/World/EnemyState.h>
 #include <Game/World/KillPlane.h>
 #include <Game/Player/Sword/Sword.h>
+#include <Game/Audio/GameAudio.h>
 
 #include <Engine/Objects/Collider/Collider.h>
 #include <Data/Engine/Configs/Scene/Objects/Collider/ColliderConfig.h>
@@ -159,6 +160,9 @@ void BaseEnemy::Destroy() {
 }
 
 void BaseEnemy::OnHitByPlayerAttack(Collider* attacker) {
+	// ガードされた場合は派生側がここへ来る前に return するので、当たった時だけ鳴る
+	GameAudio::PlaySe(GameAudio::kSeAttackHit, 0.4f);
+
 	ApplyKnockbackFrom(attacker);
 
 	auto* hitbox = attacker ? dynamic_cast<Sword*>(attacker->GetOwner()) : nullptr;

@@ -197,6 +197,4 @@ private:
 	static constexpr int32_t kAttackCount = 3;
 	bool repeatPreview_ = false;
 	int32_t previewAttackIndex_ = 0;
-
-	std::shared_ptr<fxobject>
 };

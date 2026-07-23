@@ -2,6 +2,8 @@
 
 #include "Base/PlayerBase.h"
 
+#include <Game/Audio/GameAudio.h>
+
 #include <Engine/Foundation/Math/Quaternion.h>
 #include <Engine/Physics/Character/CharacterMovementComponent.h>
 #include <Engine/Scene/Utility/SceneUtility.h>
@@ -80,4 +82,6 @@ void PlayerDodge::StartDodge(PlayerBase* player) {
 		CalyxEngine::Quaternion::FromToQuaternion(CalyxEngine::Vector3::Forward(), dodgeDir_);
 	isDodging_ = true;
 	isStartDodge_ = true;
+
+	GameAudio::PlaySe(GameAudio::kSeDodge, 0.4f);
 }

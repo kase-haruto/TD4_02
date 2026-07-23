@@ -3,6 +3,7 @@
 #include <Game/Player/Player.h>
 #include <Game/Collision/CollisionLayerUtil.h>
 #include <Game/World/RespawnState.h>
+#include <Game/Audio/GameAudio.h>
 #include <Engine/Objects/Collider/Collider.h>
 #include <Data/Engine/Configs/Scene/Objects/Collider/ColliderConfig.h>
 #include <Engine/Objects/Collider/BoxCollider.h>
@@ -48,8 +49,16 @@ void Checkpoint::OnCollisionEnter(Collider* other) {
 	auto* player = dynamic_cast<Player*>(other->GetOwner());
 	if (!player) return;
 
+	auto& rs = RespawnState::Get();
+	const bool alreadyActive = rs.Has() && rs.ActivateGuid() == GetGuid();
+
 	if (auto* ctx = SceneContext::Current()) {
-		RespawnState::Get().SetCheckpoint(ctx->GetScenePath(), GetWorldPosition(), GetGuid());
+		rs.SetCheckpoint(ctx->GetScenePath(), GetWorldPosition(), GetGuid());
+	}
+
+	// 起動した瞬間だけ。既に有効なチェックポイントに触れ直しても鳴らさない
+	if (!alreadyActive) {
+		GameAudio::PlaySe(GameAudio::kSeCheckpoint, 0.4f);
 	}
 }
 

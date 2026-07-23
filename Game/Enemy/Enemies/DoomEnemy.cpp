@@ -2,6 +2,7 @@
 
 #include <Enemy/Movement/HomingMove.h>
 #include <Enemy/Attack/PunchAttack.h>
+#include <Game/Audio/GameAudio.h>
 
 /////////////////////////////////////////////////////////////////////////////////////////
 //			ctor
@@ -18,7 +19,10 @@ void DoomEnemy::Initialize() {
 	characterMovement_.SetMaxWalkSpeed(statsImpl_.moveSpeed);
 
 	SetMovement(std::make_unique<HomingMove>());
-	SetAttack(std::make_unique<PunchAttack>());
+
+	auto attack = std::make_unique<PunchAttack>();
+	attack->SetAttackSe(GameAudio::kSeSlimeAttack);
+	SetAttack(std::move(attack));
 	walk_.Load("playerWalk");
 	BaseEnemy::Initialize();
 

@@ -75,6 +75,7 @@ void ChargeAttack::UpdateWindup(BaseEnemy& self, float dt) {
 		phaseTimer_ = 0.0f;
 		self.PlayAnimation(EnemyAnimationID::Attack);
 		CreateHitbox(self);   // 突進の瞬間に当たり判定を出す
+		PlayAttackSe();       // 溜めではなく突進の瞬間に鳴らす
 	}
 }
 

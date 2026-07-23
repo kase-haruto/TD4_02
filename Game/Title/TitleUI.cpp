@@ -6,6 +6,7 @@
 #include <Game/World/WorldState.h>
 #include <Game/World/EnemyState.h>
 #include <Game/World/RespawnState.h>
+#include <Game/Audio/GameAudio.h>
 
 
 TitleUI::TitleUI()
@@ -13,6 +14,9 @@ TitleUI::TitleUI()
 
 void TitleUI::Initialize() {
 	SetDrawEnable(false);
+
+	// クリア画面から戻ってきた時は同じ曲なので鳴り直さない
+	GameAudio::PlayBgm(GameAudio::kBgmTitleClear);
 
 	// タイトルロゴ
 	logo_ = SceneAPI::Instantiate<UiSprite>("Textures/Game/Text/title.png");

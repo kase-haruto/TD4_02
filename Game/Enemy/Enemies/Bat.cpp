@@ -2,6 +2,7 @@
 
 #include <Enemy/Movement/HomingMove.h>
 #include <Enemy/Attack/ChargeAttack.h>
+#include <Game/Audio/GameAudio.h>
 
 /////////////////////////////////////////////////////////////////////////////////////////
 //			ctor
@@ -18,7 +19,10 @@ void Bat::Initialize() {
 	characterMovement_.SetMaxWalkSpeed(statsImpl_.moveSpeed);
 
 	SetMovement(std::make_unique<HomingMove>());
-	SetAttack(std::make_unique<ChargeAttack>());
+
+	auto attack = std::make_unique<ChargeAttack>();
+	attack->SetAttackSe(GameAudio::kSeBatAttack);
+	SetAttack(std::move(attack));
 	BaseEnemy::Initialize();
 
 }

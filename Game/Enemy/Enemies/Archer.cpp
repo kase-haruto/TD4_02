@@ -2,6 +2,7 @@
 
 #include <Enemy/Movement/KiteMove.h>
 #include <Enemy/Attack/RangedAttack.h>
+#include <Game/Audio/GameAudio.h>
 
 /////////////////////////////////////////////////////////////////////////////////////////
 //			ctor
@@ -18,7 +19,10 @@ void Archer::Initialize() {
 	characterMovement_.SetMaxWalkSpeed(statsImpl_.moveSpeed);
 
 	SetMovement(std::make_unique<KiteMove>());
-	SetAttack(std::make_unique<RangedAttack>());
+
+	auto attack = std::make_unique<RangedAttack>();
+	attack->SetAttackSe(GameAudio::kSeArrowShot);
+	SetAttack(std::move(attack));
 	BaseEnemy::Initialize();
 
 }

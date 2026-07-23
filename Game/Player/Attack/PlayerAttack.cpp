@@ -3,6 +3,8 @@
 #include "../Base/PlayerBase.h"
 #include "../Sword/Sword.h"
 
+#include <Game/Audio/GameAudio.h>
+
 #include <Engine/Foundation/Math/Quaternion.h>
 #include <Engine/Scene/Context/SceneContext.h>
 #include <Engine/Scene/Utility/SceneUtility.h>
@@ -89,9 +91,11 @@ void PlayerAttack::StartAttack(PlayerBase& player, int comboIndex) {
 			worldRotation);
 	}
 
+	// 振った音。当たったかどうかに関係なく毎回鳴る
+	GameAudio::PlaySe(GameAudio::kSeAttackSwing, 0.4f);
+
 	// TODO:
 	// - Swordの攻撃判定をONにする時間を設定
-	// - 攻撃SEやエフェクトを出す
 }
 
 void PlayerAttack::UpdateAttack(PlayerBase& player, const PlayerInputState& input, float dt) {

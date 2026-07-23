@@ -90,6 +90,8 @@ void RangedAttack::Fire(BaseEnemy& self, const Actor* target) {
 	arrow->SetRotate(aim);
 
 	arrow->Launch(dir * param_.arrowSpeed, param_.arrowLifeTime);
+
+	PlayAttackSe();   // エイム完了後、矢を撃った瞬間
 }
 
 float RangedAttack::PlanarDistanceSq(const BaseEnemy& self, const Actor* target) {

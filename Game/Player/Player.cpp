@@ -5,6 +5,7 @@
 #include <Game/World/RespawnState.h>
 #include <Game/World/EnemyState.h>
 #include <Game/World/WorldState.h>
+#include <Game/Audio/GameAudio.h>
 
 #include <Engine/Foundation/Math/Quaternion.h>
 #include <Engine/Graphics/Camera/Manager/CameraManager.h>
@@ -33,6 +34,9 @@ Player::Player() {
 
 void Player::Initialize() {
 	PlayerBase::Initialize();
+
+	// Playerがいる=ゲーム中。エリア移動では既に鳴っているので鳴り直さない
+	GameAudio::PlayBgm(GameAudio::kBgmGame);
 	currentHp_ = stats_.maxHp;
 	knockbackVelocity_ = {};
 	lastCloneAnchor_ = worldTransform_.translation;
