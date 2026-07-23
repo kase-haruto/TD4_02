@@ -12,8 +12,6 @@
 #include <Engine/Scene/Utility/SceneUtility.h>
 #include <Engine/Scene/Context/SceneContext.h>
 #include <Engine/Foundation/Clock/ClockManager.h>
-#include <Engine/PostProcess/Manager/PostEffectManager.h>
-#include <Engine/PostProcess/Interface/IPostEffectPass.h>
 #include <algorithm>
 #include <cmath>
 #include <filesystem>
@@ -65,7 +63,7 @@ void Player::Initialize() {
 
 	// 読み込めるプリセットは1枚だけ。ここで別のプリセットを読むと、
 	// GamePlay.postfx のグラフごと差し替わって Bloom も Vignette も消える。
-	postFxPresetLoaded_ = PostEffectAPI::LoadPreset("GamePlay.postfx");
+	postFxPresetLoaded_ = false;
 
 	ui_.Initialize(ability_.MaxCloneCount());
 }
@@ -180,9 +178,6 @@ void Player::TakeDamage(int amount) {
 	}
 	damageAnimationTimer_ = 0.25f;
 	StartInvincible(stats_.damageInvincibleTime);
-	if (postFxPresetLoaded_) {
-		PostEffectAPI::PlayTriggered("Vignette");
-	}
 	PlayAnimation(PlayerAnimationID::Damage);
 }
 
@@ -315,9 +310,7 @@ void Player::UpdateLowHpRim(float dt) {
 	const float prevPhase = lowHpRimPhase_;
 	lowHpRimPhase_ += dt * stats_.lowHpRimSpeed * (1.0f + danger);
 
-	if (postFxPresetLoaded_ && prevPhase < kPi && lowHpRimPhase_ >= kPi) {
-		PostEffectAPI::PlayTriggered("Vignette");
-	}
+	(void)prevPhase;
 
 	if (lowHpRimPhase_ > kTwoPi) {
 		lowHpRimPhase_ -= kTwoPi;
@@ -341,10 +334,6 @@ void Player::StartDodgeBlur() {
 	dodgeBlurTimer_ = 0.0f;
 
 	// 0から始めて立ち上がりを作る。
-	if (auto* pass = PostEffectManager::Get()->GetPass("RadialBlur")) {
-		pass->SetFloatParameter("width", 0.0f);
-	}
-	PostEffectAPI::Enable("RadialBlur", true);
 }
 
 void Player::UpdateDodgeBlur(float dt) {
@@ -365,9 +354,6 @@ void Player::UpdateDodgeBlur(float dt) {
 		width = kDodgeBlurMaxWidth * k * k;
 	}
 
-	if (auto* pass = PostEffectManager::Get()->GetPass("RadialBlur")) {
-		pass->SetFloatParameter("width", width);
-	}
 
 	if (dodgeBlurTimer_ >= kDodgeBlurAttack + kDodgeBlurRelease) {
 		StopDodgeBlur();
@@ -378,10 +364,6 @@ void Player::StopDodgeBlur() {
 	isDodgeBlur_ = false;
 	dodgeBlurTimer_ = 0.0f;
 
-	if (auto* pass = PostEffectManager::Get()->GetPass("RadialBlur")) {
-		pass->SetFloatParameter("width", 0.0f);
-	}
-	PostEffectAPI::Enable("RadialBlur", false);
 }
 
 void Player::StartInvincible(float duration) {
