@@ -1,6 +1,8 @@
 #pragma once
 
 #include <Engine/Objects/3D/Actor/BaseGameObject.h>
+#include <Engine/Application/Effects/EffectAsset.h>
+#include <Engine/Application/Effects/EffectPlayer.h>
 
 /*-----------------------------------------------------------------------------------------
  * Checkpoint
@@ -21,4 +23,5 @@ private:
 
 	bool isActiveVisual_ = false;
 	bool visualApplied_ = false;
+	CalyxEngine::EffectAsset fire_;
 };
