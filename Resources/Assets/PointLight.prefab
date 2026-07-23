@@ -1,0 +1,76 @@
+[
+    {
+        "cameraDitherEnabled": false,
+        "castShadow": true,
+        "color": {
+            "w": 1.0,
+            "x": 1.0,
+            "y": 0.9608540534973145,
+            "z": 0.0
+        },
+        "decay": 1.0,
+        "drawEnable": true,
+        "guid": "145567d2-ddf4-4a28-bfd3-b59cfddef63d",
+        "intensity": 1.0,
+        "name": "PointLight",
+        "objectType": 1,
+        "outlineColor": {
+            "w": 1.0,
+            "x": 0.019999999552965164,
+            "y": 0.019999999552965164,
+            "z": 0.02500000037252903
+        },
+        "outlineEnabled": false,
+        "outlineThickness": 0.03500000014901161,
+        "parentGuid": "00000000-0000-0000-0000-000000000000",
+        "position": {
+            "x": -0.21077311038970947,
+            "y": 6.002493858337402,
+            "z": 22.23893165588379
+        },
+        "radius": 20.0,
+        "transform": {
+            "inheritRotate": true,
+            "inheritScale": true,
+            "inheritTranslate": true,
+            "rotation": {
+                "w": 1.0,
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "scale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+            },
+            "translation": {
+                "x": -0.21077311038970947,
+                "y": 6.002493858337402,
+                "z": 22.23893165588379
+            }
+        },
+        "type": "PointLight",
+        "worldTransform": {
+            "inheritRotate": true,
+            "inheritScale": true,
+            "inheritTranslate": true,
+            "rotation": {
+                "w": 1.0,
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "scale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+            },
+            "translation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            }
+        }
+    }
+]
