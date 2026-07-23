@@ -10,11 +10,13 @@ SpawnPoint::SpawnPoint()
 void SpawnPoint::Initialize() {
 	param_.ownerGuid_ = GetGuid();
 	param_.LoadParams();
+	SetDrawEnable(true);
 }
 
 void SpawnPoint::Update(float) {
 	if (!firstReset_) return;
 	firstReset_ = false;
+	SetDrawEnable(false);
 
 	auto& intent = TransitionIntent::Get();
 	if (!intent.HasPending() || intent.SpawnId() != param_.spawnId) return;
