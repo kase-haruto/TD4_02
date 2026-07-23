@@ -3,8 +3,18 @@
 #include <Game/Collision/CollisionLayerUtil.h>
 #include <Game/World/KillPlane.h>
 
+#include <Data/Engine/Configs/Scene/Objects/Collider/ColliderConfig.h>
+#include <Engine/Graphics/Pipeline/BlendMode/BlendMode.h>
 #include <Engine/Objects/Collider/Collider.h>
 #include <Engine/Scene/Context/SceneContext.h>
+
+#include <algorithm>
+#include <cmath>
+
+namespace {
+	constexpr float kVanishDuration = 0.25f;    //!< 消えきるまでの秒数
+	constexpr float kVanishExpandScale = 1.4f;  //!< 最終的な膨張倍率
+}
 
 PlayerClone::PlayerClone()
 	: PlayerBase(PlayerModelSet::Spirit) {
@@ -14,6 +24,12 @@ PlayerClone::PlayerClone()
 void PlayerClone::Update(float dt) {
 	if (isGhost_) {
 		Actor::Update(dt);
+		return;
+	}
+
+	// 消滅演出中は通常の更新をしない
+	if (isVanishing_) {
+		UpdateVanish(dt);
 		return;
 	}
 
@@ -29,7 +45,7 @@ void PlayerClone::Update(float dt) {
 }
 
 void PlayerClone::OnCollisionEnter(Collider* other) {
-	if (isGhost_) {
+	if (isGhost_ || isVanishing_) {
 		return;
 	}
 
@@ -45,8 +61,48 @@ void PlayerClone::OnCollisionEnter(Collider* other) {
 	if (ownerAbility_) {
 		ownerAbility_->OnCloneWallDeath(this);   // どのスロットが消えたかAbilityへ伝える
 	}
-	if (auto* context = SceneContext::Current()) {
-		context->RemoveObject(std::static_pointer_cast<SceneObject>(shared_from_this()));
+	StartVanish();   // 即消しではなく、膨張しながらフェードで消す
+}
+
+void PlayerClone::StartVanish() {
+	if (isVanishing_) {
+		return;
+	}
+	isVanishing_ = true;
+	vanishTime_ = 0.0f;
+	vanishBaseScale_ = GetWorldTransform().scale;
+
+	// 半透明で描けるようにする
+	SetBlendMode(BlendMode::ALPHA);
+	SetCastShadow(false);
+
+	if (auto* collider = GetCollider()) {
+		ColliderConfig config = collider->ExtractConfig();
+		config.isCollisionEnabled = false;
+		config.isDraw = false;
+		collider->ApplyConfig(config);
+	}
+}
+
+void PlayerClone::UpdateVanish(float dt) {
+	vanishTime_ += dt;
+	const float t = std::clamp(vanishTime_ / kVanishDuration, 0.0f, 1.0f);
+
+	// 膨張
+	const float ease = 1.0f - std::pow(1.0f - t, 3.0f);
+	const float scaleRate = 1.0f + (kVanishExpandScale - 1.0f) * ease;
+	SetScale(vanishBaseScale_ * scaleRate);
+
+	// 透明化
+	const float alpha = (1.0f - t) * (1.0f - t);
+	SetColor({1.0f, 1.0f, 1.0f, alpha});
+
+	Actor::Update(dt);
+
+	if (t >= 1.0f) {
+		if (auto* context = SceneContext::Current()) {
+			context->RemoveObject(std::static_pointer_cast<SceneObject>(shared_from_this()));
+		}
 	}
 }
 

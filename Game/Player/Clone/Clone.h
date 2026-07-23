@@ -35,6 +35,19 @@ public:
 	void AddWorldOffset(const CalyxEngine::Vector3& delta);
 
 private:
+	//===================================================================*/
+	//						private methods
+	//===================================================================*/
+	void StartVanish();          //!< 消滅演出を開始する
+	void UpdateVanish(float dt); //!< 消滅演出の更新
+
+	//===================================================================*/
+	//						private variables
+	//===================================================================*/
 	bool isGhost_ = false;
 	PlayerAbility* ownerAbility_ = nullptr;
+
+	bool isVanishing_ = false;                                   //!< 消滅演出中か
+	float vanishTime_ = 0.0f;                                    //!< 演出の経過時間
+	CalyxEngine::Vector3 vanishBaseScale_ = {1.0f, 1.0f, 1.0f};  //!< 演出開始時のスケール
 };
