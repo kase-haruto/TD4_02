@@ -51,14 +51,7 @@ void PlayerAttack::ShowGui(PlayerBase& player) {
 		StartAttack(player, previewAttackIndex_);
 	}
 
-	ImGui::SeparatorText("Effect Rotation (degrees)");
-	for (int32_t i = 0; i < availableAttackCount; ++i) {
-		ImGui::PushID(i);
-		std::string label = "Attack " + std::to_string(i + 1);
-		ImGui::DragFloat3(label.c_str(), &effectRotations_[i].x, 0.5f);
-		ImGui::PopID();
-	}
-	ImGui::TextDisabled("Preview values only; the effect asset is not modified or saved.");
+	ImGui::TextDisabled("Effect rotation and offset are configured in AttackRotation.");
 }
 
 CalyxEngine::SerializableObject& PlayerAttack::SerializableParam() {
@@ -72,12 +65,28 @@ void PlayerAttack::StartAttack(PlayerBase& player, int comboIndex) {
 	comboIndex_ = comboIndex;
 	attackTimer_ = 0.0f;
 
+	const CalyxEngine::Quaternion& playerRotation = player.GetWorldTransform().rotation;
+
 	if (comboIndex_ == 0) {
 		player.RequestAnimation(PlayerAnimationID::Attack1);
-		EffectAPI::PlayFromName("slashEffect", player.GetWorldTransform().translation, param_.attack1Rotation_);
+		const CalyxEngine::Vector3 worldOffset =
+			CalyxEngine::Quaternion::RotateVector(param_.attack1Offset_, playerRotation);
+		const CalyxEngine::Quaternion worldRotation =
+			CalyxEngine::Quaternion::Multiply(playerRotation, param_.attack1Rotation_);
+		EffectAPI::PlayFromName(
+			"slashEffect",
+			player.GetWorldTransform().translation + worldOffset,
+			worldRotation);
 	} else {
 		player.RequestAnimation(PlayerAnimationID::Attack2);
-		EffectAPI::PlayFromName("slashEffect", player.GetWorldTransform().translation, param_.attack2Rotation_);
+		const CalyxEngine::Vector3 worldOffset =
+			CalyxEngine::Quaternion::RotateVector(param_.attack2Offset_, playerRotation);
+		const CalyxEngine::Quaternion worldRotation =
+			CalyxEngine::Quaternion::Multiply(playerRotation, param_.attack2Rotation_);
+		EffectAPI::PlayFromName(
+			"slashEffect",
+			player.GetWorldTransform().translation + worldOffset,
+			worldRotation);
 	}
 
 	// TODO:
@@ -151,11 +160,6 @@ void PlayerAttack::Reset() {
 	nextAttackReserved_ = false;
 	comboIndex_ = 0;
 	attackTimer_ = 0.0f;
-}
-
-const CalyxEngine::Vector3& PlayerAttack::GetEffectRotation(int32_t attackIndex) const {
-	const int32_t clampedIndex = std::clamp(attackIndex, 0, kAttackCount - 1);
-	return effectRotations_[clampedIndex];
 }
 
 float PlayerAttack::GetCurrentAttackDuration() const {

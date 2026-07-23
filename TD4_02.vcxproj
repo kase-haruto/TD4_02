@@ -111,7 +111,8 @@
       <AdditionalOptions>/IGNORE:4099 /FORCE:MULTIPLE %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <PostBuildEvent>
-      <Command>if exist "$(CalyxEngineSdkDir)\Bin\$(Configuration)\CalyxEngine.dll" copy "$(CalyxEngineSdkDir)\Bin\$(Configuration)\CalyxEngine.dll" "$(TargetDir)CalyxEngine.dll"
+      <Command>if exist "$(CalyxEngineSdkDir)\Bin\$(Configuration)\CalyxGame.exe" copy /Y "$(CalyxEngineSdkDir)\Bin\$(Configuration)\CalyxGame.exe" "$(TargetDir)CalyxGame.exe"
+if exist "$(CalyxEngineSdkDir)\Bin\$(Configuration)\CalyxEngine.dll" copy "$(CalyxEngineSdkDir)\Bin\$(Configuration)\CalyxEngine.dll" "$(TargetDir)CalyxEngine.dll"
 if not exist "$(TargetDir)CalyxEngine.dll" if exist "$(CalyxEngineSdkDir)\..\CalyxEngine.dll" copy "$(CalyxEngineSdkDir)\..\CalyxEngine.dll" "$(TargetDir)CalyxEngine.dll"
 if exist "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxcompiler.dll" copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxcompiler.dll" "$(TargetDir)dxcompiler.dll"
 if exist "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dxil.dll"</Command>
@@ -142,7 +143,8 @@ if exist "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" copy "$(Win
       <AdditionalOptions>/IGNORE:4099 /FORCE:MULTIPLE %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <PostBuildEvent>
-      <Command>if exist "$(CalyxEngineSdkDir)\Bin\$(Configuration)\CalyxEngine.dll" copy "$(CalyxEngineSdkDir)\Bin\$(Configuration)\CalyxEngine.dll" "$(TargetDir)CalyxEngine.dll"
+      <Command>if exist "$(CalyxEngineSdkDir)\Bin\$(Configuration)\CalyxGame.exe" copy /Y "$(CalyxEngineSdkDir)\Bin\$(Configuration)\CalyxGame.exe" "$(TargetDir)CalyxGame.exe"
+if exist "$(CalyxEngineSdkDir)\Bin\$(Configuration)\CalyxEngine.dll" copy "$(CalyxEngineSdkDir)\Bin\$(Configuration)\CalyxEngine.dll" "$(TargetDir)CalyxEngine.dll"
 if not exist "$(TargetDir)CalyxEngine.dll" if exist "$(CalyxEngineSdkDir)\..\CalyxEngine.dll" copy "$(CalyxEngineSdkDir)\..\CalyxEngine.dll" "$(TargetDir)CalyxEngine.dll"
 if exist "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxcompiler.dll" copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxcompiler.dll" "$(TargetDir)dxcompiler.dll"
 if exist "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dxil.dll"</Command>
@@ -170,7 +172,8 @@ if exist "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" copy "$(Win
       <AdditionalOptions>/IGNORE:4099 /FORCE:MULTIPLE %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <PostBuildEvent>
-      <Command>if exist "$(CalyxEngineSdkDir)\Bin\$(Configuration)\CalyxEngine.dll" copy "$(CalyxEngineSdkDir)\Bin\$(Configuration)\CalyxEngine.dll" "$(TargetDir)CalyxEngine.dll"
+      <Command>if exist "$(CalyxEngineSdkDir)\Bin\$(Configuration)\CalyxGame.exe" copy /Y "$(CalyxEngineSdkDir)\Bin\$(Configuration)\CalyxGame.exe" "$(TargetDir)CalyxGame.exe"
+if exist "$(CalyxEngineSdkDir)\Bin\$(Configuration)\CalyxEngine.dll" copy "$(CalyxEngineSdkDir)\Bin\$(Configuration)\CalyxEngine.dll" "$(TargetDir)CalyxEngine.dll"
 if not exist "$(TargetDir)CalyxEngine.dll" if exist "$(CalyxEngineSdkDir)\..\CalyxEngine.dll" copy "$(CalyxEngineSdkDir)\..\CalyxEngine.dll" "$(TargetDir)CalyxEngine.dll"
 if exist "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxcompiler.dll" copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxcompiler.dll" "$(TargetDir)dxcompiler.dll"
 if exist "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dxil.dll"</Command>

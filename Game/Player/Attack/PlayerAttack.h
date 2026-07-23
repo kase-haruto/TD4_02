@@ -2,7 +2,6 @@
 
 #include <Demo/Input/PlayerInput.h>
 #include <Engine/Foundation/Serialization/SerializableObject.h>
-#include <array>
 #include <memory>
 
 class PlayerBase;
@@ -37,9 +36,6 @@ public:
 	bool BlocksMovement() const;
 
 	void Reset();
-
-	/// GUIで調整中の攻撃エフェクト回転（度）を返す。
-	const CalyxEngine::Vector3& GetEffectRotation(int32_t attackIndex) const;
 
 private:
 	//===================================================================*/
@@ -146,6 +142,13 @@ private:
 			AddField("attack1Rotation_", attack1Rotation_)
 				.Category("AttackRotation")
 				.Tooltip("1段目の攻撃回転");
+			AddField("attack1Offset_", attack1Offset_)
+				.Category("AttackRotation")
+				.Tooltip("Attack 1 effect position offset");
+			AddField("attack2Offset_", attack2Offset_)
+				.Category("AttackRotation")
+				.Tooltip("Attack 2 and later effect position offset");
+
 			AddField("attack2Rotation_", attack2Rotation_)
 				.Category("AttackRotation")
 				.Tooltip("2段目の攻撃回転");
@@ -178,6 +181,8 @@ private:
 
 		CalyxEngine::Quaternion attack1Rotation_;
 		CalyxEngine::Quaternion attack2Rotation_;
+		CalyxEngine::Vector3 attack1Offset_{};
+		CalyxEngine::Vector3 attack2Offset_{};
 	};
 
 	AttackParam param_;
@@ -190,7 +195,8 @@ private:
 	std::shared_ptr<Sword> attackHitbox_;
 
 	static constexpr int32_t kAttackCount = 3;
-	std::array<CalyxEngine::Vector3, kAttackCount> effectRotations_{};
 	bool repeatPreview_ = false;
 	int32_t previewAttackIndex_ = 0;
+
+	std::shared_ptr<fxobject>
 };
