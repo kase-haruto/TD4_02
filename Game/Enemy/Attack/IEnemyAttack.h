@@ -21,7 +21,7 @@ public:
 	virtual CalyxEngine::SerializableObject& SerializableParam() = 0;
 
 	// 攻撃の出だしに鳴らすSE。攻撃クラスは敵ごとに使い回すので、敵側のInitializeで設定する
-	void SetAttackSe(std::string filename, float volume = 0.5f) {
+	void SetAttackSe(std::string filename, float volume = 0.3f) {
 		attackSe_ = std::move(filename);
 		attackSeVolume_ = volume;
 	}
