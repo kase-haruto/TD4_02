@@ -9,6 +9,6 @@
   },
   "name": "TD4_02",
   "sourceDirectory": "Game",
-  "startupScene": "Resources/Assets/Scenes/Area001.scene",
+  "startupScene": "Resources/Assets/Scenes/TitleScene.scene",
   "template": "Demo"
 }
