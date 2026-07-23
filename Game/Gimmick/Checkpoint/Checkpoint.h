@@ -23,5 +23,6 @@ private:
 
 	bool isActiveVisual_ = false;
 	bool visualApplied_ = false;
+	bool isOnce_ = false;
 	CalyxEngine::EffectAsset fire_;
 };

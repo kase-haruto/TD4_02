@@ -37,11 +37,14 @@ void Checkpoint::Initialize() {
 	}
 	fire_.Load("Fire");
 
-	RefreshVisual();
+	//RefreshVisual();
 }
 
 void Checkpoint::Update(float dt) {
 	RefreshVisual();
+	if (!isOnce_) {
+		isOnce_ = true;
+	}
 }
 
 void Checkpoint::OnCollisionEnter(Collider* other) {
@@ -63,6 +66,7 @@ void Checkpoint::OnCollisionEnter(Collider* other) {
 }
 
 void Checkpoint::RefreshVisual() {
+	if (!isOnce_) return;
 	auto& rs = RespawnState::Get();
 	const bool active = rs.Has() && rs.ActivateGuid() == GetGuid();
 
