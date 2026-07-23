@@ -6,6 +6,8 @@
 #include <Engine/Foundation/Math/Quaternion.h>
 #include <Engine/Scene/Context/SceneContext.h>
 #include <Engine/Scene/Utility/SceneUtility.h>
+#include <externals/imgui/imgui.h>
+#include <algorithm>
 #include <optional>
 #include <string>
 
@@ -19,13 +21,44 @@ void PlayerAttack::Update(PlayerBase& player, const PlayerInputState& input, flo
 		return;
 	}
 
+	if (repeatPreview_) {
+		StartAttack(player, previewAttackIndex_);
+		return;
+	}
+
 	if (input.attackPressed) {
 		StartAttack(player, 0);
 	}
 }
 
-void PlayerAttack::ShowGui() {
+void PlayerAttack::ShowGui(PlayerBase& player) {
 	param_.ShowGui();
+
+	if (!ImGui::CollapsingHeader("Attack Effect Preview", ImGuiTreeNodeFlags_DefaultOpen)) {
+		return;
+	}
+
+	const int32_t availableAttackCount = std::clamp(param_.comboCount, 1, kAttackCount);
+	previewAttackIndex_ = std::clamp(previewAttackIndex_, 0, availableAttackCount - 1);
+
+	ImGui::Checkbox("Repeat Selected Attack", &repeatPreview_);
+	int32_t previewAttackNumber = previewAttackIndex_ + 1;
+	if (ImGui::SliderInt("Preview Attack", &previewAttackNumber, 1, availableAttackCount, "Attack %d")) {
+		previewAttackIndex_ = previewAttackNumber - 1;
+	}
+	if (ImGui::Button("Replay Now")) {
+		EndAttack();
+		StartAttack(player, previewAttackIndex_);
+	}
+
+	ImGui::SeparatorText("Effect Rotation (degrees)");
+	for (int32_t i = 0; i < availableAttackCount; ++i) {
+		ImGui::PushID(i);
+		std::string label = "Attack " + std::to_string(i + 1);
+		ImGui::DragFloat3(label.c_str(), &effectRotations_[i].x, 0.5f);
+		ImGui::PopID();
+	}
+	ImGui::TextDisabled("Preview values only; the effect asset is not modified or saved.");
 }
 
 CalyxEngine::SerializableObject& PlayerAttack::SerializableParam() {
@@ -42,8 +75,10 @@ void PlayerAttack::StartAttack(PlayerBase& player, int comboIndex) {
 
 	if (comboIndex_ == 0) {
 		player.RequestAnimation(PlayerAnimationID::Attack1);
+		EffectAPI::PlayFromName("slashEffect", player.GetWorldTransform().translation, param_.attack1Rotation_);
 	} else {
 		player.RequestAnimation(PlayerAnimationID::Attack2);
+		EffectAPI::PlayFromName("slashEffect", player.GetWorldTransform().translation, param_.attack2Rotation_);
 	}
 
 	// TODO:
@@ -56,7 +91,7 @@ void PlayerAttack::UpdateAttack(PlayerBase& player, const PlayerInputState& inpu
 	player.RequestAnimation(comboIndex_ == 0 ? PlayerAnimationID::Attack1 : PlayerAnimationID::Attack2);
 
 	// コンボ受付時間中に攻撃ボタンが押されたら、次段を予約
-	if (input.attackPressed && IsInComboAcceptWindow()) {
+	if (!repeatPreview_ && input.attackPressed && IsInComboAcceptWindow()) {
 		nextAttackReserved_ = true;
 	}
 
@@ -79,7 +114,12 @@ void PlayerAttack::UpdateAttack(PlayerBase& player, const PlayerInputState& inpu
 		return;
 	}
 
-	EndAttack();
+	if (repeatPreview_) {
+		EndAttack();
+		StartAttack(player, previewAttackIndex_);
+	} else {
+		EndAttack();
+	}
 }
 
 void PlayerAttack::StartNextCombo(PlayerBase& player) {
@@ -112,6 +152,11 @@ void PlayerAttack::Reset() {
 	nextAttackReserved_ = false;
 	comboIndex_ = 0;
 	attackTimer_ = 0.0f;
+}
+
+const CalyxEngine::Vector3& PlayerAttack::GetEffectRotation(int32_t attackIndex) const {
+	const int32_t clampedIndex = std::clamp(attackIndex, 0, kAttackCount - 1);
+	return effectRotations_[clampedIndex];
 }
 
 float PlayerAttack::GetCurrentAttackDuration() const {

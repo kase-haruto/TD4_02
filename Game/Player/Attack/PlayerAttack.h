@@ -2,6 +2,7 @@
 
 #include <Demo/Input/PlayerInput.h>
 #include <Engine/Foundation/Serialization/SerializableObject.h>
+#include <array>
 #include <memory>
 
 class PlayerBase;
@@ -22,7 +23,7 @@ public:
 	 * 更新処理
 	 */
 	void Update(PlayerBase& player, const PlayerInputState& input, float dt);
-	void ShowGui();
+	void ShowGui(PlayerBase& player);
 	CalyxEngine::SerializableObject& SerializableParam();
 
 	/**
@@ -36,6 +37,9 @@ public:
 	bool BlocksMovement() const;
 
 	void Reset();
+
+	/// GUIで調整中の攻撃エフェクト回転（度）を返す。
+	const CalyxEngine::Vector3& GetEffectRotation(int32_t attackIndex) const;
 
 private:
 	//===================================================================*/
@@ -138,6 +142,13 @@ private:
 			AddField("damage", damage)
 				.Category("AttackDamage")
 				.Tooltip("攻撃力");
+
+			AddField("attack1Rotation_", attack1Rotation_)
+				.Category("AttackRotation")
+				.Tooltip("1段目の攻撃回転");
+			AddField("attack2Rotation_", attack2Rotation_)
+				.Category("AttackRotation")
+				.Tooltip("2段目の攻撃回転");
 		}
 
 		CalyxEngine::ParamPath GetParamPath() const override {
@@ -164,6 +175,9 @@ private:
 		bool drawHitbox = true;
 
 		float damage = 10;
+
+		CalyxEngine::Quaternion attack1Rotation_;
+		CalyxEngine::Quaternion attack2Rotation_;
 	};
 
 	AttackParam param_;
@@ -174,4 +188,9 @@ private:
 	int32_t comboIndex_ = 0;
 	float attackTimer_ = 0.0f;
 	std::shared_ptr<Sword> attackHitbox_;
+
+	static constexpr int32_t kAttackCount = 3;
+	std::array<CalyxEngine::Vector3, kAttackCount> effectRotations_{};
+	bool repeatPreview_ = false;
+	int32_t previewAttackIndex_ = 0;
 };

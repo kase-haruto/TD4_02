@@ -243,7 +243,7 @@ bool PlayerBase::UpdateKnockback(float dt) {
 }
 
 void PlayerBase::DerivativeGui() {
-	attack_.ShowGui();
+	attack_.ShowGui(*this);
 	motor_.ShowGui();
 	dodge_.ShowGui();
 }
