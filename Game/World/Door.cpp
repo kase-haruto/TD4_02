@@ -19,12 +19,14 @@ Door::Door()
 void Door::Initialize() {
 	param_.ownerGuid_ = GetGuid();
 	param_.LoadParams();
+	SetDrawEnable(true);
 }
 
 void Door::Update(float) {
 	if (firstReset_) {
 		firstReset_ = false;
 		FirstReset();
+		SetDrawEnable(false);
 	}
 }
 
