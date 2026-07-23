@@ -1,6 +1,6 @@
 [
     {
-        "cameraDitherEnabled": true,
+        "cameraDitherEnabled": false,
         "castShadow": true,
         "colliderConfig": {
             "capsuleHeight": 2.0,
@@ -21,18 +21,18 @@
                 "z": 0.0
             },
             "size": {
-                "x": 2.0,
-                "y": 13.800000190734863,
-                "z": 38.0
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
             }
         },
-        "colliderKind": 1,
+        "colliderKind": 0,
         "drawEnable": true,
-        "guid": "0a7c5fb5-1f07-4f82-81fd-25b92fbd7ffe",
+        "guid": "35e6c6cc-66cd-4e96-9712-857cf4a10a35",
         "modelConfig": {
             "blendMode": 5,
             "materialGuid": "00000000-0000-0000-0000-000000000000",
-            "modelName": "wall.obj",
+            "modelName": "debugCube.obj",
             "textureGuid": "00000000-0000-0000-0000-000000000000",
             "uvTransConfig": {
                 "rotation": 0.0,
@@ -42,7 +42,7 @@
                 }
             }
         },
-        "name": "wall",
+        "name": "Door",
         "objectType": 2,
         "outlineColor": {
             "w": 1.0,
@@ -61,6 +61,19 @@
             "pushbackRatio": 1.0,
             "useGravity": true
         },
+        "serializableParams": {
+            "Game/Actor/World/Door/35e6c6cc-66cd-4e96-9712-857cf4a10a35": {
+                "fields": {
+                    "targetScene": "4f2de501-52de-4f78-82ad-608cc3b61ac6",
+                    "targetSpawnId": 1,
+                    "triggerSize": [
+                        1.0,
+                        2.0,
+                        1.0
+                    ]
+                }
+            }
+        },
         "transform": {
             "inheritRotate": true,
             "inheritScale": true,
@@ -72,17 +85,17 @@
                 "z": 0.0
             },
             "scale": {
-                "x": 1.0,
-                "y": 1.0,
+                "x": 2.0,
+                "y": 2.0,
                 "z": 1.0
             },
             "translation": {
-                "x": 0.0,
-                "y": 0.0,
-                "z": 0.0
+                "x": -4.2706522941589355,
+                "y": 1.4043755531311035,
+                "z": -34.619422912597656
             }
         },
-        "type": "StaticModelObject",
+        "type": "Door",
         "visualOffset": {
             "x": 0.0,
             "y": 0.0,
@@ -99,8 +112,8 @@
                 "z": 0.0
             },
             "scale": {
-                "x": 1.0,
-                "y": 1.0,
+                "x": 2.0,
+                "y": 2.0,
                 "z": 1.0
             },
             "translation": {

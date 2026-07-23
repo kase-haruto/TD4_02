@@ -21,18 +21,18 @@
                 "z": 0.0
             },
             "size": {
-                "x": 2.0,
-                "y": 13.800000190734863,
-                "z": 38.0
+                "x": 10.800000190734863,
+                "y": 24.399999618530273,
+                "z": 5.400000095367432
             }
         },
         "colliderKind": 1,
         "drawEnable": true,
-        "guid": "0a7c5fb5-1f07-4f82-81fd-25b92fbd7ffe",
+        "guid": "735fce19-28b3-408d-a64a-c2363852b551",
         "modelConfig": {
             "blendMode": 5,
             "materialGuid": "00000000-0000-0000-0000-000000000000",
-            "modelName": "wall.obj",
+            "modelName": "shortWall.obj",
             "textureGuid": "00000000-0000-0000-0000-000000000000",
             "uvTransConfig": {
                 "rotation": 0.0,
@@ -42,7 +42,7 @@
                 }
             }
         },
-        "name": "wall",
+        "name": "shortWall",
         "objectType": 2,
         "outlineColor": {
             "w": 1.0,
@@ -72,14 +72,14 @@
                 "z": 0.0
             },
             "scale": {
-                "x": 1.0,
-                "y": 1.0,
-                "z": 1.0
+                "x": 1.5,
+                "y": 1.5,
+                "z": 1.5
             },
             "translation": {
-                "x": 0.0,
+                "x": 12.0,
                 "y": 0.0,
-                "z": 0.0
+                "z": 13.0
             }
         },
         "type": "StaticModelObject",
@@ -99,9 +99,9 @@
                 "z": 0.0
             },
             "scale": {
-                "x": 1.0,
-                "y": 1.0,
-                "z": 1.0
+                "x": 1.5,
+                "y": 1.5,
+                "z": 1.5
             },
             "translation": {
                 "x": 0.0,

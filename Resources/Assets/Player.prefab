@@ -1,14 +1,14 @@
 [
     {
-        "cameraDitherEnabled": true,
+        "cameraDitherEnabled": false,
         "castShadow": true,
         "colliderConfig": {
-            "capsuleHeight": 2.0,
-            "capsuleRadius": 0.5,
+            "capsuleHeight": 1.7999999523162842,
+            "capsuleRadius": 0.30000001192092896,
             "isCollisionEnabled": true,
             "isDraw": true,
             "isTrigger": false,
-            "layerId": 0,
+            "layerId": 2,
             "offset": {
                 "x": 0.0,
                 "y": 0.0,
@@ -22,18 +22,18 @@
             },
             "size": {
                 "x": 1.0,
-                "y": 9.600000381469727,
-                "z": 37.400001525878906
+                "y": 1.0,
+                "z": 1.0
             }
         },
-        "colliderKind": 1,
+        "colliderKind": 3,
         "drawEnable": true,
-        "guid": "2b757626-edda-4d05-a8ff-49c14cb0397a",
+        "guid": "7cf4af54-848a-4332-a62a-2b36e4c02dd8",
         "modelConfig": {
             "blendMode": 5,
             "materialGuid": "00000000-0000-0000-0000-000000000000",
-            "modelName": "Door.obj",
-            "textureGuid": "00000000-0000-0000-0000-000000000000",
+            "modelName": "Player_idle.gltf",
+            "textureGuid": "7d0948fe-1c26-4aea-8145-308ccfa9b10a",
             "uvTransConfig": {
                 "rotation": 0.0,
                 "scale": {
@@ -42,7 +42,7 @@
                 }
             }
         },
-        "name": "Door",
+        "name": "Player",
         "objectType": 2,
         "outlineColor": {
             "w": 1.0,
@@ -54,35 +54,66 @@
         "outlineThickness": 0.03500000014901161,
         "parentGuid": "00000000-0000-0000-0000-000000000000",
         "physicsBodyConfig": {
-            "bodyType": 0,
+            "bodyType": 1,
             "enabled": true,
             "gravityScale": 1.0,
             "mass": 1.0,
             "pushbackRatio": 1.0,
             "useGravity": true
         },
+        "serializableParams": {
+            "Game/Actor/Player/Dodge/PlayerDodge": {
+                "fields": {
+                    "cooldown": 0.5,
+                    "dodgeDuration": 0.6499999761581421,
+                    "dodgeSpeed": 10.0,
+                    "invincibleTime": 0.4000000059604645
+                }
+            },
+            "Game/Actor/Player/Motor/PlayerMotor": {
+                "fields": {
+                    "dashSpeed": 8.0,
+                    "jumpForce": 5.0,
+                    "moveSpeed": 5.0
+                }
+            },
+            "Game/LockOnSettings/Battle": {
+                "fields": {
+                    "angleWeight": 1.0,
+                    "breakDistance": 22.0,
+                    "distanceWeight": 0.75,
+                    "lostTargetGraceSeconds": 0.15000000596046448,
+                    "maximumAngleDegrees": 70.0,
+                    "playerTurnSpeed": 12.0,
+                    "priorityWeight": 0.3499999940395355,
+                    "screenCenterWeight": 2.5,
+                    "searchRadius": 18.0,
+                    "switchCooldownSeconds": 0.25
+                }
+            }
+        },
         "transform": {
             "inheritRotate": true,
             "inheritScale": true,
             "inheritTranslate": true,
             "rotation": {
-                "w": 0.7210481762886047,
+                "w": 0.878714382648468,
                 "x": 0.0,
-                "y": -0.6928849816322327,
+                "y": -0.4773479104042053,
                 "z": 0.0
             },
             "scale": {
-                "x": 1.2000000476837158,
-                "y": 1.2000000476837158,
-                "z": 1.2000000476837158
+                "x": 0.4000000059604645,
+                "y": 0.4000000059604645,
+                "z": 0.4000000059604645
             },
             "translation": {
-                "x": 0.0,
-                "y": 0.0,
-                "z": 0.0
+                "x": 1.4943478107452393,
+                "y": 0.3975006937980652,
+                "z": -13.544198989868164
             }
         },
-        "type": "StaticModelObject",
+        "type": "Player",
         "visualOffset": {
             "x": 0.0,
             "y": 0.0,
@@ -93,15 +124,15 @@
             "inheritScale": true,
             "inheritTranslate": true,
             "rotation": {
-                "w": 0.7210481762886047,
+                "w": 0.878714382648468,
                 "x": 0.0,
-                "y": -0.6928849816322327,
+                "y": -0.4773479104042053,
                 "z": 0.0
             },
             "scale": {
-                "x": 1.2000000476837158,
-                "y": 1.2000000476837158,
-                "z": 1.2000000476837158
+                "x": 0.4000000059604645,
+                "y": 0.4000000059604645,
+                "z": 0.4000000059604645
             },
             "translation": {
                 "x": 0.0,

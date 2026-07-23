@@ -1,6 +1,6 @@
 [
     {
-        "cameraDitherEnabled": true,
+        "cameraDitherEnabled": false,
         "castShadow": true,
         "colliderConfig": {
             "capsuleHeight": 2.0,
@@ -21,19 +21,19 @@
                 "z": 0.0
             },
             "size": {
-                "x": 2.0,
-                "y": 13.800000190734863,
-                "z": 38.0
+                "x": 25.799999237060547,
+                "y": 14.199999809265137,
+                "z": 8.0
             }
         },
         "colliderKind": 1,
         "drawEnable": true,
-        "guid": "0a7c5fb5-1f07-4f82-81fd-25b92fbd7ffe",
+        "guid": "be1d4cbf-4ad6-4cbe-a91d-0778bf23b725",
         "modelConfig": {
             "blendMode": 5,
             "materialGuid": "00000000-0000-0000-0000-000000000000",
-            "modelName": "wall.obj",
-            "textureGuid": "00000000-0000-0000-0000-000000000000",
+            "modelName": "Bridge.obj",
+            "textureGuid": "80b5e82a-ee1a-4160-a2d7-0b0a01e42627",
             "uvTransConfig": {
                 "rotation": 0.0,
                 "scale": {
@@ -42,7 +42,7 @@
                 }
             }
         },
-        "name": "wall",
+        "name": "Bridge",
         "objectType": 2,
         "outlineColor": {
             "w": 1.0,
@@ -66,9 +66,9 @@
             "inheritScale": true,
             "inheritTranslate": true,
             "rotation": {
-                "w": 1.0,
+                "w": 0.7071068286895752,
                 "x": 0.0,
-                "y": 0.0,
+                "y": 0.7071068286895752,
                 "z": 0.0
             },
             "scale": {
@@ -77,9 +77,9 @@
                 "z": 1.0
             },
             "translation": {
-                "x": 0.0,
-                "y": 0.0,
-                "z": 0.0
+                "x": -3.143242597579956,
+                "y": -14.821334838867188,
+                "z": 41.79133224487305
             }
         },
         "type": "StaticModelObject",
@@ -93,9 +93,9 @@
             "inheritScale": true,
             "inheritTranslate": true,
             "rotation": {
-                "w": 1.0,
+                "w": 0.7071068286895752,
                 "x": 0.0,
-                "y": 0.0,
+                "y": 0.7071068286895752,
                 "z": 0.0
             },
             "scale": {
