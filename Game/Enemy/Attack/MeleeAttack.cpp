@@ -82,6 +82,13 @@ void MeleeAttack::EndAttack(BaseEnemy& self) {
 	cooldownTimer_ = self.GetStats().attackInterval;
 }
 
+void MeleeAttack::Cancel() {
+	RemoveAttackHitbox();
+	isAttacking_ = false;
+	attackTimer_ = 0.0f;
+	cooldownTimer_ = 0.0f;
+}
+
 bool MeleeAttack::IsHitboxActive() const {
 	return isAttacking_ &&
 		attackTimer_ >= param_.hitboxActiveStart &&

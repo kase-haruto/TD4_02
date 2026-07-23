@@ -1,0 +1,118 @@
+{
+  "graph": {
+    "links": [
+      {
+        "fromPinId": 2,
+        "id": 8,
+        "toPinId": 6
+      },
+      {
+        "fromPinId": 7,
+        "id": 9,
+        "toPinId": 4
+      }
+    ],
+    "nextId": 10,
+    "nodes": [
+      {
+        "id": 1,
+        "inputs": [],
+        "outputs": [
+          {
+            "id": 2,
+            "kind": 1,
+            "name": "Color",
+            "type": "core.color"
+          }
+        ],
+        "position": [
+          20.0,
+          120.0
+        ],
+        "properties": {},
+        "title": "Scene Color",
+        "type": "Input"
+      },
+      {
+        "id": 3,
+        "inputs": [
+          {
+            "id": 4,
+            "kind": 0,
+            "name": "Color",
+            "type": "core.color"
+          }
+        ],
+        "outputs": [],
+        "position": [
+          720.0,
+          120.0
+        ],
+        "properties": {},
+        "title": "Output",
+        "type": "Output"
+      },
+      {
+        "id": 5,
+        "inputs": [
+          {
+            "id": 6,
+            "kind": 0,
+            "name": "In",
+            "type": "core.color"
+          }
+        ],
+        "outputs": [
+          {
+            "id": 7,
+            "kind": 1,
+            "name": "Out",
+            "type": "core.color"
+          }
+        ],
+        "position": [
+          329.0,
+          110.0
+        ],
+        "properties": {
+          "applyMode": "Triggered",
+          "autoDisable": true,
+          "duration": 0.20000000298023224,
+          "easeIndex": 8,
+          "enabled": false,
+          "floatAnimations": [],
+          "parameters": {
+            "radius": 0.44999998807907104,
+            "strength": 1.0
+          }
+        },
+        "title": "Vignette",
+        "type": "Vignette"
+      }
+    ]
+  },
+  "name": "LowHP",
+  "nodes": [
+    {
+      "applyMode": "Triggered",
+      "autoDisable": true,
+      "duration": 0.20000000298023224,
+      "ease": "",
+      "easeIndex": 8,
+      "enabled": false,
+      "floatAnimations": [],
+      "id": 5,
+      "parameters": {
+        "radius": 0.44999998807907104,
+        "strength": 1.0
+      },
+      "title": "Vignette",
+      "type": "Vignette"
+    }
+  ],
+  "outline": {
+    "enabled": true
+  },
+  "type": "PostEffectPreset",
+  "version": 1
+}

@@ -30,6 +30,9 @@ enum class PlayerModelSet {
 	Spirit,
 };
 
+inline constexpr float kPlayerAnimationBlendDuration = 0.2f;
+inline constexpr float kPlayerLocomotionBlendDuration = 0.06f;
+
 /*-----------------------------------------------------------------------------------------
  * PlayerBase
  * - Playerの基底クラス
@@ -47,7 +50,7 @@ public:
 	virtual void Initialize() override;
 	virtual void Update(float dt) override;
 	void DerivativeGui() override;
-	void PlayAnimation(PlayerAnimationID animationId);
+	void PlayAnimation(PlayerAnimationID animationId, float blendDuration = kPlayerAnimationBlendDuration);
 	void RegisterPlayerAnimations();
 	PlayerAnimationID GetCurrentAnimationId() const { return currentAnimationId_; }
 	CalyxEngine::Vector3 GetMoveDir() const { return motor_.GetMoveDir(); }
@@ -57,11 +60,15 @@ public:
 
 	bool AppliesMovement() const { return appliesMovement_; }
 
+	void RequestAnimation(PlayerAnimationID animationId);
+	void FlushAnimation(float dt);
+
 protected:
 	explicit PlayerBase(PlayerModelSet modelSet);
 	bool UpdateKnockback(float dt);
 
 	void SetAppliesMovement(bool v) { appliesMovement_ = v; }
+	PlayerAnimationID requestedAnimationId_ = PlayerAnimationID::Idle;
 
 	//===================================================================*/
 	//						private variables
@@ -78,4 +85,6 @@ protected:
 	float knockbackFriction_ = 0.0f;
 
 	bool appliesMovement_ = true;
+	int requestedPriority_ = -1;
+	float currentAnimationElapsed_ = 0.0f; //!< 今のアニメを再生し始めてからの経過時間
 };

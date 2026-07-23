@@ -24,5 +24,6 @@ private:
 
 	std::shared_ptr<PlayerHPUI> hp_;
 	std::shared_ptr<UiSprite>   hpFrame_;
+	std::shared_ptr<UiSprite>   controlUI_;
 	PlayerCloneUI               clones_;
 };

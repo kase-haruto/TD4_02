@@ -39,7 +39,7 @@
             },
             "materialGuid": "00000000-0000-0000-0000-000000000000",
             "modelName": "Enemy_06_idle.gltf",
-            "textureGuid": "00000000-0000-0000-0000-000000000000",
+            "textureGuid": "c58276ec-1096-4d8f-bafc-bbd157635c2e",
             "uvTransConfig": {
                 "rotation": 0.0,
                 "scale": {
@@ -115,9 +115,9 @@
                 "z": 0.5
             },
             "translation": {
-                "x": -3.5040953159332275,
-                "y": 0.6550717353820801,
-                "z": 2.8942177295684814
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
             }
         },
         "type": "Archer",

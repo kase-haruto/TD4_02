@@ -79,10 +79,14 @@ private:
 	 */
 	CalyxEngine::Vector2 ClampMoveLength(const CalyxEngine::Vector2& move) const;
 
+	static bool ToTriggerPress(float value, bool& prevHeld);
+
 private:
 	PlayerInputState state_{};
 	bool prevCloneAbilityHeld_ = false;
 	bool aimWithMouse_ = true;
+	bool prevLeftTriggerHeld_ = false;
+	bool prevRightTriggerHeld_ = false;
 };
 
 

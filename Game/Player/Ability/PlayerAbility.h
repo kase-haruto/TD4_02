@@ -24,7 +24,8 @@ public:
 	/**
 	* 更新処理
 	*/
-	void Update(Player& player, const PlayerInputState* input,float dt);
+	void Update(Player& player, const PlayerInputState* input, float dt);
+	void CooldownUpdate(float dt);
 	void ShowGui();
 	CalyxEngine::SerializableObject& SerializableParam();
 
@@ -51,6 +52,8 @@ public:
 
 	int MaxCloneCount() const { return param_.maxCloneCount; }
 	std::vector<CloneSlotView> BuildSlotViews() const;
+	bool IsCharging() const { return cloneChargeTime_ > 0.0f; }
+	bool ConsumeJustSpawned() { const bool v = justSpawned_; justSpawned_ = false; return v; }
 
 private:
 	//===================================================================*/
@@ -99,6 +102,7 @@ private:
 	std::vector<CloneSlot> slots_;          //!< maxCloneCount 個の固定スロット
 	std::weak_ptr<PlayerClone> cloneGhost_; //!< 長押し中に表示する生成位置のプレビュー
 	float cloneChargeTime_ = 0.0f;
+	bool  justSpawned_ = false;
 
 	void EnsureSlots();    //!< slots_ を maxCloneCount 個に揃える
 	void ReconcileSlots(); //!< 壁以外で消えたクローンのスロットを空きに戻す

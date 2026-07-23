@@ -4,6 +4,8 @@
 #include <Engine/Scene/Utility/SceneUtility.h>
 #include <Engine/Scene/Reference/TransformReference.h>
 #include <Engine/Scene/Reference/SceneObjectReference.h>
+#include <Engine/Application/Effects/EffectAsset.h>
+#include <Engine/Application/Effects/EffectPlayer.h>
 
 #include <memory>
 #include <string>
@@ -31,6 +33,12 @@ struct EnemyAnimationSet {
 	std::string damage;
 	std::string defence;
 	std::string aim;
+};
+
+enum class EnemyDeathPhase {
+	None,  //!< 生存中
+	Shake, //!< 小刻みに震えている
+	Burst, //!< モデルを消し、その場で爆散エフェクトを出している
 };
 
 /*-----------------------------------------------------------------------------------------
@@ -69,8 +77,15 @@ protected:
 	virtual void OnHitByPlayerAttack(Collider* attacker);
 	// プレイヤーが向いている方向へ吹き飛ぶ
 	void ApplyKnockbackFrom(Collider* attacker);
+	void ApplyDamageRim();
 
 	void UpdateKnockback(float dt);
+	void UpdateDustEffect(bool isMoving);
+
+	// 死亡演出を開始する（多重呼び出しは無視される）
+	void BeginDeathSequence();
+	// 死亡演出を進める
+	bool UpdateDeathSequence(float dt);
 
 	virtual bool AllowMovement() const { return true; }
 	virtual bool AllowAttack()   const { return true; }
@@ -91,7 +106,19 @@ protected:
 	std::string currentAnimationModel_;
 	float damageAnimationTimer_ = 0.0f;
 	bool useSecondAttackAnimation_ = false;
+	float damageRimTime_ = 0.0f;
 
 	CalyxEngine::EffectAsset hit_;
 	CalyxEngine::EffectAsset hitLight_;
+
+	CalyxEngine::EffectAsset walk_;
+	CalyxEngine::EffectHandle dustHandle_{};
+	bool                      isDust_ = false;
+
+	EnemyDeathPhase deathPhase_ = EnemyDeathPhase::None;
+	float deathTimer_ = 0.0f;
+	CalyxEngine::Vector3 deathBasePosition_{};   //!< 震えの基準位置
+	CalyxEngine::Vector3 deathEffectPosition_{}; //!< 爆散エフェクトの発生位置
+
+	CalyxEngine::EffectAsset  death_;
 };

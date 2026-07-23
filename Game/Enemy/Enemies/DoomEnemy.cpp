@@ -19,6 +19,7 @@ void DoomEnemy::Initialize() {
 
 	SetMovement(std::make_unique<HomingMove>());
 	SetAttack(std::make_unique<PunchAttack>());
+	walk_.Load("playerWalk");
 	BaseEnemy::Initialize();
 
 }

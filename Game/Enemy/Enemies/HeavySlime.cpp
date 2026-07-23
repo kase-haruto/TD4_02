@@ -18,6 +18,6 @@ void HeavySlime::Initialize() {
 
 	SetMovement(std::make_unique<HomingMove>());
 	SetAttack(std::make_unique<MeleeAttack>());
+	walk_.Load("playerWalk");
 	BaseEnemy::Initialize();
-
 }

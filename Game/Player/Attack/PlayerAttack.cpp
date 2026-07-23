@@ -40,9 +40,9 @@ void PlayerAttack::StartAttack(PlayerBase& player, int comboIndex) {
 	attackTimer_ = 0.0f;
 
 	if (comboIndex_ == 0) {
-		player.PlayAnimation(PlayerAnimationID::Attack1);
+		player.RequestAnimation(PlayerAnimationID::Attack1);
 	} else {
-		player.PlayAnimation(PlayerAnimationID::Attack2);
+		player.RequestAnimation(PlayerAnimationID::Attack2);
 	}
 
 	// TODO:
@@ -52,6 +52,7 @@ void PlayerAttack::StartAttack(PlayerBase& player, int comboIndex) {
 
 void PlayerAttack::UpdateAttack(PlayerBase& player, const PlayerInputState& input, float dt) {
 	attackTimer_ += dt;
+	player.RequestAnimation(comboIndex_ == 0 ? PlayerAnimationID::Attack1 : PlayerAnimationID::Attack2);
 
 	// コンボ受付時間中に攻撃ボタンが押されたら、次段を予約
 	if (input.attackPressed && IsInComboAcceptWindow()) {

@@ -4,6 +4,8 @@
 
 #include <Engine/Foundation/Math/Quaternion.h>
 #include <Engine/Physics/Character/CharacterMovementComponent.h>
+#include <Engine/Scene/Utility/SceneUtility.h>
+#include <Engine/Scene/Context/SceneContext.h>
 
 void PlayerDodge::Initialize([[maybe_unused]] PlayerBase* player) {
 	param_.LoadParams();
@@ -16,6 +18,7 @@ void PlayerDodge::Update(PlayerBase* player, const PlayerInputState& input, floa
 
 	// --- 回避中 ---
 	if (isDodging_) {
+		player->RequestAnimation(PlayerAnimationID::Dodge);
 		dodgeTimer_ += dt;
 
 		// 開始時に決めた向きへ進み続ける
@@ -40,6 +43,12 @@ void PlayerDodge::ShowGui() {
 	param_.ShowGui();
 }
 
+bool PlayerDodge::IsStartDodge() {
+	bool result = isStartDodge_;
+	isStartDodge_ = false;
+	return result;
+}
+
 void PlayerDodge::Reset() {
 	isDodging_ = false;
 	enabled_ = true;
@@ -62,7 +71,7 @@ void PlayerDodge::StartDodge(PlayerBase* player) {
 	isDodging_ = true;
 	dodgeTimer_ = 0.0f;
 	invincibleTimer_ = param_.invincibleTime;
-	player->PlayAnimation(PlayerAnimationID::Dodge);
+	player->RequestAnimation(PlayerAnimationID::Dodge);
 	player->GetCharacterMovement().SetMaxWalkSpeed(param_.dodgeSpeed);
 
 	dodgeDir_ = forward.Normalize();
@@ -70,4 +79,5 @@ void PlayerDodge::StartDodge(PlayerBase* player) {
 	player->GetWorldTransform().rotation =
 		CalyxEngine::Quaternion::FromToQuaternion(CalyxEngine::Vector3::Forward(), dodgeDir_);
 	isDodging_ = true;
+	isStartDodge_ = true;
 }

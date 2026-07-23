@@ -17,6 +17,7 @@ public:
 	PunchAttack();
 
 	void Update(BaseEnemy& self, const Actor* target, float dt)override;
+	void Cancel()override;
 	void ShowGui()override;
 	bool IsAttacking() const override { return isAttacking_; }
 	CalyxEngine::SerializableObject& SerializableParam()override;

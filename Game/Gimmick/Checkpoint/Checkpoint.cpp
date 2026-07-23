@@ -9,10 +9,10 @@
 #include <Engine/Scene/Context/SceneContext.h>
 
 Checkpoint::Checkpoint()
-	: BaseGameObject("debugCube.obj", "Checkpoint") {}
+	: BaseGameObject("CheckPoint.obj", "Checkpoint") {}
 
 void Checkpoint::Initialize() {
-	const float kActivateRadius = 2.5f;
+	const float kActivateRadius = 4.0f;
 
 	InitializeCollider(ColliderKind::Box);
 
@@ -60,5 +60,5 @@ void Checkpoint::RefreshVisual() {
 	visualApplied_ = true;
 	isActiveVisual_ = active;
 
-	SetColor(active ? CalyxEngine::Vector4{ 0.4f, 1.0f, 0.4f, 1.0f } : CalyxEngine::Vector4{ 1.0f, 1.0f, 1.0f, 1.0f });;
+	//SetColor(active ? CalyxEngine::Vector4{ 0.4f, 1.0f, 0.4f, 1.0f } : CalyxEngine::Vector4{ 1.0f, 1.0f, 1.0f, 1.0f });
 }

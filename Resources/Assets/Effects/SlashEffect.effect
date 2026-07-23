@@ -1,0 +1,1194 @@
+{
+  "emitters": [
+    {
+      "emitter": {
+        "autoDestroy": false,
+        "billboardMode": 0,
+        "blendMode": 2,
+        "cameraDitherEnabled": false,
+        "cameraDitherFar": 20.0,
+        "cameraDitherNear": 0.0,
+        "color": {
+          "w": 1.0,
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "direction": {
+          "enabled": false,
+          "rotateToDirection": false,
+          "speed": {
+            "constant": 1.0,
+            "max": 1.0,
+            "min": 0.0,
+            "mode": 0
+          },
+          "vector": {
+            "constant": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "max": {
+              "x": 1.0,
+              "y": 0.0,
+              "z": 1.0
+            },
+            "min": {
+              "x": -1.0,
+              "y": 0.0,
+              "z": -1.0
+            },
+            "mode": 0
+          }
+        },
+        "emitCount": 4,
+        "emitDelay": 0.0,
+        "emitDuration": -1.0,
+        "emitRate": 0.10000000149011612,
+        "emitterShape": 0,
+        "fixedRandomSeed": false,
+        "followOneShot": false,
+        "isComplement": false,
+        "isDrawEnable": true,
+        "isOneShot": true,
+        "lifetime": {
+          "constant": 0.38999998569488525,
+          "max": 1.0,
+          "min": 0.0,
+          "mode": 0
+        },
+        "modelGuid": "6e9dc865-1610-492e-be6b-2d024b654fd0",
+        "modelPath": "SlashEffect.obj",
+        "modules": [
+          {
+            "blend": 0,
+            "clamp01": true,
+            "ease": 2,
+            "enabled": true,
+            "end": [
+              0.7297297716140747,
+              0.03099239058792591,
+              0.0,
+              1.0
+            ],
+            "guid": "b995cc1b-708e-427d-8eb2-e33b0c830e39",
+            "invert": false,
+            "name": "OverLifetimeModule",
+            "start": [
+              0.006753041408956051,
+              0.28264519572257996,
+              0.5830116271972656,
+              1.0
+            ],
+            "target": 4
+          },
+          {
+            "enabled": true,
+            "floatCurve": {
+              "constant": 1.0,
+              "constantMax": 1.0,
+              "constantMin": 1.100000023841858,
+              "keys": [
+                {
+                  "time": 0.0,
+                  "value": 0.0
+                },
+                {
+                  "time": 1.0,
+                  "value": 1.0
+                }
+              ],
+              "maxKeys": [
+                {
+                  "time": 0.0,
+                  "value": 1.0
+                },
+                {
+                  "time": 1.0,
+                  "value": 1.0
+                }
+              ],
+              "minKeys": [
+                {
+                  "time": 0.0,
+                  "value": 0.0
+                },
+                {
+                  "time": 1.0,
+                  "value": 0.0
+                }
+              ],
+              "mode": 1
+            },
+            "gradient": {
+              "keys": [
+                {
+                  "color": {
+                    "w": 1.0,
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                  },
+                  "time": 0.0
+                },
+                {
+                  "color": {
+                    "w": 1.0,
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                  },
+                  "time": 1.0
+                }
+              ]
+            },
+            "guid": "f564d9a6-67a6-4aed-b248-9b975bd0bfe6",
+            "name": "EmissiveOverLifetimeModule",
+            "stage": 3,
+            "target": 5,
+            "vectorCurve": {
+              "x": {
+                "constant": 1.0,
+                "constantMax": 1.0,
+                "constantMin": 0.0,
+                "keys": [
+                  {
+                    "time": 0.0,
+                    "value": 0.0
+                  },
+                  {
+                    "time": 1.0,
+                    "value": 1.0
+                  }
+                ],
+                "maxKeys": [
+                  {
+                    "time": 0.0,
+                    "value": 1.0
+                  },
+                  {
+                    "time": 1.0,
+                    "value": 1.0
+                  }
+                ],
+                "minKeys": [
+                  {
+                    "time": 0.0,
+                    "value": 0.0
+                  },
+                  {
+                    "time": 1.0,
+                    "value": 0.0
+                  }
+                ],
+                "mode": 0
+              },
+              "y": {
+                "constant": 1.0,
+                "constantMax": 1.0,
+                "constantMin": 0.0,
+                "keys": [
+                  {
+                    "time": 0.0,
+                    "value": 0.0
+                  },
+                  {
+                    "time": 1.0,
+                    "value": 1.0
+                  }
+                ],
+                "maxKeys": [
+                  {
+                    "time": 0.0,
+                    "value": 1.0
+                  },
+                  {
+                    "time": 1.0,
+                    "value": 1.0
+                  }
+                ],
+                "minKeys": [
+                  {
+                    "time": 0.0,
+                    "value": 0.0
+                  },
+                  {
+                    "time": 1.0,
+                    "value": 0.0
+                  }
+                ],
+                "mode": 0
+              },
+              "z": {
+                "constant": 1.0,
+                "constantMax": 1.0,
+                "constantMin": 0.0,
+                "keys": [
+                  {
+                    "time": 0.0,
+                    "value": 0.0
+                  },
+                  {
+                    "time": 1.0,
+                    "value": 1.0
+                  }
+                ],
+                "maxKeys": [
+                  {
+                    "time": 0.0,
+                    "value": 1.0
+                  },
+                  {
+                    "time": 1.0,
+                    "value": 1.0
+                  }
+                ],
+                "minKeys": [
+                  {
+                    "time": 0.0,
+                    "value": 0.0
+                  },
+                  {
+                    "time": 1.0,
+                    "value": 0.0
+                  }
+                ],
+                "mode": 0
+              }
+            }
+          }
+        ],
+        "noiseMaskScale": 2.0999999046325684,
+        "noiseMaskScrollSpeed": {
+          "x": 0.75,
+          "y": 1.850000023841858
+        },
+        "noiseMaskSoftness": 0.4749999940395355,
+        "noiseMaskStrength": 0.9229999780654907,
+        "noiseMaskTextureGuid": "20985d27-2f12-4556-8b4e-6924b16bae09",
+        "noiseMaskTexturePath": "C:/MyProject/TD4_02/Resources/Assets/Textures/Noise/Voronoi_Noise.png",
+        "noiseMaskThreshold": 0.5600000023841858,
+        "offset": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "randomSeed": 1,
+        "randomSpinEmit": false,
+        "rotation": {
+          "w": 1.0,
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "scale": {
+          "constant": {
+            "x": 1.5,
+            "y": 1.5,
+            "z": 1.5
+          },
+          "max": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "min": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+          },
+          "mode": 0
+        },
+        "shapeAngle": 30.0,
+        "shapeRadius": 1.0,
+        "shapeSize": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "spin": {
+          "constant": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+          },
+          "max": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+          },
+          "min": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+          },
+          "mode": 0
+        },
+        "textureGuid": "37a7ccbf-c016-420b-9271-8f8df7e2d67c",
+        "texturePath": "Textures/white1x1.dds",
+        "uvSettings": {
+          "offset": {
+            "x": -0.7300000190734863,
+            "y": -0.38499999046325684
+          },
+          "rotation": 0.050614554435014725,
+          "scrollSpeed": {
+            "x": -0.4000000059604645,
+            "y": -1.7400000095367432
+          },
+          "tiling": {
+            "x": 1.1200000047683716,
+            "y": 0.7300000190734863
+          }
+        },
+        "velocity": {
+          "constant": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+          },
+          "max": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "min": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+          },
+          "mode": 0
+        },
+        "vertexColor": {
+          "w": 1.0,
+          "x": 2.4000000953674316,
+          "y": 2.561000108718872,
+          "z": 1.0
+        },
+        "worldScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "isDrawEnable": true,
+      "isGpu": false,
+      "name": "slash",
+      "transform": {
+        "inheritRotate": true,
+        "inheritScale": true,
+        "inheritTranslate": true,
+        "rotation": {
+          "w": 1.0,
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "translation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        }
+      }
+    },
+    {
+      "emitter": {
+        "autoDestroy": false,
+        "billboardMode": 1,
+        "blendMode": 2,
+        "cameraDitherEnabled": false,
+        "cameraDitherFar": 20.0,
+        "cameraDitherNear": 0.0,
+        "color": {
+          "w": 1.0,
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "direction": {
+          "enabled": false,
+          "rotateToDirection": false,
+          "speed": {
+            "constant": 1.0,
+            "max": 1.0,
+            "min": 0.0,
+            "mode": 0
+          },
+          "vector": {
+            "constant": {
+              "x": 0.0,
+              "y": 1.0,
+              "z": 0.0
+            },
+            "max": {
+              "x": 1.0,
+              "y": 0.0,
+              "z": 1.0
+            },
+            "min": {
+              "x": -1.0,
+              "y": 0.0,
+              "z": -1.0
+            },
+            "mode": 0
+          }
+        },
+        "emitCount": 5,
+        "emitDelay": 0.009999999776482582,
+        "emitDuration": -1.0,
+        "emitRate": 0.10000000149011612,
+        "emitterShape": 0,
+        "fixedRandomSeed": false,
+        "followOneShot": false,
+        "isComplement": true,
+        "isDrawEnable": true,
+        "isOneShot": true,
+        "lifetime": {
+          "constant": 0.30000001192092896,
+          "max": 1.0,
+          "min": 0.0,
+          "mode": 0
+        },
+        "modelGuid": "00000000-0000-0000-0000-000000000000",
+        "modelPath": "plane.obj",
+        "modules": [
+          {
+            "enabled": true,
+            "floatCurve": {
+              "constant": 1.0,
+              "constantMax": 1.0,
+              "constantMin": 0.0,
+              "keys": [
+                {
+                  "time": 0.0,
+                  "value": 0.0
+                },
+                {
+                  "time": 1.0,
+                  "value": 1.0
+                }
+              ],
+              "maxKeys": [
+                {
+                  "time": 0.0,
+                  "value": 1.0
+                },
+                {
+                  "time": 1.0,
+                  "value": 1.0
+                }
+              ],
+              "minKeys": [
+                {
+                  "time": 0.0,
+                  "value": 0.0
+                },
+                {
+                  "time": 1.0,
+                  "value": 0.0
+                }
+              ],
+              "mode": 0
+            },
+            "gradient": {
+              "keys": [
+                {
+                  "color": {
+                    "w": 1.0,
+                    "x": 0.15169720351696014,
+                    "y": 0.7799130082130432,
+                    "z": 0.8185328245162964
+                  },
+                  "time": 0.0
+                },
+                {
+                  "color": {
+                    "w": 1.0,
+                    "x": 0.6023166179656982,
+                    "y": 0.05116203799843788,
+                    "z": 0.05116203799843788
+                  },
+                  "time": 1.0
+                }
+              ]
+            },
+            "guid": "aadd02e9-1f16-4c33-842d-9a75dbd133cd",
+            "name": "ColorOverLifetimeModule",
+            "stage": 3,
+            "target": 0,
+            "vectorCurve": {
+              "x": {
+                "constant": 1.0,
+                "constantMax": 1.0,
+                "constantMin": 0.0,
+                "keys": [
+                  {
+                    "time": 0.0,
+                    "value": 0.0
+                  },
+                  {
+                    "time": 1.0,
+                    "value": 1.0
+                  }
+                ],
+                "maxKeys": [
+                  {
+                    "time": 0.0,
+                    "value": 1.0
+                  },
+                  {
+                    "time": 1.0,
+                    "value": 1.0
+                  }
+                ],
+                "minKeys": [
+                  {
+                    "time": 0.0,
+                    "value": 0.0
+                  },
+                  {
+                    "time": 1.0,
+                    "value": 0.0
+                  }
+                ],
+                "mode": 0
+              },
+              "y": {
+                "constant": 1.0,
+                "constantMax": 1.0,
+                "constantMin": 0.0,
+                "keys": [
+                  {
+                    "time": 0.0,
+                    "value": 0.0
+                  },
+                  {
+                    "time": 1.0,
+                    "value": 1.0
+                  }
+                ],
+                "maxKeys": [
+                  {
+                    "time": 0.0,
+                    "value": 1.0
+                  },
+                  {
+                    "time": 1.0,
+                    "value": 1.0
+                  }
+                ],
+                "minKeys": [
+                  {
+                    "time": 0.0,
+                    "value": 0.0
+                  },
+                  {
+                    "time": 1.0,
+                    "value": 0.0
+                  }
+                ],
+                "mode": 0
+              },
+              "z": {
+                "constant": 1.0,
+                "constantMax": 1.0,
+                "constantMin": 0.0,
+                "keys": [
+                  {
+                    "time": 0.0,
+                    "value": 0.0
+                  },
+                  {
+                    "time": 1.0,
+                    "value": 1.0
+                  }
+                ],
+                "maxKeys": [
+                  {
+                    "time": 0.0,
+                    "value": 1.0
+                  },
+                  {
+                    "time": 1.0,
+                    "value": 1.0
+                  }
+                ],
+                "minKeys": [
+                  {
+                    "time": 0.0,
+                    "value": 0.0
+                  },
+                  {
+                    "time": 1.0,
+                    "value": 0.0
+                  }
+                ],
+                "mode": 0
+              }
+            }
+          }
+        ],
+        "noiseMaskScale": 1.0,
+        "noiseMaskScrollSpeed": {
+          "x": 0.0,
+          "y": 0.0
+        },
+        "noiseMaskSoftness": 0.10000000149011612,
+        "noiseMaskStrength": 1.0,
+        "noiseMaskTextureGuid": "00000000-0000-0000-0000-000000000000",
+        "noiseMaskTexturePath": "",
+        "noiseMaskThreshold": 0.5,
+        "offset": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "randomSeed": 1,
+        "randomSpinEmit": true,
+        "rotation": {
+          "w": 1.0,
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "scale": {
+          "constant": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "max": {
+            "x": -0.09000000357627869,
+            "y": 0.75,
+            "z": 1.4900000095367432
+          },
+          "min": {
+            "x": -0.1899999976158142,
+            "y": -0.7200000286102295,
+            "z": -1.690000057220459
+          },
+          "mode": 1
+        },
+        "shapeAngle": 30.0,
+        "shapeRadius": 1.0,
+        "shapeSize": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "spin": {
+          "constant": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+          },
+          "max": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+          },
+          "min": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+          },
+          "mode": 0
+        },
+        "textureGuid": "a6432373-88ba-494c-89ce-1c1725c34fd5",
+        "texturePath": "Textures/white1x1.dds",
+        "uvSettings": {
+          "offset": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "scrollSpeed": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "tiling": {
+            "x": 1.0,
+            "y": 1.0
+          }
+        },
+        "velocity": {
+          "constant": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+          },
+          "max": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "min": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+          },
+          "mode": 0
+        },
+        "vertexColor": {
+          "w": 1.0,
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "worldScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "isDrawEnable": true,
+      "isGpu": false,
+      "name": "hit",
+      "transform": {
+        "inheritRotate": true,
+        "inheritScale": true,
+        "inheritTranslate": true,
+        "rotation": {
+          "w": 1.0,
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "translation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        }
+      }
+    },
+    {
+      "emitter": {
+        "autoDestroy": false,
+        "billboardMode": 1,
+        "blendMode": 6,
+        "cameraDitherEnabled": false,
+        "cameraDitherFar": 20.0,
+        "cameraDitherNear": 0.0,
+        "color": {
+          "w": 1.0,
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "direction": {
+          "enabled": false,
+          "rotateToDirection": false,
+          "speed": {
+            "constant": 1.0,
+            "max": 1.0,
+            "min": 0.0,
+            "mode": 0
+          },
+          "vector": {
+            "constant": {
+              "x": 0.0,
+              "y": 1.0,
+              "z": 0.0
+            },
+            "max": {
+              "x": 1.0,
+              "y": 1.7200000286102295,
+              "z": 1.0
+            },
+            "min": {
+              "x": -1.0,
+              "y": 1.7100000381469727,
+              "z": -1.0
+            },
+            "mode": 1
+          }
+        },
+        "emitCount": 10,
+        "emitDelay": 0.0,
+        "emitDuration": -1.0,
+        "emitRate": 0.10000000149011612,
+        "emitterShape": 3,
+        "fixedRandomSeed": false,
+        "followOneShot": false,
+        "isComplement": true,
+        "isDrawEnable": true,
+        "isOneShot": true,
+        "lifetime": {
+          "constant": 0.5099999904632568,
+          "max": 1.0,
+          "min": 0.0,
+          "mode": 0
+        },
+        "modelGuid": "00000000-0000-0000-0000-000000000000",
+        "modelPath": "plane.obj",
+        "modules": [
+          {
+            "enabled": true,
+            "gravity": {
+              "x": 0.0,
+              "y": -9.800000190734863,
+              "z": 0.0
+            },
+            "name": "GravityModule"
+          },
+          {
+            "enabled": true,
+            "floatCurve": {
+              "constant": 1.0,
+              "constantMax": 1.0,
+              "constantMin": 0.0,
+              "keys": [
+                {
+                  "time": 0.0,
+                  "value": 0.0
+                },
+                {
+                  "time": 1.0,
+                  "value": 1.0
+                }
+              ],
+              "maxKeys": [
+                {
+                  "time": 0.0,
+                  "value": 1.0
+                },
+                {
+                  "time": 1.0,
+                  "value": 1.0
+                }
+              ],
+              "minKeys": [
+                {
+                  "time": 0.0,
+                  "value": 0.0
+                },
+                {
+                  "time": 1.0,
+                  "value": 0.0
+                }
+              ],
+              "mode": 0
+            },
+            "gradient": {
+              "keys": [
+                {
+                  "color": {
+                    "w": 1.0,
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                  },
+                  "time": 0.0
+                },
+                {
+                  "color": {
+                    "w": 1.0,
+                    "x": 0.4749034643173218,
+                    "y": 0.09534742683172226,
+                    "z": 0.12172601372003555
+                  },
+                  "time": 1.0
+                }
+              ]
+            },
+            "guid": "dc387e83-8a2c-426f-8622-abb9bd528dc8",
+            "name": "ColorOverLifetimeModule",
+            "stage": 3,
+            "target": 0,
+            "vectorCurve": {
+              "x": {
+                "constant": 1.0,
+                "constantMax": 1.0,
+                "constantMin": 0.0,
+                "keys": [
+                  {
+                    "time": 0.0,
+                    "value": 0.0
+                  },
+                  {
+                    "time": 1.0,
+                    "value": 1.0
+                  }
+                ],
+                "maxKeys": [
+                  {
+                    "time": 0.0,
+                    "value": 1.0
+                  },
+                  {
+                    "time": 1.0,
+                    "value": 1.0
+                  }
+                ],
+                "minKeys": [
+                  {
+                    "time": 0.0,
+                    "value": 0.0
+                  },
+                  {
+                    "time": 1.0,
+                    "value": 0.0
+                  }
+                ],
+                "mode": 0
+              },
+              "y": {
+                "constant": 1.0,
+                "constantMax": 1.0,
+                "constantMin": 0.0,
+                "keys": [
+                  {
+                    "time": 0.0,
+                    "value": 0.0
+                  },
+                  {
+                    "time": 1.0,
+                    "value": 1.0
+                  }
+                ],
+                "maxKeys": [
+                  {
+                    "time": 0.0,
+                    "value": 1.0
+                  },
+                  {
+                    "time": 1.0,
+                    "value": 1.0
+                  }
+                ],
+                "minKeys": [
+                  {
+                    "time": 0.0,
+                    "value": 0.0
+                  },
+                  {
+                    "time": 1.0,
+                    "value": 0.0
+                  }
+                ],
+                "mode": 0
+              },
+              "z": {
+                "constant": 1.0,
+                "constantMax": 1.0,
+                "constantMin": 0.0,
+                "keys": [
+                  {
+                    "time": 0.0,
+                    "value": 0.0
+                  },
+                  {
+                    "time": 1.0,
+                    "value": 1.0
+                  }
+                ],
+                "maxKeys": [
+                  {
+                    "time": 0.0,
+                    "value": 1.0
+                  },
+                  {
+                    "time": 1.0,
+                    "value": 1.0
+                  }
+                ],
+                "minKeys": [
+                  {
+                    "time": 0.0,
+                    "value": 0.0
+                  },
+                  {
+                    "time": 1.0,
+                    "value": 0.0
+                  }
+                ],
+                "mode": 0
+              }
+            }
+          },
+          {
+            "drag": 2.950000047683716,
+            "enabled": true,
+            "guid": "7d520c6d-e35d-4bae-b662-61e1f60019e4",
+            "name": "DragModule"
+          },
+          {
+            "acceleration": {
+              "x": 3.930000066757202,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "enabled": true,
+            "guid": "14d4ce26-4498-4514-958e-73f63fbf7963",
+            "name": "AccelerationModule"
+          }
+        ],
+        "noiseMaskScale": 1.0,
+        "noiseMaskScrollSpeed": {
+          "x": 0.0,
+          "y": 0.0
+        },
+        "noiseMaskSoftness": 0.10000000149011612,
+        "noiseMaskStrength": 1.0,
+        "noiseMaskTextureGuid": "00000000-0000-0000-0000-000000000000",
+        "noiseMaskTexturePath": "",
+        "noiseMaskThreshold": 0.5,
+        "offset": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "randomSeed": 1,
+        "randomSpinEmit": false,
+        "rotation": {
+          "w": 1.0,
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "scale": {
+          "constant": {
+            "x": 0.10000000149011612,
+            "y": 0.10000000149011612,
+            "z": 1.0
+          },
+          "max": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "min": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+          },
+          "mode": 0
+        },
+        "shapeAngle": 30.0,
+        "shapeRadius": 1.0,
+        "shapeSize": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "spin": {
+          "constant": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+          },
+          "max": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+          },
+          "min": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+          },
+          "mode": 0
+        },
+        "textureGuid": "a6432373-88ba-494c-89ce-1c1725c34fd5",
+        "texturePath": "Textures/white1x1.dds",
+        "uvSettings": {
+          "offset": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "rotation": 0.0,
+          "scrollSpeed": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "tiling": {
+            "x": 1.0,
+            "y": 1.0
+          }
+        },
+        "velocity": {
+          "constant": {
+            "x": 1.0,
+            "y": 1.0,
+            "z": 1.0
+          },
+          "max": {
+            "x": 3.690000057220459,
+            "y": 1.6299999952316284,
+            "z": 1.0
+          },
+          "min": {
+            "x": 1.2799999713897705,
+            "y": 1.6200000047683716,
+            "z": 0.0
+          },
+          "mode": 1
+        },
+        "vertexColor": {
+          "w": 1.0,
+          "x": 1.0,
+          "y": 0.32199999690055847,
+          "z": 0.2669999897480011
+        },
+        "worldScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "isDrawEnable": true,
+      "isGpu": false,
+      "name": "particle",
+      "transform": {
+        "inheritRotate": true,
+        "inheritScale": true,
+        "inheritTranslate": true,
+        "rotation": {
+          "w": 1.0,
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "translation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        }
+      }
+    }
+  ],
+  "name": "SlashEffect",
+  "type": "EffectAsset",
+  "version": 1
+}

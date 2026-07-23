@@ -13,8 +13,6 @@ PlayerBase::PlayerBase(PlayerModelSet modelSet)
 	modelSet_(modelSet) {}
 
 namespace {
-	constexpr float kPlayerAnimationBlendDuration = 0.2f;
-
 	const char* GetPlayerAnimationName(PlayerAnimationID animationId) {
 		switch (animationId) {
 		case PlayerAnimationID::Idle:      return "Idle";
@@ -72,6 +70,43 @@ namespace {
 			return "Player_idle.gltf";
 		}
 	}
+
+	//! 待機/移動系か(入力で細かく切り替わるグループ)
+	bool IsLocomotionAnimation(PlayerAnimationID id) {
+		switch (id) {
+		case PlayerAnimationID::Idle:
+		case PlayerAnimationID::MoveFront:
+		case PlayerAnimationID::MoveBack:
+		case PlayerAnimationID::MoveLeft:
+		case PlayerAnimationID::MoveRight:
+			return true;
+		default:
+			return false;
+		}
+	}
+
+	//! 遷移の種類に応じたブレンド時間
+	float GetPlayerAnimationBlendDuration(PlayerAnimationID from, PlayerAnimationID to) {
+		if (IsLocomotionAnimation(from) && IsLocomotionAnimation(to)) {
+			return kPlayerLocomotionBlendDuration;
+		}
+		return kPlayerAnimationBlendDuration;
+	}
+
+	int GetPlayerAnimationPriority(PlayerAnimationID id) {
+		switch (id) {
+		case PlayerAnimationID::Damage:    return 50;
+		case PlayerAnimationID::Dodge:     return 40;
+		case PlayerAnimationID::Attack1:
+		case PlayerAnimationID::Attack2:   return 30;
+		case PlayerAnimationID::Spirit:    return 20;
+		case PlayerAnimationID::MoveFront:
+		case PlayerAnimationID::MoveBack:
+		case PlayerAnimationID::MoveLeft:
+		case PlayerAnimationID::MoveRight: return 10;
+		default:                           return 0;   // Idle
+		}
+	}
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -92,6 +127,7 @@ void PlayerBase::Initialize() {
 /////////////////////////////////////////////////////////////////////////////////////////
 void PlayerBase::Update(float dt) {
 	if (UpdateKnockback(dt)) {
+		FlushAnimation(dt);
 		Actor::Update(dt);
 		return;
 	}
@@ -113,6 +149,7 @@ void PlayerBase::Update(float dt) {
 		motor_.Update(this, in, dt);
 	}
 
+	FlushAnimation(dt);
 	Actor::Update(dt);
 }
 
@@ -149,12 +186,13 @@ void PlayerBase::RegisterPlayerAnimations() {
 	playerAnimationsRegistered_ = true;
 }
 
-void PlayerBase::PlayAnimation(PlayerAnimationID animationId) {
+void PlayerBase::PlayAnimation(PlayerAnimationID animationId, float blendDuration) {
 	if (currentAnimationId_ == animationId) {
 		return;
 	}
 
 	currentAnimationId_ = animationId;
+	currentAnimationElapsed_ = 0.0f;
 
 	auto* model = AnimationModel();
 	if (!model) {
@@ -164,12 +202,32 @@ void PlayerBase::PlayAnimation(PlayerAnimationID animationId) {
 	}
 
 	RegisterPlayerAnimations();
-	PlayRegisteredAnimation(static_cast<int16_t>(animationId), kPlayerAnimationBlendDuration);
+	PlayRegisteredAnimation(static_cast<int16_t>(animationId), blendDuration);
 }
 
 void PlayerBase::ApplyKnockback(const CalyxEngine::Vector3& velocity, float friction) {
 	knockbackVelocity_ = velocity;
 	knockbackFriction_ = friction;
+}
+
+void PlayerBase::RequestAnimation(PlayerAnimationID animationId) {
+	const int priority = GetPlayerAnimationPriority(animationId);
+	if (priority < requestedPriority_) {
+		return;
+	}
+	requestedPriority_ = priority;
+	requestedAnimationId_ = animationId;
+}
+
+void PlayerBase::FlushAnimation(float dt) {
+	currentAnimationElapsed_ += dt;
+
+	if (requestedPriority_ >= 0) {
+		const float base = GetPlayerAnimationBlendDuration(currentAnimationId_, requestedAnimationId_);
+		const float blend = currentAnimationElapsed_ >= base ? base : 0.0f;
+		PlayAnimation(requestedAnimationId_, blend);
+	}
+	requestedPriority_ = -1;
 }
 
 bool PlayerBase::UpdateKnockback(float dt) {

@@ -23,7 +23,18 @@ public:
 		activated_[id] = value;
 	}
 
-	void Clear() { activated_.clear(); }
+	//===================================================================*/
+	//						プレイヤーHPの持ち越し
+	//===================================================================*/
+	/// エリア移動をまたいでHPを引き継ぐ。死亡リスポーン時は引き継がない
+	bool IsPlayerHpStored() const { return playerHp_ >= 0; }
+	int  PlayerHp() const { return playerHp_; }
+	void SetPlayerHp(int hp) { playerHp_ = hp; }
+
+	void Clear() {
+		activated_.clear();
+		playerHp_ = -1;
+	}
 
 private:
 	WorldState() = default;
@@ -31,4 +42,5 @@ private:
 	WorldState& operator=(const WorldState&) = delete;
 
 	std::unordered_map<Guid, bool> activated_;
+	int playerHp_ = -1; //!< -1 = 未保存
 };

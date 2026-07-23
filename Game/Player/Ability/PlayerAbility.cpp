@@ -23,7 +23,6 @@ PlayerAbility::PlayerAbility() {
 void PlayerAbility::Update(Player& player, const PlayerInputState* input, float dt) {
 	EnsureSlots();
 	ReconcileSlots();
-	UpdateSlotCooldowns(ClockManager::GetInstance()->GetDeltaTime());
 
 	if (!input) {
 		// 入力を受け付けない状態（回避中など）。チャージを中断して元に戻す
@@ -50,6 +49,10 @@ void PlayerAbility::Update(Player& player, const PlayerInputState* input, float 
 	} else if (!input->cloneAbilityHeld) {
 		ClearCloneGhost();
 	}
+}
+
+void PlayerAbility::CooldownUpdate(float dt) {
+	UpdateSlotCooldowns(dt);
 }
 
 void PlayerAbility::ShowGui() {
@@ -143,6 +146,7 @@ void PlayerAbility::SpawnClone(Player& player, float spawnDistance) {
 
 	freeSlot->state = CloneSlot::State::InUse;
 	freeSlot->clone = clone;
+	justSpawned_ = true;
 }
 
 void PlayerAbility::EnsureSlots() {

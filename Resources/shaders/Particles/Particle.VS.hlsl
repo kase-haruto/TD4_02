@@ -22,6 +22,11 @@ struct ParticleData {
 	float3 position;
 	float3 scale;
 	float4 color;
+	float4 vertexColor;
+	float4 flipbookScaleOffset;
+	float4 emissiveColor;
+	float emissiveIntensity;
+	float3 emissivePadding;
 	float3 rotation; // XYZ spin angles
 	float3 alignDirection;
 	uint alignToDirection;
@@ -120,14 +125,24 @@ VertexShaderOutput main(VertexShaderInput input,
 		}
 	}
 
-	rotatedUp = normalize(RotateAroundAxis(rotatedUp, rotatedRight, p.rotation.x));
-	rotatedForward = normalize(RotateAroundAxis(rotatedForward, rotatedRight, p.rotation.x));
+	// Keep the rotation axes fixed to the base orientation. CPU-side Euler angles
+	// use Quaternion::EulerToQuaternion (qz * qy * qx), which means X, Y, then Z
+	// rotations around fixed axes. Using the already-rotated axes here produced an
+	// intrinsic rotation and diverged whenever more than one axis was involved.
+	const float3 rotationAxisRight = rotatedRight;
+	const float3 rotationAxisUp = rotatedUp;
+	const float3 rotationAxisForward = rotatedForward;
 
-	rotatedRight = normalize(RotateAroundAxis(rotatedRight, rotatedUp, p.rotation.y));
-	rotatedForward = normalize(RotateAroundAxis(rotatedForward, rotatedUp, p.rotation.y));
+	rotatedUp = normalize(RotateAroundAxis(rotatedUp, rotationAxisRight, p.rotation.x));
+	rotatedForward = normalize(RotateAroundAxis(rotatedForward, rotationAxisRight, p.rotation.x));
 
-	rotatedRight = normalize(RotateAroundAxis(rotatedRight, rotatedForward, p.rotation.z));
-	rotatedUp = normalize(RotateAroundAxis(rotatedUp, rotatedForward, p.rotation.z));
+	rotatedRight = normalize(RotateAroundAxis(rotatedRight, rotationAxisUp, p.rotation.y));
+	rotatedUp = normalize(RotateAroundAxis(rotatedUp, rotationAxisUp, p.rotation.y));
+	rotatedForward = normalize(RotateAroundAxis(rotatedForward, rotationAxisUp, p.rotation.y));
+
+	rotatedRight = normalize(RotateAroundAxis(rotatedRight, rotationAxisForward, p.rotation.z));
+	rotatedUp = normalize(RotateAroundAxis(rotatedUp, rotationAxisForward, p.rotation.z));
+	rotatedForward = normalize(RotateAroundAxis(rotatedForward, rotationAxisForward, p.rotation.z));
 
 	// ==========================================================
 	//  頂点計算
@@ -156,7 +171,10 @@ VertexShaderOutput main(VertexShaderInput input,
 		cameraFade = saturate((dist - gFadeParm.fadeNear) / (gFadeParm.fadeFar - gFadeParm.fadeNear));
 	}
 
-	o.color = p.color;
+	o.color = p.color * p.vertexColor;
 	o.fade = cameraFade;
+	o.flipbookScaleOffset = p.flipbookScaleOffset;
+	o.emissiveColor = p.emissiveColor;
+	o.emissiveIntensity = p.emissiveIntensity;
 	return o;
 }

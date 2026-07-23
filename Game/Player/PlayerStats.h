@@ -13,6 +13,11 @@ struct PlayerStats : CalyxEngine::SerializableObject {
 		AddField("damageFlashInterval", damageFlashInterval).Category("Damage").Tooltip("点滅の切り替え間隔。小さいほど速く点滅する");
 
 		AddField("respawnInvincibleTime", respawnInvincibleTime).Category("Damage").Tooltip("リスポーン直後の無敵時間");
+
+		AddField("lowHpRatio", lowHpRatio).Category("LowHp").Tooltip("この割合以下でリムライトが点滅する");
+		AddField("lowHpRimIntensityMin", lowHpRimIntensityMin).Category("LowHp").Tooltip("点滅の一番暗いときの強さ");
+		AddField("lowHpRimIntensityMax", lowHpRimIntensityMax).Category("LowHp").Tooltip("点滅の一番明るいときの強さ");
+		AddField("lowHpRimSpeed", lowHpRimSpeed).Category("LowHp").Tooltip("点滅の速さ。HPが低いほど最大2倍まで加速する");
 	}
 
 	CalyxEngine::ParamPath GetParamPath() const override {
@@ -26,4 +31,9 @@ struct PlayerStats : CalyxEngine::SerializableObject {
 	float damageInvincibleTime = 0.5f;
 	float damageFlashInterval = 0.05f;
 	float respawnInvincibleTime = 1.5f;
+
+	float lowHpRatio = 0.3f;           // HPがこの割合以下で点滅開始
+	float lowHpRimIntensityMin = 0.0f;
+	float lowHpRimIntensityMax = 6.0f;
+	float lowHpRimSpeed = 10.0f;
 };

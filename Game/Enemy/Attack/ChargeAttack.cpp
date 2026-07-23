@@ -114,6 +114,13 @@ void ChargeAttack::EndCharge(BaseEnemy& self) {
 	cooldownTimer_ = self.GetStats().attackInterval;   // 次の突進まで間隔をあける
 }
 
+void ChargeAttack::Cancel() {
+	RemoveHitbox();
+	phase_ = Phase::Idle;
+	phaseTimer_ = 0.0f;
+	cooldownTimer_ = 0.0f;
+}
+
 void ChargeAttack::CreateHitbox(BaseEnemy& self) {
 	if (hitbox_) {
 		return;
