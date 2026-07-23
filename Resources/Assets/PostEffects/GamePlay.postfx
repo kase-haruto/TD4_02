@@ -1,0 +1,335 @@
+{
+  "graph": {
+    "links": [
+      {
+        "fromPinId": 2,
+        "id": 76,
+        "toPinId": 74
+      },
+      {
+        "fromPinId": 2,
+        "id": 77,
+        "toPinId": 68
+      },
+      {
+        "fromPinId": 2,
+        "id": 78,
+        "toPinId": 71
+      },
+      {
+        "fromPinId": 69,
+        "id": 80,
+        "toPinId": 56
+      },
+      {
+        "fromPinId": 75,
+        "id": 81,
+        "toPinId": 55
+      },
+      {
+        "fromPinId": 72,
+        "id": 84,
+        "toPinId": 83
+      },
+      {
+        "fromPinId": 57,
+        "id": 85,
+        "toPinId": 4
+      }
+    ],
+    "nextId": 86,
+    "nodes": [
+      {
+        "id": 1,
+        "inputs": [],
+        "outputs": [
+          {
+            "id": 2,
+            "kind": 1,
+            "name": "Color",
+            "type": "core.color"
+          }
+        ],
+        "position": [
+          20.0,
+          120.0
+        ],
+        "properties": {},
+        "title": "Scene Color",
+        "type": "Input"
+      },
+      {
+        "id": 3,
+        "inputs": [
+          {
+            "id": 4,
+            "kind": 0,
+            "name": "Color",
+            "type": "core.color"
+          }
+        ],
+        "outputs": [],
+        "position": [
+          720.0,
+          120.0
+        ],
+        "properties": {},
+        "title": "Output",
+        "type": "Output"
+      },
+      {
+        "id": 54,
+        "inputs": [
+          {
+            "id": 55,
+            "kind": 0,
+            "name": "A",
+            "type": "core.color"
+          },
+          {
+            "id": 56,
+            "kind": 0,
+            "name": "B",
+            "type": "core.color"
+          },
+          {
+            "id": 83,
+            "kind": 0,
+            "name": "C",
+            "type": "core.color"
+          }
+        ],
+        "outputs": [
+          {
+            "id": 57,
+            "kind": 1,
+            "name": "Out",
+            "type": "core.color"
+          }
+        ],
+        "position": [
+          565.0,
+          94.0
+        ],
+        "properties": {
+          "applyMode": "Always",
+          "autoDisable": true,
+          "duration": 0.25,
+          "easeIndex": 8,
+          "enabled": true,
+          "floatAnimations": [],
+          "inputCount": 3,
+          "parameters": {
+            "mode": 0,
+            "opacity": 0.5
+          }
+        },
+        "title": "Blend",
+        "type": "Blend"
+      },
+      {
+        "id": 67,
+        "inputs": [
+          {
+            "id": 68,
+            "kind": 0,
+            "name": "In",
+            "type": "core.color"
+          }
+        ],
+        "outputs": [
+          {
+            "id": 69,
+            "kind": 1,
+            "name": "Out",
+            "type": "core.color"
+          }
+        ],
+        "position": [
+          281.0,
+          185.0
+        ],
+        "properties": {
+          "applyMode": "Triggered",
+          "autoDisable": true,
+          "duration": 0.25,
+          "easeIndex": 8,
+          "enabled": false,
+          "floatAnimations": [],
+          "parameters": {
+            "center": [
+              0.5,
+              0.5
+            ],
+            "width": 0.15000000596046448
+          }
+        },
+        "title": "RadialBlur",
+        "type": "RadialBlur"
+      },
+      {
+        "id": 70,
+        "inputs": [
+          {
+            "id": 71,
+            "kind": 0,
+            "name": "In",
+            "type": "core.color"
+          }
+        ],
+        "outputs": [
+          {
+            "id": 72,
+            "kind": 1,
+            "name": "Out",
+            "type": "core.color"
+          }
+        ],
+        "position": [
+          275.0,
+          415.0
+        ],
+        "properties": {
+          "applyMode": "Always",
+          "autoDisable": true,
+          "duration": 0.25,
+          "easeIndex": 8,
+          "enabled": true,
+          "floatAnimations": [],
+          "parameters": {
+            "intensity": 0.699999988079071,
+            "radius": 1.0,
+            "softKnee": 0.5,
+            "threshold": 0.800000011920929,
+            "tint": [
+              1.0,
+              1.0,
+              1.0
+            ]
+          }
+        },
+        "title": "Bloom",
+        "type": "Bloom"
+      },
+      {
+        "id": 73,
+        "inputs": [
+          {
+            "id": 74,
+            "kind": 0,
+            "name": "In",
+            "type": "core.color"
+          }
+        ],
+        "outputs": [
+          {
+            "id": 75,
+            "kind": 1,
+            "name": "Out",
+            "type": "core.color"
+          }
+        ],
+        "position": [
+          281.0,
+          -7.0
+        ],
+        "properties": {
+          "applyMode": "Triggered",
+          "autoDisable": true,
+          "duration": 0.20000000298023224,
+          "easeIndex": 8,
+          "enabled": false,
+          "floatAnimations": [],
+          "parameters": {
+            "radius": 0.4000000059604645,
+            "strength": 1.0
+          }
+        },
+        "title": "Vignette",
+        "type": "Vignette"
+      }
+    ]
+  },
+  "name": "GamePlay",
+  "nodes": [
+    {
+      "applyMode": "Always",
+      "autoDisable": true,
+      "duration": 0.25,
+      "ease": "",
+      "easeIndex": 8,
+      "enabled": true,
+      "floatAnimations": [],
+      "id": 70,
+      "parameters": {
+        "intensity": 0.699999988079071,
+        "radius": 1.0,
+        "softKnee": 0.5,
+        "threshold": 0.800000011920929,
+        "tint": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      "title": "Bloom",
+      "type": "Bloom"
+    },
+    {
+      "applyMode": "Triggered",
+      "autoDisable": true,
+      "duration": 0.25,
+      "ease": "",
+      "easeIndex": 8,
+      "enabled": false,
+      "floatAnimations": [],
+      "id": 67,
+      "parameters": {
+        "center": [
+          0.5,
+          0.5
+        ],
+        "width": 0.15000000596046448
+      },
+      "title": "RadialBlur",
+      "type": "RadialBlur"
+    },
+    {
+      "applyMode": "Triggered",
+      "autoDisable": true,
+      "duration": 0.20000000298023224,
+      "ease": "",
+      "easeIndex": 8,
+      "enabled": false,
+      "floatAnimations": [],
+      "id": 73,
+      "parameters": {
+        "radius": 0.4000000059604645,
+        "strength": 1.0
+      },
+      "title": "Vignette",
+      "type": "Vignette"
+    },
+    {
+      "applyMode": "Always",
+      "autoDisable": true,
+      "duration": 0.25,
+      "ease": "",
+      "easeIndex": 8,
+      "enabled": true,
+      "floatAnimations": [],
+      "id": 54,
+      "parameters": {
+        "mode": 0,
+        "opacity": 0.5
+      },
+      "title": "Blend",
+      "type": "Blend"
+    }
+  ],
+  "outline": {
+    "enabled": true
+  },
+  "type": "PostEffectPreset",
+  "version": 1
+}

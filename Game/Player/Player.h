@@ -61,6 +61,12 @@ private:
 
 	void UpdateWalkEffect(bool isWalking);
 
+	// 回避のラジアルブラー。Triggeredのトゥイーンは from→to の一方向しか作れないため、
+	// 0→最大→0 の山を出したいここだけコードで width を動かす
+	void StartDodgeBlur();
+	void UpdateDodgeBlur(float dt);
+	void StopDodgeBlur();
+
 	//===================================================================*/
 	//						private variables
 	//===================================================================*/
@@ -76,6 +82,9 @@ private:
 	float      invincibleTimer_ = 0.0f;
 	float      lowHpRimPhase_ = 0.0f;
 	bool       isLowHpRim_ = false;
+	bool       postFxPresetLoaded_ = false; //!< GamePlayプリセットを読み込み済みか
+	bool       isDodgeBlur_ = false;        //!< 回避ブラーの再生中か
+	float      dodgeBlurTimer_ = 0.0f;      //!< 回避ブラーの経過時間
 	CalyxEngine::Vector3 lastCloneAnchor_{};
 
 	CalyxEngine::Vector3 respawnPoint_{};

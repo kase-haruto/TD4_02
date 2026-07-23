@@ -4,6 +4,8 @@
 
 #include <Engine/Foundation/Math/Quaternion.h>
 #include <Engine/Physics/Character/CharacterMovementComponent.h>
+#include <Engine/Scene/Utility/SceneUtility.h>
+#include <Engine/Scene/Context/SceneContext.h>
 
 void PlayerDodge::Initialize([[maybe_unused]] PlayerBase* player) {
 	param_.LoadParams();

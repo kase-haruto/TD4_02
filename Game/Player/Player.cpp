@@ -12,9 +12,17 @@
 #include <Engine/Scene/Utility/SceneUtility.h>
 #include <Engine/Scene/Context/SceneContext.h>
 #include <Engine/Foundation/Clock/ClockManager.h>
+#include <Engine/PostProcess/Manager/PostEffectManager.h>
+#include <Engine/PostProcess/Interface/IPostEffectPass.h>
 #include <algorithm>
 #include <cmath>
 #include <filesystem>
+
+namespace {
+	constexpr float kDodgeBlurAttack = 0.07f;   // 0→最大までの時間(秒)
+	constexpr float kDodgeBlurRelease = 0.30f;  // 最大→0までの時間(秒)
+	constexpr float kDodgeBlurMaxWidth = 0.2f; // ブラーの最大強度(RadialBlurのwidth)
+}
 
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -55,6 +63,10 @@ void Player::Initialize() {
 	walk_.Load("playerWalk");
 	dodgeEffect_.Load("playerDodge");
 
+	// 読み込めるプリセットは1枚だけ。ここで別のプリセットを読むと、
+	// GamePlay.postfx のグラフごと差し替わって Bloom も Vignette も消える。
+	postFxPresetLoaded_ = PostEffectAPI::LoadPreset("GamePlay.postfx");
+
 	ui_.Initialize(ability_.MaxCloneCount());
 }
 
@@ -63,9 +75,11 @@ void Player::Initialize() {
 /////////////////////////////////////////////////////////////////////////////////////////
 void Player::Update(float dt) {
 	WorldState::Get().SetPlayerHp(currentHp_);   // エリア移動で引き継ぐ用(途中returnがあるので先頭で保存)
+	WorldState::Get().AddPlayTime(dt);           // クリアタイムの計測。Playerがいる=ゲーム中
 	damageAnimationTimer_ = damageAnimationTimer_ > dt ? damageAnimationTimer_ - dt : 0.0f;
 	UpdateInvincible(dt);
 	UpdateLowHpRim(dt);
+	UpdateDodgeBlur(dt);
 
 	// 落下死。床をすり抜けたら通常の死亡と同じ扱いにしてリスポーンさせる
 	if (currentHp_ > 0 && KillPlane::IsFallenOut(GetWorldPosition())) {
@@ -113,6 +127,7 @@ void Player::Update(float dt) {
 	dodge_.Update(this, in, dt);
 	if (dodge_.IsStartDodge()) {
 		EffectAPI::Play(dodgeEffect_, GetWorldPosition());
+		StartDodgeBlur();
 	}
 	// 回避中はアビリティの入力を受け付けない（チャージは中断）
 	ability_.Update(*this, dodge_.IsDodging() ? nullptr : &in, dt);
@@ -162,12 +177,11 @@ void Player::TakeDamage(int amount) {
 	if (currentHp_ < 0) {
 		currentHp_ = 0;
 	}
-
-	// Keep the scene's Always preset and temporarily overlay the damage preset.
-	PostEffectAPI::PlayTriggeredPreset("LowHP.postfx");
-
 	damageAnimationTimer_ = 0.25f;
 	StartInvincible(stats_.damageInvincibleTime);
+	if (postFxPresetLoaded_) {
+		PostEffectAPI::PlayTriggered("Vignette");
+	}
 	PlayAnimation(PlayerAnimationID::Damage);
 }
 
@@ -226,6 +240,7 @@ void Player::Respawn() {
 	SetDrawEnable(true);
 	ClearRimLight();
 	isLowHpRim_ = false;
+	StopDodgeBlur();   // 回避中に死んでもブラーが残らないようにする
 
 	isWalk_ = false;
 
@@ -263,9 +278,9 @@ void Player::UpdateInvincible(float dt) {
 	}
 
 	// 残り時間を間隔で割った回数の偶奇で表示/非表示を切り替える
-	const float interval = (std::max)(stats_.damageFlashInterval, 0.001f);
+	/*const float interval = (std::max)(stats_.damageFlashInterval, 0.001f);
 	const int   step = static_cast<int>(invincibleTimer_ / interval);
-	SetDrawEnable((step % 2) == 0);
+	SetDrawEnable((step % 2) == 0);*/
 }
 
 void Player::UpdateLowHpRim(float dt) {
@@ -294,12 +309,18 @@ void Player::UpdateLowHpRim(float dt) {
 		? std::clamp(1.0f - hpRate / stats_.lowHpRatio, 0.0f, 1.0f)
 		: 1.0f;
 
-	//constexpr float kTwoPi = 6.28318530718f;
+	constexpr float kPi = 3.14159265359f;
+	constexpr float kTwoPi = 6.28318530718f;
+	const float prevPhase = lowHpRimPhase_;
 	lowHpRimPhase_ += dt * stats_.lowHpRimSpeed * (1.0f + danger);
 
-	//if (lowHpRimPhase_ > kTwoPi) {
-	//	lowHpRimPhase_ -= kTwoPi;
-	//}
+	if (postFxPresetLoaded_ && prevPhase < kPi && lowHpRimPhase_ >= kPi) {
+		PostEffectAPI::PlayTriggered("Vignette");
+	}
+
+	if (lowHpRimPhase_ > kTwoPi) {
+		lowHpRimPhase_ -= kTwoPi;
+	}
 
 	//// 0→1→0 で滑らかに脈動させる
 	//const float t = 0.5f * (1.0f - std::cos(lowHpRimPhase_));
@@ -308,6 +329,58 @@ void Player::UpdateLowHpRim(float dt) {
 	//// モデル差し替えで消えても復帰できるよう毎フレーム貼り直す
 	//isLowHpRim_ = true;
 	//SetRimLight({ 1.0f, 0.15f, 0.15f, 1.0f }, intensity, 1.0f);
+}
+
+void Player::StartDodgeBlur() {
+	if (!postFxPresetLoaded_) {
+		return;
+	}
+
+	isDodgeBlur_ = true;
+	dodgeBlurTimer_ = 0.0f;
+
+	// 0から始めて立ち上がりを作る。
+	if (auto* pass = PostEffectManager::Get()->GetPass("RadialBlur")) {
+		pass->SetFloatParameter("width", 0.0f);
+	}
+	PostEffectAPI::Enable("RadialBlur", true);
+}
+
+void Player::UpdateDodgeBlur(float dt) {
+	if (!isDodgeBlur_) {
+		return;
+	}
+
+	dodgeBlurTimer_ += dt;
+
+	// 0→最大→0
+	float width = 0.0f;
+	if (dodgeBlurTimer_ < kDodgeBlurAttack) {
+		const float r = dodgeBlurTimer_ / kDodgeBlurAttack;
+		width = kDodgeBlurMaxWidth * r * r;
+	} else {
+		const float r = std::clamp((dodgeBlurTimer_ - kDodgeBlurAttack) / kDodgeBlurRelease, 0.0f, 1.0f);
+		const float k = 1.0f - r;
+		width = kDodgeBlurMaxWidth * k * k;
+	}
+
+	if (auto* pass = PostEffectManager::Get()->GetPass("RadialBlur")) {
+		pass->SetFloatParameter("width", width);
+	}
+
+	if (dodgeBlurTimer_ >= kDodgeBlurAttack + kDodgeBlurRelease) {
+		StopDodgeBlur();
+	}
+}
+
+void Player::StopDodgeBlur() {
+	isDodgeBlur_ = false;
+	dodgeBlurTimer_ = 0.0f;
+
+	if (auto* pass = PostEffectManager::Get()->GetPass("RadialBlur")) {
+		pass->SetFloatParameter("width", 0.0f);
+	}
+	PostEffectAPI::Enable("RadialBlur", false);
 }
 
 void Player::StartInvincible(float duration) {
