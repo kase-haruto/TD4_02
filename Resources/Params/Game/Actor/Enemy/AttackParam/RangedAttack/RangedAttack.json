@@ -1,13 +1,14 @@
 {
     "fields": {
+        "aimDuration": 0.4000000059604645,
         "arrowLifeTime": 3.0,
         "arrowSize": [
-            0.10000000149011612,
-            0.10000000149011612,
-            0.6000000238418579
+            0.5,
+            0.5,
+            1.0
         ],
         "arrowSpeed": 8.0,
-        "drawHitbox": false,
+        "drawHitbox": true,
         "spawnForwardOffset": 1.0,
         "spawnHeight": 1.0
     }

@@ -20,6 +20,8 @@ protected:
 	// 防御中は移動も攻撃も止める
 	bool AllowMovement() const override { return !isDefending_; }
 	bool AllowAttack()   const override { return !isDefending_; }
+	// 防御中は待機/移動アニメで上書きさせない
+	bool AllowLocomotionAnimation() const override { return !isDefending_; }
 
 	// 前方180°ガード
 	void OnHitByPlayerAttack(Collider* attacker) override;
@@ -31,7 +33,8 @@ private:
 	void ExitDefense();
 	void RollThreshold();          // attacksUntilDefense_ を抽選
 	void FaceTarget();             // 常にプレイヤーを向く
-	bool IsBlockedDirection() const;
+	bool IsBlockedDirection(Collider* attacker) const;
+	void EnsureDefenceAnimation(); // 防御アニメを維持し、ループを切る
 
 
 	struct ShieldParam : CalyxEngine::SerializableObject {

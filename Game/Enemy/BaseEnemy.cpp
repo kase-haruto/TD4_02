@@ -99,7 +99,7 @@ void BaseEnemy::Update(float dt) {
 	const CalyxEngine::Vector3 moved = GetWorldPosition() - frameStartPosition;
 	const bool isMoving = moved.LengthSquared() > 1.0e-6f;
 
-	if (damageAnimationTimer_ <= 0.0f && !(attack_ && attack_->IsAttacking())) {
+	if (AllowLocomotionAnimation() && damageAnimationTimer_ <= 0.0f && !(attack_ && attack_->IsAttacking())) {
 		PlayAnimation(isMoving ? EnemyAnimationID::Move : EnemyAnimationID::Idle);
 	}
 

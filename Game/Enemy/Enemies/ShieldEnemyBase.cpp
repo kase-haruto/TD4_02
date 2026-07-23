@@ -31,12 +31,12 @@ void ShieldEnemyBase::Update(float dt) {
 
 	BaseEnemy::Update(dt);
 	if (isDefending_) {
-		PlayAnimation(EnemyAnimationID::Defence);
+		EnsureDefenceAnimation();
 	}
 }
 
 void ShieldEnemyBase::OnHitByPlayerAttack(Collider* attacker) {
-	if (isDefending_ && IsBlockedDirection()) {
+	if (isDefending_ && IsBlockedDirection(attacker)) {
 		return;   // ガード成功（ダメージもノックバックも無し）
 	}
 	BaseEnemy::OnHitByPlayerAttack(attacker);
@@ -87,23 +87,50 @@ void ShieldEnemyBase::FaceTarget() {
 			CalyxEngine::Vector3::Forward(), toTarget.Normalize());
 }
 
-bool ShieldEnemyBase::IsBlockedDirection() const {
-	auto targetPlayer = stats_.target.Resolve().get();
-	if (!targetPlayer) {
+void ShieldEnemyBase::EnsureDefenceAnimation() {
+	if (animations_.defence.empty()) {
+		return;
+	}
+
+	// 被弾アニメなどで別モデルに変わっていたら防御へ戻す。
+	// 同じモデルなら PlayAnimation 側の名前ガードで何もしないので、再生位置は維持される
+	PlayAnimation(EnemyAnimationID::Defence);
+}
+
+bool ShieldEnemyBase::IsBlockedDirection(Collider* attacker) const {
+	if (!attacker) {
 		return false;
 	}
+	// プレイヤーではなく「当たったヒットボックス」の位置で見る。
+	// 防御中は常にプレイヤーを向いているので、プレイヤー基準だと必ず前方になってしまう
+	const BaseGameObject* source = attacker->GetOwner();
+	if (!source) {
+		return false;
+	}
+
 	CalyxEngine::Vector3 forward = CalyxEngine::Quaternion::RotateVector(
 			CalyxEngine::Vector3::Forward(), GetWorldTransform().rotation);
 	forward.y = 0.0f;
-
-	CalyxEngine::Vector3 toTarget = targetPlayer->GetWorldPosition() - GetWorldPosition();
-	toTarget.y = 0.0f;
-
-	if (forward.LengthSquared() < 1.0e-6f || toTarget.LengthSquared() < 1.0e-6f) {
+	if (forward.LengthSquared() < 1.0e-6f) {
 		return false;
 	}
 
-	// 前方180°ならブロック
+	// ボーン追従の武器は render 側の transform でないと正しい位置が取れない
+	CalyxEngine::Vector3 toAttacker = source->GetRenderWorldTransform().translation - GetWorldPosition();
+	toAttacker.y = 0.0f;
+
+	if (toAttacker.LengthSquared() < 1.0e-6f) {
+		// ヒットボックスが自分の中心に重なっている時は、攻撃側の向きの逆＝発生源の方向とみなす
+		CalyxEngine::Vector3 attackDir = CalyxEngine::Quaternion::RotateVector(
+				CalyxEngine::Vector3::Forward(), source->GetRenderWorldTransform().rotation);
+		attackDir.y = 0.0f;
+		if (attackDir.LengthSquared() < 1.0e-6f) {
+			return false;
+		}
+		toAttacker = -attackDir;
+	}
+
+	// 前方 blockAngleDeg 以内から来た攻撃だけブロック
 	const float cosHalf = std::cos(CalyxEngine::ToRadians(param_.blockAngleDeg * 0.5f));
-	return CalyxEngine::Vector3::Dot(forward.Normalize(), toTarget.Normalize()) >= cosHalf;
+	return CalyxEngine::Vector3::Dot(forward.Normalize(), toAttacker.Normalize()) >= cosHalf;
 }

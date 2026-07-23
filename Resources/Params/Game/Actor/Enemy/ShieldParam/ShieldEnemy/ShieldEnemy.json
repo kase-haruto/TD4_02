@@ -1,0 +1,8 @@
+{
+    "fields": {
+        "blockAngleDeg": 180.0,
+        "blockCountMax": 2,
+        "blockCountMin": 2,
+        "defenseDuration": 4.0
+    }
+}

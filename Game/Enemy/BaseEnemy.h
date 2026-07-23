@@ -89,6 +89,8 @@ protected:
 
 	virtual bool AllowMovement() const { return true; }
 	virtual bool AllowAttack()   const { return true; }
+	// false の間は待機/移動アニメへの自動切り替えをしない
+	virtual bool AllowLocomotionAnimation() const { return true; }
 
 	//===================================================================*/
 	//						protected variables
