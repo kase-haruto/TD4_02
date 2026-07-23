@@ -34,6 +34,7 @@ void Checkpoint::Initialize() {
 			sphere->SetSize({ kActivateRadius ,kActivateRadius, kActivateRadius });
 		}
 	}
+	fire_.Load("Fire");
 
 	RefreshVisual();
 }
@@ -60,5 +61,7 @@ void Checkpoint::RefreshVisual() {
 	visualApplied_ = true;
 	isActiveVisual_ = active;
 
-	//SetColor(active ? CalyxEngine::Vector4{ 0.4f, 1.0f, 0.4f, 1.0f } : CalyxEngine::Vector4{ 1.0f, 1.0f, 1.0f, 1.0f });
+	if (!fire_.GetData().emitters.empty() && isActiveVisual_) {
+		EffectAPI::Play(fire_, GetWorldPosition() + CalyxEngine::Vector3{0.0f, 2.5f, 0.0f});
+	}
 }
