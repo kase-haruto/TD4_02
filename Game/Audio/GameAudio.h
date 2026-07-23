@@ -11,8 +11,8 @@
 namespace GameAudio {
 
 	// BGM
-	inline constexpr const char* kBgmTitleClear = "TitleClearBGM.mp3"; //!< タイトルとクリアで共有
-	inline constexpr const char* kBgmGame = "GameBGM.mp3";
+	inline constexpr const char* kBgmTitleClear = "GameBGM.mp3"; //!< タイトルとクリアで共有
+	inline constexpr const char* kBgmGame = "TitleClearBGM.mp3";
 
 	// SE
 	inline constexpr const char* kSeAttackSwing = "Attack_normal.mp3"; //!< 剣を振った

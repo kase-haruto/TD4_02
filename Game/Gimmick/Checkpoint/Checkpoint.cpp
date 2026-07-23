@@ -13,7 +13,7 @@ Checkpoint::Checkpoint()
 	: BaseGameObject("CheckPoint.obj", "Checkpoint") {}
 
 void Checkpoint::Initialize() {
-	const float kActivateRadius = 4.0f;
+	const float kActivateRadius = 8.0f;
 
 	InitializeCollider(ColliderKind::Box);
 
