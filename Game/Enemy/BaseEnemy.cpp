@@ -12,8 +12,8 @@
 #include <Engine/Foundation/Utility/Random/Random.h>
 
 namespace {
-	constexpr float kDeathShakeTime = 0.45f; // 震えている時間(秒)
-	constexpr float kDeathShakeAmplitude = 0.06f; // 震え幅(m)
+	constexpr float kDeathShakeTime = 0.75f; // 震えている時間(秒)
+	constexpr float kDeathShakeAmplitude = 0.1f; // 震え幅(m)
 	constexpr float kDeathBurstTime = 0.4f;  // エフェクト時間
 }
 
@@ -35,7 +35,7 @@ void BaseEnemy::Initialize() {
 	PlayAnimation(EnemyAnimationID::Idle);
 	hit_.Load("EnemyHit");
 	hitLight_.Load("hitLight");
-	//death_.Load("EnemyDeath");
+	death_.Load("EnemyExp");
 
 	if (EnemyState::Get().IsDefeated(GetGuid())) {
 		pendingRemove_ = true;

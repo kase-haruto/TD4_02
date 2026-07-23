@@ -35,7 +35,6 @@ CalyxEngine::SerializableObject& PlayerAttack::SerializableParam() {
 void PlayerAttack::StartAttack(PlayerBase& player, int comboIndex) {
 	isAttacking_ = true;
 	nextAttackReserved_ = false;
-	PostEffectAPI::PlayTriggeredPreset("Game/PlayerShock.postfx");
 
 	comboIndex_ = comboIndex;
 	attackTimer_ = 0.0f;

@@ -9,6 +9,9 @@
 #include "../Sword/Sword.h"
 #include "../Ability/PlayerAbility.h"
 
+#include <Engine/Application/Effects/EffectAsset.h>
+#include <Engine/Application/Effects/EffectPlayer.h>
+
 /*-----------------------------------------------------------------------------------------
  * PlayerClone
  * - Playerのクローン
@@ -53,4 +56,7 @@ private:
 	bool isVanishing_ = false;                                   //!< 消滅演出中か
 	float vanishTime_ = 0.0f;                                    //!< 演出の経過時間
 	CalyxEngine::Vector3 vanishBaseScale_ = {1.0f, 1.0f, 1.0f};  //!< 演出開始時のスケール
+
+	CalyxEngine::EffectAsset deleteEf_;
+
 };

@@ -19,6 +19,7 @@ namespace {
 PlayerClone::PlayerClone()
 	: PlayerBase(PlayerModelSet::Spirit) {
 	SetAppliesMovement(false);
+	deleteEf_.Load("CloneDelete");
 }
 
 void PlayerClone::Update(float dt) {
@@ -100,6 +101,9 @@ void PlayerClone::UpdateVanish(float dt) {
 	Actor::Update(dt);
 
 	if (t >= 1.0f) {
+		if (!deleteEf_.GetData().emitters.empty()) {
+			EffectAPI::Play(deleteEf_, GetWorldPosition());
+		}
 		if (auto* context = SceneContext::Current()) {
 			context->RemoveObject(std::static_pointer_cast<SceneObject>(shared_from_this()));
 		}
