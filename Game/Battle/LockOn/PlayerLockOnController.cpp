@@ -106,6 +106,13 @@ std::vector<CalyxEngine::TransformRef> PlayerLockOnController::QueryVisibleTarge
 	return result;
 }
 
+std::optional<LockOnCandidate> PlayerLockOnController::PeekBestTarget(
+	const CalyxEngine::Vector3& playerPosition) const {
+	const LockOnQueryContext context = BuildContext(playerPosition);
+	const auto candidates = query_->QueryTargets(context, settings_);
+	return selector_->SelectBestTarget(candidates, context, settings_);
+}
+
 LockOnQueryContext PlayerLockOnController::BuildContext(const CalyxEngine::Vector3& playerPosition) const {
 	LockOnQueryContext context;
 	context.playerPosition = playerPosition;
@@ -135,10 +142,7 @@ LockOnCandidate PlayerLockOnController::BuildCurrentCandidate(const CalyxEngine:
 }
 
 void PlayerLockOnController::TryLockOn(const CalyxEngine::Vector3& playerPosition) {
-	const LockOnQueryContext context = BuildContext(playerPosition);
-	const auto candidates = query_->QueryTargets(context, settings_);
-	const auto selected = selector_->SelectBestTarget(candidates, context, settings_);
-	if (selected) {
+	if (const auto selected = PeekBestTarget(playerPosition)) {
 		SetTarget(selected->entry.targetTransform);
 	}
 }

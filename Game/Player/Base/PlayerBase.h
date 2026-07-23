@@ -1,6 +1,7 @@
 #pragma once
 
 #include <Engine/Objects/3D/Actor/Actor.h>
+#include <Engine/Application/Effects/FxObject.h>
 
 // game
 #include <Demo/Input/PlayerInput.h>
@@ -54,6 +55,7 @@ public:
 	void RegisterPlayerAnimations();
 	PlayerAnimationID GetCurrentAnimationId() const { return currentAnimationId_; }
 	CalyxEngine::Vector3 GetMoveDir() const { return motor_.GetMoveDir(); }
+	CalyxEngine::FxObject* GetAttackFx() const { return attackFx_.get(); }
 
 	void ApplyKnockback(const CalyxEngine::Vector3& velocity, float friction);
 	bool IsKnockedBack() const { return knockbackVelocity_.LengthSquared() > 0.01f; }
@@ -87,4 +89,6 @@ protected:
 	bool appliesMovement_ = true;
 	int requestedPriority_ = -1;
 	float currentAnimationElapsed_ = 0.0f; //!< 今のアニメを再生し始めてからの経過時間
+
+	std::shared_ptr<CalyxEngine::FxObject> attackFx_;
 };

@@ -1,5 +1,7 @@
 #pragma once
 
+#include <Game/UI/WorldMarkerUI.h>
+
 #include <Engine/Objects/3D/Actor/BaseGameObject.h>
 #include <Engine/Foundation/Serialization/SerializableObject.h>
 #include <cstdint>
@@ -48,6 +50,9 @@ private:
 				.Category("Zone").Tooltip("レバー範囲の大きさ");
 			AddField("bodySize", bodySize)
 				.Category("Body").Tooltip("橋板の当たり");
+
+			AddField("promptHeight", promptHeight)
+				.Category("Zone").Tooltip("プレイヤーの頭上どれだけ上にAを出すか");
 		}
 
 		Guid ownerGuid_;
@@ -64,11 +69,14 @@ private:
 		CalyxEngine::Vector3 leverOffset = { 2.0f, 0.0f, 2.0f };
 		CalyxEngine::Vector3 zoneSize = { 2.5f, 2.5f, 2.5f };
 		CalyxEngine::Vector3 bodySize = { 4.0f, 1.0f, 10.0f };
+
+		float promptHeight = 2.2f;   // 頭上マーカーの高さ
 	};
 
 	BridgeData param_;
 
 	std::shared_ptr<InteractZone> zone_;
+	WorldMarkerUI prompt_;                  //!< 範囲内のプレイヤー頭上に出す「A」
 	Player* suppressedPlayer_ = nullptr;
 
 	bool  activated_ = false;

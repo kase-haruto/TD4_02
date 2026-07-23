@@ -1,11 +1,42 @@
 {
     "fields": {
+        "attack1Offset_": [
+            2.5999999046325684,
+            4.5,
+            1.0
+        ],
+        "attack1Rotation_": [
+            -1.8899999856948853,
+            -0.699999988079071,
+            2.5959999561309814
+        ],
+        "attack2Offset_": [
+            0.4000000059604645,
+            2.799999952316284,
+            0.6000000238418579
+        ],
+        "attack2Rotation_": [
+            -27.0,
+            -16.200000762939453,
+            15.399999618530273
+        ],
+        "attack3Offset_": [
+            0.0,
+            0.0,
+            0.0
+        ],
+        "attack3Rotation_": [
+            0.0,
+            0.0,
+            0.0
+        ],
         "attackDuration1": 0.4000000059604645,
         "attackDuration2": 0.44999998807907104,
         "attackDuration3": 0.6000000238418579,
         "comboAcceptEnd": 0.3499999940395355,
         "comboAcceptStart": 0.18000000715255737,
         "comboCount": 2,
+        "damage": 10.0,
         "drawHitbox": true,
         "hitboxActiveEnd": 0.25,
         "hitboxActiveStart": 0.05000000074505806,

@@ -1,5 +1,7 @@
 #include "PlayerBase.h"
-
+#include "Engine/Application/Effects/FxObject.h"
+#include <Engine/Assets/Animation/AnimationModel.h>
+#include <Engine/Scene/Utility/SceneUtility.h>
 #include <array>
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -86,7 +88,7 @@ namespace {
 	}
 
 	//! 遷移の種類に応じたブレンド時間
-	float GetPlayerAnimationBlendDuration(PlayerAnimationID from, PlayerAnimationID to) {
+	float	GetPlayerAnimationBlendDuration(PlayerAnimationID from, PlayerAnimationID to) {
 		if (IsLocomotionAnimation(from) && IsLocomotionAnimation(to)) {
 			return kPlayerLocomotionBlendDuration;
 		}
@@ -120,6 +122,10 @@ void PlayerBase::Initialize() {
 	dodge_.Initialize(this);
 	RegisterPlayerAnimations();
 	PlayAnimation(PlayerAnimationID::Idle);
+
+	attackFx_ = SceneAPI::Instantiate<CalyxEngine::FxObject>("SlashEffect");
+	attackFx_->LoadFromPath("SlashEffect.effect");
+	attackFx_->SetParent(shared_from_this());
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -182,6 +188,9 @@ void PlayerBase::RegisterPlayerAnimations() {
 			GetPlayerAnimationName(id),
 			GetPlayerAnimationModelName(modelSet_, id));
 	}
+
+	model->SetLoop(static_cast<int16_t>(PlayerAnimationID::Attack1), false);
+	model->SetLoop(static_cast<int16_t>(PlayerAnimationID::Attack2), false);
 
 	playerAnimationsRegistered_ = true;
 }
