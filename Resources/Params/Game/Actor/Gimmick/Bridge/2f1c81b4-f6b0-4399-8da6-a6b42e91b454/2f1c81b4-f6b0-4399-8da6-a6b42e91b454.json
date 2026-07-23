@@ -1,0 +1,27 @@
+{
+    "fields": {
+        "bodySize": [
+            12.0,
+            6.0,
+            20.0
+        ],
+        "fallAxis": [
+            0.0,
+            0.0,
+            1.0
+        ],
+        "fallSpeedDeg": 120.0,
+        "leverOffset": [
+            2.0,
+            0.0,
+            2.0
+        ],
+        "loweredAngleDeg": 0.0,
+        "raisedAngleDeg": 90.0,
+        "zoneSize": [
+            2.5,
+            2.5,
+            2.5
+        ]
+    }
+}

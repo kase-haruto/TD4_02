@@ -1,6 +1,6 @@
 [
     {
-        "cameraDitherEnabled": false,
+        "cameraDitherEnabled": true,
         "castShadow": true,
         "colliderConfig": {
             "capsuleHeight": 2.0,
@@ -78,8 +78,8 @@
             },
             "translation": {
                 "x": 0.0,
-                "y": 0.26788318157196045,
-                "z": 18.996471405029297
+                "y": 0.0,
+                "z": 0.0
             }
         },
         "type": "StaticModelObject",
