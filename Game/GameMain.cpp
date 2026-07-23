@@ -5,6 +5,7 @@
 
 extern "C" __declspec(dllexport) Calyx::Application* CreateCalyxApplication() {
 	CalyxEngine::RegisterGeneratedSceneObjects();
+
 	CalyxEngine::RegisterGeneratedGameSceneObjects();
 
 	return new GameApplication();
