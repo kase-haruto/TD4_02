@@ -76,7 +76,6 @@ private:
 	float      invincibleTimer_ = 0.0f;
 	float      lowHpRimPhase_ = 0.0f;
 	bool       isLowHpRim_ = false;
-	bool       lowHpPostFxReady_ = false; //!< LowHPプリセットを読み込み済みか
 	CalyxEngine::Vector3 lastCloneAnchor_{};
 
 	CalyxEngine::Vector3 respawnPoint_{};

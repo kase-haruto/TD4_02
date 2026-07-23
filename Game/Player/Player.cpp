@@ -162,6 +162,10 @@ void Player::TakeDamage(int amount) {
 	if (currentHp_ < 0) {
 		currentHp_ = 0;
 	}
+
+	// Keep the scene's Always preset and temporarily overlay the damage preset.
+	PostEffectAPI::PlayTriggeredPreset("LowHP.postfx");
+
 	damageAnimationTimer_ = 0.25f;
 	StartInvincible(stats_.damageInvincibleTime);
 	PlayAnimation(PlayerAnimationID::Damage);
@@ -290,18 +294,8 @@ void Player::UpdateLowHpRim(float dt) {
 		? std::clamp(1.0f - hpRate / stats_.lowHpRatio, 0.0f, 1.0f)
 		: 1.0f;
 
-	if (!lowHpPostFxReady_) {
-		lowHpPostFxReady_ = PostEffectAPI::LoadPreset("LowHP.postfx");
-	}
-
-	constexpr float kPi = 3.14159265359f;
 	//constexpr float kTwoPi = 6.28318530718f;
-	const float prevPhase = lowHpRimPhase_;
 	lowHpRimPhase_ += dt * stats_.lowHpRimSpeed * (1.0f + danger);
-
-	if (lowHpPostFxReady_ && prevPhase < kPi && lowHpRimPhase_ >= kPi) {
-		PostEffectAPI::PlayTriggered("Vignette");
-	}
 
 	//if (lowHpRimPhase_ > kTwoPi) {
 	//	lowHpRimPhase_ -= kTwoPi;

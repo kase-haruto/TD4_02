@@ -82,6 +82,11 @@
           "enabled": false,
           "floatAnimations": [],
           "parameters": {
+			"color": [
+			  1.0,
+			  0.0,
+			  0.0
+			],
             "radius": 0.44999998807907104,
             "strength": 1.0
           }
@@ -103,6 +108,11 @@
       "floatAnimations": [],
       "id": 5,
       "parameters": {
+		"color": [
+		  1.0,
+		  0.0,
+		  0.0
+		],
         "radius": 0.44999998807907104,
         "strength": 1.0
       },
