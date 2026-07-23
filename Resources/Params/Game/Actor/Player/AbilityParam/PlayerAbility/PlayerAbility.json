@@ -1,0 +1,11 @@
+{
+    "fields": {
+        "chargeTimeToMax": 2.0,
+        "cloneGhostAlpha": 0.3499999940395355,
+        "cloneLockDuration": 5.0,
+        "maxCloneCount": 4,
+        "maxCloneDistance": 20.0,
+        "minCloneDistance": 1.0,
+        "showCloneGhost": true
+    }
+}

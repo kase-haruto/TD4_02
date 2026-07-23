@@ -4,11 +4,11 @@
         "castShadow": true,
         "colliderConfig": {
             "capsuleHeight": 2.0,
-            "capsuleRadius": 0.30000001192092896,
+            "capsuleRadius": 0.5,
             "isCollisionEnabled": true,
             "isDraw": true,
             "isTrigger": false,
-            "layerId": 6,
+            "layerId": 0,
             "offset": {
                 "x": 0.0,
                 "y": 0.0,
@@ -26,14 +26,14 @@
                 "z": 1.0
             }
         },
-        "colliderKind": 3,
+        "colliderKind": 0,
         "drawEnable": true,
-        "guid": "9d6107b3-9531-43a0-8097-fc301a4fe63f",
+        "guid": "2f1c81b4-f6b0-4399-8da6-a6b42e91b454",
         "modelConfig": {
             "blendMode": 5,
             "materialGuid": "00000000-0000-0000-0000-000000000000",
-            "modelName": "Spirit_idle.gltf",
-            "textureGuid": "2397234c-9b4d-4438-926f-4761890178dd",
+            "modelName": "Darwbridge.obj",
+            "textureGuid": "a552d984-4123-4ed3-9d6e-0668b1be33ea",
             "uvTransConfig": {
                 "rotation": 0.0,
                 "scale": {
@@ -42,7 +42,7 @@
                 }
             }
         },
-        "name": "PlayerClone",
+        "name": "Bridge",
         "objectType": 2,
         "outlineColor": {
             "w": 1.0,
@@ -54,7 +54,7 @@
         "outlineThickness": 0.03500000014901161,
         "parentGuid": "00000000-0000-0000-0000-000000000000",
         "physicsBodyConfig": {
-            "bodyType": 1,
+            "bodyType": 0,
             "enabled": true,
             "gravityScale": 1.0,
             "mass": 1.0,
@@ -62,19 +62,32 @@
             "useGravity": true
         },
         "serializableParams": {
-            "Game/Actor/Player/Dodge/PlayerDodge": {
+            "Game/Actor/Gimmick/Bridge/2f1c81b4-f6b0-4399-8da6-a6b42e91b454": {
                 "fields": {
-                    "cooldown": 0.5,
-                    "dodgeDuration": 0.6499999761581421,
-                    "dodgeSpeed": 10.0,
-                    "invincibleTime": 0.4000000059604645
-                }
-            },
-            "Game/Actor/Player/Motor/PlayerMotor": {
-                "fields": {
-                    "dashSpeed": 8.0,
-                    "jumpForce": 5.0,
-                    "moveSpeed": 5.0
+                    "bodySize": [
+                        12.0,
+                        2.0,
+                        20.0
+                    ],
+                    "fallAxis": [
+                        0.0,
+                        0.0,
+                        1.0
+                    ],
+                    "fallSpeedDeg": 120.0,
+                    "leverOffset": [
+                        2.0,
+                        0.0,
+                        2.0
+                    ],
+                    "loweredAngleDeg": 0.0,
+                    "promptHeight": 2.200000047683716,
+                    "raisedAngleDeg": 90.0,
+                    "zoneSize": [
+                        2.5,
+                        2.5,
+                        2.5
+                    ]
                 }
             }
         },
@@ -83,23 +96,23 @@
             "inheritScale": true,
             "inheritTranslate": true,
             "rotation": {
-                "w": 1.0,
-                "x": 0.0,
-                "y": 0.0,
-                "z": 0.0
+                "w": 0.4999999701976776,
+                "x": -0.4999999701976776,
+                "y": 0.4999999701976776,
+                "z": 0.4999999701976776
             },
             "scale": {
-                "x": 0.5,
-                "y": 0.5,
-                "z": 0.5
+                "x": 6.0,
+                "y": 3.0,
+                "z": 10.0
             },
             "translation": {
-                "x": 0.0,
-                "y": 0.0,
-                "z": 0.0
+                "x": 38.061458587646484,
+                "y": -1.1522204875946045,
+                "z": -6.433462142944336
             }
         },
-        "type": "PlayerClone",
+        "type": "Bridge",
         "visualOffset": {
             "x": 0.0,
             "y": 0.0,
@@ -110,15 +123,15 @@
             "inheritScale": true,
             "inheritTranslate": true,
             "rotation": {
-                "w": 1.0,
-                "x": 0.0,
-                "y": 0.0,
-                "z": 0.0
+                "w": 0.4999999701976776,
+                "x": -0.4999999701976776,
+                "y": 0.4999999701976776,
+                "z": 0.4999999701976776
             },
             "scale": {
-                "x": 0.5,
-                "y": 0.5,
-                "z": 0.5
+                "x": 6.0,
+                "y": 3.0,
+                "z": 10.0
             },
             "translation": {
                 "x": 0.0,
