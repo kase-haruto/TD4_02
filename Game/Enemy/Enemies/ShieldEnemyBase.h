@@ -35,6 +35,7 @@ private:
 	void FaceTarget();             // 常にプレイヤーを向く
 	bool IsBlockedDirection(Collider* attacker) const;
 	void EnsureDefenceAnimation(); // 防御アニメを維持し、ループを切る
+	void RestoreDefenceLoop();     // 切った防御アニメのループを戻す
 
 
 	struct ShieldParam : CalyxEngine::SerializableObject {
@@ -59,4 +60,5 @@ private:
 	int32_t hitsUntilDefense_ = 3;   // 何回食らったら防御に入るか
 	bool    isDefending_ = false;
 	float   defenseTimer_ = 0.0f;
+	bool    defenceLoopDisabled_ = false;   // 今の防御モデルでループを切り終えたか
 };

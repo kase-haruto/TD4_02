@@ -2,6 +2,7 @@
 
 #include <Enemy/Attack/IEnemyAttack.h>
 
+#include <Engine/Assets/Animation/AnimationModel.h>
 #include <Engine/Objects/3D/Actor/Actor.h>
 #include <Engine/Objects/Collider/Collider.h>
 #include <Engine/Foundation/Math/Quaternion.h>
@@ -9,6 +10,12 @@
 #include <Engine/Foundation/Utility/Random/Random.h>
 
 #include <cmath>
+#include <string>
+
+namespace {
+	// 防御クリップに紐づけるID。敵側で登録しているクリップは他に無いので何でもよい
+	constexpr int16_t kDefenceClipId = static_cast<int16_t>(EnemyAnimationID::Defence);
+}
 
 ShieldEnemyBase::ShieldEnemyBase(EnemyAnimationSet animations, const std::string& objName, EnemyStats& stats)
 	: BaseEnemy(std::move(animations), objName, stats) {}
@@ -63,6 +70,7 @@ void ShieldEnemyBase::EnterDefense() {
 
 void ShieldEnemyBase::ExitDefense() {
 	isDefending_ = false;
+	RestoreDefenceLoop();   // モデルが差し替わる前に、切ったループを戻す
 	RollThreshold();
 	PlayAnimation(EnemyAnimationID::Idle);
 }
@@ -94,7 +102,43 @@ void ShieldEnemyBase::EnsureDefenceAnimation() {
 
 	// 被弾アニメなどで別モデルに変わっていたら防御へ戻す。
 	// 同じモデルなら PlayAnimation 側の名前ガードで何もしないので、再生位置は維持される
+	if (currentAnimationModel_ != animations_.defence) {
+		defenceLoopDisabled_ = false;   // モデルを作り直すとループ設定も消える
+	}
 	PlayAnimation(EnemyAnimationID::Defence);
+
+	if (defenceLoopDisabled_) {
+		return;
+	}
+
+	// モデル差し替え直後は再生中クリップ名がまだ取れないので、取れるまで毎フレーム試す
+	auto* model = AnimationModel();
+	if (!model) {
+		return;
+	}
+	const std::string clipName = model->GetCurrentAnimationName();
+	if (clipName.empty()) {
+		return;
+	}
+
+	// AddAnimation の emplace は既存の同名クリップを上書きしないので、
+	// 再生位置はそのままに「IDとクリップ名の紐付け」だけが増える
+	if (!RegisterAnimationClip(kDefenceClipId, clipName, animations_.defence)) {
+		return;
+	}
+	model->SetLoop(kDefenceClipId, false);   // 最後のポーズで止める
+	defenceLoopDisabled_ = true;
+}
+
+void ShieldEnemyBase::RestoreDefenceLoop() {
+	if (!defenceLoopDisabled_) {
+		return;
+	}
+	// 防御モデルが使い回された時に、切ったままのループを持ち越さない
+	if (auto* model = AnimationModel()) {
+		model->SetLoop(kDefenceClipId, true);
+	}
+	defenceLoopDisabled_ = false;
 }
 
 bool ShieldEnemyBase::IsBlockedDirection(Collider* attacker) const {
