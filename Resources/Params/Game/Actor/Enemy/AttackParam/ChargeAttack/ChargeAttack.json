@@ -4,9 +4,9 @@
         "drawHitbox": true,
         "hitboxHeightOffset": 1.0,
         "hitboxSize": [
-            1.0,
+            1.2000000476837158,
             0.800000011920929,
-            1.0
+            1.2000000476837158
         ],
         "maxChargeTime": 1.2000000476837158,
         "overshootDistance": 2.0,
