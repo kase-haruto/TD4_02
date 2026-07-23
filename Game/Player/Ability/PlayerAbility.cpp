@@ -141,6 +141,7 @@ void PlayerAbility::SpawnClone(Player& player, float spawnDistance) {
 		return;
 	}
 	clone->SetAimOrigin(&player);
+	clone->SetLockOnState(&player.GetLockOnStateReader());
 	clone->SetOwnerAbility(this);
 	clone->SetRotate(player.GetWorldTransform().rotation);
 

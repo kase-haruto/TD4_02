@@ -30,6 +30,9 @@ public:
 
 	void SetAimOrigin(const PlayerBase* origin) { motor_.SetAimOrigin(origin); }
 
+	//! ロックオン状態を共有する。ロックオン中はクローンもターゲットを向く
+	void SetLockOnState(const ILockOnStateReader* reader) { motor_.SetLockOnStateReader(reader); }
+
 	void SetOwnerAbility(PlayerAbility* ability) { ownerAbility_ = ability; }
 
 	void AddWorldOffset(const CalyxEngine::Vector3& delta);
